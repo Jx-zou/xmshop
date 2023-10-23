@@ -1,0 +1,37 @@
+{
+  "id": "",
+  "name": "",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "4765866",
+      "name": "message",
+      "font_class": "message",
+      "unicode": "e78a",
+      "unicode_decimal": 59274
+    },
+    {
+      "icon_id": "10241252",
+      "name": "search",
+      "font_class": "search",
+      "unicode": "e755",
+      "unicode_decimal": 59221
+    },
+    {
+      "icon_id": "24348059",
+      "name": "xiaomi",
+      "font_class": "xiaomi",
+      "unicode": "e725",
+      "unicode_decimal": 59173
+    },
+    {
+      "icon_id": "26608029",
+      "name": "scan-code",
+      "font_class": "scan-code",
+      "unicode": "e636",
+      "unicode_decimal": 58934
+    }
+  ]
+}
