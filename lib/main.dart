@@ -8,7 +8,7 @@ import 'app/routes/app_pages.dart';
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(
-      const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
+      const SystemUiOverlayStyle(statusBarColor: Colors.transparent));  
 
   runApp(ScreenUtilInit(
     designSize: const Size(1080, 2400),

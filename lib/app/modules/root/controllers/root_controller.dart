@@ -7,8 +7,8 @@ import 'package:xmshop/app/modules/home/views/home_view.dart';
 import 'package:xmshop/app/modules/user/views/user_view.dart';
 
 class RootController extends GetxController {
-  final RxInt currentIndex = 0.obs;
-  final PageController pageController = PageController(initialPage: 0);
+  final RxInt currentIndex = 1.obs;
+  final PageController pageController = PageController(initialPage: 1);
   final List<Widget> pages = const [
     HomeView(),
     CategoryView(),
@@ -23,17 +23,8 @@ class RootController extends GetxController {
   }
 
   @override
-  void onInit() {
-    super.onInit();
-  }
-
-  @override
-  void onReady() {
-    super.onReady();
-  }
-
-  @override
   void onClose() {
     super.onClose();
+    pageController.dispose();
   }
 }

@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:xmshop/app/data/best_category_provider.dart';
 import 'package:xmshop/app/data/focus_provider.dart';
 import 'package:xmshop/app/data/goods_provider.dart';
+import 'package:xmshop/app/data/pcate_provider.dart';
 import 'package:xmshop/app/modules/cart/controllers/cart_controller.dart';
 import 'package:xmshop/app/modules/category/controllers/category_controller.dart';
 import 'package:xmshop/app/modules/give/controllers/give_controller.dart';
@@ -23,6 +24,7 @@ class RootBinding extends Bindings {
 
     /*providers*/
     Get.lazyPut<IBestCategoryProvider>(() => BestCategoryProvider());
+    Get.lazyPut<IPCateProvider>(() => PCateProvider());
     Get.lazyPut<IFocusProvider>(() => FocusProvider());
     Get.lazyPut<IGoodsProvider>(() => GoodsProvider());
 
@@ -35,8 +37,10 @@ class RootBinding extends Bindings {
     Get.lazyPut<HomeBestGoodsBannerController>(() => HomeBestGoodsBannerController(provider: Get.find<IGoodsProvider>()));
     Get.lazyPut<HomeBestGoodsListController>(() => HomeBestGoodsListController(provider: Get.find<IGoodsProvider>()));
 
-    /**/
-    Get.lazyPut<CategoryController>(() => CategoryController());
+    /*Category*/
+    Get.lazyPut<CategoryController>(() => CategoryController(provider: Get.find<IPCateProvider>()));
+
+
     Get.lazyPut<CartController>(() => CartController());
     Get.lazyPut<GiveController>(() => GiveController());
     Get.lazyPut<UserController>(() => UserController());

@@ -38,8 +38,16 @@ class HomeView extends GetView<HomeController> {
                 gradient: LinearGradient(
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
-                    colors: [Colors.white60, Colors.white54, Colors.transparent],
-                    stops: [0.0, 0.1, 1.0])),
+                    colors: [
+                  Colors.white60,
+                  Colors.white54,
+                  Colors.transparent
+                ],
+                    stops: [
+                  0.0,
+                  0.1,
+                  1.0
+                ])),
             child: const HomeBestGoodsListView())
       ],
     );
@@ -163,7 +171,7 @@ class HomeView extends GetView<HomeController> {
           centerTitle: true,
           actions: [
             IconButton(onPressed: () {}, icon: const Icon(Icons.qr_code)),
-            IconButton(onPressed: () {}, icon: const Icon(Icons.message))
+            IconButton(onPressed: () {}, icon: const Icon(XmshopFonts.message))
           ],
           actionsIconTheme: IconThemeData(
               size: 28,
