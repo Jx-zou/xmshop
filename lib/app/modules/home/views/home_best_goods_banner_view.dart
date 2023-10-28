@@ -12,7 +12,7 @@ class HomeBestGoodsBannerView extends GetView<HomeBestGoodsBannerController> {
   Widget build(BuildContext context) {
     return controller.obx(
       (state) => GridView.builder(
-          itemCount: state!.items!.length,
+          itemCount: state!.length,
           padding: EdgeInsets.only(top: ScreenAdapter.height(40), bottom: ScreenAdapter.height(20)),
           physics: const NeverScrollableScrollPhysics(),
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -22,11 +22,11 @@ class HomeBestGoodsBannerView extends GetView<HomeBestGoodsBannerController> {
                   SizedBox(
                       height: ScreenAdapter.height(210),
                       child: Image.network(
-                          "https://xiaomi.itying.com/${state.items?[index].pic}"
+                          "https://xiaomi.itying.com/${state[index].pic}"
                               .replaceAll("\\", "/"),
                           fit: BoxFit.cover)),
                   SizedBox(height: ScreenAdapter.height(20)),
-                  Text("¥${state.items?[index].price}",
+                  Text("¥${state[index].price}",
                       style: TextStyle(fontSize: ScreenAdapter.fontSize(32)))
                 ],
               )),

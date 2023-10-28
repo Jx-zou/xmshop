@@ -24,7 +24,6 @@ class CategoryController extends GetxController with StateMixin<PCateModel> {
     } else {
       pCateItemModels.value = response.body.items;
     }
-    for (var element in pCateItemModels) {log(element.toString());}
     update();
   }
 

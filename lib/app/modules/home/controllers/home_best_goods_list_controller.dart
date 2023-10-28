@@ -5,22 +5,22 @@ import 'package:xmshop/app/models/goods_model.dart';
 import 'package:xmshop/app/modules/home/controllers/home_controller.dart';
 
 class HomeBestGoodsListController extends GetxController
-    with StateMixin<GoodsModel> {
+    with StateMixin<List<GoodsModel>> {
   final IGoodsProvider provider;
   final ScrollController scrollController = Get
       .find<HomeController>()
       .scrollController;
   int page = 1;
   int pageSize = 10;
-  bool flag = false;
+  bool isFetching = false;
 
   HomeBestGoodsListController({required this.provider});
 
   _addScrollListener() {
     scrollController.addListener(() {
-      if (!flag && scrollController.offset >
+      if (!isFetching && scrollController.offset >
           scrollController.position.maxScrollExtent - 10) {
-        flag = true;
+        isFetching = true;
         page++;
         if (page > 1) {
           _getGoodsModel();
@@ -29,31 +29,31 @@ class HomeBestGoodsListController extends GetxController
     });
   }
 
-  _updateState(Response<GoodsModel> response) {
-    state?.items?.addAll(response.body?.items as Iterable<GoodsItemModel>);
+  _updateState(Response<List<GoodsModel>> response) {
+    state?.addAll(response.body as List<GoodsModel>);
   }
 
   _getGoodsModel() async {
     final response = await provider.getGoodsModel(
-        query: {"is_best": "1", "page": page.toString(), "pageSize": pageSize.toString()});
+        query: {"is_best": "1", "page": "$page", "pageSize": "$pageSize"});
     if (response.hasError) {
       if (page == 1) {
         change(null, status: RxStatus.error(response.statusText));
       } else {
         change(state, status: RxStatus.error(response.statusText));
       }
-      flag = true;
+      isFetching = true;
     } else {
-      if (page > 1 && response.body!.items!.isNotEmpty) {
+      if (page > 1 && response.body!.isNotEmpty) {
         _updateState(response);
         change(state, status: RxStatus.success());
-        if (response.body?.items?.length == pageSize) {
-          flag = false;
+        if (response.body?.length == pageSize) {
+          isFetching = false;
         }
       }
       if(page == 1) {
         change(response.body, status: RxStatus.success());
-        flag = false;
+        isFetching = false;
       }
     }
   }

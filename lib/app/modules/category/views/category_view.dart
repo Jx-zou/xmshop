@@ -49,18 +49,25 @@ class CategoryView extends GetView<CategoryController> {
                     crossAxisCount: 3,
                     crossAxisSpacing: ScreenAdapter.width(40),
                     childAspectRatio: 240 / 346),
-                itemBuilder: (context, index) => Column(
-                      children: [
-                        Container(
-                            alignment: Alignment.center,
-                            width: double.infinity,
-                            child: Image.network(
-                                "https://xiaomi.itying.com/${controller.pCateItemModels[index].pic}"
-                                    .replaceAll("\\", "/"),
-                                fit: BoxFit.fitHeight)),
-                        SizedBox(height: ScreenAdapter.height(30)),
-                        Text("${controller.pCateItemModels[index].title}")
-                      ],
+                itemBuilder: (context, index) => InkWell(
+                      onTap: () {
+                        Get.toNamed("/product", arguments: {
+                          "cid": controller.pCateItemModels[index].id
+                        });
+                      },
+                      child: Column(
+                        children: [
+                          Container(
+                              alignment: Alignment.center,
+                              width: double.infinity,
+                              child: Image.network(
+                                  "https://xiaomi.itying.com/${controller.pCateItemModels[index].pic}"
+                                      .replaceAll("\\", "/"),
+                                  fit: BoxFit.fitHeight)),
+                          SizedBox(height: ScreenAdapter.height(30)),
+                          Text("${controller.pCateItemModels[index].title}")
+                        ],
+                      ),
                     ))),
           ))
         ],

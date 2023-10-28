@@ -16,7 +16,7 @@ class HomeBestGoodsListView extends GetView<HomeBestGoodsListController> {
               crossAxisCount: 2,
               mainAxisSpacing: ScreenAdapter.width(26),
               crossAxisSpacing: ScreenAdapter.width(26),
-              itemCount: state!.items!.length,
+              itemCount: state!.length,
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
               itemBuilder: (context, index) => Container(
@@ -29,27 +29,26 @@ class HomeBestGoodsListView extends GetView<HomeBestGoodsListController> {
                           padding:
                               EdgeInsets.only(top: ScreenAdapter.width(30)),
                           child: Image.network(
-                              "https://xiaomi.itying.com/${state.items?[index].pic}"
+                              "https://xiaomi.itying.com/${state[index].pic}"
                                   .replaceAll("\\", "/"),
                               fit: BoxFit.cover,
                               errorBuilder: (c, o, s) => Image.asset(
                                   "assets/images/404mix.jpg",
                                   fit: BoxFit.cover))),
                       ListTile(
-                          title: Text("${state.items?[index].title}"),
+                          title: Text("${state[index].title}"),
                           subtitle: Text(
-                            "${state.items?[index].subTitle}",
+                            "${state[index].subTitle}",
                             style: TextStyle(
                                 fontSize: ScreenAdapter.fontSize(32),
                                 overflow: TextOverflow.ellipsis),
                           )),
                       ListTile(
-                        title: Text("¥${state.items?[index].price}"),
+                        title: Text("¥${state[index].price}"),
                       )
                     ],
                   )),
             ),
-        onLoading: const Loading(),
-        onError: (error) => Container());
+        onLoading: const Loading());
   }
 }

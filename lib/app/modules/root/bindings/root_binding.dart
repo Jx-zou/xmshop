@@ -26,7 +26,7 @@ class RootBinding extends Bindings {
     Get.lazyPut<IBestCategoryProvider>(() => BestCategoryProvider());
     Get.lazyPut<IPCateProvider>(() => PCateProvider());
     Get.lazyPut<IFocusProvider>(() => FocusProvider());
-    Get.lazyPut<IGoodsProvider>(() => GoodsProvider());
+    Get.lazyPut<IGoodsProvider>(() => GoodsProvider(), fenix: true);
 
     /*Home*/
     Get.lazyPut<HomeController>(() => HomeController());

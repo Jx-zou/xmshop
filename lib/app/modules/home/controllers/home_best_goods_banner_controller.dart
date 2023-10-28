@@ -3,7 +3,7 @@ import 'package:xmshop/app/models/goods_model.dart';
 
 import '../../../data/goods_provider.dart';
 
-class HomeBestGoodsBannerController extends GetxController with StateMixin<GoodsModel> {
+class HomeBestGoodsBannerController extends GetxController with StateMixin<List<GoodsModel>> {
   final IGoodsProvider provider;
   HomeBestGoodsBannerController({required this.provider});
 

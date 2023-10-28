@@ -2,7 +2,7 @@ import 'package:get/get.dart';
 import 'package:xmshop/app/data/goods_provider.dart';
 import 'package:xmshop/app/models/goods_model.dart';
 
-class HomeHotGoodsListController extends GetxController with StateMixin<GoodsModel> {
+class HomeHotGoodsListController extends GetxController with StateMixin<List<GoodsModel>> {
 
   final IGoodsProvider provider;
 

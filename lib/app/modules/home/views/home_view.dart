@@ -39,9 +39,9 @@ class HomeView extends GetView<HomeController> {
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
                     colors: [
-                  Colors.white60,
-                  Colors.white54,
-                  Colors.transparent
+                  Colors.white38,
+                  Colors.white24,
+                  Colors.white10
                 ],
                     stops: [
                   0.0,

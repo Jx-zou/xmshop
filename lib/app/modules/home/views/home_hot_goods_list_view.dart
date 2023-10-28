@@ -10,7 +10,7 @@ class HomeHotGoodsListView extends GetView<HomeHotGoodsListController> {
   Widget build(BuildContext context) {
     return controller.obx((state) {
       List<Widget> widgets = [];
-      for (int i = 0; i < state!.items!.length; i++) {
+      for (int i = 0; i < state!.length; i++) {
         widgets.add(Expanded(
             flex: 1,
             child: Padding(
@@ -27,17 +27,17 @@ class HomeHotGoodsListView extends GetView<HomeHotGoodsListController> {
                           children: [
                             SizedBox(height: ScreenAdapter.height(32)),
                             Text(
-                              "${state.items![i].title}",
+                              "${state[i].title}",
                               style: TextStyle(
                                   fontSize: ScreenAdapter.fontSize(38),
                                   fontWeight: FontWeight.bold),
                             ),
                             SizedBox(height: ScreenAdapter.height(20)),
-                            Text("${state.items![i].subTitle}",
+                            Text("${state[i].subTitle}",
                                 style: TextStyle(
                                     fontSize: ScreenAdapter.fontSize(28))),
                             SizedBox(height: ScreenAdapter.height(20)),
-                            Text("${state.items![i].price}",
+                            Text("${state[i].price}",
                                 style: TextStyle(
                                     fontSize: ScreenAdapter.fontSize(34)))
                           ],
@@ -49,7 +49,7 @@ class HomeHotGoodsListView extends GetView<HomeHotGoodsListController> {
                             child: Padding(
                                 padding: EdgeInsets.all(ScreenAdapter.height(20)),
                                 child: Image.network(
-                                    "https://xiaomi.itying.com/${state.items![i].pic}".replaceAll("\\", "/"),
+                                    "https://xiaomi.itying.com/${state[i].pic}".replaceAll("\\", "/"),
                                     fit: BoxFit.cover))))
                   ],
                 ),
