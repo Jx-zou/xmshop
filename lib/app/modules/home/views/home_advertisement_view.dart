@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:xmshop/app/utils/screen_adapter.dart';
+
+import '../../../utils/screen_adapter.dart';
 
 class HomeAdvertisementView extends GetView {
   const HomeAdvertisementView({super.key});

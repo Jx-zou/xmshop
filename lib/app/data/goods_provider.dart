@@ -1,13 +1,13 @@
-import 'package:get/get.dart';
-import 'package:xmshop/app/common/providers/base_provider.dart';
-import 'package:xmshop/app/models/goods_model.dart';
+import 'package:get/get_connect/http/src/response/response.dart';
+
+import '../common/providers/base_provider.dart';
+import '../models/goods_model.dart';
 
 abstract class IGoodsProvider {
   Future<Response<List<GoodsModel>>> getGoodsModel({Map<String, dynamic>? query});
 }
 
 class GoodsProvider extends BaseProvider implements IGoodsProvider {
-
 
   List<GoodsModel>? _decode(dynamic json) {
     if (json['result'] != null) {

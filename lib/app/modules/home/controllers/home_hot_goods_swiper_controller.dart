@@ -1,11 +1,9 @@
 import 'package:get/get.dart';
-import 'package:xmshop/app/data/focus_provider.dart';
 
+import '../../../data/focus_provider.dart';
 import '../../../models/focus_model.dart';
 
-
-
-class HomeHotGoodsSwiperController extends GetxController with StateMixin<FocusModel> {
+class HomeHotGoodsSwiperController extends GetxController with StateMixin<List<FocusModel>> {
 
   final IFocusProvider provider;
 

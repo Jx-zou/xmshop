@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:xmshop/app/data/goods_provider.dart';
-import 'package:xmshop/app/models/goods_model.dart';
-import 'package:xmshop/app/modules/home/controllers/home_controller.dart';
+
+import '../../../data/goods_provider.dart';
+import '../../../models/goods_model.dart';
+import 'home_controller.dart';
 
 class HomeBestGoodsListController extends GetxController
     with StateMixin<List<GoodsModel>> {

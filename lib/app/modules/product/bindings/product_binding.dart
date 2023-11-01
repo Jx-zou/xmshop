@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
-import 'package:xmshop/app/data/goods_provider.dart';
-import 'package:xmshop/app/modules/product/controllers/product_controller.dart';
+
+import '../../../data/goods_provider.dart';
+import '../controllers/product_controller.dart';
 
 
 

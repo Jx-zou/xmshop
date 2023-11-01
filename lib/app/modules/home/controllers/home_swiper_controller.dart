@@ -3,8 +3,7 @@ import 'package:get/get.dart';
 import '../../../data/focus_provider.dart';
 import '../../../models/focus_model.dart';
 
-
-class HomeSwiperController extends GetxController with StateMixin<FocusModel>{
+class HomeSwiperController extends GetxController with StateMixin<List<FocusModel>>{
   final IFocusProvider provider;
 
   HomeSwiperController({required this.provider});

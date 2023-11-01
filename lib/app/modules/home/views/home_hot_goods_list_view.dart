@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:xmshop/app/modules/home/controllers/home_hot_goods_list_controller.dart';
-import 'package:xmshop/app/utils/screen_adapter.dart';
+
+import '../../../utils/screen_adapter.dart';
+import '../controllers/home_hot_goods_list_controller.dart';
 
 class HomeHotGoodsListView extends GetView<HomeHotGoodsListController> {
   const HomeHotGoodsListView({super.key});

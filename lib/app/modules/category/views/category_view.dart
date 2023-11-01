@@ -15,7 +15,7 @@ class CategoryView extends GetView<CategoryController> {
             width: ScreenAdapter.width(300),
             height: double.infinity,
             child: controller.obx((state) => ListView.builder(
-                itemCount: state!.items!.length,
+                itemCount: state?.length,
                 itemBuilder: (context, index) => SizedBox(
                     width: double.infinity,
                     height: ScreenAdapter.height(180),
@@ -34,7 +34,7 @@ class CategoryView extends GetView<CategoryController> {
                             ),
                           ),
                           Center(
-                            child: Text("${state.items?[index].title}"),
+                            child: Text("${state?[index].title}"),
                           )
                         ],
                       ),
@@ -44,15 +44,16 @@ class CategoryView extends GetView<CategoryController> {
               child: SizedBox(
             height: double.infinity,
             child: Obx(() => GridView.builder(
-                itemCount: controller.pCateItemModels.length,
+                itemCount: controller.categoryModels.length,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 3,
                     crossAxisSpacing: ScreenAdapter.width(40),
                     childAspectRatio: 240 / 346),
                 itemBuilder: (context, index) => InkWell(
                       onTap: () {
-                        Get.toNamed("/product", arguments: {
-                          "cid": controller.pCateItemModels[index].id
+                        Get.offAndToNamed("/product", parameters: {
+                          "requestKey": "cid",
+                          "requestValue": "${controller.categoryModels[index].id}"
                         });
                       },
                       child: Column(
@@ -61,11 +62,11 @@ class CategoryView extends GetView<CategoryController> {
                               alignment: Alignment.center,
                               width: double.infinity,
                               child: Image.network(
-                                  "https://xiaomi.itying.com/${controller.pCateItemModels[index].pic}"
+                                  "https://xiaomi.itying.com/${controller.categoryModels[index].pic}"
                                       .replaceAll("\\", "/"),
                                   fit: BoxFit.fitHeight)),
                           SizedBox(height: ScreenAdapter.height(30)),
-                          Text("${controller.pCateItemModels[index].title}")
+                          Text("${controller.categoryModels[index].title}")
                         ],
                       ),
                     ))),
@@ -75,27 +76,32 @@ class CategoryView extends GetView<CategoryController> {
 
   _appBar() => AppBar(
       titleSpacing: 0,
-      title: Container(
-        width: ScreenAdapter.width(840),
-        height: ScreenAdapter.height(100),
-        decoration: BoxDecoration(
-            color: const Color.fromARGB(230, 240, 245, 245),
-            borderRadius: BorderRadius.circular(30)),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Padding(
-                padding: EdgeInsets.fromLTRB(
-                    ScreenAdapter.width(34), 0, ScreenAdapter.width(10), 0),
-                child: const Icon(XmshopFonts.search,
-                    size: 20, color: Colors.black45)),
-            Text(
-              "搜索",
-              style: TextStyle(
-                  fontSize: ScreenAdapter.fontSize(32), color: Colors.black54),
-            )
-          ],
+      title: InkWell(
+        child: Container(
+          width: ScreenAdapter.width(840),
+          height: ScreenAdapter.height(100),
+          decoration: BoxDecoration(
+              color: const Color.fromARGB(230, 240, 245, 245),
+              borderRadius: BorderRadius.circular(30)),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Padding(
+                  padding: EdgeInsets.fromLTRB(
+                      ScreenAdapter.width(34), 0, ScreenAdapter.width(10), 0),
+                  child: const Icon(XmshopFonts.search,
+                      size: 20, color: Colors.black45)),
+              Text(
+                "搜索",
+                style: TextStyle(
+                    fontSize: ScreenAdapter.fontSize(32), color: Colors.black54),
+              )
+            ],
+          ),
         ),
+        onTap: () {
+          Get.toNamed("/xm-search");
+        },
       ),
       backgroundColor: Colors.transparent,
       elevation: 0,

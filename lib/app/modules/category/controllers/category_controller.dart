@@ -1,45 +1,44 @@
-import 'dart:developer';
-
 import 'package:get/get.dart';
-import 'package:xmshop/app/data/pcate_provider.dart';
-import 'package:xmshop/app/models/pcate_model.dart';
 
-class CategoryController extends GetxController with StateMixin<PCateModel> {
-  final IPCateProvider provider;
+import '../../../data/category_provider.dart';
+import '../../../models/category_model.dart';
+
+class CategoryController extends GetxController with StateMixin<List<CategoryModel>> {
+  final ICategoryProvider provider;
   CategoryController({required this.provider});
 
-  RxList<PCateItemModel> pCateItemModels = <PCateItemModel>[].obs;
+  RxList<CategoryModel> categoryModels = <CategoryModel>[].obs;
   final RxInt selectIndex = 0.obs;
 
   void changeSelectIndex(int index) {
     selectIndex.value = index;
-    updatePCateItemModels();
+    updateCategoryModel();
     update();
   }
 
-  void updatePCateItemModels() async {
-    final Response response = await provider.getPCateModel(query: {"pid": state!.items?[selectIndex.value].id});
+  void updateCategoryModel() async {
+    final Response response = await provider.getPCateModel(query: {"pid": state?[selectIndex.value].id});
     if (response.hasError) {
-      pCateItemModels.value = <PCateItemModel>[].obs;
+      categoryModels.value = <CategoryModel>[].obs;
     } else {
-      pCateItemModels.value = response.body.items;
+      categoryModels.value = response.body;
     }
     update();
   }
 
-  getPCateModelData() async {
+  void getCategoryModel() async {
     final Response response = await provider.getPCateModel();
     if (response.hasError) {
       change(null, status: RxStatus.error(response.statusText));
     } else {
       change(response.body, status: RxStatus.success());
-      updatePCateItemModels();
+      updateCategoryModel();
     }
   }
 
   @override
   void onInit() {
     super.onInit();
-    getPCateModelData();
+    getCategoryModel();
   }
 }

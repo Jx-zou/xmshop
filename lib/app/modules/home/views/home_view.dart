@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:xmshop/app/common/views/title_banner.dart';
-import 'package:xmshop/app/modules/home/views/home_advertisement_view.dart';
-import 'package:xmshop/app/modules/home/views/home_best_goods_banner_view.dart';
-import 'package:xmshop/app/modules/home/views/home_best_goods_list_view.dart';
 
 import '../../../common/icons/xmshop_fonts.dart';
+import '../../../common/views/title_banner.dart';
 import '../../../utils/screen_adapter.dart';
 import '../controllers/home_controller.dart';
+import 'home_advertisement_view.dart';
+import 'home_best_goods_banner_view.dart';
+import 'home_best_goods_list_view.dart';
 import 'home_category_view.dart';
 import 'home_hot_goods_list_view.dart';
 import 'home_hot_goods_swiper_view.dart';
@@ -22,7 +22,7 @@ class HomeView extends GetView<HomeController> {
         Container(
             padding: EdgeInsets.only(
                 left: ScreenAdapter.width(25), right: ScreenAdapter.width(25)),
-            child: TitleBanner("省心优惠", "全部优惠",
+            child: TitleBanner("省心优惠", subTitle: "全部优惠",
                 mainSize: ScreenAdapter.fontSize(48),
                 secondSize: ScreenAdapter.fontSize(38))),
         Container(
@@ -56,7 +56,7 @@ class HomeView extends GetView<HomeController> {
   Widget _hotGoodsView() {
     return Column(
       children: [
-        TitleBanner("热销甄选", "更多手机",
+        TitleBanner("热销甄选", subTitle: "更多手机",
             mainSize: ScreenAdapter.fontSize(48),
             secondSize: ScreenAdapter.fontSize(38)),
         Row(
@@ -137,28 +137,33 @@ class HomeView extends GetView<HomeController> {
           ),
           leadingWidth: ScreenAdapter.width(
               200 * (1 - controller.offsetProportion.value)),
-          title: Container(
-            width: ScreenAdapter.width(620 + controller.offset.value * 1.5),
-            height: ScreenAdapter.height(110),
-            decoration: BoxDecoration(
-                color: const Color.fromARGB(230, 240, 245, 245),
-                borderRadius: BorderRadius.circular(30)),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Padding(
-                    padding: EdgeInsets.fromLTRB(
-                        ScreenAdapter.width(34), 0, ScreenAdapter.width(10), 0),
-                    child: const Icon(XmshopFonts.search,
-                        size: 20, color: Colors.black26)),
-                Text(
-                  "${controller.offset.value}",
-                  style: TextStyle(
-                      fontSize: ScreenAdapter.fontSize(32),
-                      color: Colors.black54),
-                )
-              ],
+          title: InkWell(
+            child: Container(
+              width: ScreenAdapter.width(620 + controller.offset.value * 1.5),
+              height: ScreenAdapter.height(110),
+              decoration: BoxDecoration(
+                  color: const Color.fromARGB(230, 240, 245, 245),
+                  borderRadius: BorderRadius.circular(30)),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Padding(
+                      padding: EdgeInsets.fromLTRB(
+                          ScreenAdapter.width(34), 0, ScreenAdapter.width(10), 0),
+                      child: const Icon(XmshopFonts.search,
+                          size: 20, color: Colors.black26)),
+                  Text(
+                    "${controller.offset.value}",
+                    style: TextStyle(
+                        fontSize: ScreenAdapter.fontSize(32),
+                        color: Colors.black54),
+                  )
+                ],
+              ),
             ),
+            onTap: () {
+              Get.toNamed("/search");
+            },
           ),
           backgroundColor: controller.flag.value
               ? Color.fromARGB(

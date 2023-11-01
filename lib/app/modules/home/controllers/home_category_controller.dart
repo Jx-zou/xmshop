@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import '../../../data/best_category_provider.dart';
 import '../../../models/best_category_model.dart';
 
-class HomeCategoryController extends GetxController with StateMixin<BestCategoryModel> {
+class HomeCategoryController extends GetxController with StateMixin<List<BestCategoryModel>> {
   final IBestCategoryProvider provider;
   HomeCategoryController({required this.provider});
   final RxDouble paginationValue = RxDouble(0);

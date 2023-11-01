@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
-import 'package:xmshop/app/common/views/loading.dart';
-import 'package:xmshop/app/utils/screen_adapter.dart';
 
+import '../../../common/views/loading.dart';
+import '../../../utils/screen_adapter.dart';
 import '../controllers/home_best_goods_list_controller.dart';
 
 class HomeBestGoodsListView extends GetView<HomeBestGoodsListController> {

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
-import 'package:xmshop/app/common/views/loading.dart';
 
+import '../../../common/views/loading.dart';
 import '../../../utils/screen_adapter.dart';
 import '../controllers/home_category_controller.dart';
 
@@ -41,7 +40,7 @@ class HomeCategoryView extends GetView<HomeCategoryController> {
           child: controller.obx(
             (state) => GridView.builder(
                 scrollDirection: Axis.horizontal,
-                itemCount: state!.items?.length,
+                itemCount: state?.length,
                 controller: controller.scrollController,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
@@ -53,14 +52,14 @@ class HomeCategoryView extends GetView<HomeCategoryController> {
                         width: ScreenAdapter.width(120),
                         height: ScreenAdapter.width(120),
                         child: Image.network(
-                            "https://xiaomi.itying.com/${state.items?[index].pic}"
+                            "https://xiaomi.itying.com/${state?[index].pic}"
                                 .replaceAll('\\', '/'),
                             fit: BoxFit.cover),
                       ),
                       Padding(
                           padding: EdgeInsets.fromLTRB(
                               0, ScreenAdapter.height(4), 0, 0),
-                          child: Text("${state.items?[index].title}",
+                          child: Text("${state?[index].title}",
                               style: TextStyle(
                                   fontSize: ScreenAdapter.fontSize(34)))),
                     ])),

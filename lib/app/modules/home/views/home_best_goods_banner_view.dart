@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:xmshop/app/common/views/loading.dart';
-import 'package:xmshop/app/modules/home/controllers/home_best_goods_banner_controller.dart';
 
+import '../../../common/views/loading.dart';
 import '../../../utils/screen_adapter.dart';
+import '../controllers/home_best_goods_banner_controller.dart';
 
 class HomeBestGoodsBannerView extends GetView<HomeBestGoodsBannerController> {
   const HomeBestGoodsBannerView({super.key});

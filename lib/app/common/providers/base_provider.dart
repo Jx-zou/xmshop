@@ -1,9 +1,8 @@
-import 'dart:developer';
-
 import 'package:get/get_connect/connect.dart';
 import 'package:xmshop/global.dart';
 
 class BaseProvider extends GetConnect {
+
   @override
   void onInit() {
     //请求前缀
@@ -11,7 +10,7 @@ class BaseProvider extends GetConnect {
 
     //request监听
     httpClient.addResponseModifier((request, response) {
-      log(request.url.toString());
+      print(request.url.toString());
       return response;
     });
     
