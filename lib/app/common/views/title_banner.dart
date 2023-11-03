@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class TitleBanner extends StatelessWidget {
   final String mainTitle;

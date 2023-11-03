@@ -9,7 +9,7 @@ class HomeSwiperController extends GetxController with StateMixin<List<FocusMode
   HomeSwiperController({required this.provider});
 
   _getFocusData() async {
-    final response = await provider.getFocusModel();
+    final response = await provider.getFocusModels();
     if (response.hasError) {
       change(null, status: RxStatus.error(response.statusText));
     } else {

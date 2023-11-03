@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../common/icons/xmshop_fonts.dart';
+import '../../../common/icons/xmshop_icons.dart';
 import '../../../common/views/title_banner.dart';
 import '../../../utils/screen_adapter.dart';
 import '../controllers/home_controller.dart';
@@ -22,7 +22,8 @@ class HomeView extends GetView<HomeController> {
         Container(
             padding: EdgeInsets.only(
                 left: ScreenAdapter.width(25), right: ScreenAdapter.width(25)),
-            child: TitleBanner("省心优惠", subTitle: "全部优惠",
+            child: TitleBanner("省心优惠",
+                subTitle: "全部优惠",
                 mainSize: ScreenAdapter.fontSize(48),
                 secondSize: ScreenAdapter.fontSize(38))),
         Container(
@@ -38,16 +39,8 @@ class HomeView extends GetView<HomeController> {
                 gradient: LinearGradient(
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
-                    colors: [
-                  Colors.white38,
-                  Colors.white24,
-                  Colors.white10
-                ],
-                    stops: [
-                  0.0,
-                  0.1,
-                  1.0
-                ])),
+                    colors: [Colors.white38, Colors.white24, Colors.white10],
+                    stops: [0.0, 0.1, 1.0])),
             child: const HomeBestGoodsListView())
       ],
     );
@@ -56,7 +49,8 @@ class HomeView extends GetView<HomeController> {
   Widget _hotGoodsView() {
     return Column(
       children: [
-        TitleBanner("热销甄选", subTitle: "更多手机",
+        TitleBanner("热销甄选",
+            subTitle: "更多手机",
             mainSize: ScreenAdapter.fontSize(48),
             secondSize: ScreenAdapter.fontSize(38)),
         Row(
@@ -83,12 +77,7 @@ class HomeView extends GetView<HomeController> {
     );
   }
 
-  Widget _bodyView() => Positioned(
-      top: -40,
-      left: 0,
-      right: 0,
-      bottom: 0,
-      child: ListView(
+  Widget _bodyView() => ListView(
         controller: controller.scrollController,
         children: [
           SizedBox(
@@ -118,28 +107,23 @@ class HomeView extends GetView<HomeController> {
               child: _hotGoodsView()),
           _bestGoodsView(),
         ],
-      ));
+      );
 
-  Widget _barView() => Positioned(
-      top: 0,
-      left: 0,
-      right: 0,
+  _appBarView() => PreferredSize(
+      preferredSize: Size.fromHeight(ScreenAdapter.height(150)),
       child: Obx(() => AppBar(
           titleSpacing: 0,
           leading: Icon(
-            XmshopFonts.xiaomi,
-            color: Color.fromARGB(
-                (255 * (1 - controller.offsetProportion.value)).toInt(),
-                255,
-                255,
-                255),
+            XmshopIcons.logo,
+            color: Colors.white.withOpacity(1 - controller.opacity.value),
             size: 32,
           ),
-          leadingWidth: ScreenAdapter.width(
-              200 * (1 - controller.offsetProportion.value)),
+          leadingWidth:
+              ScreenAdapter.width(200 * (1 - controller.opacity.value)),
           title: InkWell(
             child: Container(
-              width: ScreenAdapter.width(620 + controller.offset.value * 1.5),
+              width: ScreenAdapter.width(620 +
+                  controller.opacity.value * 1.5 * HomeController.maxOffset),
               height: ScreenAdapter.height(110),
               decoration: BoxDecoration(
                   color: const Color.fromARGB(230, 240, 245, 245),
@@ -148,12 +132,12 @@ class HomeView extends GetView<HomeController> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Padding(
-                      padding: EdgeInsets.fromLTRB(
-                          ScreenAdapter.width(34), 0, ScreenAdapter.width(10), 0),
-                      child: const Icon(XmshopFonts.search,
+                      padding: EdgeInsets.fromLTRB(ScreenAdapter.width(34), 0,
+                          ScreenAdapter.width(10), 0),
+                      child: const Icon(XmshopIcons.search,
                           size: 20, color: Colors.black26)),
                   Text(
-                    "${controller.offset.value}",
+                    "手机",
                     style: TextStyle(
                         fontSize: ScreenAdapter.fontSize(32),
                         color: Colors.black54),
@@ -165,28 +149,28 @@ class HomeView extends GetView<HomeController> {
               Get.toNamed("/search");
             },
           ),
-          backgroundColor: controller.flag.value
-              ? Color.fromARGB(
-                  (255 * controller.offsetProportion.value).toInt(),
-                  255,
-                  255,
-                  255)
-              : Colors.transparent,
+          backgroundColor: Colors.white.withOpacity(controller.opacity.value),
           elevation: 0,
           centerTitle: true,
           actions: [
-            IconButton(onPressed: () {}, icon: const Icon(Icons.qr_code)),
-            IconButton(onPressed: () {}, icon: const Icon(XmshopFonts.message))
+            IconButton(
+                padding: const EdgeInsets.all(0),
+                onPressed: () {},
+                icon: const Icon(XmshopIcons.qrcode)),
+            IconButton(
+                padding: const EdgeInsets.all(0),
+                onPressed: () {},
+                icon: const Icon(XmshopIcons.message))
           ],
-          actionsIconTheme: IconThemeData(
-              size: 28,
-              color: controller.flag.value ? Colors.black54 : Colors.white))));
+          actionsIconTheme:
+              IconThemeData(size: 28, color: controller.actionColor.value))));
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Stack(
-      children: [_bodyView(), _barView()],
-    ));
+        extendBodyBehindAppBar: true,
+        appBar: _appBarView(),
+        body: MediaQuery.removePadding(
+            context: context, removeTop: true, child: _bodyView()));
   }
 }

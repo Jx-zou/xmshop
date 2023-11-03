@@ -1,44 +1,48 @@
 
-import '../utils/storage.dart';
+import 'package:get/get.dart';
 
-class SearchService {
+import 'storage_service.dart';
+
+class SearchService extends GetxService{
 
   static const String searchHistoryKey = "searchHistory";
 
-  static setHistory(keywords) async {
-    List? searchHistory = await Storage.get(searchHistoryKey);
+  final StorageService storageService = Get.find<StorageService>();
+
+  setHistory(keywords) async {
+    List? searchHistory = await storageService.get(searchHistoryKey);
     if (searchHistory != null && searchHistory.isNotEmpty) {
       if(!searchHistory.contains(keywords)) {
         searchHistory.add(keywords);
-        await Storage.set(searchHistoryKey, searchHistory);
+        await storageService.set(searchHistoryKey, searchHistory);
       }
       return;
     }
     searchHistory = [];
     searchHistory.add(keywords);
-    await Storage.set(searchHistoryKey, searchHistory);
+    await storageService.set(searchHistoryKey, searchHistory);
   }
 
-  static getHistory() async {
-    List? searchHistory = await Storage.get(searchHistoryKey);
+  Future<List> getHistory() async {
+    List? searchHistory = await storageService.get(searchHistoryKey);
     if (searchHistory != null) {
       return searchHistory;
     }
     return [];
   }
 
-  static deleteHistory(keywords) async {
-    List? searchHistory = await Storage.get(searchHistoryKey);
+  deleteHistory(keywords) async {
+    List? searchHistory = await storageService.get(searchHistoryKey);
     if (searchHistory != null && searchHistory.isNotEmpty && searchHistory.contains(keywords)) {
-      Storage.remove(searchHistoryKey);
-      await Storage.set(searchHistoryKey, searchHistory);
+      storageService.remove(searchHistoryKey);
+      await storageService.set(searchHistoryKey, searchHistory);
     }
   }
 
-  static clearHistory() async {
-    List? searchHistory = await Storage.get(searchHistoryKey);
+  clearHistory() async {
+    List? searchHistory = await storageService.get(searchHistoryKey);
     if (searchHistory != null) {
-      Storage.remove(searchHistoryKey);
+      storageService.remove(searchHistoryKey);
     }
   }
 }

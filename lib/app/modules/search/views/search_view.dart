@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../common/icons/xmshop_fonts.dart';
+import '../../../common/icons/xmshop_icons.dart';
 import '../../../common/views/title_banner.dart';
 import '../../../utils/screen_adapter.dart';
 import '../controllers/xm_search_controller.dart';
@@ -213,7 +213,7 @@ class SearchView extends GetView<XmSearchController> {
                 contentPadding: EdgeInsets.fromLTRB(
                     0, ScreenAdapter.height(20), 0, ScreenAdapter.height(50)),
                 prefixIcon: Icon(
-                  XmshopFonts.search,
+                  XmshopIcons.search,
                   size: ScreenAdapter.width(50),
                 ),
                 border: OutlineInputBorder(

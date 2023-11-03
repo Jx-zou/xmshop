@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:xmshop/app/common/icons/xmshop_icons.dart';
 
 import '../controllers/root_controller.dart';
 
@@ -24,13 +25,13 @@ class RootView extends GetView<RootController> {
               controller.pageController.jumpToPage(index);
             },
             items: const [
-              BottomNavigationBarItem(icon: Icon(Icons.home), label: "首页"),
-              BottomNavigationBarItem(icon: Icon(Icons.category), label: "分类"),
+              BottomNavigationBarItem(icon: Icon(XmshopIcons.home), label: "首页"),
+              BottomNavigationBarItem(icon: Icon(XmshopIcons.category), label: "分类"),
               BottomNavigationBarItem(
-                  icon: Icon(Icons.room_service), label: "服务"),
+                  icon: Icon(XmshopIcons.service), label: "服务"),
               BottomNavigationBarItem(
-                  icon: Icon(Icons.shopping_cart), label: "购物车"),
-              BottomNavigationBarItem(icon: Icon(Icons.people), label: "用户")
+                  icon: Icon(XmshopIcons.tabShopCart), label: "购物车"),
+              BottomNavigationBarItem(icon: Icon(XmshopIcons.mine), label: "用户")
             ],
           ),
         ));

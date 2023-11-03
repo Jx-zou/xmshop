@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../common/icons/xmshop_fonts.dart';
+import '../../../common/icons/xmshop_icons.dart';
 import '../../../common/views/loading.dart';
 import '../../../utils/screen_adapter.dart';
 import '../controllers/product_controller.dart';
@@ -23,7 +23,7 @@ class ProductView extends GetView<ProductController> {
               Padding(
                   padding: EdgeInsets.fromLTRB(
                       ScreenAdapter.width(34), 0, ScreenAdapter.width(10), 0),
-                  child: const Icon(XmshopFonts.search,
+                  child: const Icon(XmshopIcons.search,
                       size: 20, color: Colors.black45)),
               Text(
                 "",

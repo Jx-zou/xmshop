@@ -3,11 +3,13 @@ import '../../../services/search_service.dart';
 
 class XmSearchController extends GetxController {
 
+  final SearchService searchService = Get.find<SearchService>();
+
   String keywords = "";
   RxList history = [].obs;
 
   searchToProduct() {
-    SearchService.setHistory(keywords);
+    searchService.setHistory(keywords);
     Get.offAndToNamed("/product", parameters: {
       "requestKey": "search",
       "requestValue": keywords
@@ -17,7 +19,7 @@ class XmSearchController extends GetxController {
   void clearHistoryData() async {
     if (history.isNotEmpty) {
       history.clear();
-      await SearchService.clearHistory();
+      await searchService.clearHistory();
       update();
     }
   }
@@ -26,13 +28,13 @@ class XmSearchController extends GetxController {
     if (history.contains(keywords)) {
       history.remove(keywords);
     }
-    await SearchService.deleteHistory(keywords);
+    await searchService.deleteHistory(keywords);
     update();
   }
 
   _getHistoryData() async {
-    List? history = await SearchService.getHistory();
-    if (history != null && history.isNotEmpty) {
+    List? history = await searchService.getHistory();
+    if (history.isNotEmpty) {
       this.history.addAll(history);
       update();
     }  

@@ -11,7 +11,7 @@ class HomeHotGoodsSwiperController extends GetxController with StateMixin<List<F
 
 
   _getFocusData() async {
-    final response = await provider.getFocusModel(query: {"position": "2"});
+    final response = await provider.getFocusModels(query: {"position": "2"});
     if (response.hasError) {
       change(null, status: RxStatus.error(response.statusText));
     } else {

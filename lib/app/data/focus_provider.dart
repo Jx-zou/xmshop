@@ -4,7 +4,7 @@ import '../common/providers/base_provider.dart';
 import '../models/focus_model.dart';
 
 abstract class IFocusProvider {
-  Future<Response<List<FocusModel>>> getFocusModel({Map<String, dynamic>? query});
+  Future<Response<List<FocusModel>>> getFocusModels({Map<String, dynamic>? query});
 }
 
 class FocusProvider extends BaseProvider implements IFocusProvider {
@@ -21,7 +21,7 @@ class FocusProvider extends BaseProvider implements IFocusProvider {
   }
 
   @override
-  Future<Response<List<FocusModel>>> getFocusModel({Map<String, dynamic>? query}) async{
+  Future<Response<List<FocusModel>>> getFocusModels({Map<String, dynamic>? query}) async{
     final res = await get("/focus", query: query);
     return Response(
         statusCode: res.statusCode,

@@ -3,36 +3,19 @@ import 'package:get/get.dart';
 
 class HomeController extends GetxController {
   static const double maxOffset = 75;
-  final RxBool flag = false.obs;
-  final RxDouble offset = RxDouble(0);
-  final RxDouble offsetProportion = RxDouble(0);
+  final Rx<Color> actionColor = Colors.white.obs;
+  final RxDouble opacity = 0.0.obs;
   final ScrollController scrollController = ScrollController();
 
   void _addScrollListener() {
     scrollController.addListener(() {
-      double pixels = scrollController.position.pixels;
-
-      if (pixels < 10) {
-        if (flag.value) {
-          flag.value = false;
-        }
-      }
-      if (pixels > 10 && pixels < maxOffset) {
-        if (!flag.value) {
-          flag.value = true;
-        }
-      }
-      if (pixels > maxOffset) {
-        if (offset.value == maxOffset) {
-          return;
-        }
-        offset.value = maxOffset;
-        offsetProportion.value = 1;
+      if (scrollController.offset <= maxOffset) {
+        opacity.value = scrollController.offset / 75;
+        actionColor.value = Colors.white;
         update();
         return;
       }
-      offset.value = pixels;
-      offsetProportion.value = pixels / maxOffset;
+      actionColor.value = Colors.black54;
       update();
     });
   }

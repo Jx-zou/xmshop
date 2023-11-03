@@ -6,32 +6,116 @@
   "description": "",
   "glyphs": [
     {
-      "icon_id": "4765866",
-      "name": "message",
-      "font_class": "message",
-      "unicode": "e78a",
-      "unicode_decimal": 59274
+      "icon_id": "77828",
+      "name": "收藏",
+      "font_class": "shoucang",
+      "unicode": "f0114",
+      "unicode_decimal": 983316
     },
     {
-      "icon_id": "10241252",
-      "name": "search",
-      "font_class": "search",
-      "unicode": "e755",
-      "unicode_decimal": 59221
+      "icon_id": "446575",
+      "name": "分享",
+      "font_class": "fenxiang",
+      "unicode": "e60d",
+      "unicode_decimal": 58893
     },
     {
-      "icon_id": "24348059",
-      "name": "xiaomi",
+      "icon_id": "1161668",
+      "name": "mine",
+      "font_class": "mine",
+      "unicode": "e614",
+      "unicode_decimal": 58900
+    },
+    {
+      "icon_id": "1363827",
+      "name": "home",
+      "font_class": "home",
+      "unicode": "e602",
+      "unicode_decimal": 58882
+    },
+    {
+      "icon_id": "2076288",
+      "name": " 购物车",
+      "font_class": "gouwuche",
+      "unicode": "e899",
+      "unicode_decimal": 59545
+    },
+    {
+      "icon_id": "2674472",
+      "name": "返回",
+      "font_class": "fanhui",
+      "unicode": "e624",
+      "unicode_decimal": 58916
+    },
+    {
+      "icon_id": "3652974",
+      "name": "分类",
+      "font_class": "fenlei",
+      "unicode": "e71b",
+      "unicode_decimal": 59163
+    },
+    {
+      "icon_id": "4896380",
+      "name": "更多",
+      "font_class": "gengduo",
+      "unicode": "ec1c",
+      "unicode_decimal": 60444
+    },
+    {
+      "icon_id": "4954949",
+      "name": "扫码",
+      "font_class": "saoma",
+      "unicode": "e65d",
+      "unicode_decimal": 58973
+    },
+    {
+      "icon_id": "6150962",
+      "name": "qrcode",
+      "font_class": "qrcode",
+      "unicode": "e76e",
+      "unicode_decimal": 59246
+    },
+    {
+      "icon_id": "8288820",
+      "name": "爱心",
+      "font_class": "aixin",
+      "unicode": "e83f",
+      "unicode_decimal": 59455
+    },
+    {
+      "icon_id": "9297200",
+      "name": "客服",
+      "font_class": "kefu",
+      "unicode": "e61b",
+      "unicode_decimal": 58907
+    },
+    {
+      "icon_id": "11420388",
+      "name": "un-message-o",
+      "font_class": "un-message-o",
+      "unicode": "e6bd",
+      "unicode_decimal": 59069
+    },
+    {
+      "icon_id": "11481178",
+      "name": "购物车",
+      "font_class": "gouwuche1",
+      "unicode": "e655",
+      "unicode_decimal": 58965
+    },
+    {
+      "icon_id": "25324009",
+      "name": "search bar_search",
+      "font_class": "a-searchbar_search",
+      "unicode": "e70b",
+      "unicode_decimal": 59147
+    },
+    {
+      "icon_id": "34303445",
+      "name": "小米",
       "font_class": "xiaomi",
-      "unicode": "e725",
-      "unicode_decimal": 59173
-    },
-    {
-      "icon_id": "26608029",
-      "name": "scan-code",
-      "font_class": "scan-code",
-      "unicode": "e636",
-      "unicode_decimal": 58934
+      "unicode": "e720",
+      "unicode_decimal": 59168
     }
   ]
 }
