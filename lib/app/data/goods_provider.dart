@@ -10,7 +10,7 @@ abstract class IGoodsProvider {
 class GoodsProvider extends BaseProvider implements IGoodsProvider {
 
   List<GoodsModel>? _decode(dynamic json) {
-    if (json['result'] != null) {
+    if (json != null && json['result'] != null) {
       List<GoodsModel> list = <GoodsModel>[];
       json['result'].forEach((v) {
         list.add(GoodsModel.fromJson(v));

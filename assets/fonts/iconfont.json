@@ -20,11 +20,32 @@
       "unicode_decimal": 58893
     },
     {
+      "icon_id": "1017309",
+      "name": "yes",
+      "font_class": "yes",
+      "unicode": "e684",
+      "unicode_decimal": 59012
+    },
+    {
       "icon_id": "1161668",
       "name": "mine",
       "font_class": "mine",
       "unicode": "e614",
       "unicode_decimal": 58900
+    },
+    {
+      "icon_id": "1222030",
+      "name": "arrow-right",
+      "font_class": "arrowright",
+      "unicode": "e694",
+      "unicode_decimal": 59028
+    },
+    {
+      "icon_id": "1251425",
+      "name": "location",
+      "font_class": "location",
+      "unicode": "e6a7",
+      "unicode_decimal": 59047
     },
     {
       "icon_id": "1363827",
@@ -74,6 +95,13 @@
       "font_class": "qrcode",
       "unicode": "e76e",
       "unicode_decimal": 59246
+    },
+    {
+      "icon_id": "7569993",
+      "name": "24gl-warningCircle",
+      "font_class": "24gl-warningCircle",
+      "unicode": "e97e",
+      "unicode_decimal": 59774
     },
     {
       "icon_id": "8288820",

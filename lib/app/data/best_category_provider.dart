@@ -10,7 +10,7 @@ abstract class IBestCategoryProvider {
 class BestCategoryProvider extends BaseProvider implements IBestCategoryProvider {
 
   List<BestCategoryModel>? _decode(dynamic json) {
-    if (json['result'] != null) {
+    if (json != null && json['result'] != null) {
       List<BestCategoryModel> list = <BestCategoryModel>[];
       json['result'].forEach((v) {
         list.add(BestCategoryModel.fromJson(v));

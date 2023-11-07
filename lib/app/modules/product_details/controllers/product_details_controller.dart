@@ -31,7 +31,6 @@ class ProductDetailsController extends GetxController
   final RxDouble appBarOpacity = 0.0.obs;
   final Rx<Color> actionColor = Colors.white.obs;
   final RxInt selectedId = 1.obs;
-  final RxBool showTabs = false.obs;
 
   _changeSelectedId(int id) {
     selectedId.value = id;
@@ -50,10 +49,8 @@ class ProductDetailsController extends GetxController
       if (offset <= 75) {
         appBarOpacity.value = offset / 75;
         actionColor.value = Colors.white;
-        showTabs.value = false;
         update();
       } else {
-        showTabs.value = true;
         actionColor.value = Colors.black;
         update();
       }

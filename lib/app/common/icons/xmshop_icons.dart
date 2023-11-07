@@ -11,7 +11,7 @@ class XmshopIcons {
       IconData(0xe602, fontFamily: "xmshopIcon", matchTextDirection: true);
   static const IconData shopCart =
       IconData(0xe899, fontFamily: "xmshopIcon", matchTextDirection: true);
-  static const IconData back =
+  static const IconData arrowLeft =
       IconData(0xe624, fontFamily: "xmshopIcon", matchTextDirection: true);
   static const IconData category =
       IconData(0xe71b, fontFamily: "xmshopIcon", matchTextDirection: true);
@@ -33,4 +33,12 @@ class XmshopIcons {
       IconData(0xe720, fontFamily: "xmshopIcon", matchTextDirection: true);
   static const IconData qrcode =
       IconData(0xe76e, fontFamily: "xmshopIcon", matchTextDirection: true);
+  static const IconData location =
+      IconData(0xe6a7, fontFamily: "xmshopIcon", matchTextDirection: true);
+  static const IconData yes =
+      IconData(0xe684, fontFamily: "xmshopIcon", matchTextDirection: true);
+  static const IconData arrowRight =
+      IconData(0xe694, fontFamily: "xmshopIcon", matchTextDirection: true);
+  static const IconData exclamationMark =
+  IconData(0xe97e, fontFamily: "xmshopIcon", matchTextDirection: true);
 }

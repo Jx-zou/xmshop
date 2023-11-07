@@ -12,7 +12,7 @@ abstract class ICategoryProvider {
 class CategoryProvider extends BaseProvider implements ICategoryProvider {
 
   List<CategoryModel>? _decode(dynamic json) {
-    if (json['result'] != null) {
+    if (json != null && json['result'] != null) {
       List<CategoryModel> list = <CategoryModel>[];
       json['result'].forEach((v) {
         list.add(CategoryModel.fromJson(v));

@@ -5,6 +5,11 @@ import '../../../common/icons/xmshop_icons.dart';
 import '../../../common/views/round_rect_button.dart';
 import '../../../utils/screen_adapter.dart';
 import '../controllers/product_details_controller.dart';
+import 'product_details_bottom_view.dart';
+import 'product_details_evaluate_view.dart';
+import 'product_details_goods_view.dart';
+import 'product_details_more_view.dart';
+import 'product_details_recommended_view.dart';
 
 class ProductDetailsView extends GetView<ProductDetailsController> {
   const ProductDetailsView({super.key});
@@ -36,26 +41,14 @@ class ProductDetailsView extends GetView<ProductDetailsController> {
     return SingleChildScrollView(
         controller: controller.scrollController,
         child: Column(children: [
-          Container(
-            key: controller.tarTitles[0]['contentKey'],
-            color: Colors.red,
-            height: 500,
-          ),
-          Container(
-            key: controller.tarTitles[1]['contentKey'],
-            height: 500,
-            color: Colors.grey,
-          ),
-          Container(
-            key: controller.tarTitles[2]['contentKey'],
-            height: 1000,
-            color: Colors.green,
-          ),
-          Container(
-            key: controller.tarTitles[3]['contentKey'],
-            height: 1000,
-            color: Colors.blue,
-          ),
+          ProductDetailsGoodsView(
+              key: controller.tarTitles[0]['contentKey']),
+          ProductDetailsEvaluateView(
+              key: controller.tarTitles[1]['contentKey']),
+          ProductDetailsMoreView(
+              key: controller.tarTitles[2]['contentKey']),
+          ProductDetailsRecommendedView(
+              key: controller.tarTitles[3]['contentKey']),
         ]));
   }
 
@@ -73,11 +66,10 @@ class ProductDetailsView extends GetView<ProductDetailsController> {
                       foregroundColor: Colors.white,
                       elevation: 0,
                       borderRadius: ScreenAdapter.width(30),
-                      child: Icon(XmshopIcons.back,
+                      child: Icon(XmshopIcons.arrowLeft,
                           size: ScreenAdapter.width(40),
                           color: controller.actionColor.value))),
-              title: controller.showTabs.value
-                  ? Row(
+              title: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: controller.tarTitles
@@ -93,8 +85,8 @@ class ProductDetailsView extends GetView<ProductDetailsController> {
                                           fontSize: ScreenAdapter.fontSize(35),
                                           color: value['id'] ==
                                                   controller.selectedId.value
-                                              ? Colors.red
-                                              : Colors.black)),
+                                              ? Colors.red.withOpacity(controller.appBarOpacity.value)
+                                              : Colors.black.withOpacity(controller.appBarOpacity.value))),
                                   Container(
                                       margin: EdgeInsets.only(
                                           top: ScreenAdapter.height(20)),
@@ -102,12 +94,11 @@ class ProductDetailsView extends GetView<ProductDetailsController> {
                                       height: ScreenAdapter.height(5),
                                       color: value['id'] ==
                                               controller.selectedId.value
-                                          ? Colors.red
+                                          ? Colors.red.withOpacity(controller.appBarOpacity.value)
                                           : Colors.transparent)
                                 ],
                               )))
-                          .toList())
-                  : Container(),
+                          .toList()),
               centerTitle: true,
               backgroundColor:
                   Colors.white.withOpacity(controller.appBarOpacity.value),
@@ -148,6 +139,6 @@ class ProductDetailsView extends GetView<ProductDetailsController> {
     return Scaffold(
         extendBodyBehindAppBar: true,
         appBar: _appBarView(context),
-        body: _bodyView());
+        body: Stack(children: [_bodyView(), const ProductDetailsBottomView()]));
   }
 }

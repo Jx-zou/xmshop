@@ -10,7 +10,7 @@ abstract class IFocusProvider {
 class FocusProvider extends BaseProvider implements IFocusProvider {
 
   List<FocusModel>? _decode(dynamic json) {
-    if (json['result'] != null) {
+    if (json != null && json['result'] != null) {
       List<FocusModel> list = <FocusModel>[];
       json['result'].forEach((v) {
         list.add(FocusModel.fromJson(v));
