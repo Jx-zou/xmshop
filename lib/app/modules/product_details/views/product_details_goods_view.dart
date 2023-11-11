@@ -222,7 +222,8 @@ class ProductDetailsGoodsView extends GetView<ProductDetailsController> {
     return Image.asset("assets/images/404mid.gif",
         width: ScreenAdapter.width(1080),
         height: ScreenAdapter.height(2400),
-        fit: BoxFit.cover);
+        fit: BoxFit.cover,
+    );
   }
 }
 
@@ -238,15 +239,13 @@ class _SelectedBottomSheet extends GetView<ProductDetailsController> {
               borderRadius: BorderRadius.circular(ScreenAdapter.height(80)),
               elevation: 0,
               onPressed: onPressed,
-              child:
-              Text("$title", style: const TextStyle(color: Colors.white))));
+              child: Text("$title", style: const TextStyle(color: Colors.white))));
 
   @override
   Widget build(BuildContext context) {
     return controller.obx((state) =>
         Stack(children: [
-          ListView(
-            children: [
+          ListView(children: [
               Row(children: [
                 Container(
                     width: ScreenAdapter.width(256),
@@ -255,8 +254,7 @@ class _SelectedBottomSheet extends GetView<ProductDetailsController> {
                     padding: EdgeInsets.all(ScreenAdapter.width(25)),
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
-                      borderRadius:
-                      BorderRadius.circular(ScreenAdapter.fontSize(12)),
+                      borderRadius: BorderRadius.circular(ScreenAdapter.fontSize(12)),
                       color: Colors.black.withOpacity(0.05),
                     ),
                     child: Image.network(
@@ -281,70 +279,48 @@ class _SelectedBottomSheet extends GetView<ProductDetailsController> {
                                     decoration: TextDecoration.lineThrough))
                           ]),
                           SizedBox(height: ScreenAdapter.width(40)),
-                          Text("${state?.title}  ${controller
-                              .selectedAttr['selected']!.join('  ')}",
+                          Text("${state?.title}  ${controller.selectedAttr['selected']!.join('  ')}",
                               style: TextStyle(
                                   fontSize: ScreenAdapter.fontSize(32),
                                   color: Colors.black87))
                         ]))
               ]),
               SizedBox(height: ScreenAdapter.height(80)),
-              ...?state?.attr
-                  ?.map((attr) =>
+              ...?state?.attr?.map((attr) =>
                   Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text("${attr.cate}",
-                            style: TextStyle(
-                                fontSize: ScreenAdapter.fontSize(35))),
+                            style: TextStyle(fontSize: ScreenAdapter.fontSize(35))),
                         SizedBox(height: ScreenAdapter.height(30)),
                         Wrap(
                             spacing: ScreenAdapter.width(30),
-                            children: attr.list!
-                                .map((item) =>
+                            children: attr.list!.map((item) =>
                                 Row(
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
                                       Obx(() =>
                                           RoundRectButton(
                                               padding: EdgeInsets.symmetric(
-                                                  horizontal:
-                                                  ScreenAdapter.width(40),
-                                                  vertical:
-                                                  ScreenAdapter.height(16)),
-                                              color: controller
-                                                  .selectedAttr['selected']!
-                                                  .contains(item)
-                                                  ? Colors.redAccent
-                                                  .withOpacity(0.1)
-                                                  : Colors.black
-                                                  .withOpacity(0.05),
+                                                  horizontal: ScreenAdapter.width(40),
+                                                  vertical: ScreenAdapter.height(16)),
+                                              color: controller.selectedAttr['selected']!.contains(item) ? Colors.redAccent.withOpacity(0.1) : Colors.black.withOpacity(0.05),
                                               borderRadius:
                                               BorderRadius.circular(
                                                   ScreenAdapter
                                                       .fontSize(40)),
                                               elevation: 0,
-                                              border: controller
-                                                  .selectedAttr['selected']!
-                                                  .contains(item)
-                                                  ? Border.all(
-                                                  color:
-                                                  Colors.redAccent)
-                                                  : null,
+                                              border: controller.selectedAttr['selected']!.contains(item) ? Border.all(color: Colors.redAccent, strokeAlign: BorderSide.strokeAlignOutside) : null,
                                               child: Text(
                                                 item,
                                                 style: TextStyle(
                                                     color: Colors.black87,
-                                                    fontSize: ScreenAdapter
-                                                        .fontSize(32)),
+                                                    fontSize: ScreenAdapter.fontSize(32))
                                               ),
                                               onPressed: () {
-                                                controller
-                                                    .changeAttrSelected(
-                                                    attr.cate, item);
+                                                controller.changeAttrSelected(attr.cate, item);
                                               }))
-                                    ]))
-                                .toList()),
+                                    ])).toList()),
                         SizedBox(height: ScreenAdapter.height(40))
                       ]))
                   .toList(),
