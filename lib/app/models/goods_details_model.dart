@@ -1,21 +1,21 @@
 class GoodsDetailsModel {
   GoodsDetailsModel({
-      this.id, 
-      this.title, 
-      this.cid, 
-      this.price, 
-      this.oldPrice, 
-      this.isBest, 
-      this.isHot, 
-      this.isNew, 
-      this.status, 
-      this.pic, 
-      this.content, 
-      this.cname, 
-      this.attr, 
-      this.subTitle, 
-      this.salecount, 
-      this.specs,});
+    this.id,
+    this.title,
+    this.cid,
+    this.price,
+    this.oldPrice,
+    this.isBest,
+    this.isHot,
+    this.isNew,
+    this.attr,
+    this.status,
+    this.pic,
+    this.content,
+    this.cname,
+    this.subTitle,
+    this.specs,
+  });
 
   GoodsDetailsModel.fromJson(dynamic json) {
     id = json['_id'];
@@ -26,20 +26,20 @@ class GoodsDetailsModel {
     isBest = json['is_best'];
     isHot = json['is_hot'];
     isNew = json['is_new'];
+    if (json['attr'] != null) {
+      attr = [];
+      json['attr'].forEach((v) {
+        attr?.add(GoodsDetailsAttrModel.fromJson(v));
+      });
+    }
     status = json['status'];
     pic = json['pic'];
     content = json['content'];
     cname = json['cname'];
-    if (json['attr'] != null) {
-      attr = [];
-      json['attr'].forEach((v) {
-        attr?.add(Attr.fromJson(v));
-      });
-    }
     subTitle = json['sub_title'];
-    salecount = json['salecount'];
     specs = json['specs'];
   }
+
   String? id;
   String? title;
   String? cid;
@@ -48,13 +48,12 @@ class GoodsDetailsModel {
   num? isBest;
   num? isHot;
   num? isNew;
+  List<GoodsDetailsAttrModel>? attr;
   num? status;
   String? pic;
   String? content;
   String? cname;
-  List<Attr>? attr;
   String? subTitle;
-  num? salecount;
   String? specs;
 
   Map<String, dynamic> toJson() {
@@ -67,31 +66,35 @@ class GoodsDetailsModel {
     map['is_best'] = isBest;
     map['is_hot'] = isHot;
     map['is_new'] = isNew;
+    if (attr != null) {
+      map['attr'] = attr?.map((v) => v.toJson()).toList();
+    }
     map['status'] = status;
     map['pic'] = pic;
     map['content'] = content;
     map['cname'] = cname;
-    if (attr != null) {
-      map['attr'] = attr?.map((v) => v.toJson()).toList();
-    }
     map['sub_title'] = subTitle;
-    map['salecount'] = salecount;
     map['specs'] = specs;
     return map;
   }
 }
 
-class Attr {
-  Attr({
-      this.cate, 
-      this.list,});
+class GoodsDetailsAttrModel {
+  GoodsDetailsAttrModel({
+    this.cate,
+    this.list,
+    this.selected,
+  });
 
-  Attr.fromJson(dynamic json) {
+  GoodsDetailsAttrModel.fromJson(dynamic json) {
     cate = json['cate'];
     list = json['list'] != null ? json['list'].cast<String>() : [];
+    selected = "";
   }
+
   String? cate;
   List<String>? list;
+  String? selected;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};

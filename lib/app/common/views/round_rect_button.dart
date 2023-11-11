@@ -1,41 +1,48 @@
 import 'package:flutter/material.dart';
 
 class RoundRectButton extends StatelessWidget {
-  final double size;
-  final Color backgroundColor;
-  final Color foregroundColor;
-  final double elevation;
-  final double borderRadius;
+  final double? width;
+  final double? height;
+  final Color? color;
+  final Gradient? gradient;
+  final BoxBorder? border;
+  final EdgeInsetsGeometry? padding;
+  final EdgeInsetsGeometry? margin;
+  final BorderRadiusGeometry? borderRadius;
+  final double? elevation;
   final Widget child;
-  final GestureTapCallback? onPressed;
+  final VoidCallback onPressed;
 
-  const RoundRectButton(
-      {super.key,
-      this.size = 20,
-      this.backgroundColor = Colors.black54,
-      this.foregroundColor = Colors.white,
-      this.elevation = 10,
-      this.borderRadius = 10,
-      required this.child,
-      required this.onPressed});
+  const RoundRectButton({
+    super.key,
+    this.width,
+    this.height,
+    this.color,
+    this.elevation,
+    this.borderRadius,
+    this.padding,
+    this.border,
+    this.margin,
+    this.gradient,
+    required this.child,
+    required this.onPressed,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-        width: size,
-        height: size,
-        child: ElevatedButton(
-            onPressed: onPressed,
-            style: ButtonStyle(
-                padding: MaterialStateProperty.all(const EdgeInsets.all(0)),
-                alignment: Alignment.center,
-                backgroundColor:
-                MaterialStateProperty.all(backgroundColor),
-                foregroundColor:
-                MaterialStateProperty.all(foregroundColor),
-                elevation: MaterialStateProperty.all(0),
-                shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(borderRadius)))),
+    return InkResponse(
+        onTap: onPressed,
+        child: Container(
+            alignment: Alignment.center,
+            width: width,
+            height: height,
+            margin: margin,
+            padding: padding,
+            decoration: BoxDecoration(
+                borderRadius: borderRadius,
+                color: color,
+                gradient: gradient,
+                border: border),
             child: child));
   }
 }

@@ -40,5 +40,13 @@ class XmshopIcons {
   static const IconData arrowRight =
       IconData(0xe694, fontFamily: "xmshopIcon", matchTextDirection: true);
   static const IconData exclamationMark =
-  IconData(0xe97e, fontFamily: "xmshopIcon", matchTextDirection: true);
+      IconData(0xe97e, fontFamily: "xmshopIcon", matchTextDirection: true);
+  static const IconData close =
+      IconData(0xe659, fontFamily: "xmshopIcon", matchTextDirection: true);
+  static const IconData cny =
+      IconData(0xe629, fontFamily: "xmshopIcon", matchTextDirection: true);
+  static const IconData add =
+      IconData(0xed21, fontFamily: "xmshopIcon", matchTextDirection: true);
+  static const IconData subtract =
+      IconData(0xed22, fontFamily: "xmshopIcon", matchTextDirection: true);
 }

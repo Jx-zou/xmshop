@@ -24,7 +24,7 @@ void run() {
       getPages: AppPages.routes,
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.grey,
+        fontFamily: "miFont"
       ),
       defaultTransition: Transition.rightToLeft,
     ),

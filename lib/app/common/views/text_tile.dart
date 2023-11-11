@@ -43,7 +43,7 @@ class TextTile extends StatelessWidget {
               style: TextStyle(fontSize: leadingSize, color: leadingColor)),
           const SizedBox(width: 20),
           Expanded(
-              child: GestureDetector(
+              child: InkWell(
                   onTap: onTap,
                   child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,

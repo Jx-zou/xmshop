@@ -20,11 +20,25 @@
       "unicode_decimal": 58893
     },
     {
+      "icon_id": "658025",
+      "name": "关闭",
+      "font_class": "guanbi",
+      "unicode": "e659",
+      "unicode_decimal": 58969
+    },
+    {
       "icon_id": "1017309",
       "name": "yes",
       "font_class": "yes",
       "unicode": "e684",
       "unicode_decimal": 59012
+    },
+    {
+      "icon_id": "1160107",
+      "name": "cny",
+      "font_class": "cny",
+      "unicode": "e629",
+      "unicode_decimal": 58921
     },
     {
       "icon_id": "1161668",
@@ -102,6 +116,20 @@
       "font_class": "24gl-warningCircle",
       "unicode": "e97e",
       "unicode_decimal": 59774
+    },
+    {
+      "icon_id": "7956834",
+      "name": "加_色块",
+      "font_class": "jia_sekuai",
+      "unicode": "ed21",
+      "unicode_decimal": 60705
+    },
+    {
+      "icon_id": "7956835",
+      "name": "减_色块",
+      "font_class": "jian_sekuai",
+      "unicode": "ed22",
+      "unicode_decimal": 60706
     },
     {
       "icon_id": "8288820",

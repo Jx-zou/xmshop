@@ -12,7 +12,7 @@ class GoodsDetailsProvider extends BaseProvider
     implements IGoodsDetailsProvider {
   GoodsDetailsModel? _decode(dynamic json) {
     if (json != null && json['result'] != null) {
-      return GoodsDetailsModel.fromJson(json);
+      return GoodsDetailsModel.fromJson(json['result']);
     }
     return null;
   }

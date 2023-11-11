@@ -31,6 +31,29 @@ class ProductDetailsController extends GetxController
   final RxDouble appBarOpacity = 0.0.obs;
   final Rx<Color> actionColor = Colors.white.obs;
   final RxInt selectedId = 1.obs;
+  final RxInt shopNum = 1.obs;
+  final RxMap<String, List<String?>> selectedAttr = {'cate': <String>[], 'selected': <String>[]}.obs;
+
+  changeAttrSelected(cate, title) {
+    for (int i = 0; i < selectedAttr['cate']!.length; i++) {
+      if (selectedAttr['cate']?[i] == cate) {
+        selectedAttr['selected']?[i] = title;
+      }
+    }
+    update();
+  }
+
+  shopNumAdd() {
+    shopNum.value++;
+    update();
+  }
+
+  shopNumSubtract() {
+    if (shopNum.value > 1) {
+      shopNum.value--;
+      update();
+    }
+  }
 
   _changeSelectedId(int id) {
     selectedId.value = id;
@@ -76,6 +99,7 @@ class ProductDetailsController extends GetxController
       change(null, status: RxStatus.error(response.statusText));
     } else {
       change(response.body, status: RxStatus.success());
+      _initAttrSelected(state);
     }
   }
 
@@ -97,6 +121,17 @@ class ProductDetailsController extends GetxController
         }
       }
     }
+  }
+
+  _initAttrSelected(GoodsDetailsModel? goodsDetailsModel) {
+    List<GoodsDetailsAttrModel>? attrs = goodsDetailsModel!.attr;
+    if (attrs != null) {
+      for (int i = 0; i < attrs.length; i++) {
+        selectedAttr['cate']?.add(attrs[i].cate);
+        selectedAttr['selected']?.add(attrs[i].list?[0]);
+      }
+    }
+    update();
   }
 
   _initGlobalKey() {
