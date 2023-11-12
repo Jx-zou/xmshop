@@ -42,13 +42,9 @@ class ProductDetailsGoodsView extends GetView<ProductDetailsController> {
   Widget _module({required Widget widget}) =>
       Container(
           width: ScreenAdapter.width(1080),
-          margin: EdgeInsets.fromLTRB(ScreenAdapter.width(30),
-              ScreenAdapter.width(30), ScreenAdapter.width(30), 0),
-          padding: EdgeInsets.fromLTRB(ScreenAdapter.width(30),
-              ScreenAdapter.width(30), ScreenAdapter.width(30), 0),
-          decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(ScreenAdapter.width(20))),
+          margin: EdgeInsets.fromLTRB(ScreenAdapter.width(30), ScreenAdapter.width(30), ScreenAdapter.width(30), 0),
+          padding: EdgeInsets.fromLTRB(ScreenAdapter.width(30), ScreenAdapter.width(30), ScreenAdapter.width(30), 0),
+          decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(ScreenAdapter.width(20))),
           child: widget);
 
   Widget _serviceTag({required String title}) =>
@@ -101,8 +97,7 @@ class ProductDetailsGoodsView extends GetView<ProductDetailsController> {
                             Row(
                               children: [
                                 Padding(
-                                  padding: EdgeInsets.only(
-                                      top: ScreenAdapter.height(20)),
+                                  padding: EdgeInsets.only(top: ScreenAdapter.height(20)),
                                   child: Text(
                                     "￥",
                                     style: TextStyle(
@@ -129,16 +124,14 @@ class ProductDetailsGoodsView extends GetView<ProductDetailsController> {
                           ],
                         ),
                         Container(
-                          padding: EdgeInsets.only(
-                              top: ScreenAdapter.height(20)),
+                          padding: EdgeInsets.only(top: ScreenAdapter.height(20)),
                           child: Text("${state?.title}",
                               style: TextStyle(
                                   color: Colors.black87,
                                   fontSize: ScreenAdapter.fontSize(56))),
                         ),
                         Container(
-                          padding: EdgeInsets.symmetric(
-                              vertical: ScreenAdapter.height(20)),
+                          padding: EdgeInsets.symmetric(vertical: ScreenAdapter.height(20)),
                           child: Text("${state?.subTitle}",
                               style: TextStyle(
                                   color: Colors.black87,
@@ -150,9 +143,7 @@ class ProductDetailsGoodsView extends GetView<ProductDetailsController> {
                     _textTile(
                         leading: "已选",
                         title: SizedBox(
-                            child: Text("${state?.title}  ${controller
-                                .selectedAttr['selected']!.join(
-                                '  ')}  X${controller.shopNum}",
+                            child: Text("${state?.title}  ${controller.selectedAttr['selected']!.join('  ')}  X${controller.shopNum}",
                                 style: TextStyle(
                                     fontSize: ScreenAdapter.fontSize(32),
                                     color: Colors.black87))),
@@ -168,22 +159,19 @@ class ProductDetailsGoodsView extends GetView<ProductDetailsController> {
                                         size: ScreenAdapter.fontSize(30)),
                                     Text("贵州 贵阳市 观山湖区",
                                         style: TextStyle(
-                                            fontSize: ScreenAdapter.fontSize(
-                                                32),
+                                            fontSize: ScreenAdapter.fontSize(32),
                                             color: Colors.black38))
                                   ]),
                                   Row(children: [
                                     Text("有现货",
                                         style: TextStyle(
-                                            fontSize: ScreenAdapter.fontSize(
-                                                32),
+                                            fontSize: ScreenAdapter.fontSize(32),
                                             color: Colors.red)),
                                     Icon(XmshopIcons.exclamationMark,
                                         size: ScreenAdapter.fontSize(30)),
                                     Text("今天20点前付款，预计1月8日送达",
                                         style: TextStyle(
-                                            fontSize: ScreenAdapter.fontSize(
-                                                32),
+                                            fontSize: ScreenAdapter.fontSize(32),
                                             color: Colors.black87))
                                   ])
                                 ])),
@@ -305,10 +293,7 @@ class _SelectedBottomSheet extends GetView<ProductDetailsController> {
                                                   horizontal: ScreenAdapter.width(40),
                                                   vertical: ScreenAdapter.height(16)),
                                               color: controller.selectedAttr['selected']!.contains(item) ? Colors.redAccent.withOpacity(0.1) : Colors.black.withOpacity(0.05),
-                                              borderRadius:
-                                              BorderRadius.circular(
-                                                  ScreenAdapter
-                                                      .fontSize(40)),
+                                              borderRadius: BorderRadius.circular(ScreenAdapter.fontSize(40)),
                                               elevation: 0,
                                               border: controller.selectedAttr['selected']!.contains(item) ? Border.all(color: Colors.redAccent, strokeAlign: BorderSide.strokeAlignOutside) : null,
                                               child: Text(
@@ -381,10 +366,7 @@ class _SelectedBottomSheet extends GetView<ProductDetailsController> {
                     SizedBox(width: ScreenAdapter.width(20)),
                     _bottomButton(
                         onPressed: () {},
-                        colors: [
-                          Colors.deepOrange.withOpacity(0.5),
-                          Colors.redAccent
-                        ],
+                        colors: [Colors.deepOrange.withOpacity(0.5), Colors.redAccent],
                         title: "立即购买"),
                   ],
                 ),
