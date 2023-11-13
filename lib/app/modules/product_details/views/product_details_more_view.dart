@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
 
+import '../controllers/product_details_controller.dart';
 import '../../../utils/screen_adapter.dart';
 
-class ProductDetailsMoreView extends GetView {
+class ProductDetailsMoreView extends GetView<ProductDetailsController> {
   const ProductDetailsMoreView({super.key});
 
   @override

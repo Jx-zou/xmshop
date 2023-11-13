@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import 'package:get/get.dart';
-import 'package:xmshop/app/services/search_service.dart';
-import 'package:xmshop/app/services/storage_service.dart';
 
 import 'app/routes/app_pages.dart';
+import 'app/services/search_service.dart';
+import 'app/services/storage_service.dart';
 
 void initService() {
-  Get.put(() => StorageService());
-  Get.put(() => SearchService());
+  Get.lazyPut(() => StorageService());
+  Get.lazyPut(() => SearchService());
 }
 
 void run() {
@@ -32,9 +31,7 @@ void run() {
 }
 
 void main() {
-  SystemChrome.setSystemUIOverlayStyle(
-      const SystemUiOverlayStyle(statusBarColor: Colors.transparent));  
-
+  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
   initService();
   run();
 }

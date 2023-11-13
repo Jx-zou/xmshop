@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../common/icons/xmshop_icons.dart';
-import '../../../common/views/title_banner.dart';
+import '../../../common/views/widgets/title_banner.dart';
 import '../../../utils/screen_adapter.dart';
 import '../controllers/xm_search_controller.dart';
 
@@ -116,8 +116,9 @@ class SearchView extends GetView<XmSearchController> {
       padding: EdgeInsets.all(ScreenAdapter.height(20)),
       children: [
         TitleBanner("搜索历史",
-            mainSize: ScreenAdapter.fontSize(48),
-            subIcon: Icons.delete, onSubTap: () {
+            leftSize: ScreenAdapter.fontSize(48),
+            iconSize: ScreenAdapter.fontSize(54),
+            icon: Icons.delete, onTap: () {
           Get.bottomSheet(Obx(() => controller.history.isNotEmpty
               ? Container(
                   padding: EdgeInsets.fromLTRB(ScreenAdapter.width(80),
@@ -125,17 +126,15 @@ class SearchView extends GetView<XmSearchController> {
                   width: ScreenAdapter.width(1080),
                   height: ScreenAdapter.height(360),
                   color: Colors.white,
-                  child: Column(
-                    children: [
-                      Center(
-                        child: Text(
-                          "您确定要清除历史记录吗？",
-                          style:
-                              TextStyle(fontSize: ScreenAdapter.fontSize(42)),
-                        ),
+                  child: Column(children: [
+                    Center(
+                      child: Text(
+                        "您确定要清除历史记录吗？",
+                        style: TextStyle(fontSize: ScreenAdapter.fontSize(42)),
                       ),
-                      SizedBox(height: ScreenAdapter.height(40)),
-                      Row(
+                    ),
+                    SizedBox(height: ScreenAdapter.height(40)),
+                    Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           SizedBox(
@@ -174,21 +173,20 @@ class SearchView extends GetView<XmSearchController> {
                                         fontSize: ScreenAdapter.fontSize(28),
                                         color: Colors.black54))),
                           )
-                        ],
-                      )
-                    ],
-                  ),
-                )
+                        ])
+                  ]))
               : Container()));
         }),
-        const SizedBox(height: 20),
+        SizedBox(height: ScreenAdapter.height(30)),
         _historyView(),
-        const SizedBox(height: 20),
+        SizedBox(height: ScreenAdapter.height(30)),
         TitleBanner("猜你想搜",
-            mainSize: ScreenAdapter.fontSize(48), subIcon: Icons.refresh),
-        const SizedBox(height: 20),
+            leftSize: ScreenAdapter.fontSize(48),
+            iconSize: ScreenAdapter.fontSize(60),
+            icon: Icons.refresh),
+        SizedBox(height: ScreenAdapter.height(30)),
         _guessView(),
-        const SizedBox(height: 20),
+        SizedBox(height: ScreenAdapter.height(30)),
         _hotSearchView()
       ],
     );

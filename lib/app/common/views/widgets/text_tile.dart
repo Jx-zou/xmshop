@@ -13,7 +13,7 @@ class TextTile extends StatelessWidget {
 
   const TextTile({
     super.key,
-    this.leading = "",
+    this.leading,
     this.title,
     this.trailing,
     this.leadingColor,

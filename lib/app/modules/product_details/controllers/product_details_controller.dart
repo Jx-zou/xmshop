@@ -28,11 +28,19 @@ class ProductDetailsController extends GetxController
     {"id": 3, "title": "收藏", "icon": XmshopIcons.collect}
   ];
 
+  final List<String> picList = [
+    "https://p4.itc.cn/images01/20211031/d0ff5fcb10e240928bc0ec46b8d71fbf.jpeg",
+    "https://files.jb51.net/file_images/article/201407/20140730091343112.jpg",
+    "https://k-static.appmobile.cn/uploads/allimg/211207/28-21120G43118.jpg",
+    "https://img1.mydrivers.com/img/20220927/d35930cd-b2d6-4a59-a11d-1ecc4c163c47_1000.jpg"
+  ];
+
   final RxDouble appBarOpacity = 0.0.obs;
   final Rx<Color> actionColor = Colors.white.obs;
   final RxInt selectedId = 1.obs;
   final RxInt shopNum = 1.obs;
-  final RxMap<String, List<String?>> selectedAttr = {'cate': <String>[], 'selected': <String>[]}.obs;
+  final RxMap<String, List<String?>> selectedAttr =
+      {'cate': <String>[], 'selected': <String>[]}.obs;
 
   changeAttrSelected(cate, title) {
     for (int i = 0; i < selectedAttr['cate']!.length; i++) {

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../common/icons/xmshop_icons.dart';
-import '../../../common/views/title_banner.dart';
+import '../../../common/views/widgets/title_banner.dart';
 import '../../../utils/screen_adapter.dart';
 import '../controllers/home_controller.dart';
 import 'home_advertisement_view.dart';
@@ -16,6 +16,13 @@ import 'home_swiper_view.dart';
 class HomeView extends GetView<HomeController> {
   const HomeView({super.key});
 
+  Widget _actionButton(IconData icon, VoidCallback onPressed) {
+    return Padding(
+      padding: EdgeInsets.only(right: ScreenAdapter.width(40)),
+      child: InkResponse(onTap: onPressed, child: Icon(icon)),
+    );
+  }
+
   Widget _bestGoodsView() {
     return Column(
       children: [
@@ -23,9 +30,10 @@ class HomeView extends GetView<HomeController> {
             padding: EdgeInsets.only(
                 left: ScreenAdapter.width(25), right: ScreenAdapter.width(25)),
             child: TitleBanner("省心优惠",
-                subTitle: "全部优惠",
-                mainSize: ScreenAdapter.fontSize(48),
-                secondSize: ScreenAdapter.fontSize(38))),
+                right: "全部优惠",
+                icon: XmshopIcons.arrowRight,
+                leftSize: ScreenAdapter.fontSize(48),
+                rightSize: ScreenAdapter.fontSize(38))),
         Container(
             color: Colors.white38,
             height: ScreenAdapter.height(350),
@@ -50,9 +58,10 @@ class HomeView extends GetView<HomeController> {
     return Column(
       children: [
         TitleBanner("热销甄选",
-            subTitle: "更多手机",
-            mainSize: ScreenAdapter.fontSize(48),
-            secondSize: ScreenAdapter.fontSize(38)),
+            right: "更多手机",
+            icon: XmshopIcons.arrowRight,
+            leftSize: ScreenAdapter.fontSize(48),
+            rightSize: ScreenAdapter.fontSize(38)),
         Row(
           children: [
             Expanded(
@@ -112,58 +121,63 @@ class HomeView extends GetView<HomeController> {
   _appBarView() => PreferredSize(
       preferredSize: Size.fromHeight(ScreenAdapter.height(150)),
       child: Obx(() => AppBar(
-          titleSpacing: 0,
-          leading: Icon(
-            XmshopIcons.logo,
-            color: Colors.white.withOpacity(1 - controller.opacity.value),
-            size: 32,
-          ),
-          leadingWidth:
-              ScreenAdapter.width(200 * (1 - controller.opacity.value)),
-          title: InkWell(
-            child: Container(
-              width: ScreenAdapter.width(620 +
-                  controller.opacity.value * 1.5 * HomeController.maxOffset),
-              height: ScreenAdapter.height(110),
-              decoration: BoxDecoration(
-                  color: const Color.fromARGB(230, 240, 245, 245),
-                  borderRadius: BorderRadius.circular(30)),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
+          leadingWidth: 0,
+          title: Container(
+              alignment: Alignment.centerRight,
+              child: Stack(
+                fit: StackFit.passthrough,
+                alignment: AlignmentDirectional.centerStart,
                 children: [
-                  Padding(
-                      padding: EdgeInsets.fromLTRB(ScreenAdapter.width(34), 0,
-                          ScreenAdapter.width(10), 0),
-                      child: const Icon(XmshopIcons.search,
-                          size: 20, color: Colors.black26)),
-                  Text(
-                    "手机",
-                    style: TextStyle(
-                        fontSize: ScreenAdapter.fontSize(32),
-                        color: Colors.black54),
+                  Icon(
+                    XmshopIcons.logo,
+                    color:
+                        Colors.white.withOpacity(1 - controller.opacity.value),
+                    size: 32,
+                  ),
+                  InkWell(
+                    child: Container(
+                      margin: EdgeInsets.only(left: ScreenAdapter.width(135 - controller.opacity.value * HomeController.maxOffset)),
+                      width: ScreenAdapter.width(650 + controller.opacity.value * HomeController.maxOffset),
+                      height: ScreenAdapter.height(110),
+                      decoration: BoxDecoration(
+                          color: const Color.fromARGB(230, 240, 245, 245),
+                          borderRadius: BorderRadius.circular(30)),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Padding(
+                              padding: EdgeInsets.fromLTRB(
+                                  ScreenAdapter.width(34),
+                                  0,
+                                  ScreenAdapter.width(10),
+                                  0),
+                              child: const Icon(XmshopIcons.search,
+                                  size: 20, color: Colors.black26)),
+                          Text(
+                            "手机",
+                            style: TextStyle(
+                                fontSize: ScreenAdapter.fontSize(32),
+                                color: Colors.black54),
+                          )
+                        ],
+                      ),
+                    ),
+                    onTap: () {
+                      Get.toNamed("/search");
+                    },
                   )
                 ],
-              ),
-            ),
-            onTap: () {
-              Get.toNamed("/search");
-            },
-          ),
+              )),
           backgroundColor: Colors.white.withOpacity(controller.opacity.value),
           elevation: 0,
-          centerTitle: true,
+          // centerTitle: true,
           actions: [
-            IconButton(
-                padding: const EdgeInsets.all(0),
-                onPressed: () {},
-                icon: const Icon(XmshopIcons.qrcode)),
-            IconButton(
-                padding: const EdgeInsets.all(0),
-                onPressed: () {},
-                icon: const Icon(XmshopIcons.message))
+            _actionButton(XmshopIcons.qrcode, () {}),
+            _actionButton(XmshopIcons.message, () {})
           ],
-          actionsIconTheme:
-              IconThemeData(size: 28, color: controller.actionColor.value))));
+          actionsIconTheme: IconThemeData(
+              size: ScreenAdapter.fontSize(64),
+              color: controller.actionColor.value))));
 
   @override
   Widget build(BuildContext context) {

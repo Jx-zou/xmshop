@@ -3,7 +3,7 @@ import 'package:flutter_swiper_view/flutter_swiper_view.dart';
 import 'package:get/get.dart';
 
 import '../../../common/views/loading.dart';
-import '../../../common/views/rect_inside_swiper_pagination_builder.dart';
+import '../../../common/views/paginations/rect_inside_swiper_pagination_builder.dart';
 import '../controllers/home_hot_goods_swiper_controller.dart';
 
 class HomeHotGoodsSwiperView

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class HomeController extends GetxController {
-  static const double maxOffset = 75;
+  static const double maxOffset = 135;
   final Rx<Color> actionColor = Colors.white.obs;
   final RxDouble opacity = 0.0.obs;
   final ScrollController scrollController = ScrollController();
@@ -10,12 +10,15 @@ class HomeController extends GetxController {
   void _addScrollListener() {
     scrollController.addListener(() {
       if (scrollController.offset <= maxOffset) {
-        opacity.value = scrollController.offset / 75;
+        opacity.value = scrollController.offset / maxOffset;
         actionColor.value = Colors.white;
         update();
         return;
       }
-      actionColor.value = Colors.black54;
+      if (opacity.value != 1) {
+        opacity.value = 1;
+        actionColor.value = Colors.black54;
+      }
       update();
     });
   }

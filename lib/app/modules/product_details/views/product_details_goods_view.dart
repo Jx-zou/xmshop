@@ -3,11 +3,11 @@ import 'package:flutter_swiper_view/flutter_swiper_view.dart';
 import 'package:get/get.dart';
 
 import '../controllers/product_details_controller.dart';
-import '../../../common/views/rect_fraction_pagination_builder.dart';
-import '../../../common/views/close_bottom_sheet.dart';
-import '../../../common/views/round_rect_button.dart';
+import '../../../common/views/paginations/rect_fraction_pagination_builder.dart';
+import '../../../common/views/widgets/close_bottom_sheet.dart';
+import '../../../common/views/widgets/round_rect_button.dart';
 import '../../../common/icons/xmshop_icons.dart';
-import '../../../common/views/text_tile.dart';
+import '../../../common/views/widgets/text_tile.dart';
 import '../../../utils/screen_adapter.dart';
 import '../../../utils/https_client.dart';
 
@@ -65,7 +65,7 @@ class ProductDetailsGoodsView extends GetView<ProductDetailsController> {
                 width: ScreenAdapter.width(1080),
                 height: ScreenAdapter.height(1200),
                 child: Swiper(
-                  itemCount: 7,
+                  itemCount: 3,
                   itemBuilder: (context, index) =>
                       Image.network(
                         HttpsClient.picReplaceUrl("${state?.pic}"),
@@ -77,8 +77,7 @@ class ProductDetailsGoodsView extends GetView<ProductDetailsController> {
                       alignment: Alignment.bottomRight,
                       builder: RectFractionPaginationBuilder(
                           backgroundColor: Colors.black26,
-                          borderRadius:
-                          BorderRadius.circular(ScreenAdapter.height(10)),
+                          borderRadius: BorderRadius.circular(ScreenAdapter.height(10)),
                           color: Colors.white,
                           activeColor: Colors.cyan,
                           width: ScreenAdapter.width(100),

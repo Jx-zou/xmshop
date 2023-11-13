@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../common/icons/xmshop_icons.dart';
-import '../../../common/views/round_rect_button.dart';
+import '../../../common/views/widgets/round_rect_button.dart';
 import '../../../utils/screen_adapter.dart';
 import '../controllers/product_details_controller.dart';
 import 'product_details_bottom_view.dart';
@@ -39,11 +39,9 @@ class ProductDetailsView extends GetView<ProductDetailsController> {
         controller: controller.scrollController,
         child: Column(children: [
           ProductDetailsGoodsView(key: controller.tarTitles[0]['contentKey']),
-          ProductDetailsEvaluateView(
-              key: controller.tarTitles[1]['contentKey']),
+          ProductDetailsEvaluateView(key: controller.tarTitles[1]['contentKey']),
           ProductDetailsMoreView(key: controller.tarTitles[2]['contentKey']),
-          ProductDetailsRecommendedView(
-              key: controller.tarTitles[3]['contentKey']),
+          ProductDetailsRecommendedView(key: controller.tarTitles[3]['contentKey']),
         ]));
   }
 

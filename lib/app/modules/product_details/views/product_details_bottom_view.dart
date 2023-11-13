@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../common/views/round_rect_button.dart';
+import '../../../common/views/widgets/round_rect_button.dart';
 import '../../../common/icons/xmshop_icons.dart';
 import '../../../utils/screen_adapter.dart';
 
