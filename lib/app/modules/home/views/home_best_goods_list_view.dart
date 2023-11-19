@@ -36,10 +36,7 @@ class HomeBestGoodsListView extends GetView<HomeBestGoodsListController> {
                               child: Image.network(
                                   "https://xiaomi.itying.com/${state[index].pic}"
                                       .replaceAll("\\", "/"),
-                                  fit: BoxFit.cover,
-                                  errorBuilder: (c, o, s) => Image.asset(
-                                      "assets/images/404mix.jpg",
-                                      fit: BoxFit.cover))),
+                                  fit: BoxFit.cover)),
                           ListTile(
                               title: Text("${state[index].title}"),
                               subtitle: Text(
@@ -54,6 +51,8 @@ class HomeBestGoodsListView extends GetView<HomeBestGoodsListController> {
                         ],
                       ))),
             ),
-        onLoading: const Loading());
+        onLoading: const Loading(),
+        onEmpty: Container(),
+        onError: (error) => Container());
   }
 }

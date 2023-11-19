@@ -1,26 +1,30 @@
 import 'package:get/get.dart';
 
+import '../../../common/controllers/base_controller.dart';
 import '../../../data/goods_provider.dart';
 import '../../../models/goods_model.dart';
 
-class HomeHotGoodsListController extends GetxController with StateMixin<List<GoodsModel>> {
-
+class HomeHotGoodsListController extends BaseController
+    with StateMixin<List<GoodsModel>> {
   final IGoodsProvider provider;
 
   HomeHotGoodsListController({required this.provider});
 
-  _getPlistData() async {
-    final response = await provider.getGoodsModel(query: {"is_hot": "1", "pageSize": "3"});
-    if (response.hasError) {
-      change(null, status: RxStatus.error(response.statusText));
-    } else {
-      change(response.body, status: RxStatus.success());
+  onToDetails(String? id) {
+    if (id != null) {
+      Get.toNamed("product-details",
+          parameters: {"requestKey": "id", "requestValue": id});
     }
   }
 
   @override
-  void onInit() {
-    super.onInit();
-    _getPlistData();
+  void loadData() async {
+    final response =
+        await provider.getGoodsModel(query: {"is_hot": "1", "pageSize": "3"});
+    if (response.hasError) {
+      change(null, status: RxStatus.error(response.statusText));
+      return;
+    }
+    change(response.body, status: RxStatus.success());
   }
 }

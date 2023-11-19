@@ -31,6 +31,8 @@ class RoundRectButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkResponse(
+        highlightColor: Colors.transparent,
+        radius: 0,
         onTap: onPressed,
         child: Container(
             alignment: Alignment.center,

@@ -1,16 +1,17 @@
-import 'package:get/get_connect/connect.dart';
-import 'package:xmshop/global.dart';
+import 'package:get/get.dart';
+
+import '../../../global.dart';
 
 class BaseProvider extends GetConnect {
 
   @override
   void onInit() {
     //请求前缀
-    httpClient.baseUrl = Global.ServerApi;
+    httpClient.baseUrl = Global.serverApi;
 
     //request监听
     httpClient.addResponseModifier((request, response) {
-      print(request.url.toString());
+      printInfo(info: request.url.toString());
       return response;
     });
     

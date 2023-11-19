@@ -8,10 +8,7 @@ import '../../../utils/screen_adapter.dart';
 class ProductDetailsBottomView extends GetView {
   const ProductDetailsBottomView({super.key});
 
-  Widget _bottomButton(
-          {required String title,
-          required List<Color> colors,
-          required VoidCallback onPressed}) =>
+  Widget _bottomButton({required String title, required List<Color> colors, required VoidCallback onPressed}) =>
       Expanded(
           child: RoundRectButton(
               height: ScreenAdapter.height(125),
@@ -24,11 +21,7 @@ class ProductDetailsBottomView extends GetView {
 
   @override
   Widget build(BuildContext context) {
-    return Positioned(
-      bottom: 0,
-      left: 0,
-      right: 0,
-      child: Container(
+    return Container(
         padding: EdgeInsets.only(
             left: ScreenAdapter.width(15), right: ScreenAdapter.width(10)),
         height: ScreenAdapter.height(160),
@@ -101,7 +94,6 @@ class ProductDetailsBottomView extends GetView {
                 onPressed: () {})
           ],
         ),
-      ),
-    );
+      );
   }
 }

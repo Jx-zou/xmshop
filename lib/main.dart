@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
+import 'global.dart';
 import 'app/routes/app_pages.dart';
 import 'app/services/search_service.dart';
 import 'app/services/storage_service.dart';
@@ -18,12 +19,13 @@ void run() {
     minTextAdapt: true,
     splitScreenMode: true,
     builder: (context, child) => GetMaterialApp(
-      title: "Application",
+      title: Global.appTitle,
       initialRoute: AppPages.INITIAL,
       getPages: AppPages.routes,
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        fontFamily: "miFont"
+        fontFamily: "miFont",
+        appBarTheme: Global.appBarTheme
       ),
       defaultTransition: Transition.rightToLeft,
     ),

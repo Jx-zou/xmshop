@@ -14,8 +14,8 @@ class ProductDetailsEvaluateView extends GetView<ProductDetailsController> {
   Widget build(BuildContext context) {
     return Container(
         width: ScreenAdapter.width(1080),
-        margin: EdgeInsets.fromLTRB(ScreenAdapter.width(30),
-            ScreenAdapter.width(30), ScreenAdapter.width(30), 0),
+        margin: EdgeInsets.fromLTRB(ScreenAdapter.width(30), 0,
+            ScreenAdapter.width(30), ScreenAdapter.width(30)),
         padding: EdgeInsets.fromLTRB(ScreenAdapter.width(30),
             ScreenAdapter.width(30), ScreenAdapter.width(30), 0),
         decoration: BoxDecoration(
@@ -58,7 +58,7 @@ class ProductDetailsEvaluateView extends GetView<ProductDetailsController> {
             ),
             SizedBox(height: ScreenAdapter.height(30)),
             SizedBox(
-              height: ScreenAdapter.height(236),
+              height: ScreenAdapter.height(222.5),
               child: GridView.builder(
                   itemCount: 4,
                   shrinkWrap: true,
@@ -69,7 +69,7 @@ class ProductDetailsEvaluateView extends GetView<ProductDetailsController> {
                       crossAxisSpacing: ScreenAdapter.width(30),
                       crossAxisCount: 1,
                       childAspectRatio: 1 / 1),
-                  itemBuilder: (context, index) => InkResponse(
+                  itemBuilder: (context, index) => InkWell(
                       onTap: () {},
                       child: Container(
                         decoration: BoxDecoration(
@@ -77,8 +77,8 @@ class ProductDetailsEvaluateView extends GetView<ProductDetailsController> {
                             borderRadius: BorderRadius.circular(
                                 ScreenAdapter.fontSize(20)),
                             image: DecorationImage(
-                                image: NetworkImage(
-                                    controller.picList[index]), fit: BoxFit.cover)),
+                                image: NetworkImage(controller.picList[index]),
+                                fit: BoxFit.cover)),
                       ))),
             ),
             Divider(height: ScreenAdapter.height(100)),

@@ -1,68 +1,59 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../common/controllers/base_controller.dart';
 import '../../../data/goods_provider.dart';
 import '../../../models/goods_model.dart';
 import 'home_controller.dart';
 
-class HomeBestGoodsListController extends GetxController
-    with StateMixin<List<GoodsModel>> {
+class HomeBestGoodsListController extends BaseController with StateMixin<List<GoodsModel>> {
   final IGoodsProvider provider;
-  final ScrollController scrollController = Get
-      .find<HomeController>()
-      .scrollController;
-  int page = 1;
-  int pageSize = 10;
-  bool isFetching = false;
+  final ScrollController scrollController = Get.find<HomeController>().scrollController;
+  late int page;
+  late int pageSize;
+  late bool isFetching;
 
   HomeBestGoodsListController({required this.provider});
 
   _addScrollListener() {
     scrollController.addListener(() {
-      if (!isFetching && scrollController.offset >
-          scrollController.position.maxScrollExtent - 10) {
+      if (!isFetching && scrollController.offset > scrollController.position.maxScrollExtent - 10) {
         isFetching = true;
         page++;
         if (page > 1) {
-          _getGoodsModel();
+          loadData();
         }
       }
     });
   }
 
-  _updateState(Response<List<GoodsModel>> response) {
-    state?.addAll(response.body as List<GoodsModel>);
-  }
-
-  _getGoodsModel() async {
-    final response = await provider.getGoodsModel(
-        query: {"is_best": "1", "page": "$page", "pageSize": "$pageSize"});
+  @override
+  void loadData() async {
+    final response = await provider.getGoodsModel(query: {"is_best": "1", "page": "$page", "pageSize": "$pageSize"});
     if (response.hasError) {
-      if (page == 1) {
-        change(null, status: RxStatus.error(response.statusText));
-      } else {
-        change(state, status: RxStatus.error(response.statusText));
-      }
+      change(page == 1 ? null : state, status: RxStatus.error(response.statusText));
       isFetching = true;
-    } else {
-      if (page > 1 && response.body!.isNotEmpty) {
-        _updateState(response);
-        change(state, status: RxStatus.success());
-        if (response.body?.length == pageSize) {
-          isFetching = false;
-        }
-      }
-      if(page == 1) {
-        change(response.body, status: RxStatus.success());
+      return;
+    }
+    if (page == 1) {
+      change(response.body, status: RxStatus.success());
+      isFetching = false;
+      return;
+    }
+    if (page > 1 && response.body!.isNotEmpty) {
+      state?.addAll(response.body as List<GoodsModel>);
+      change(state, status: RxStatus.success());
+      if (response.body?.length == pageSize) {
         isFetching = false;
       }
     }
   }
 
   @override
-  void onInit() {
-    super.onInit();
-    _getGoodsModel();
+  void init() {
+    page = 1;
+    pageSize = 10;
+    isFetching = false;
     _addScrollListener();
   }
 }

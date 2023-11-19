@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../common/controllers/base_controller.dart';
 import '../../../data/goods_provider.dart';
 import '../../../models/goods_model.dart';
 
-class ProductController extends GetxController
+class ProductController extends BaseController
     with StateMixin<List<GoodsModel>> {
   final IGoodsProvider provider;
   ProductController({required this.provider});
@@ -54,7 +55,18 @@ class ProductController extends GetxController
   final RxBool hasMore = true.obs;
   final ScrollController scrollController = ScrollController();
 
+  onToDetails(String? id) {
+    if (id != null) {
+      Get.toNamed("product-details", parameters: {
+        "requestKey": "id",
+        "requestValue": id
+      });
+    }
+  }
+
   onSubTap(int id) {
+    selectId.value = id;
+    update();
     _getScreenData(id);
   }
 
@@ -83,7 +95,7 @@ class ProductController extends GetxController
       screenQuery.clear();
     }
     screenQuery.putIfAbsent(key, ifAbsent);
-    _getGoodsListData();
+    loadData();
   }
 
   _endDrawerSubTap() {
@@ -95,7 +107,7 @@ class ProductController extends GetxController
       if (!isFetching &&
           scrollController.offset >
               scrollController.position.maxScrollExtent - 40) {
-        _getGoodsListData();
+        loadData();
       }
     });
   }
@@ -108,7 +120,8 @@ class ProductController extends GetxController
     };
   }
 
-  _getGoodsListData() async {
+  @override
+  void loadData() async {
     //判断是否还有数据，如没有数据了则直接返回
     if (!hasMore.value) {
       return;
@@ -151,24 +164,16 @@ class ProductController extends GetxController
     isFetching = false;
   }
 
-  Future<void> onRefresh() async {
-    await Future.delayed(const Duration(milliseconds: 1000), () {
-      page = 1;
-      _getGoodsListData();
-    });
-  }
-
   @override
-  void onInit() {
-    super.onInit();
+  void init() {
     _initQuery();
     _getScreenData(selectId.value);
     _addScrollListener();
   }
 
+
   @override
-  void onClose() {
-    super.onClose();
+  void close() {
     scrollController.dispose();
   }
 }

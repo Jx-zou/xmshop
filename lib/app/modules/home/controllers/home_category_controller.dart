@@ -1,43 +1,47 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../common/controllers/base_controller.dart';
 import '../../../data/best_category_provider.dart';
 import '../../../models/best_category_model.dart';
 
-class HomeCategoryController extends GetxController with StateMixin<List<BestCategoryModel>> {
+class HomeCategoryController extends BaseController
+    with StateMixin<List<BestCategoryModel>> {
   final IBestCategoryProvider provider;
-  HomeCategoryController({required this.provider});
-  final RxDouble paginationValue = RxDouble(0);
-  final ScrollController scrollController = ScrollController();
 
-  _getBestCategoryData() async {
-    final response = await provider.getBestCategoryModel();
-    if (response.hasError) {
-      change(null, status: RxStatus.error(response.statusText));
-    } else {
-      change(response.body, status: RxStatus.success());
-    }
-  }
+  HomeCategoryController({required this.provider});
+
+  final RxDouble paginationValue = 0.0.obs;
+  final ScrollController scrollController = ScrollController();
 
   _addScrollListener() {
     scrollController.addListener(() {
-      if (scrollController.offset > 0 && scrollController.position.maxScrollExtent > 0) {
-        paginationValue.value = scrollController.offset / scrollController.position.maxScrollExtent;
+      if (scrollController.offset > 0 &&
+          scrollController.position.maxScrollExtent > 0) {
+        paginationValue.value =
+            scrollController.offset / scrollController.position.maxScrollExtent;
         update();
       }
     });
   }
 
   @override
-  void onInit() {
-    super.onInit();
-    _getBestCategoryData();
+  void loadData() async {
+    final response = await provider.getBestCategoryModel();
+    if (response.hasError) {
+      change(null, status: RxStatus.error(response.statusText));
+      return;
+    }
+    change(response.body, status: RxStatus.success());
+  }
+
+  @override
+  void init() {
     _addScrollListener();
   }
 
   @override
-  void onClose() {
-    super.onClose();
+  void close() {
     scrollController.dispose();
   }
 }

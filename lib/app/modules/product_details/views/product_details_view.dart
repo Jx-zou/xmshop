@@ -34,14 +34,44 @@ class ProductDetailsView extends GetView<ProductDetailsController> {
                 color: controller.actionColor.value)));
   }
 
+  _moreTar() {
+    return Container(
+        color: Colors.white,
+        height: ScreenAdapter.height(100),
+        child: Obx(() =>
+            Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+              InkWell(
+                  highlightColor: Colors.transparent,
+                  radius: 0,
+                  onTap: () => controller.changeMoreSelected(1),
+                  child: Text("商品介绍",
+                      style: TextStyle(
+                          color: controller.moreSelected.value == 1
+                              ? Colors.redAccent
+                              : null))),
+              InkWell(
+                  highlightColor: Colors.transparent,
+                  radius: 0,
+                  onTap: () => controller.changeMoreSelected(2),
+                  child: Text("规格参数",
+                      style: TextStyle(
+                          color: controller.moreSelected.value == 2
+                              ? Colors.redAccent
+                              : null)))
+            ])));
+  }
+
   _bodyView() {
     return SingleChildScrollView(
         controller: controller.scrollController,
         child: Column(children: [
           ProductDetailsGoodsView(key: controller.tarTitles[0]['contentKey']),
-          ProductDetailsEvaluateView(key: controller.tarTitles[1]['contentKey']),
-          ProductDetailsMoreView(key: controller.tarTitles[2]['contentKey']),
-          ProductDetailsRecommendedView(key: controller.tarTitles[3]['contentKey']),
+          ProductDetailsEvaluateView(
+              key: controller.tarTitles[1]['contentKey']),
+          ProductDetailsMoreView(_moreTar(),
+              key: controller.tarTitles[2]['contentKey']),
+          ProductDetailsRecommendedView(
+              key: controller.tarTitles[3]['contentKey']),
         ]));
   }
 
@@ -49,9 +79,11 @@ class ProductDetailsView extends GetView<ProductDetailsController> {
     return PreferredSize(
         preferredSize: Size.fromHeight(ScreenAdapter.height(150)),
         child: Obx(() => AppBar(
-                leading: _action(onPressed: () {
-                  Get.back();
-                }, icon: XmshopIcons.arrowLeft),
+                leading: _action(
+                    onPressed: () {
+                      Get.back();
+                    },
+                    icon: XmshopIcons.arrowLeft),
                 title: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -87,8 +119,7 @@ class ProductDetailsView extends GetView<ProductDetailsController> {
                             )))
                         .toList()),
                 centerTitle: true,
-                backgroundColor:
-                    Colors.white.withOpacity(controller.appBarOpacity.value),
+                backgroundColor: Colors.white.withOpacity(controller.appBarOpacity.value),
                 elevation: 0,
                 actions: [
                   _action(
@@ -131,6 +162,20 @@ class ProductDetailsView extends GetView<ProductDetailsController> {
     return Scaffold(
         extendBodyBehindAppBar: true,
         appBar: _appBarView(context),
-        body: Stack(children: [_bodyView(), const ProductDetailsBottomView()]));
+        body: Obx(() => Stack(children: [
+              _bodyView(),
+              const Positioned(
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                  child: ProductDetailsBottomView()),
+              controller.showMoreTar.isTrue
+                  ? Positioned(
+                      top: ScreenAdapter.height(225),
+                      left: 0,
+                      right: 0,
+                      child: _moreTar())
+                  : const SizedBox()
+            ])));
   }
 }

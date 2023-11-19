@@ -3,15 +3,11 @@ import 'package:flutter_swiper_view/flutter_swiper_view.dart';
 import 'package:get/get.dart';
 
 import '../../../common/views/loading.dart';
-import '../../../common/views/paginations/rect_inside_swiper_pagination_builder.dart';
+import '../../../common/views/pagination/rect_inside_swiper_pagination_builder.dart';
 import '../controllers/home_swiper_controller.dart';
 
 class HomeSwiperView extends GetView<HomeSwiperController> {
   const HomeSwiperView({super.key});
-
-  Widget _errorImage() {
-    return Image.asset("assets/images/404.png", fit: BoxFit.cover);
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +25,7 @@ class HomeSwiperView extends GetView<HomeSwiperController> {
               loop: true,
             ),
         onLoading: const Loading(),
-        onEmpty: _errorImage(),
-        onError: (error) => _errorImage());
+        onEmpty: Container(),
+        onError: (error) => Container());
   }
 }

@@ -9,8 +9,8 @@ class SearchService extends GetxService{
 
   final StorageService storageService = Get.find<StorageService>();
 
-  setHistory(keywords) async {
-    List? searchHistory = await storageService.get(searchHistoryKey);
+  void setHistory(keywords) async {
+    List<String>? searchHistory = await storageService.get(searchHistoryKey);
     if (searchHistory != null && searchHistory.isNotEmpty) {
       if(!searchHistory.contains(keywords)) {
         searchHistory.add(keywords);
@@ -23,8 +23,8 @@ class SearchService extends GetxService{
     await storageService.set(searchHistoryKey, searchHistory);
   }
 
-  Future<List> getHistory() async {
-    List? searchHistory = await storageService.get(searchHistoryKey);
+  Future<List<String>> getHistory() async {
+    List<String>? searchHistory = await storageService.get(searchHistoryKey);
     if (searchHistory != null) {
       return searchHistory;
     }
@@ -32,7 +32,7 @@ class SearchService extends GetxService{
   }
 
   deleteHistory(keywords) async {
-    List? searchHistory = await storageService.get(searchHistoryKey);
+    List<String>? searchHistory = await storageService.get(searchHistoryKey);
     if (searchHistory != null && searchHistory.isNotEmpty && searchHistory.contains(keywords)) {
       storageService.remove(searchHistoryKey);
       await storageService.set(searchHistoryKey, searchHistory);
@@ -40,7 +40,7 @@ class SearchService extends GetxService{
   }
 
   clearHistory() async {
-    List? searchHistory = await storageService.get(searchHistoryKey);
+    List<String>? searchHistory = await storageService.get(searchHistoryKey);
     if (searchHistory != null) {
       storageService.remove(searchHistoryKey);
     }

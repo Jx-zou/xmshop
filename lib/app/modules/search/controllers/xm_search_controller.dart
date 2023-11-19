@@ -1,50 +1,58 @@
 import 'package:get/get.dart';
+
+import '../../../common/controllers/base_controller.dart';
 import '../../../services/search_service.dart';
 
-class XmSearchController extends GetxController {
+class XmSearchController extends BaseController with StateMixin<List<String>> {
 
   final SearchService searchService = Get.find<SearchService>();
 
-  String keywords = "";
-  RxList history = [].obs;
+  RxString keywords = "".obs;
+
+  onKeywordsTap(String value) {
+    changeKeywords(value);
+    searchToProduct();
+  }
+
+  changeKeywords(String value) {
+    keywords.value = value;
+    update();
+  }
 
   searchToProduct() {
-    searchService.setHistory(keywords);
+    searchService.setHistory(keywords.value);
     Get.offAndToNamed("/product", parameters: {
       "requestKey": "search",
-      "requestValue": keywords
+      "requestValue": keywords.value
     });
   }
 
   void clearHistoryData() async {
-    if (history.isNotEmpty) {
-      history.clear();
+    if (state != null && state!.isNotEmpty) {
+      state?.clear();
       await searchService.clearHistory();
       update();
     }
   }
 
   void removeHistoryData(String keywords) async {
-    if (history.contains(keywords)) {
-      history.remove(keywords);
+    if (state != null && state!.contains(keywords)) {
+      state?.remove(keywords);
     }
     await searchService.deleteHistory(keywords);
     update();
   }
 
-  _getHistoryData() async {
-    List? history = await searchService.getHistory();
-    if (history.isNotEmpty) {
-      this.history.addAll(history);
-      update();
-    }  
-  }
-
   @override
-  void onInit() {
-    super.onInit();
-    _getHistoryData();
+  void loadData() async {
+    List<String>? history = await searchService.getHistory();
+    if (history.isNotEmpty) {
+      if (state == null) {
+        change(history, status: RxStatus.success());
+        return;
+      }
+      state?.addAll(history);
+      change(history, status: RxStatus.success());
+    }
   }
-
-  
 }

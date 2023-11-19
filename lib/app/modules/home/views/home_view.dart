@@ -86,37 +86,37 @@ class HomeView extends GetView<HomeController> {
     );
   }
 
-  Widget _bodyView() => ListView(
-        controller: controller.scrollController,
-        children: [
-          SizedBox(
-            width: ScreenAdapter.width(1080),
-            height: ScreenAdapter.height(682),
-            child: const HomeSwiperView(),
-          ),
-          SizedBox(
-            width: ScreenAdapter.width(1080),
-            height: ScreenAdapter.height(92),
-            child: Image.asset("assets/images/xiaomiBanner.png",
-                fit: BoxFit.cover),
-          ),
-          Container(
-              padding: EdgeInsets.all(ScreenAdapter.width(15)),
-              color: Colors.white,
-              width: ScreenAdapter.width(1080),
-              height: ScreenAdapter.height(500),
-              child: const HomeCategoryView()),
-          Padding(
-            padding: EdgeInsets.fromLTRB(ScreenAdapter.width(20),
-                ScreenAdapter.height(20), ScreenAdapter.width(20), 0),
-            child: const HomeAdvertisementView(),
-          ),
-          Padding(
-              padding: EdgeInsets.all(ScreenAdapter.width(30)),
-              child: _hotGoodsView()),
-          _bestGoodsView(),
-        ],
-      );
+  Widget _bodyView() => RefreshIndicator(onRefresh: () => controller.onRefresh(), child: ListView(
+    controller: controller.scrollController,
+    children: [
+      SizedBox(
+        width: ScreenAdapter.width(1080),
+        height: ScreenAdapter.height(682),
+        child: const HomeSwiperView(),
+      ),
+      SizedBox(
+        width: ScreenAdapter.width(1080),
+        height: ScreenAdapter.height(92),
+        child: Image.asset("assets/images/xiaomiBanner.png",
+            fit: BoxFit.cover),
+      ),
+      Container(
+          padding: EdgeInsets.all(ScreenAdapter.width(15)),
+          color: Colors.white,
+          width: ScreenAdapter.width(1080),
+          height: ScreenAdapter.height(500),
+          child: const HomeCategoryView()),
+      Padding(
+        padding: EdgeInsets.fromLTRB(ScreenAdapter.width(20),
+            ScreenAdapter.height(20), ScreenAdapter.width(20), 0),
+        child: const HomeAdvertisementView(),
+      ),
+      Padding(
+          padding: EdgeInsets.all(ScreenAdapter.width(30)),
+          child: _hotGoodsView()),
+      _bestGoodsView(),
+    ],
+  ));
 
   _appBarView() => PreferredSize(
       preferredSize: Size.fromHeight(ScreenAdapter.height(150)),
@@ -170,7 +170,6 @@ class HomeView extends GetView<HomeController> {
               )),
           backgroundColor: Colors.white.withOpacity(controller.opacity.value),
           elevation: 0,
-          // centerTitle: true,
           actions: [
             _actionButton(XmshopIcons.qrcode, () {}),
             _actionButton(XmshopIcons.message, () {})

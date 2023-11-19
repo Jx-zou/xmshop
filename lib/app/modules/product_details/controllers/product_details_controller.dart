@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:xmshop/app/common/icons/xmshop_icons.dart';
-import 'package:xmshop/app/utils/screen_adapter.dart';
 
+import '../../../common/controllers/base_controller.dart';
 import '../../../data/goods_details_provider.dart';
 import '../../../models/goods_details_model.dart';
+import '../../../common/icons/xmshop_icons.dart';
+import '../../../utils/screen_adapter.dart';
 
-class ProductDetailsController extends GetxController
+class ProductDetailsController extends BaseController
     with StateMixin<GoodsDetailsModel> {
   final IGoodsDetailsProvider provider;
 
@@ -15,12 +16,32 @@ class ProductDetailsController extends GetxController
   Map<String, String> query = {};
 
   final ScrollController scrollController = ScrollController();
+
   final List<Map<String, dynamic>> tarTitles = [
-    {"id": 1, "title": "商品"},
-    {"id": 2, "title": "评价"},
-    {"id": 3, "title": "详情"},
-    {"id": 4, "title": "推荐"}
+    {
+      "id": 1,
+      "contentKey": "",
+      "title": "商品",
+      "anchor_point": 0.0,
+      "loaded": 0
+    },
+    {
+      "id": 2,
+      "contentKey": "",
+      "title": "评价",
+      "anchor_point": 0.0,
+      "loaded": 0
+    },
+    {
+      "id": 3,
+      "contentKey": "",
+      "title": "详情",
+      "anchor_point": 0.0,
+      "loaded": 0
+    },
+    {"id": 4, "contentKey": "", "title": "推荐", "anchor_point": 0.0, "loaded": 0}
   ];
+  final int maxLoading = 3;
 
   final List moreMenu = [
     {"id": 1, "title": "首页", "icon": XmshopIcons.home},
@@ -41,6 +62,17 @@ class ProductDetailsController extends GetxController
   final RxInt shopNum = 1.obs;
   final RxMap<String, List<String?>> selectedAttr =
       {'cate': <String>[], 'selected': <String>[]}.obs;
+  final RxBool showMoreTar = false.obs;
+  final RxInt moreSelected = 1.obs;
+
+  changeMoreSelected(int selected) {
+    if (selected != moreSelected.value) {
+      moreSelected.value = selected;
+    }
+    scrollController.animateTo(_getAndUpdateAnchorPoint(2),
+        duration: const Duration(milliseconds: 1000), curve: Curves.easeIn);
+    update();
+  }
 
   changeAttrSelected(cate, title) {
     for (int i = 0; i < selectedAttr['cate']!.length; i++) {
@@ -69,9 +101,52 @@ class ProductDetailsController extends GetxController
   }
 
   onTarTitlePressed(int id) {
-    _changeSelectedId(id);
-    scrollController.animateTo(tarTitles[id - 1]['anchor_point'],
-        duration: const Duration(milliseconds: 1000), curve: Curves.easeIn);
+    scrollController.animateTo(
+        tarTitles[id - 1]['anchor_point'] +
+            ScreenAdapter.height(id == 4 ? 110 : 10),
+        duration: const Duration(milliseconds: 1000),
+        curve: Curves.easeIn);
+  }
+
+  double _getAnchorPoint(int index) {
+    if (index == 0) {
+      return 0.0;
+    }
+    GlobalKey contentKey = tarTitles[index]['contentKey'] as GlobalKey;
+    BuildContext? context = contentKey.currentContext;
+    if (context != null) {
+      RenderObject? renderObject = context.findRenderObject();
+      if (renderObject != null) {
+        RenderBox renderBox = renderObject as RenderBox;
+        return renderBox.localToGlobal(Offset.zero).dy -
+            ScreenAdapter.height(index == 3 ? 325 : 225);
+      }
+    }
+    return 0.0;
+  }
+
+  double _getAndUpdateAnchorPoint(int index) {
+    double anchorPoint = _getAnchorPoint(index);
+    if (anchorPoint != tarTitles[index]['anchor_point']) {
+      tarTitles[index]['anchor_point'] = anchorPoint;
+    }
+    return anchorPoint;
+  }
+
+  double _getAndSaveAnchorPoint(int index) {
+    int loaded = tarTitles[index]['loaded'];
+    if (loaded == maxLoading) {
+      return tarTitles[index]['anchor_point'];
+    }
+    double anchorPoint = _getAnchorPoint(index);
+    if (anchorPoint != tarTitles[index]['anchor_point']) {
+      tarTitles[index]['anchor_point'] = anchorPoint;
+      return anchorPoint;
+    }
+    if (loaded < maxLoading) {
+      tarTitles[index]['loaded']++;
+    }
+    return anchorPoint;
   }
 
   _addScrollListener() {
@@ -82,53 +157,44 @@ class ProductDetailsController extends GetxController
         actionColor.value = Colors.white;
         update();
       } else {
+        appBarOpacity.value = 1;
         actionColor.value = Colors.black;
         update();
       }
+      double current;
+      double next;
       for (int i = 0; i < tarTitles.length; i++) {
-        double current = tarTitles[i]['anchor_point'];
-        if (i < tarTitles.length - 1) {
-          double next = tarTitles[i + 1]['anchor_point'];
-          if (current < offset && offset < next) {
-            _changeSelectedId(i + 1);
+        current = _getAndSaveAnchorPoint(i);
+        if (selectedId.value - 1 != i) {
+          if (i == tarTitles.length - 1) {
+            if (offset > current) {
+              showMoreTar.value = false;
+              _changeSelectedId(i + 1);
+              update();
+            }
             return;
           }
-        } else if (offset > current) {
-          _changeSelectedId(i + 1);
-          return;
+          next = _getAndSaveAnchorPoint(i + 1);
+          if (current < offset && offset < next) {
+            _changeSelectedId(i + 1);
+            i == 2 ? showMoreTar.value = true : showMoreTar.value = false;
+            update();
+            return;
+          }
         }
       }
     });
   }
 
-  _getGoodsDetails() async {
+  @override
+  void loadData() async {
     final response = await provider.getGoodsDetailsModel(query: query);
     if (response.hasError) {
       change(null, status: RxStatus.error(response.statusText));
-    } else {
-      change(response.body, status: RxStatus.success());
-      _initAttrSelected(state);
+      return;
     }
-  }
-
-  _initAnchorPoint() {
-    for (Map map in tarTitles) {
-      GlobalKey contentKey = map['contentKey'] as GlobalKey;
-      BuildContext? context = contentKey.currentContext;
-      if (context != null) {
-        RenderObject? renderObject = context.findRenderObject();
-        if (renderObject != null) {
-          RenderBox renderBox = renderObject as RenderBox;
-          Offset offset = renderBox.localToGlobal(Offset.zero);
-          map.putIfAbsent(
-              "anchor_point",
-              () =>
-                  offset.dy +
-                  scrollController.offset -
-                  ScreenAdapter.height(225));
-        }
-      }
-    }
+    change(response.body, status: RxStatus.success());
+    _initAttrSelected(state);
   }
 
   _initAttrSelected(GoodsDetailsModel? goodsDetailsModel) {
@@ -143,8 +209,8 @@ class ProductDetailsController extends GetxController
   }
 
   _initGlobalKey() {
-    for (Map map in tarTitles) {
-      map.putIfAbsent("contentKey", () => GlobalKey());
+    for (int i = 0; i < tarTitles.length; i++) {
+      tarTitles[i]["contentKey"] = GlobalKey();
     }
   }
 
@@ -155,23 +221,14 @@ class ProductDetailsController extends GetxController
   }
 
   @override
-  void onInit() {
-    super.onInit();
+  void init() {
     _initQuery();
     _initGlobalKey();
     _addScrollListener();
-    _getGoodsDetails();
   }
 
   @override
-  void onReady() {
-    super.onReady();
-    _initAnchorPoint();
-  }
-
-  @override
-  void onClose() {
-    super.onClose();
+  void close() {
     scrollController.dispose();
   }
 }

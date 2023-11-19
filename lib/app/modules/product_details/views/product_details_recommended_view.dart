@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
 
 import '../../../utils/screen_adapter.dart';
@@ -11,8 +10,10 @@ class ProductDetailsRecommendedView extends GetView<ProductDetailsController> {
   Widget build(BuildContext context) {
     return Container(
       width: ScreenAdapter.width(1080),
-      height: ScreenAdapter.height(500),
+      height: ScreenAdapter.height(2400),
       color: Colors.red,
+      alignment: Alignment.center,
+      child: Text("推荐"),
     );
   }
 }

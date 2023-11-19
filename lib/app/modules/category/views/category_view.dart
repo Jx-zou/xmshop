@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:xmshop/app/common/views/loading.dart';
+import 'package:xmshop/app/modules/category/views/second_category_view.dart';
 
 import '../../../common/icons/xmshop_icons.dart';
 import '../../../utils/screen_adapter.dart';
@@ -9,70 +11,42 @@ import '../controllers/category_controller.dart';
 class CategoryView extends GetView<CategoryController> {
   const CategoryView({super.key});
 
-  _body() => Row(
-        children: [
-          SizedBox(
-            width: ScreenAdapter.width(300),
-            height: double.infinity,
-            child: controller.obx((state) => ListView.builder(
-                itemCount: state?.length,
-                itemBuilder: (context, index) => SizedBox(
-                    width: double.infinity,
-                    height: ScreenAdapter.height(180),
-                    child: InkWell(
-                      onTap: () => controller.changeSelectIndex(index),
-                      child: Stack(
-                        children: [
-                          Align(
-                            alignment: Alignment.centerLeft,
-                            child: Container(
-                              width: ScreenAdapter.width(10),
-                              height: ScreenAdapter.height(46),
-                              color: controller.selectIndex.value == index
-                                  ? Colors.deepOrange
-                                  : Colors.white,
-                            ),
-                          ),
-                          Center(
-                            child: Text("${state?[index].title}"),
-                          )
-                        ],
-                      ),
-                    )))),
-          ),
-          Expanded(
-              child: SizedBox(
-            height: double.infinity,
-            child: Obx(() => GridView.builder(
-                itemCount: controller.categoryModels.length,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 3,
-                    crossAxisSpacing: ScreenAdapter.width(40),
-                    childAspectRatio: 240 / 346),
-                itemBuilder: (context, index) => InkWell(
-                      onTap: () {
-                        Get.offAndToNamed("/product", parameters: {
-                          "requestKey": "cid",
-                          "requestValue": "${controller.categoryModels[index].id}"
-                        });
-                      },
-                      child: Column(
-                        children: [
-                          Container(
-                              alignment: Alignment.center,
-                              width: double.infinity,
-                              child: Image.network(
-                                  "https://xiaomi.itying.com/${controller.categoryModels[index].pic}"
-                                      .replaceAll("\\", "/"),
-                                  fit: BoxFit.fitHeight)),
-                          SizedBox(height: ScreenAdapter.height(30)),
-                          Text("${controller.categoryModels[index].title}")
-                        ],
-                      ),
-                    ))),
-          ))
-        ],
-      );
+  _body() => controller.obx(
+      (state) => Row(children: [
+            SizedBox(
+                width: ScreenAdapter.width(300),
+                height: double.infinity,
+                child: ListView.builder(
+                    itemCount: state?.length,
+                    itemBuilder: (context, index) => SizedBox(
+                        width: double.infinity,
+                        height: ScreenAdapter.height(180),
+                        child: InkWell(
+                            onTap: () => controller.changeSelectIndex(index),
+                            child: Stack(children: [
+                              Align(
+                                alignment: Alignment.centerLeft,
+                                child: Container(
+                                  width: ScreenAdapter.width(10),
+                                  height: ScreenAdapter.height(46),
+                                  color: controller.selectIndex.value == index
+                                      ? Colors.deepOrange
+                                      : Colors.white,
+                                ),
+                              ),
+                              Center(
+                                child: Text("${state?[index].title}"),
+                              )
+                            ]))))),
+            const Expanded(
+                child: SizedBox(
+              height: double.infinity,
+              child: SecondCategoryView(),
+            ))
+          ]),
+      onLoading: const Loading(),
+      onEmpty: Container(),
+      onError: (error) => Container());
 
   _appBar() => AppBar(
       titleSpacing: 0,
@@ -94,7 +68,8 @@ class CategoryView extends GetView<CategoryController> {
               Text(
                 "搜索",
                 style: TextStyle(
-                    fontSize: ScreenAdapter.fontSize(32), color: Colors.black54),
+                    fontSize: ScreenAdapter.fontSize(32),
+                    color: Colors.black54),
               )
             ],
           ),
