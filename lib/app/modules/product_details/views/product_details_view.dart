@@ -65,13 +65,13 @@ class ProductDetailsView extends GetView<ProductDetailsController> {
     return SingleChildScrollView(
         controller: controller.scrollController,
         child: Column(children: [
-          ProductDetailsGoodsView(key: controller.tarTitles[0]['contentKey']),
+          ProductDetailsGoodsView(key: controller.tannerTitles[0]['contentKey']),
           ProductDetailsEvaluateView(
-              key: controller.tarTitles[1]['contentKey']),
+              key: controller.tannerTitles[1]['contentKey']),
           ProductDetailsMoreView(_moreTar(),
-              key: controller.tarTitles[2]['contentKey']),
+              key: controller.tannerTitles[2]['contentKey']),
           ProductDetailsRecommendedView(
-              key: controller.tarTitles[3]['contentKey']),
+              key: controller.tannerTitles[3]['contentKey']),
         ]));
   }
 
@@ -87,7 +87,7 @@ class ProductDetailsView extends GetView<ProductDetailsController> {
                 title: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.center,
-                    children: controller.tarTitles
+                    children: controller.tannerTitles
                         .map((value) => InkWell(
                             onTap: () {
                               controller.onTarTitlePressed(value['id']);

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:xmshop/app/common/views/loading.dart';
 
+import '../../../common/views/loading.dart';
+import '../../../utils/https_client.dart';
 import '../../../utils/screen_adapter.dart';
 import '../controllers/search_hot_controller.dart';
 
@@ -35,12 +36,27 @@ class SearchHotView extends GetView<SearchHotController> {
                           mainAxisSpacing: ScreenAdapter.height(20),
                           childAspectRatio: 3 / 1),
                       itemBuilder: (context, index) => ListTile(
-                            leading: Image.network("${state?[index].pic}",
-                                fit: BoxFit.cover),
-                            title: Text("${state?[index].title}"),
-                            subtitle: Text("${state?[index].subTitle}"),
-                        onTap: controller.onHotTap(state?[index].id),
-                          )),
+                          leading: Image.network(
+                              HttpsClient.picReplaceUrl("${state?[index].pic}"),
+                              fit: BoxFit.cover),
+                          title: Text(
+                            "${state?[index].title}",
+                            style: TextStyle(
+                                fontSize: ScreenAdapter.fontSize(32),
+                                overflow: TextOverflow.ellipsis),
+                          ),
+                          subtitle: Text(
+                            "${state?[index].subTitle}",
+                            style: TextStyle(
+                                fontSize: ScreenAdapter.fontSize(28),
+                                overflow: TextOverflow.ellipsis),
+                          ),
+                          onTap: () {
+                            Get.offAndToNamed("product-details", parameters: {
+                              "requestKey": "id",
+                              "requestValue": "${state?[index].id}"
+                            });
+                          })),
                   onLoading: const Loading(),
                   onEmpty: Container(),
                   onError: (error) => Container())),

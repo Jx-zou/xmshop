@@ -4,7 +4,6 @@ import '../../../common/controllers/base_controller.dart';
 import '../../../services/search_service.dart';
 
 class XmSearchController extends BaseController with StateMixin<List<String>> {
-
   final SearchService searchService = Get.find<SearchService>();
 
   RxString keywords = "".obs;
@@ -21,10 +20,8 @@ class XmSearchController extends BaseController with StateMixin<List<String>> {
 
   searchToProduct() {
     searchService.setHistory(keywords.value);
-    Get.offAndToNamed("/product", parameters: {
-      "requestKey": "search",
-      "requestValue": keywords.value
-    });
+    Get.offAndToNamed("/product",
+        parameters: {"requestKey": "search", "requestValue": keywords.value});
   }
 
   void clearHistoryData() async {
@@ -45,14 +42,11 @@ class XmSearchController extends BaseController with StateMixin<List<String>> {
 
   @override
   void loadData() async {
-    List<String>? history = await searchService.getHistory();
-    if (history.isNotEmpty) {
-      if (state == null) {
-        change(history, status: RxStatus.success());
-        return;
-      }
-      state?.addAll(history);
-      change(history, status: RxStatus.success());
+    List<String> history = await searchService.getHistory();
+    if (history.isEmpty) {
+      change([], status: RxStatus.success());
+      return;
     }
+    change(history, status: RxStatus.success());
   }
 }

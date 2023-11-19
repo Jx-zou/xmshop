@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -17,32 +19,12 @@ class ProductDetailsController extends BaseController
 
   final ScrollController scrollController = ScrollController();
 
-  final List<Map<String, dynamic>> tarTitles = [
-    {
-      "id": 1,
-      "contentKey": "",
-      "title": "商品",
-      "anchor_point": 0.0,
-      "loaded": 0
-    },
-    {
-      "id": 2,
-      "contentKey": "",
-      "title": "评价",
-      "anchor_point": 0.0,
-      "loaded": 0
-    },
-    {
-      "id": 3,
-      "contentKey": "",
-      "title": "详情",
-      "anchor_point": 0.0,
-      "loaded": 0
-    },
-    {"id": 4, "contentKey": "", "title": "推荐", "anchor_point": 0.0, "loaded": 0}
+  final List<Map<String, dynamic>> tannerTitles = [
+    {"id": 1, "contentKey": "", "title": "商品", "anchor_point": 0.0},
+    {"id": 2, "contentKey": "", "title": "评价", "anchor_point": 0.0},
+    {"id": 3, "contentKey": "", "title": "详情", "anchor_point": 0.0},
+    {"id": 4, "contentKey": "", "title": "推荐", "anchor_point": 0.0}
   ];
-  final int maxLoading = 3;
-
   final List moreMenu = [
     {"id": 1, "title": "首页", "icon": XmshopIcons.home},
     {"id": 2, "title": "消息", "icon": XmshopIcons.message},
@@ -64,8 +46,10 @@ class ProductDetailsController extends BaseController
       {'cate': <String>[], 'selected': <String>[]}.obs;
   final RxBool showMoreTar = false.obs;
   final RxInt moreSelected = 1.obs;
+  int loadTime = 10;
+  late Timer timer;
 
-  changeMoreSelected(int selected) {
+  void changeMoreSelected(int selected) {
     if (selected != moreSelected.value) {
       moreSelected.value = selected;
     }
@@ -74,7 +58,7 @@ class ProductDetailsController extends BaseController
     update();
   }
 
-  changeAttrSelected(cate, title) {
+  void changeAttrSelected(cate, title) {
     for (int i = 0; i < selectedAttr['cate']!.length; i++) {
       if (selectedAttr['cate']?[i] == cate) {
         selectedAttr['selected']?[i] = title;
@@ -83,26 +67,26 @@ class ProductDetailsController extends BaseController
     update();
   }
 
-  shopNumAdd() {
+  void shopNumAdd() {
     shopNum.value++;
     update();
   }
 
-  shopNumSubtract() {
+  void shopNumSubtract() {
     if (shopNum.value > 1) {
       shopNum.value--;
       update();
     }
   }
 
-  _changeSelectedId(int id) {
+  void _changeSelectedId(int id) {
     selectedId.value = id;
     update();
   }
 
-  onTarTitlePressed(int id) {
+  void onTarTitlePressed(int id) {
     scrollController.animateTo(
-        tarTitles[id - 1]['anchor_point'] +
+        tannerTitles[id - 1]['anchor_point'] +
             ScreenAdapter.height(id == 4 ? 110 : 10),
         duration: const Duration(milliseconds: 1000),
         curve: Curves.easeIn);
@@ -112,44 +96,43 @@ class ProductDetailsController extends BaseController
     if (index == 0) {
       return 0.0;
     }
-    GlobalKey contentKey = tarTitles[index]['contentKey'] as GlobalKey;
+    GlobalKey contentKey = tannerTitles[index]['contentKey'] as GlobalKey;
     BuildContext? context = contentKey.currentContext;
     if (context != null) {
       RenderObject? renderObject = context.findRenderObject();
       if (renderObject != null) {
         RenderBox renderBox = renderObject as RenderBox;
-        return renderBox.localToGlobal(Offset.zero).dy -
+        debugPrint(
+            "[_$index]->${renderBox.localToGlobal(Offset.zero).dy + scrollController.offset - ScreenAdapter.height(index == 3 ? 325 : 225)}");
+        return renderBox.localToGlobal(Offset.zero).dy +
+            scrollController.offset -
             ScreenAdapter.height(index == 3 ? 325 : 225);
       }
     }
     return 0.0;
   }
 
-  double _getAndUpdateAnchorPoint(int index) {
+  void _updateAnchorPoint(int index) {
     double anchorPoint = _getAnchorPoint(index);
-    if (anchorPoint != tarTitles[index]['anchor_point']) {
-      tarTitles[index]['anchor_point'] = anchorPoint;
+    if (anchorPoint != tannerTitles[index]['anchor_point']) {
+      tannerTitles[index]['anchor_point'] = anchorPoint;
     }
-    return anchorPoint;
+  }
+
+  double _getAndUpdateAnchorPoint(int index) {
+    _updateAnchorPoint(index);
+    return tannerTitles[index]['anchor_point'];
   }
 
   double _getAndSaveAnchorPoint(int index) {
-    int loaded = tarTitles[index]['loaded'];
-    if (loaded == maxLoading) {
-      return tarTitles[index]['anchor_point'];
+    if (loadTime <= 0) {
+      return tannerTitles[index]['anchor_point'];
     }
-    double anchorPoint = _getAnchorPoint(index);
-    if (anchorPoint != tarTitles[index]['anchor_point']) {
-      tarTitles[index]['anchor_point'] = anchorPoint;
-      return anchorPoint;
-    }
-    if (loaded < maxLoading) {
-      tarTitles[index]['loaded']++;
-    }
-    return anchorPoint;
+    _updateAnchorPoint(index);
+    return tannerTitles[index]['anchor_point'];
   }
 
-  _addScrollListener() {
+  void _addScrollListener() {
     scrollController.addListener(() {
       double offset = scrollController.offset;
       if (offset <= 75) {
@@ -163,10 +146,10 @@ class ProductDetailsController extends BaseController
       }
       double current;
       double next;
-      for (int i = 0; i < tarTitles.length; i++) {
+      for (int i = 0; i < tannerTitles.length; i++) {
         current = _getAndSaveAnchorPoint(i);
         if (selectedId.value - 1 != i) {
-          if (i == tarTitles.length - 1) {
+          if (i == tannerTitles.length - 1) {
             if (offset > current) {
               showMoreTar.value = false;
               _changeSelectedId(i + 1);
@@ -197,7 +180,7 @@ class ProductDetailsController extends BaseController
     _initAttrSelected(state);
   }
 
-  _initAttrSelected(GoodsDetailsModel? goodsDetailsModel) {
+  void _initAttrSelected(GoodsDetailsModel? goodsDetailsModel) {
     List<GoodsDetailsAttrModel>? attrs = goodsDetailsModel!.attr;
     if (attrs != null) {
       for (int i = 0; i < attrs.length; i++) {
@@ -208,13 +191,26 @@ class ProductDetailsController extends BaseController
     update();
   }
 
-  _initGlobalKey() {
-    for (int i = 0; i < tarTitles.length; i++) {
-      tarTitles[i]["contentKey"] = GlobalKey();
+  void _initTimer() {
+    timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      if (loadTime <= 0) {
+        for (int i = 0; i < tannerTitles.length; i++) {
+          _updateAnchorPoint(i);
+        }
+        timer.cancel();
+        return;
+      }
+      loadTime--;
+    });
+  }
+
+  void _initGlobalKey() {
+    for (int i = 0; i < tannerTitles.length; i++) {
+      tannerTitles[i]["contentKey"] = GlobalKey();
     }
   }
 
-  _initQuery() {
+  void _initQuery() {
     query = {
       "${Get.parameters['requestKey']}": "${Get.parameters['requestValue']}"
     };
@@ -224,11 +220,13 @@ class ProductDetailsController extends BaseController
   void init() {
     _initQuery();
     _initGlobalKey();
+    _initTimer();
     _addScrollListener();
   }
 
   @override
   void close() {
     scrollController.dispose();
+    timer.cancel();
   }
 }

@@ -78,7 +78,8 @@ class ProductDetailsEvaluateView extends GetView<ProductDetailsController> {
                                 ScreenAdapter.fontSize(20)),
                             image: DecorationImage(
                                 image: NetworkImage(controller.picList[index]),
-                                fit: BoxFit.cover)),
+                                fit: BoxFit.cover,
+                                onError: (obj, stack) => Container())),
                       ))),
             ),
             Divider(height: ScreenAdapter.height(100)),

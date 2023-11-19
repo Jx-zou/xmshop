@@ -15,7 +15,7 @@ class SearchGuessView extends GetView<SearchGuessController> {
                 splashColor: Colors.transparent,
                 radius: 0,
                 onTap: () {
-                  controller.searchController.onKeywordsTap(value);
+                  controller.onKeywordsTap(value);
                 },
                 child: Container(
                     padding: EdgeInsets.fromLTRB(

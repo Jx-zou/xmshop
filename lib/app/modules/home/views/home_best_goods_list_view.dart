@@ -3,6 +3,7 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 
 import '../../../common/views/loading.dart';
+import '../../../utils/https_client.dart';
 import '../../../utils/screen_adapter.dart';
 import '../controllers/home_best_goods_list_controller.dart';
 
@@ -34,8 +35,7 @@ class HomeBestGoodsListView extends GetView<HomeBestGoodsListController> {
                               padding:
                                   EdgeInsets.only(top: ScreenAdapter.width(30)),
                               child: Image.network(
-                                  "https://xiaomi.itying.com/${state[index].pic}"
-                                      .replaceAll("\\", "/"),
+                                HttpsClient.picReplaceUrl("${state[index].pic}"),
                                   fit: BoxFit.cover)),
                           ListTile(
                               title: Text("${state[index].title}"),

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:xmshop/app/modules/search/views/search_guess_view.dart';
 
-import '../controllers/xm_search_controller.dart';
 import 'search_hot_view.dart';
+import 'search_guess_view.dart';
+import '../controllers/xm_search_controller.dart';
 
+import '../../../common/views/loading.dart';
 import '../../../common/icons/xmshop_icons.dart';
 import '../../../common/views/widgets/title_banner.dart';
 import '../../../utils/screen_adapter.dart';
@@ -64,7 +65,10 @@ class SearchView extends GetView<XmSearchController> {
                       color: Colors.white),
                   child: Text(value),
                 )))
-            .toList()));
+            .toList()),
+    onLoading: const Loading(),
+    onEmpty: Container(),
+    onError: (error) => Container());
   }
 
   Widget _clearHistoryBottomSheet() {
