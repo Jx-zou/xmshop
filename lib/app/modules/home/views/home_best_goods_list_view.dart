@@ -22,10 +22,9 @@ class HomeBestGoodsListView extends GetView<HomeBestGoodsListController> {
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
             itemBuilder: (context, index) => TileCard(
-              aspectRatio: 1 / 2,
                 backgroundColor: Colors.white,
-                image: NetworkImage(
-                    HttpsClient.picReplaceUrl("${state[index].pic}")),
+                image: Image.network(
+                    HttpsClient.picReplaceUrl("${state[index].pic}"), fit: BoxFit.fitHeight,),
                 title: "${state[index].title}",
                 titleStyle: TextStyle(fontSize: ScreenAdapter.fontSize(42), fontWeight: FontWeight.w600),
                 subTitle: "${state[index].subTitle}",

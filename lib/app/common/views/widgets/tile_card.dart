@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 
 class TileCard extends StatelessWidget {
+  final double? width;
+  final double? height;
   final VoidCallback? onTap;
   final double borderRadius;
-  final double aspectRatio;
   final Color? backgroundColor;
   final EdgeInsetsGeometry? padding;
-  final ImageProvider image;
+  final Image image;
   final String title;
   final TextStyle? titleStyle;
   final String subTitle;
@@ -28,20 +29,16 @@ class TileCard extends StatelessWidget {
       this.spacing = 5,
       this.tag,
       this.trailing,
-      this.aspectRatio = 1 / 1,
-      this.padding});
+      this.padding,
+      this.width,
+      this.height});
 
   @override
   Widget build(BuildContext context) {
     ThemeData themeData = Theme.of(context);
     Color backgroundColor = this.backgroundColor ?? themeData.primaryColor;
-    TextStyle titleStyle = this.titleStyle ??
-        const TextStyle(fontSize: 15, fontWeight: FontWeight.bold);
-    TextStyle subTitleStyle = this.subTitleStyle ??
-        const TextStyle(
-            fontSize: 11,
-            color: Colors.black38,
-            overflow: TextOverflow.ellipsis);
+    TextStyle titleStyle = this.titleStyle ?? const TextStyle(fontSize: 15, fontWeight: FontWeight.bold);
+    TextStyle subTitleStyle = this.subTitleStyle ?? const TextStyle(fontSize: 11, color: Colors.black38, overflow: TextOverflow.ellipsis);
     EdgeInsetsGeometry padding = this.padding ?? const EdgeInsets.all(5);
 
     Widget spacingBox(Widget? widget) {
@@ -56,14 +53,16 @@ class TileCard extends StatelessWidget {
         radius: 0,
         onTap: onTap,
         child: Container(
+            width: width,
+            height: height,
             padding: padding,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(borderRadius),
                 color: backgroundColor),
             child:
-                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              spacingBox(Image(image: image)),
-              spacingBox(Text(title, style: titleStyle)),
+                Column(mainAxisAlignment: MainAxisAlignment.spaceAround, crossAxisAlignment: CrossAxisAlignment.start, children: [
+              spacingBox(image),
+              spacingBox(Text(title, style: titleStyle, maxLines: 2)),
               spacingBox(Text(subTitle, style: subTitleStyle)),
               spacingBox(tag),
               spacingBox(trailing)
