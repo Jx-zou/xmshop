@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 
+import '../../../common/views/widgets/tile_card.dart';
 import '../../../common/views/loading.dart';
 import '../../../utils/https_client.dart';
 import '../../../utils/screen_adapter.dart';
@@ -14,43 +15,23 @@ class HomeBestGoodsListView extends GetView<HomeBestGoodsListController> {
   Widget build(BuildContext context) {
     return controller.obx(
         (state) => MasonryGridView.count(
-              crossAxisCount: 2,
-              mainAxisSpacing: ScreenAdapter.width(26),
-              crossAxisSpacing: ScreenAdapter.width(26),
-              itemCount: state!.length,
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              itemBuilder: (context, index) => InkWell(
-                  onTap: () => Get.toNamed("product-details", parameters: {
-                        "requestKey": "id",
-                        "requestValue": "${state[index].id}"
-                      }),
-                  child: Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: Colors.white),
-                      child: Column(
-                        children: [
-                          Container(
-                              padding:
-                                  EdgeInsets.only(top: ScreenAdapter.width(30)),
-                              child: Image.network(
-                                HttpsClient.picReplaceUrl("${state[index].pic}"),
-                                  fit: BoxFit.cover)),
-                          ListTile(
-                              title: Text("${state[index].title}"),
-                              subtitle: Text(
-                                "${state[index].subTitle}",
-                                style: TextStyle(
-                                    fontSize: ScreenAdapter.fontSize(32),
-                                    overflow: TextOverflow.ellipsis),
-                              )),
-                          ListTile(
-                            title: Text("¥${state[index].price}"),
-                          )
-                        ],
-                      ))),
-            ),
+            crossAxisCount: 2,
+            mainAxisSpacing: ScreenAdapter.width(26),
+            crossAxisSpacing: ScreenAdapter.width(26),
+            itemCount: state!.length,
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemBuilder: (context, index) => TileCard(
+              aspectRatio: 1 / 2,
+                backgroundColor: Colors.white,
+                image: NetworkImage(
+                    HttpsClient.picReplaceUrl("${state[index].pic}")),
+                title: "${state[index].title}",
+                titleStyle: TextStyle(fontSize: ScreenAdapter.fontSize(42), fontWeight: FontWeight.w600),
+                subTitle: "${state[index].subTitle}",
+                subTitleStyle: TextStyle(fontSize: ScreenAdapter.fontSize(28), overflow: TextOverflow.ellipsis),
+                trailing: Text("￥${state[index].price}",
+                    style: TextStyle(fontSize: ScreenAdapter.fontSize(42))))),
         onLoading: const Loading(),
         onEmpty: Container(),
         onError: (error) => Container());

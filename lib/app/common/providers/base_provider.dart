@@ -2,7 +2,7 @@ import 'package:get/get.dart';
 
 import '../../../global.dart';
 
-class BaseProvider extends GetConnect {
+abstract class BaseProvider extends GetConnect {
 
   @override
   void onInit() {
@@ -17,7 +17,4 @@ class BaseProvider extends GetConnect {
     
     super.onInit();
   }
-
-
-
 }

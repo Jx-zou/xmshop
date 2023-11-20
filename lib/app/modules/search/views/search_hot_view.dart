@@ -42,14 +42,7 @@ class SearchHotView extends GetView<SearchHotController> {
                           title: Text(
                             "${state?[index].title}",
                             style: TextStyle(
-                                fontSize: ScreenAdapter.fontSize(32),
-                                overflow: TextOverflow.ellipsis),
-                          ),
-                          subtitle: Text(
-                            "${state?[index].subTitle}",
-                            style: TextStyle(
-                                fontSize: ScreenAdapter.fontSize(28),
-                                overflow: TextOverflow.ellipsis),
+                                fontSize: ScreenAdapter.fontSize(32)),
                           ),
                           onTap: () {
                             Get.offAndToNamed("product-details", parameters: {

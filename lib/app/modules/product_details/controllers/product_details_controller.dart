@@ -13,7 +13,7 @@ class ProductDetailsController extends BaseController
     with StateMixin<GoodsDetailsModel> {
   final IGoodsDetailsProvider provider;
 
-  ProductDetailsController(this.provider);
+  ProductDetailsController({required this.provider});
 
   Map<String, String> query = {};
 
@@ -102,8 +102,6 @@ class ProductDetailsController extends BaseController
       RenderObject? renderObject = context.findRenderObject();
       if (renderObject != null) {
         RenderBox renderBox = renderObject as RenderBox;
-        debugPrint(
-            "[_$index]->${renderBox.localToGlobal(Offset.zero).dy + scrollController.offset - ScreenAdapter.height(index == 3 ? 325 : 225)}");
         return renderBox.localToGlobal(Offset.zero).dy +
             scrollController.offset -
             ScreenAdapter.height(index == 3 ? 325 : 225);

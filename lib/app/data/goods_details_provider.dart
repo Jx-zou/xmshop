@@ -4,8 +4,7 @@ import '../common/providers/base_provider.dart';
 import '../models/goods_details_model.dart';
 
 abstract class IGoodsDetailsProvider {
-  Future<Response<GoodsDetailsModel>> getGoodsDetailsModel(
-      {required Map<String, dynamic> query});
+  Future<Response<GoodsDetailsModel>> getGoodsDetailsModel({required Map<String, dynamic> query});
 }
 
 class GoodsDetailsProvider extends BaseProvider
@@ -18,8 +17,7 @@ class GoodsDetailsProvider extends BaseProvider
   }
 
   @override
-  Future<Response<GoodsDetailsModel>> getGoodsDetailsModel(
-      {required Map<String, dynamic> query}) async {
+  Future<Response<GoodsDetailsModel>> getGoodsDetailsModel({required Map<String, dynamic> query}) async {
     final res = await get("/pcontent", query: query);
     return Response(
         statusCode: res.statusCode,
