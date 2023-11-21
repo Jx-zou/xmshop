@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import '../controllers/cart_controller.dart';
 
 class CartView extends GetView<CartController> {
-  const CartView({Key? key}) : super(key: key);
+  const CartView({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -13,12 +13,16 @@ class CartView extends GetView<CartController> {
         title: const Text('CartView'),
         centerTitle: true,
       ),
-      body: const Center(
-        child: Text(
-          'CartView is working',
-          style: TextStyle(fontSize: 20),
-        ),
-      ),
+      body: Stack(
+        children: [
+          Container(),
+          Positioned(
+            left: 0,
+            right: 0,
+            bottom: 0,
+              child: Container())
+        ],
+      )
     );
   }
 }

@@ -8,45 +8,22 @@ class Loading extends StatefulWidget {
   const Loading({super.key});
 
   @override
-  State<StatefulWidget> createState() => LoadingState();
+  State<StatefulWidget> createState() => _LoadingState();
 }
 
-class LoadingState extends State<Loading> {
-  int _countDown = 10;
-  late Timer _timer;
-
-  void initTimer() {
-    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
-      if (_countDown <= 0 && timer.isActive) {
-        timer.cancel();
-        _widget = Container();
-        return;
-      }
-      _countDown--;
-    });
-  }
-
-  Widget _widget = Center(
-      child: SpinKitThreeBounce(
-          size: ScreenAdapter.width(50),
-          itemBuilder: (context, index) => const DecoratedBox(
-              decoration: BoxDecoration(
-                  color: Colors.black26, shape: BoxShape.circle))));
+class _LoadingState extends State<Loading> {
+  bool _loading = true;
 
   @override
   Widget build(BuildContext context) {
-    return _widget;
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    initTimer();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    _timer.cancel();
+    Future.delayed(const Duration(seconds: 10),() {
+      _loading = false;
+    });
+    return _loading ? Center(
+        child: SpinKitThreeBounce(
+            size: ScreenAdapter.width(50),
+            itemBuilder: (context, index) => const DecoratedBox(
+                decoration: BoxDecoration(
+                    color: Colors.black26, shape: BoxShape.circle)))) : Container();
   }
 }
