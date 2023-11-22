@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
-import 'package:xmshop/app/common/views/loading.dart';
-import 'package:xmshop/app/modules/category/views/second_category_view.dart';
 
+import '../controllers/category_controller.dart';
+import '../../../common/views/loading.dart';
 import '../../../common/icons/xmshop_icons.dart';
 import '../../../utils/screen_adapter.dart';
-import '../controllers/category_controller.dart';
 
 class CategoryView extends GetView<CategoryController> {
   const CategoryView({super.key});
@@ -38,11 +36,34 @@ class CategoryView extends GetView<CategoryController> {
                                 child: Text("${state?[index].title}"),
                               )
                             ]))))),
-            const Expanded(
-                child: SizedBox(
-              height: double.infinity,
-              child: SecondCategoryView(),
-            ))
+            Expanded(
+              child: GridView.builder(
+                  itemCount: controller.secondCategory.value.length,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 3,
+                      crossAxisSpacing: ScreenAdapter.width(40),
+                      childAspectRatio: 240 / 346),
+                  itemBuilder: (context, index) => InkWell(
+                        onTap: () {
+                          controller.toProduct(
+                              "${controller.secondCategory.value[index].id}");
+                        },
+                        child: Column(
+                          children: [
+                            Container(
+                                alignment: Alignment.center,
+                                width: double.infinity,
+                                child: Image.network(
+                                    "https://xiaomi.itying.com/${controller.secondCategory.value[index].pic}"
+                                        .replaceAll("\\", "/"),
+                                    fit: BoxFit.fitHeight)),
+                            SizedBox(height: ScreenAdapter.height(30)),
+                            Text(
+                                "${controller.secondCategory.value[index].title}")
+                          ],
+                        ),
+                      )),
+            )
           ]),
       onLoading: const Loading(),
       onEmpty: Container(),

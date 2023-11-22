@@ -49,4 +49,6 @@ class XmshopIcons {
       IconData(0xed21, fontFamily: "xmshopIcon", matchTextDirection: true);
   static const IconData subtract =
       IconData(0xed22, fontFamily: "xmshopIcon", matchTextDirection: true);
+  static const IconData checked =
+      IconData(0xe6e1, fontFamily: "xmshopIcon", matchTextDirection: true);
 }

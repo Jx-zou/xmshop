@@ -20,35 +20,36 @@ class ProductDetailsRecommendedView
                 fontSize: ScreenAdapter.fontSize(42),
                 fontWeight: FontWeight.w600)),
       ),
-      controller.obx((state) => GridView.count(
+      controller.obx((state) => GridView.builder(
           physics: const NeverScrollableScrollPhysics(),
           padding: EdgeInsets.all(ScreenAdapter.width(30)),
           shrinkWrap: true,
-          childAspectRatio: 3 / 5,
-          crossAxisCount: 2,
-          mainAxisSpacing: ScreenAdapter.width(30),
-          crossAxisSpacing: ScreenAdapter.width(30),
-          children: state!
-              .map((goodsModel) => TileCard(
-                  padding: EdgeInsets.all(ScreenAdapter.width(30)),
-                  backgroundColor: Colors.white,
-                  image: Image.network(
-                    HttpsClient.picReplaceUrl("${goodsModel.pic}"),
-                    fit: BoxFit.cover,
-                  ),
-                  title: "${goodsModel.title}",
-                  titleStyle: TextStyle(
-                    fontSize: ScreenAdapter.fontSize(42),
-                    fontWeight: FontWeight.w600,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  subTitle: "${goodsModel.subTitle}",
-                  subTitleStyle: TextStyle(
-                      fontSize: ScreenAdapter.fontSize(28),
-                      overflow: TextOverflow.ellipsis),
-                  trailing: Text("￥${goodsModel.price}",
-                      style: TextStyle(fontSize: ScreenAdapter.fontSize(42)))))
-              .toList())),
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            childAspectRatio: 3 / 5,
+            mainAxisSpacing: ScreenAdapter.width(30),
+            crossAxisSpacing: ScreenAdapter.width(30),
+          ),
+          itemCount: state?.length,
+          itemBuilder: (context, index) => TileCard(
+              padding: EdgeInsets.all(ScreenAdapter.width(30)),
+              backgroundColor: Colors.white,
+              image: Image.network(
+                HttpsClient.picReplaceUrl("${state?[index].pic}"),
+                fit: BoxFit.cover,
+              ),
+              title: "${state?[index].title}",
+              titleStyle: TextStyle(
+                fontSize: ScreenAdapter.fontSize(42),
+                fontWeight: FontWeight.w600,
+                overflow: TextOverflow.ellipsis,
+              ),
+              subTitle: "${state?[index].subTitle}",
+              subTitleStyle: TextStyle(
+                  fontSize: ScreenAdapter.fontSize(28),
+                  overflow: TextOverflow.ellipsis),
+              trailing: Text("￥${state?[index].price}",
+                  style: TextStyle(fontSize: ScreenAdapter.fontSize(42)))))),
       SizedBox(height: ScreenAdapter.height(30))
     ]);
   }

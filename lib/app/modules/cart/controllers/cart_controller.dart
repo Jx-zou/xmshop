@@ -1,10 +1,7 @@
 import 'package:get/get.dart';
 
-class CartController extends GetxController {
-  //TODO: Implement CartController
+import '../../../common/controllers/base_controller.dart';
 
-  final count = 0.obs;
+class CartController extends BaseController {
 
-
-  void increment() => count.value++;
 }

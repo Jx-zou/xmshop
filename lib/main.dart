@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'global.dart';
 import 'app/routes/app_pages.dart';
@@ -23,17 +22,13 @@ void run() {
       initialRoute: AppPages.INITIAL,
       getPages: AppPages.routes,
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        fontFamily: "miFont",
-        appBarTheme: Global.appBarTheme
-      ),
+      theme: Global.themeData,
       defaultTransition: Transition.rightToLeft,
     ),
   ));
 }
 
 void main() {
-  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
   initService();
   run();
 }

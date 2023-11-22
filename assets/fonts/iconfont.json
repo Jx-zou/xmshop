@@ -69,6 +69,13 @@
       "unicode_decimal": 58882
     },
     {
+      "icon_id": "1996910",
+      "name": "yes",
+      "font_class": "yes1",
+      "unicode": "e6e1",
+      "unicode_decimal": 59105
+    },
+    {
       "icon_id": "2076288",
       "name": " 购物车",
       "font_class": "gouwuche",

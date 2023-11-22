@@ -6,7 +6,6 @@ import '../../../data/focus_provider.dart';
 import '../../../data/goods_provider.dart';
 import '../../cart/controllers/cart_controller.dart';
 import '../../category/controllers/category_controller.dart';
-import '../../category/controllers/second_category_controller.dart';
 import '../../give/controllers/give_controller.dart';
 import '../../home/controllers/home_best_goods_banner_controller.dart';
 import '../../home/controllers/home_best_goods_list_controller.dart';
@@ -39,7 +38,6 @@ class RootBinding extends Bindings {
     Get.lazyPut<HomeBestGoodsListController>(() => HomeBestGoodsListController(provider: Get.find<IGoodsProvider>()));
 
     /*Category*/
-    Get.lazyPut<SecondCategoryController>(() => SecondCategoryController(provider: Get.find<ICategoryProvider>()));
     Get.lazyPut<CategoryController>(() => CategoryController(provider: Get.find<ICategoryProvider>()));
 
 

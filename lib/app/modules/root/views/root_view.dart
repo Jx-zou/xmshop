@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:xmshop/app/common/icons/xmshop_icons.dart';
 
 import '../controllers/root_controller.dart';
+import '../../../common/icons/xmshop_icons.dart';
 
 class RootView extends GetView<RootController> {
   const RootView({super.key});
@@ -19,6 +19,7 @@ class RootView extends GetView<RootController> {
           bottomNavigationBar: BottomNavigationBar(
             fixedColor: Colors.red,
             currentIndex: controller.currentIndex.value,
+            selectedFontSize: 12.0,
             type: BottomNavigationBarType.fixed,
             onTap: (index) {
               controller.switchPage(index);
@@ -27,10 +28,8 @@ class RootView extends GetView<RootController> {
             items: const [
               BottomNavigationBarItem(icon: Icon(XmshopIcons.home), label: "首页"),
               BottomNavigationBarItem(icon: Icon(XmshopIcons.category), label: "分类"),
-              BottomNavigationBarItem(
-                  icon: Icon(XmshopIcons.service), label: "服务"),
-              BottomNavigationBarItem(
-                  icon: Icon(XmshopIcons.tabShopCart), label: "购物车"),
+              BottomNavigationBarItem(icon: Icon(XmshopIcons.service), label: "服务"),
+              BottomNavigationBarItem(icon: Icon(XmshopIcons.tabShopCart), label: "购物车"),
               BottomNavigationBarItem(icon: Icon(XmshopIcons.mine), label: "用户")
             ],
           ),
