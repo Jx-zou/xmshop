@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../utils/route_utils.dart';
 import '../controllers/home_hot_goods_list_controller.dart';
 import '../../../common/views/loading.dart';
 import '../../../utils/screen_adapter.dart';
@@ -21,7 +22,7 @@ class HomeHotGoodsListView extends GetView<HomeHotGoodsListController> {
                             bottom: ScreenAdapter.height(10)),
                         child: InkWell(
                             onTap: () {
-                              controller.onToDetails(goodsModel.id);
+                              RouteUtils.toGoodsDetails("id", goodsModel.id);
                             },
                             child: Container(
                                 color: const Color.fromRGBO(246, 246, 246, 1),

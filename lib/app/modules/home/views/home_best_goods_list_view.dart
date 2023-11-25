@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import '../../../common/views/widgets/tile_card.dart';
 import '../../../common/views/loading.dart';
 import '../../../utils/https_client.dart';
+import '../../../utils/route_utils.dart';
 import '../../../utils/screen_adapter.dart';
 import '../controllers/home_best_goods_list_controller.dart';
 
@@ -22,6 +23,7 @@ class HomeBestGoodsListView extends GetView<HomeBestGoodsListController> {
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
             itemBuilder: (context, index) => TileCard(
+              onTap: RouteUtils.toGoodsDetails("id", state[index].id),
                 backgroundColor: Colors.white,
                 image: Image.network(
                     HttpsClient.picReplaceUrl("${state[index].pic}"), fit: BoxFit.fitHeight,),

@@ -10,17 +10,9 @@ class HomeHotGoodsListController extends BaseController
 
   HomeHotGoodsListController({required this.provider});
 
-  onToDetails(String? id) {
-    if (id != null) {
-      Get.toNamed("product-details",
-          parameters: {"requestKey": "id", "requestValue": id});
-    }
-  }
-
   @override
   void loadData() async {
-    final response =
-        await provider.getGoodsModel(query: {"is_hot": "1", "pageSize": "3"});
+    final response = await provider.getGoodsModel(query: {"is_hot": "1", "pageSize": "3"});
     if (response.hasError) {
       change(null, status: RxStatus.error(response.statusText));
       return;

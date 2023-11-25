@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import '../../../common/views/loading.dart';
 import '../../../common/views/widgets/tile_card.dart';
 import '../../../utils/https_client.dart';
+import '../../../utils/route_utils.dart';
 import '../../../utils/screen_adapter.dart';
 import '../controllers/cart_guess_controller.dart';
 
@@ -25,6 +26,7 @@ class CartGuessView extends GetView<CartGuessController> {
             ),
             itemCount: state?.length,
             itemBuilder: (context, index) => TileCard(
+              onTap: RouteUtils.toGoodsDetails("id", state?[index].id),
                 padding: EdgeInsets.all(ScreenAdapter.width(30)),
                 backgroundColor: Colors.white,
                 image: Image.network(
