@@ -9,7 +9,6 @@ abstract class BaseController extends GetxController {
   Future<void> onRefresh({Duration duration = Duration.zero}) async {
     Future.delayed(duration, () {
       reset();
-      close();
       init();
       loadData();
     });

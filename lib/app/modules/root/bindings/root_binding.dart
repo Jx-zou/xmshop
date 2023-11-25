@@ -5,6 +5,7 @@ import '../../../data/category_provider.dart';
 import '../../../data/focus_provider.dart';
 import '../../../data/goods_provider.dart';
 import '../../cart/controllers/cart_controller.dart';
+import '../../cart/controllers/cart_guess_controller.dart';
 import '../../category/controllers/category_controller.dart';
 import '../../give/controllers/give_controller.dart';
 import '../../home/controllers/home_best_goods_banner_controller.dart';
@@ -40,8 +41,11 @@ class RootBinding extends Bindings {
     /*Category*/
     Get.lazyPut<CategoryController>(() => CategoryController(provider: Get.find<ICategoryProvider>()));
 
-
+    /*Cart*/
     Get.lazyPut<CartController>(() => CartController());
+    Get.lazyPut<CartGuessController>(() => CartGuessController(provider: Get.find<IGoodsProvider>()));
+
+
     Get.lazyPut<GiveController>(() => GiveController());
     Get.lazyPut<UserController>(() => UserController());
   }
