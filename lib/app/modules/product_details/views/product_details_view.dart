@@ -14,10 +14,7 @@ import 'product_details_recommended_view.dart';
 class ProductDetailsView extends GetView<ProductDetailsController> {
   const ProductDetailsView({super.key});
 
-  _action(
-      {required VoidCallback onPressed,
-      required IconData icon,
-      EdgeInsetsGeometry? margin}) {
+  _action({required VoidCallback onPressed, required IconData icon, EdgeInsetsGeometry? margin}) {
     return Container(
         margin: margin,
         alignment: Alignment.center,
@@ -66,12 +63,9 @@ class ProductDetailsView extends GetView<ProductDetailsController> {
         controller: controller.scrollController,
         child: Column(children: [
           ProductDetailsGoodsView(key: controller.tannerTitles[0]['contentKey']),
-          ProductDetailsEvaluateView(
-              key: controller.tannerTitles[1]['contentKey']),
-          ProductDetailsMoreView(_moreTar(),
-              key: controller.tannerTitles[2]['contentKey']),
-          ProductDetailsRecommendedView(
-              key: controller.tannerTitles[3]['contentKey']),
+          ProductDetailsEvaluateView(key: controller.tannerTitles[1]['contentKey']),
+          ProductDetailsMoreView(_moreTar(), key: controller.tannerTitles[2]['contentKey']),
+          ProductDetailsRecommendedView(key: controller.tannerTitles[3]['contentKey'])
         ]));
   }
 
@@ -115,7 +109,7 @@ class ProductDetailsView extends GetView<ProductDetailsController> {
                                         ? Colors.red.withOpacity(
                                             controller.appBarOpacity.value)
                                         : Colors.transparent)
-                              ],
+                              ]
                             )))
                         .toList()),
                 centerTitle: true,

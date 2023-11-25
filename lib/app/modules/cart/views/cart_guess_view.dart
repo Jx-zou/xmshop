@@ -26,7 +26,9 @@ class CartGuessView extends GetView<CartGuessController> {
             ),
             itemCount: state?.length,
             itemBuilder: (context, index) => TileCard(
-              onTap: RouteUtils.toGoodsDetails("id", state?[index].id),
+                onTap: () {
+                  RouteUtils.toGoodsDetails("id", state?[index].id);
+                },
                 padding: EdgeInsets.all(ScreenAdapter.width(30)),
                 backgroundColor: Colors.white,
                 image: Image.network(

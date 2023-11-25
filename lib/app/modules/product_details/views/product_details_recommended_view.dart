@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../utils/route_utils.dart';
 import '../controllers/product_details_recommended_controller.dart';
 import '../../../common/views/widgets/tile_card.dart';
 import '../../../utils/https_client.dart';
@@ -32,6 +33,9 @@ class ProductDetailsRecommendedView
           ),
           itemCount: state?.length,
           itemBuilder: (context, index) => TileCard(
+              onTap: () {
+                RouteUtils.toGoodsDetails("id", state?[index].id);
+              },
               padding: EdgeInsets.all(ScreenAdapter.width(30)),
               backgroundColor: Colors.white,
               image: Image.network(

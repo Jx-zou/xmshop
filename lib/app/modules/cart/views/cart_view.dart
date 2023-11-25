@@ -15,35 +15,34 @@ class CartView extends GetView<CartController> {
 
   Widget _store({required String title, Widget? trailing}) {
     Widget mTrailing = trailing ?? Container();
-    return Column(
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Row(
-              children: [
-                IconCheckBox(
-                  value: true,
-                  onChanged: (value) {},
-                  fillColor: Colors.deepOrange,
-                  activeColor: Colors.white,
-                  size: 18.0,
-                  iconSize: 12.0,
-                  icon: XmshopIcons.checked,
-                ),
-                Container(
-                  margin: EdgeInsets.only(left: ScreenAdapter.width(20)),
-                  child: Text(title,
-                      style: TextStyle(
-                          fontSize: ScreenAdapter.fontSize(42),
-                          fontWeight: FontWeight.bold)),
-                )
-              ],
-            ),
-            mTrailing
-          ],
-        ),
-        Container(
+    return Column(children: [
+      Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Row(
+            children: [
+              IconCheckBox(
+                value: true,
+                onChanged: (value) {},
+                fillColor: Colors.deepOrange,
+                activeColor: Colors.white,
+                size: 18.0,
+                iconSize: 12.0,
+                icon: XmshopIcons.checked,
+              ),
+              Container(
+                margin: EdgeInsets.only(left: ScreenAdapter.width(20)),
+                child: Text(title,
+                    style: TextStyle(
+                        fontSize: ScreenAdapter.fontSize(42),
+                        fontWeight: FontWeight.bold)),
+              )
+            ],
+          ),
+          mTrailing
+        ],
+      ),
+      Container(
           margin: EdgeInsets.only(top: ScreenAdapter.height(80)),
           child: IconCheckBoxListTile(
               value: true,
@@ -73,11 +72,12 @@ class CartView extends GetView<CartController> {
               subTitle: Row(mainAxisSize: MainAxisSize.min, children: [
                 RoundRectButton(
                     color: Colors.black.withOpacity(0.02),
-                    padding: EdgeInsets.symmetric(
-                        vertical: ScreenAdapter.width(10),
-                        horizontal: ScreenAdapter.width(15)),
-                    borderRadius:
-                        BorderRadius.circular(ScreenAdapter.fontSize(20)),
+                    padding: EdgeInsets.fromLTRB(
+                        ScreenAdapter.width(15),
+                        ScreenAdapter.width(10),
+                        ScreenAdapter.width(15),
+                        ScreenAdapter.width(10)),
+                    borderRadius: BorderRadius.circular(ScreenAdapter.fontSize(20)),
                     onPressed: () {},
                     child: Row(mainAxisSize: MainAxisSize.min, children: [
                       Text("黑色",
@@ -91,26 +91,27 @@ class CartView extends GetView<CartController> {
                     ]))
               ]),
               secondary: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
-                    Text("￥",
-                        style: TextStyle(
-                            fontSize: ScreenAdapter.fontSize(36),
-                            fontWeight: FontWeight.bold,
-                            color: Colors.deepOrange)),
-                    NumView(89.99,
-                        height: ScreenAdapter.height(68),
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        intStyle: TextStyle(
-                            fontSize: ScreenAdapter.fontSize(58),
-                            color: Colors.deepOrange),
-                        fractionStyle: TextStyle(
-                            fontSize: ScreenAdapter.fontSize(32),
-                            color: Colors.deepOrange))
-                  ]),
-                  Row(
-                    children: [
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Text("￥",
+                              style: TextStyle(
+                                  fontSize: ScreenAdapter.fontSize(36),
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.deepOrange)),
+                          NumView(89.99,
+                              height: ScreenAdapter.height(68),
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              intStyle: TextStyle(
+                                  fontSize: ScreenAdapter.fontSize(58),
+                                  color: Colors.deepOrange),
+                              fractionStyle: TextStyle(
+                                  fontSize: ScreenAdapter.fontSize(32),
+                                  color: Colors.deepOrange))
+                        ]),
+                    Row(children: [
                       RoundRectButton(
                           width: ScreenAdapter.width(80),
                           height: ScreenAdapter.width(70),
@@ -122,14 +123,14 @@ class CartView extends GetView<CartController> {
                               size: ScreenAdapter.width(20)),
                           onPressed: () {}),
                       Container(
-                        width: ScreenAdapter.width(80),
-                        height: ScreenAdapter.width(70),
-                        alignment: Alignment.center,
-                        decoration: const BoxDecoration(
-                            border: Border.symmetric(
-                                horizontal: BorderSide(color: Colors.black12))),
-                        child: Text("2"),
-                      ),
+                          width: ScreenAdapter.width(80),
+                          height: ScreenAdapter.width(70),
+                          alignment: Alignment.center,
+                          decoration: const BoxDecoration(
+                              border: Border.symmetric(
+                                  horizontal:
+                                      BorderSide(color: Colors.black12))),
+                          child: const Text("2")),
                       RoundRectButton(
                           width: ScreenAdapter.width(80),
                           height: ScreenAdapter.width(70),
@@ -140,13 +141,9 @@ class CartView extends GetView<CartController> {
                           child: Icon(XmshopIcons.subtract,
                               size: ScreenAdapter.width(20)),
                           onPressed: () {})
-                    ],
-                  )
-                ],
-              )),
-        )
-      ],
-    );
+                    ])
+                  ])))
+    ]);
   }
 
   Widget _guessBar() => Row(

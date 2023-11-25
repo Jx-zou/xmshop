@@ -23,14 +23,22 @@ class HomeBestGoodsListView extends GetView<HomeBestGoodsListController> {
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
             itemBuilder: (context, index) => TileCard(
-              onTap: RouteUtils.toGoodsDetails("id", state[index].id),
+                onTap: () {
+                  RouteUtils.toGoodsDetails("id", state[index].id);
+                },
                 backgroundColor: Colors.white,
                 image: Image.network(
-                    HttpsClient.picReplaceUrl("${state[index].pic}"), fit: BoxFit.fitHeight,),
+                  HttpsClient.picReplaceUrl("${state[index].pic}"),
+                  fit: BoxFit.fitHeight,
+                ),
                 title: "${state[index].title}",
-                titleStyle: TextStyle(fontSize: ScreenAdapter.fontSize(42), fontWeight: FontWeight.w600),
+                titleStyle: TextStyle(
+                    fontSize: ScreenAdapter.fontSize(42),
+                    fontWeight: FontWeight.w600),
                 subTitle: "${state[index].subTitle}",
-                subTitleStyle: TextStyle(fontSize: ScreenAdapter.fontSize(28), overflow: TextOverflow.ellipsis),
+                subTitleStyle: TextStyle(
+                    fontSize: ScreenAdapter.fontSize(28),
+                    overflow: TextOverflow.ellipsis),
                 trailing: Text("￥${state[index].price}",
                     style: TextStyle(fontSize: ScreenAdapter.fontSize(42))))),
         onLoading: const Loading(),

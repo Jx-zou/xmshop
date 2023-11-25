@@ -65,14 +65,10 @@ class CloseBottomSheet extends StatelessWidget {
                           alignment: Alignment.center,
                           padding: MaterialStateProperty.all(closePadding),
                           minimumSize: MaterialStateProperty.all(Size.zero),
-                          backgroundColor:
-                              MaterialStateProperty.all(closeBackgroundColor),
-                          foregroundColor:
-                              MaterialStateProperty.all(closeForegroundColor),
+                          backgroundColor: MaterialStateProperty.all(closeBackgroundColor),
+                          foregroundColor: MaterialStateProperty.all(closeForegroundColor),
                           elevation: MaterialStateProperty.all(0),
-                          shape: MaterialStateProperty.all(
-                              RoundedRectangleBorder(
-                                  borderRadius: closeBorderRadius))),
+                          shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: closeBorderRadius))),
                       child: icon)),
             )
           ],
