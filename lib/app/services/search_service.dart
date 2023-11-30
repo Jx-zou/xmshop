@@ -1,12 +1,9 @@
-
 import 'package:get/get.dart';
 
 import 'storage_service.dart';
 
 class SearchService extends GetxService{
-
   static const String searchHistoryKey = "searchHistory";
-
   final StorageService storageService = Get.find<StorageService>();
 
   void setHistory(keywords) async {
@@ -34,6 +31,7 @@ class SearchService extends GetxService{
   deleteHistory(keywords) async {
     List<String>? searchHistory = await storageService.get(searchHistoryKey);
     if (searchHistory != null && searchHistory.isNotEmpty && searchHistory.contains(keywords)) {
+      searchHistory.remove(keywords);
       storageService.remove(searchHistoryKey);
       await storageService.set(searchHistoryKey, searchHistory);
     }

@@ -7,8 +7,8 @@ class StorageService extends GetxService {
 
   late final SharedPreferences _prefs;
 
-  set(String key, dynamic value) async {
-    _prefs.setString(key, json.encode(value));
+  Future<bool> set(String key, dynamic value) async {
+    return _prefs.setString(key, json.encode(value));
   }
 
   get(String key) async {
@@ -23,12 +23,12 @@ class StorageService extends GetxService {
     }
   }
 
-  remove(String key) async {
-    _prefs.remove(key);
+  Future<bool> remove(String key) async {
+    return _prefs.remove(key);
   }
 
-  clear() async {
-    _prefs.clear();
+  Future<bool> clear() async {
+    return _prefs.clear();
   }
 
   init() async {

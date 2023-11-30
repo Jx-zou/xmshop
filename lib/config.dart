@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class Global {
+class Config {
+  Config._();
+
   static const String appTitle = "XmShop";
   static const String serverApi = "https://xiaomi.itying.com/api";
   static const String server = "https://xiaomi.itying.com/";

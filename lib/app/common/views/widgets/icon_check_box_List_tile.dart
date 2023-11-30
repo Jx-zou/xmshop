@@ -19,6 +19,7 @@ class IconCheckBoxListTile extends StatelessWidget {
   final Widget? subTitle;
   final Widget? secondary;
   final CrossAxisAlignment titleCrossAxisAlignment;
+  final VoidCallback? onTap;
 
   const IconCheckBoxListTile(
       {super.key,
@@ -37,7 +38,8 @@ class IconCheckBoxListTile extends StatelessWidget {
       this.title,
       this.subTitle,
       this.secondary,
-      this.titleCrossAxisAlignment = CrossAxisAlignment.center});
+      this.titleCrossAxisAlignment = CrossAxisAlignment.center,
+      this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -61,17 +63,22 @@ class IconCheckBoxListTile extends StatelessWidget {
         margin: EdgeInsets.only(right: mainSpacing),
       ),
       Expanded(
-          child: Row(children: [
-        leading,
-        SizedBox(width: mainSpacing),
-        Expanded(child: Column(crossAxisAlignment: titleCrossAxisAlignment, children: [
-          title,
-          SizedBox(height: crossSpacing),
-          subTitle,
-          SizedBox(height: crossSpacing),
-          secondary
-        ]))
-      ]))
+          child: InkWell(
+              onTap: onTap,
+              child: Row(children: [
+                leading,
+                SizedBox(width: mainSpacing),
+                Expanded(
+                    child: Column(
+                        crossAxisAlignment: titleCrossAxisAlignment,
+                        children: [
+                      title,
+                      SizedBox(height: crossSpacing),
+                      subTitle,
+                      SizedBox(height: crossSpacing),
+                      secondary
+                    ]))
+              ])))
     ]);
   }
 }

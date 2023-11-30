@@ -1,13 +1,13 @@
 import 'package:get/get.dart';
 
-import '../../../global.dart';
+import '../../../config.dart';
 
 abstract class BaseProvider extends GetConnect {
 
   @override
   void onInit() {
     //请求前缀
-    httpClient.baseUrl = Global.serverApi;
+    httpClient.baseUrl = Config.serverApi;
 
     //request监听
     httpClient.addResponseModifier((request, response) {

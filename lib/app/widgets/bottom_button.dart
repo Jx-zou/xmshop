@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../common/views/widgets/round_rect_button.dart';
-import '../../../utils/screen_adapter.dart';
+import '../common/views/widgets/round_rect_button.dart';
+import '../utils/screen_adapter.dart';
 
 class BottomButton extends StatelessWidget {
   final String? title;

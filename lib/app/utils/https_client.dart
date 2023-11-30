@@ -1,8 +1,8 @@
-import 'package:xmshop/global.dart';
+import 'package:xmshop/config.dart';
 
 class HttpsClient {
 
   static String picReplaceUrl(String url) {
-    return "${Global.server}$url".replaceAll("\\", "/");
+    return "${Config.server}$url".replaceAll("\\", "/");
   }
 }

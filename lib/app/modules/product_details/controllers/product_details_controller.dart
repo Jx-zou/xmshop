@@ -2,22 +2,21 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:xmshop/app/utils/toast_utils.dart';
 
 import '../../../common/controllers/base_controller.dart';
 import '../../../data/goods_details_provider.dart';
 import '../../../models/goods_details_model.dart';
 import '../../../common/icons/xmshop_icons.dart';
+import '../../../services/cart_service.dart';
 import '../../../utils/screen_adapter.dart';
 
-class ProductDetailsController extends BaseController
-    with StateMixin<GoodsDetailsModel> {
+class ProductDetailsController extends BaseController with StateMixin<GoodsDetailsModel> {
   final IGoodsDetailsProvider provider;
-
   ProductDetailsController({required this.provider});
-
   Map<String, String> query = {};
-
   final ScrollController scrollController = ScrollController();
+  final CartService cartService = Get.find<CartService>();
 
   final List<Map<String, dynamic>> tannerTitles = [
     {"id": 1, "contentKey": "", "title": "商品", "anchor_point": 0.0},
@@ -38,16 +37,31 @@ class ProductDetailsController extends BaseController
     "https://img1.mydrivers.com/img/20220927/d35930cd-b2d6-4a59-a11d-1ecc4c163c47_1000.jpg"
   ];
 
+  final RxString selectedAttr = "".obs;
+  final RxInt shopNum = 1.obs;
   final RxDouble appBarOpacity = 0.0.obs;
   final Rx<Color> actionColor = Colors.white.obs;
   final RxInt selectedId = 1.obs;
-  final RxInt shopNum = 1.obs;
-  final RxMap<String, List<String?>> selectedAttr =
-      {'cate': <String>[], 'selected': <String>[]}.obs;
   final RxBool showMoreTar = false.obs;
   final RxInt moreSelected = 1.obs;
   int loadTime = 10;
   late Timer timer;
+
+  void buy() {
+    Get.back();
+  }
+
+  void addCart() async {
+    bool flag = await cartService.setGoodsDetails(state!, selectedAttr.value, shopNum.value);
+    ToastUtils.centerToast(flag ? "收藏成功." : "收藏失败.");
+    Get.back();
+  }
+
+  updateAttrs(String selectedAttr, int shopNum) {
+    this.selectedAttr.value = selectedAttr;
+    this.shopNum.value = shopNum;
+    update();
+  }
 
   void changeMoreSelected(int selected) {
     if (selected != moreSelected.value) {
@@ -58,27 +72,6 @@ class ProductDetailsController extends BaseController
     update();
   }
 
-  void changeAttrSelected(cate, title) {
-    for (int i = 0; i < selectedAttr['cate']!.length; i++) {
-      if (selectedAttr['cate']?[i] == cate) {
-        selectedAttr['selected']?[i] = title;
-      }
-    }
-    update();
-  }
-
-  void shopNumAdd() {
-    shopNum.value++;
-    update();
-  }
-
-  void shopNumSubtract() {
-    if (shopNum.value > 1) {
-      shopNum.value--;
-      update();
-    }
-  }
-
   void _changeSelectedId(int id) {
     selectedId.value = id;
     update();
@@ -86,8 +79,7 @@ class ProductDetailsController extends BaseController
 
   void onTarTitlePressed(int id) {
     scrollController.animateTo(
-        tannerTitles[id - 1]['anchor_point'] +
-            ScreenAdapter.height(id == 4 ? 110 : 10),
+        tannerTitles[id - 1]['anchor_point'] + ScreenAdapter.height(id == 4 ? 110 : 10),
         duration: const Duration(milliseconds: 1000),
         curve: Curves.easeIn);
   }
@@ -175,18 +167,7 @@ class ProductDetailsController extends BaseController
       return;
     }
     change(response.body, status: RxStatus.success());
-    _initAttrSelected(state);
-  }
-
-  void _initAttrSelected(GoodsDetailsModel? goodsDetailsModel) {
-    List<GoodsDetailsAttrModel>? attrs = goodsDetailsModel!.attr;
-    if (attrs != null) {
-      for (int i = 0; i < attrs.length; i++) {
-        selectedAttr['cate']?.add(attrs[i].cate);
-        selectedAttr['selected']?.add(attrs[i].list?[0]);
-      }
-    }
-    update();
+    _initAttrSelected();
   }
 
   void _initTimer() {
@@ -200,6 +181,17 @@ class ProductDetailsController extends BaseController
       }
       loadTime--;
     });
+  }
+
+  void _initAttrSelected() {
+    if (state != null) {
+      List<GoodsDetailsAttrModel>? attrs = state?.attr;
+      if (attrs != null) {
+        for (int i = 0; i < attrs.length; i++) {
+          selectedAttr.value += "${attrs[i].list![0]}  ";
+        }
+      }
+    }
   }
 
   void _initGlobalKey() {

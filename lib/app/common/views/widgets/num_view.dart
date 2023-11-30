@@ -4,7 +4,7 @@ class NumView extends StatelessWidget {
   final double? width;
   final double? height;
 
-  final double num;
+  final double? num;
   final TextStyle? intStyle;
   final TextStyle? fractionStyle;
   final MainAxisAlignment mainAxisAlignment;

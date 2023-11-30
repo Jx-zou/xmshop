@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_swiper_view/flutter_swiper_view.dart';
 import 'package:get/get.dart';
+
+import 'package:flutter_swiper_view/flutter_swiper_view.dart';
 
 import '../controllers/product_details_controller.dart';
 import '../../../common/views/pagination/rect_fraction_pagination_builder.dart';
-import '../../../common/views/widgets/close_bottom_sheet.dart';
 import '../../../common/icons/xmshop_icons.dart';
 import '../../../common/views/loading.dart';
 import '../../../common/views/widgets/text_tile.dart';
 import '../../../utils/screen_adapter.dart';
 import '../../../utils/https_client.dart';
-import '../widgets/bottom_button.dart';
-import '../widgets/selected_bottom_sheet.dart';
+import '../../../utils/bottom_sheet_utils.dart';
+import '../../../widgets/bottom_button.dart';
 
 class ProductDetailsGoodsView extends GetView<ProductDetailsController> {
   const ProductDetailsGoodsView({super.key});
@@ -19,7 +19,7 @@ class ProductDetailsGoodsView extends GetView<ProductDetailsController> {
   Widget _textTile(
           {required String leading,
           required Widget title,
-          required Widget bottomSheet}) =>
+          required VoidCallback onTap}) =>
       TextTile(
           leading: leading,
           title: title,
@@ -28,19 +28,7 @@ class ProductDetailsGoodsView extends GetView<ProductDetailsController> {
           leadingSize: ScreenAdapter.fontSize(32),
           leadingColor: Colors.black26,
           padding: EdgeInsets.only(bottom: ScreenAdapter.height(30)),
-          onTap: () {
-            Get.bottomSheet(
-                CloseBottomSheet(
-                    width: ScreenAdapter.width(1080),
-                    height: ScreenAdapter.height(1680),
-                    icon: Icon(XmshopIcons.close,
-                        size: ScreenAdapter.fontSize(20),
-                        color: Colors.black87),
-                    closed: () => Get.back(),
-                    child: bottomSheet),
-                isScrollControlled: true,
-                elevation: 0);
-          });
+          onTap: onTap);
 
   Widget _module({required Widget widget}) => Container(
       width: ScreenAdapter.width(1080),
@@ -136,40 +124,47 @@ class ProductDetailsGoodsView extends GetView<ProductDetailsController> {
                   widget: Column(children: [
                 _textTile(
                     leading: "已选",
-                    title: SizedBox(
-                        child: Text(
-                            "${state?.title}  ${controller.selectedAttr['selected']!.join('  ')}  X${controller.shopNum}",
-                            style: TextStyle(
-                                fontSize: ScreenAdapter.fontSize(32),
-                                color: Colors.black87))),
-                    bottomSheet: SelectedBottomSheet(
-                        bottom: Padding(
-                      padding: EdgeInsets.symmetric(
-                          vertical: ScreenAdapter.width(20),
-                          horizontal: ScreenAdapter.width(30)),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Expanded(
-                              child: BottomButton(
-                                  onPressed: () {},
-                                  colors: [
-                                    Colors.orange.withOpacity(0.5),
-                                    Colors.orange
-                                  ],
-                                  title: "加入购物车")),
-                          SizedBox(width: ScreenAdapter.width(50)),
-                          Expanded(
-                              child: BottomButton(
-                                  onPressed: () {},
-                                  colors: [
-                                    Colors.deepOrange.withOpacity(0.5),
-                                    Colors.redAccent
-                                  ],
-                                  title: "立即购买")),
-                        ],
-                      ),
-                    ))),
+                    title: Text(
+                        "${state?.title}  ${controller.selectedAttr}  X${controller.shopNum}",
+                        style: TextStyle(
+                            fontSize: ScreenAdapter.fontSize(32),
+                            color: Colors.black87)),
+                    onTap: () {
+                      BottomSheetUtils.goodsSelectedBottomSheet(
+                          bottom: Padding(
+                            padding: EdgeInsets.symmetric(
+                                vertical: ScreenAdapter.width(20),
+                                horizontal: ScreenAdapter.width(30)),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Expanded(
+                                    child: BottomButton(
+                                        onPressed: () {
+                                          controller.addCart();
+                                        },
+                                        colors: [
+                                          Colors.orange.withOpacity(0.5),
+                                          Colors.orange
+                                        ],
+                                        title: "加入购物车")),
+                                SizedBox(width: ScreenAdapter.width(50)),
+                                Expanded(
+                                    child: BottomButton(
+                                        onPressed: () {
+                                          controller.buy();
+                                        },
+                                        colors: [
+                                          Colors.deepOrange.withOpacity(0.5),
+                                          Colors.redAccent
+                                        ],
+                                        title: "立即购买")),
+                              ],
+                            ),
+                          ),
+                          close: (selectedAttr, shopNum) =>
+                              controller.updateAttrs(selectedAttr, shopNum));
+                    }),
                 _textTile(
                     leading: "配送",
                     title: SizedBox(
@@ -197,14 +192,18 @@ class ProductDetailsGoodsView extends GetView<ProductDetailsController> {
                                     color: Colors.black87))
                           ])
                         ])),
-                    bottomSheet: Container()),
+                    onTap: () {
+                      BottomSheetUtils.closeBottomSheet();
+                    }),
                 _textTile(
                     leading: "门店",
                     title: Text("定位失败，重新定位",
                         style: TextStyle(
                             fontSize: ScreenAdapter.fontSize(32),
                             color: Colors.black87)),
-                    bottomSheet: Container()),
+                    onTap: () {
+                      BottomSheetUtils.closeBottomSheet();
+                    }),
                 _textTile(
                     leading: "服务",
                     title: Wrap(
@@ -215,7 +214,9 @@ class ProductDetailsGoodsView extends GetView<ProductDetailsController> {
                         _serviceTag(title: "7天无理由退货（到店自取拆封后不支持）"),
                       ],
                     ),
-                    bottomSheet: Container())
+                    onTap: () {
+                      BottomSheetUtils.closeBottomSheet();
+                    })
               ])),
               SizedBox(height: ScreenAdapter.width(30))
             ]),

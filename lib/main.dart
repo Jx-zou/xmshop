@@ -1,15 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:xmshop/handler.dart';
 
-import 'global.dart';
 import 'app/routes/app_pages.dart';
+
+import 'app/services/cart_service.dart';
 import 'app/services/search_service.dart';
 import 'app/services/storage_service.dart';
+
+import 'config.dart';
 
 void initService() {
   Get.lazyPut(() => StorageService());
   Get.lazyPut(() => SearchService());
+  Get.lazyPut(() => CartService());
 }
 
 void run() {
@@ -18,18 +23,20 @@ void run() {
     minTextAdapt: true,
     splitScreenMode: true,
     builder: (context, child) => GetMaterialApp(
-      title: Global.appTitle,
+      title: Config.appTitle,
       initialRoute: AppPages.INITIAL,
       getPages: AppPages.routes,
       debugShowCheckedModeBanner: false,
-      theme: Global.themeData,
+      theme: Config.themeData,
       defaultTransition: Transition.rightToLeft,
     ),
   ));
 }
 
 void main() {
-  initService();
-  run();
+  ExceptionHandler(() {
+    initService();
+    run();
+  });
 }
 

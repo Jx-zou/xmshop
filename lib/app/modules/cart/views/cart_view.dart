@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../controllers/cart_controller.dart';
+import '../../../models/cart_model.dart';
+import '../../../utils/bottom_sheet_utils.dart';
+import '../../../utils/https_client.dart';
 import '../../../common/views/widgets/icon_check_box_List_tile.dart';
 import '../../../common/views/widgets/num_view.dart';
 import '../../../common/views/widgets/round_rect_button.dart';
-import '../controllers/cart_controller.dart';
 import '../../../common/icons/xmshop_icons.dart';
 import '../../../common/views/widgets/icon_check_box.dart';
 import '../../../utils/screen_adapter.dart';
@@ -13,7 +16,122 @@ import 'cart_guess_view.dart';
 class CartView extends GetView<CartController> {
   const CartView({super.key});
 
-  Widget _store({required String title, Widget? trailing}) {
+  bool isAll(List<CartItemModel>? cartItemModels) {
+    if (cartItemModels != null) {
+      for (CartItemModel value in cartItemModels) {
+        if (!value.checked) {
+          return false;
+        }
+      }
+      return true;
+    }
+    return false;
+  }
+
+  Widget _storeItem({required CartItemModel cartItemModel}) {
+    return Container(
+        margin: EdgeInsets.only(top: ScreenAdapter.height(80)),
+        child: IconCheckBoxListTile(
+            value: true,
+            fillColor: Colors.deepOrange,
+            icon: XmshopIcons.checked,
+            titleCrossAxisAlignment: CrossAxisAlignment.start,
+            onChanged: (isChecked) {},
+            onTap: () {
+              Get.toNamed("/product-details", parameters: {
+                "requestKey": "id", "requestValue": "${cartItemModel.id}"
+              });
+            },
+            leading: Container(
+              width: ScreenAdapter.width(300),
+              height: ScreenAdapter.width(300),
+              decoration: BoxDecoration(
+                color: Colors.black.withOpacity(0.02),
+                borderRadius: BorderRadius.circular(ScreenAdapter.fontSize(30)),
+                image: DecorationImage(image: NetworkImage(HttpsClient.picReplaceUrl("${cartItemModel.pic}")), fit: BoxFit.fitHeight)
+              )
+            ),
+            title: Text("${cartItemModel.title}",
+                  style: TextStyle(
+                      fontSize: ScreenAdapter.fontSize(48),
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black54)
+            ),
+            subTitle: Row(mainAxisSize: MainAxisSize.min, children: [
+              RoundRectButton(
+                  color: Colors.black.withOpacity(0.02),
+                  padding: EdgeInsets.fromLTRB(
+                      ScreenAdapter.width(15),
+                      ScreenAdapter.width(10),
+                      ScreenAdapter.width(15),
+                      ScreenAdapter.width(10)),
+                  borderRadius: BorderRadius.circular(ScreenAdapter.fontSize(20)),
+                  onPressed: () {
+                    BottomSheetUtils.goodsSelectedBottomSheet(
+                        showNumWidget: false, onPressed: () {});
+                  },
+                  child: Row(mainAxisSize: MainAxisSize.min, children: [
+                    Text("${cartItemModel.selectedAttr}",
+                        style: TextStyle(
+                            fontSize: ScreenAdapter.fontSize(32),
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black54)),
+                    SizedBox(width: ScreenAdapter.width(10)),
+                    Icon(Icons.keyboard_arrow_down_outlined,
+                        size: ScreenAdapter.fontSize(32))
+                  ]))
+            ]),
+            secondary: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text("￥",
+                            style: TextStyle(
+                                fontSize: ScreenAdapter.fontSize(36),
+                                fontWeight: FontWeight.bold,
+                                color: Colors.deepOrange)),
+                        NumView(cartItemModel.price,
+                            height: ScreenAdapter.height(68),
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            intStyle: TextStyle(
+                                fontSize: ScreenAdapter.fontSize(58),
+                                color: Colors.deepOrange),
+                            fractionStyle: TextStyle(
+                                fontSize: ScreenAdapter.fontSize(32),
+                                color: Colors.deepOrange))
+                      ]),
+                  Row(children: [
+                    RoundRectButton(
+                        width: ScreenAdapter.width(80),
+                        height: ScreenAdapter.width(70),
+                        border: Border.all(color: Colors.black12),
+                        borderRadius: BorderRadius.horizontal(left: Radius.circular(ScreenAdapter.fontSize(32))),
+                        child: Icon(XmshopIcons.add, size: ScreenAdapter.width(20)),
+                        onPressed: () {
+                          controller.addShopNum(cartItemModel.id, cartItemModel.selectedAttr);
+                        }),
+                    Container(
+                        width: ScreenAdapter.width(80),
+                        height: ScreenAdapter.width(70),
+                        alignment: Alignment.center,
+                        decoration: const BoxDecoration(border: Border.symmetric(horizontal: BorderSide(color: Colors.black12))),
+                        child: Text("${cartItemModel.count}")),
+                    RoundRectButton(
+                        width: ScreenAdapter.width(80),
+                        height: ScreenAdapter.width(70),
+                        border: Border.all(color: Colors.black12),
+                        borderRadius: BorderRadius.horizontal(right: Radius.circular(ScreenAdapter.fontSize(32))),
+                        child: Icon(XmshopIcons.subtract, size: ScreenAdapter.width(20), color: cartItemModel.count > 1 ? Colors.black87 : Colors.black12),
+                        onPressed: () {
+                          controller.reduceShopNum(cartItemModel.id, cartItemModel.selectedAttr, cartItemModel.count);
+                        })
+                  ])
+                ])));
+  }
+
+  Widget _store({required String title, Widget? trailing, required List<CartItemModel> cartItemModels}) {
     Widget mTrailing = trailing ?? Container();
     return Column(children: [
       Row(
@@ -22,7 +140,7 @@ class CartView extends GetView<CartController> {
           Row(
             children: [
               IconCheckBox(
-                value: true,
+                value: isAll(cartItemModels),
                 onChanged: (value) {},
                 fillColor: Colors.deepOrange,
                 activeColor: Colors.white,
@@ -42,107 +160,7 @@ class CartView extends GetView<CartController> {
           mTrailing
         ],
       ),
-      Container(
-          margin: EdgeInsets.only(top: ScreenAdapter.height(80)),
-          child: IconCheckBoxListTile(
-              value: true,
-              fillColor: Colors.deepOrange,
-              icon: XmshopIcons.checked,
-              titleCrossAxisAlignment: CrossAxisAlignment.start,
-              onChanged: (isChecked) {},
-              leading: RoundRectButton(
-                width: ScreenAdapter.width(300),
-                height: ScreenAdapter.width(300),
-                onPressed: () {},
-                color: Colors.black.withOpacity(0.02),
-                borderRadius: BorderRadius.circular(ScreenAdapter.fontSize(30)),
-                child: Image.asset(
-                  "assets/images/404mix.jpg",
-                  fit: BoxFit.fitHeight,
-                ),
-              ),
-              title: InkWell(
-                onTap: () {},
-                child: Text("小米啥啥啥",
-                    style: TextStyle(
-                        fontSize: ScreenAdapter.fontSize(48),
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black54)),
-              ),
-              subTitle: Row(mainAxisSize: MainAxisSize.min, children: [
-                RoundRectButton(
-                    color: Colors.black.withOpacity(0.02),
-                    padding: EdgeInsets.fromLTRB(
-                        ScreenAdapter.width(15),
-                        ScreenAdapter.width(10),
-                        ScreenAdapter.width(15),
-                        ScreenAdapter.width(10)),
-                    borderRadius: BorderRadius.circular(ScreenAdapter.fontSize(20)),
-                    onPressed: () {},
-                    child: Row(mainAxisSize: MainAxisSize.min, children: [
-                      Text("黑色",
-                          style: TextStyle(
-                              fontSize: ScreenAdapter.fontSize(32),
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black54)),
-                      SizedBox(width: ScreenAdapter.width(10)),
-                      Icon(Icons.keyboard_arrow_down_outlined,
-                          size: ScreenAdapter.fontSize(32))
-                    ]))
-              ]),
-              secondary: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Text("￥",
-                              style: TextStyle(
-                                  fontSize: ScreenAdapter.fontSize(36),
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.deepOrange)),
-                          NumView(89.99,
-                              height: ScreenAdapter.height(68),
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              intStyle: TextStyle(
-                                  fontSize: ScreenAdapter.fontSize(58),
-                                  color: Colors.deepOrange),
-                              fractionStyle: TextStyle(
-                                  fontSize: ScreenAdapter.fontSize(32),
-                                  color: Colors.deepOrange))
-                        ]),
-                    Row(children: [
-                      RoundRectButton(
-                          width: ScreenAdapter.width(80),
-                          height: ScreenAdapter.width(70),
-                          border: Border.all(color: Colors.black12),
-                          borderRadius: BorderRadius.horizontal(
-                              left:
-                                  Radius.circular(ScreenAdapter.fontSize(32))),
-                          child: Icon(XmshopIcons.add,
-                              size: ScreenAdapter.width(20)),
-                          onPressed: () {}),
-                      Container(
-                          width: ScreenAdapter.width(80),
-                          height: ScreenAdapter.width(70),
-                          alignment: Alignment.center,
-                          decoration: const BoxDecoration(
-                              border: Border.symmetric(
-                                  horizontal:
-                                      BorderSide(color: Colors.black12))),
-                          child: const Text("2")),
-                      RoundRectButton(
-                          width: ScreenAdapter.width(80),
-                          height: ScreenAdapter.width(70),
-                          border: Border.all(color: Colors.black12),
-                          borderRadius: BorderRadius.horizontal(
-                              right:
-                                  Radius.circular(ScreenAdapter.fontSize(32))),
-                          child: Icon(XmshopIcons.subtract,
-                              size: ScreenAdapter.width(20)),
-                          onPressed: () {})
-                    ])
-                  ])))
+      ...cartItemModels.map((v) => _storeItem(cartItemModel: v))
     ]);
   }
 
@@ -176,51 +194,47 @@ class CartView extends GetView<CartController> {
       );
 
   Widget _body() {
-    return ListView(
-      controller: controller.scrollController,
-      children: [
-        Container(
-          margin: EdgeInsets.all(ScreenAdapter.width(30)),
-          padding: EdgeInsets.all(ScreenAdapter.width(30)),
-          decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(ScreenAdapter.fontSize(40))),
-          child: Column(
-            children: [
-              _store(
-                  title: "小米自营",
-                  trailing: Row(
-                    children: [
-                      Icon(
-                        XmshopIcons.exclamationMark,
-                        color: Colors.black26,
-                        size: ScreenAdapter.fontSize(38),
-                      ),
-                      SizedBox(width: ScreenAdapter.width(10)),
-                      Text("已免运费",
-                          style: TextStyle(
-                              fontSize: ScreenAdapter.fontSize(32),
-                              color: Colors.black26,
-                              fontWeight: FontWeight.w600))
-                    ],
-                  ))
-            ],
-          ),
-        ),
-        Container(
-          margin: EdgeInsets.all(ScreenAdapter.width(30)),
-          padding: EdgeInsets.all(ScreenAdapter.width(30)),
-          decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(ScreenAdapter.fontSize(40))),
-          child: Column(
-            children: [_store(title: "失效分组")],
-          ),
-        ),
-        _guessBar(),
-        const CartGuessView()
-      ],
-    );
+    return controller.obx((state) => ListView(
+          controller: controller.scrollController,
+          children: [
+            state != null && state.normal!= null && state.normal!.isNotEmpty ? Container(
+                margin: EdgeInsets.all(ScreenAdapter.width(30)),
+                padding: EdgeInsets.all(ScreenAdapter.width(30)),
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius:
+                        BorderRadius.circular(ScreenAdapter.fontSize(40))),
+                child: Column(children: [
+                  _store(
+                      title: "小米自营",
+                      trailing: Row(children: [
+                        Icon(XmshopIcons.exclamationMark,
+                            color: Colors.black26,
+                            size: ScreenAdapter.fontSize(38)),
+                        SizedBox(width: ScreenAdapter.width(10)),
+                        Text("已免运费",
+                            style: TextStyle(
+                                fontSize: ScreenAdapter.fontSize(32),
+                                color: Colors.black26,
+                                fontWeight: FontWeight.w600))
+                      ]),
+                      cartItemModels: state.normal ?? [])
+                ])) : Container(),
+            state != null && state.expire!= null && state.expire!.isNotEmpty ? Container(
+              margin: EdgeInsets.all(ScreenAdapter.width(30)),
+              padding: EdgeInsets.all(ScreenAdapter.width(30)),
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius:
+                      BorderRadius.circular(ScreenAdapter.fontSize(40))),
+              child: Column(
+                children: [_store(title: "失效分组", cartItemModels: state.expire ?? [])],
+              ),
+            ) : Container(),
+            _guessBar(),
+            const CartGuessView()
+          ],
+        ));
   }
 
   Widget _bottom() {
