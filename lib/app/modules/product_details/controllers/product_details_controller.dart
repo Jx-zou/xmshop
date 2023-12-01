@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:xmshop/app/utils/toast_utils.dart';
 
 import '../../../common/controllers/base_controller.dart';
 import '../../../data/goods_details_provider.dart';
@@ -10,6 +9,7 @@ import '../../../models/goods_details_model.dart';
 import '../../../common/icons/xmshop_icons.dart';
 import '../../../services/cart_service.dart';
 import '../../../utils/screen_adapter.dart';
+import '../../../utils/toast_utils.dart';
 
 class ProductDetailsController extends BaseController with StateMixin<GoodsDetailsModel> {
   final IGoodsDetailsProvider provider;

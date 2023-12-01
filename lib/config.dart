@@ -9,7 +9,10 @@ class Config {
   static const String server = "https://xiaomi.itying.com/";
 
   static ThemeData themeData = ThemeData(
+    useMaterial3: true,
     fontFamily: "miFont",
+    splashColor: Colors.transparent,
+    highlightColor: Colors.transparent,
     appBarTheme: const AppBarTheme(
       elevation: 0,
       color: Colors.white,

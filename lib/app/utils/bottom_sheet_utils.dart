@@ -9,6 +9,8 @@ import '../widgets/selected_bottom_sheet.dart';
 import 'screen_adapter.dart';
 
 class BottomSheetUtils {
+  BottomSheetUtils._();
+
   static CloseBottomSheet _closeBottomSheet({Widget? child}) {
     return CloseBottomSheet(
         width: ScreenAdapter.width(1080),

@@ -8,6 +8,7 @@ import '../../../services/cart_service.dart';
 class CartController extends BaseController with StateMixin<CartModel> {
   final ScrollController scrollController = ScrollController();
   final CartService cartService = Get.find<CartService>();
+  final RxBool allSelected = false.obs;
 
   void addShopNum(String? id, String? selectedAttr) {
     if (id != null && selectedAttr != null) {
@@ -23,6 +24,40 @@ class CartController extends BaseController with StateMixin<CartModel> {
     }
   }
 
+  void changeAllSelected() {
+    if(state != null && state?.normal != null && state!.normal!.isNotEmpty) {
+      for(int i = 0; i < state!.normal!.length; i++) {
+        state!.normal?[i].checked = !allSelected.value;
+      }
+      allSelected.value = !allSelected.value;
+    }
+    update();
+  }
+
+  bool isAllSelected(List<CartItemModel>? cartItemModels) {
+    if (cartItemModels == null) {
+      return false;
+    }
+    for (CartItemModel value in cartItemModels) {
+      if (!value.checked) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  void _initAllSelected() {
+    if (state!.normal!.isNotEmpty) {
+      for (int i = 0; i < state!.normal!.length; i++) {
+        if (!state!.normal![i].checked) {
+          return;
+        }
+      }
+      allSelected.value = true;
+      update();
+    }
+  }
+
   @override
   void loadData() async {
     CartModel? cartModel = await cartService.get();
@@ -31,6 +66,7 @@ class CartController extends BaseController with StateMixin<CartModel> {
       return;
     }
     change(cartModel, status: RxStatus.success());
+    _initAllSelected();
   }
 
   @override

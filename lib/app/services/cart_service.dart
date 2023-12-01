@@ -24,7 +24,7 @@ class CartService extends GetxService {
 
   Future<bool> setGoodsDetails(GoodsDetailsModel? goodsDetailsModel, String? selectedAttr, int? shopNum) async {
     if (goodsDetailsModel != null && selectedAttr != null && shopNum != null) {
-      double price = goodsDetailsModel.price ?? 0;
+      num price = goodsDetailsModel.price ?? 0;
       return await set("${goodsDetailsModel.id}", "${goodsDetailsModel.title}", price, "${goodsDetailsModel.pic}", selectedAttr, shopNum);
     }
     return Future(() => false);
@@ -34,7 +34,7 @@ class CartService extends GetxService {
     return await storageService.set(cartKey, cartModel);
   }
 
-  Future<bool> set(String id, String title, double price, String pic, String selectedAttr, int shopNum) async {
+  Future<bool> set(String id, String title, num price, String pic, String selectedAttr, int shopNum) async {
     CartModel? cart = await storageService.get(cartKey);
     if (cart == null) {
       cart = CartModel(normal: [], expire: []);

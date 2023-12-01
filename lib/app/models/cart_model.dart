@@ -8,7 +8,7 @@ class CartModel {
 class CartItemModel {
   String? id;
   String? title;
-  double? price;
+  num? price;
   String? selectedAttr;
   int count;
   String? pic;

@@ -34,7 +34,7 @@ class _IconCheckBoxState extends State<IconCheckBox> {
   Widget build(BuildContext context) {
     IconData icon = widget.icon ?? Icons.task_alt;
     Color activeColor = widget.activeColor ?? Colors.white;
-    Color unActiveColor = widget.unActiveColor ?? Colors.black.withOpacity(0.05);
+    Color unActiveColor = widget.unActiveColor ?? Colors.transparent;
     Color fillColor = widget.fillColor ?? Colors.black.withOpacity(0.05);
     BoxShape shape = widget.shape ?? BoxShape.circle;
     double size = widget.size ?? 18.0;
@@ -54,7 +54,7 @@ class _IconCheckBoxState extends State<IconCheckBox> {
         decoration: BoxDecoration(
             shape: shape,
             border: Border.all(
-                color: widget.value ? unActiveColor : Colors.transparent),
+                color: widget.value ? Colors.black.withOpacity(0.05) : fillColor),
             color: fillColor),
         child: widget.value
             ? Icon(

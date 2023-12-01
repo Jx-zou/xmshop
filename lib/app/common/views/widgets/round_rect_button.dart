@@ -31,8 +31,6 @@ class RoundRectButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-        splashColor: Colors.transparent,
-        highlightColor: Colors.transparent,
         radius: 0,
         onTap: onPressed,
         child: Container(
