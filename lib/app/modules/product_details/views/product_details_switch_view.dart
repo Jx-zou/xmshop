@@ -8,20 +8,20 @@ import '../../../utils/bottom_sheet_utils.dart';
 import '../../../utils/screen_adapter.dart';
 import '../../../widgets/bottom_button.dart';
 import '../controllers/product_details_controller.dart';
+import 'product_details_swiper_view.dart';
 
 class ProductDetailsSwitchView extends GetView<ProductDetailsController> {
   const ProductDetailsSwitchView({super.key});
 
-
   Widget _textTile(
-      {required String leading,
-        required Widget title,
-        required VoidCallback onTap}) =>
+          {required String leading,
+          required Widget title,
+          required VoidCallback onTap}) =>
       TextTile(
           leading: leading,
           title: title,
           trailing:
-          Icon(XmshopIcons.arrowRight, size: ScreenAdapter.fontSize(30)),
+              Icon(XmshopIcons.arrowRight, size: ScreenAdapter.fontSize(30)),
           leadingSize: ScreenAdapter.fontSize(32),
           leadingColor: Colors.black26,
           padding: EdgeInsets.only(bottom: ScreenAdapter.height(30)),
@@ -49,12 +49,12 @@ class ProductDetailsSwitchView extends GetView<ProductDetailsController> {
 
   @override
   Widget build(BuildContext context) {
-    return controller.obx(
-            (state) => Column(children: [
-          _module(
-              widget: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
+    return controller.obx((state) => Column(children: [
+              const ProductDetailsSwiperView(),
+              _module(
+                  widget: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
                     Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -97,8 +97,8 @@ class ProductDetailsSwitchView extends GetView<ProductDetailsController> {
                                 color: Colors.black87,
                                 fontSize: ScreenAdapter.fontSize(34))))
                   ])),
-          _module(
-              widget: Column(children: [
+              _module(
+                  widget: Column(children: [
                 _textTile(
                     leading: "已选",
                     title: Text(
@@ -148,27 +148,27 @@ class ProductDetailsSwitchView extends GetView<ProductDetailsController> {
                         child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Row(children: [
-                                Icon(XmshopIcons.location,
-                                    size: ScreenAdapter.fontSize(30)),
-                                Text("北京市 海淀区",
-                                    style: TextStyle(
-                                        fontSize: ScreenAdapter.fontSize(32),
-                                        color: Colors.black38))
-                              ]),
-                              Row(children: [
-                                Text("有现货",
-                                    style: TextStyle(
-                                        fontSize: ScreenAdapter.fontSize(32),
-                                        color: Colors.red)),
-                                Icon(XmshopIcons.warningCircle,
-                                    size: ScreenAdapter.fontSize(30)),
-                                Text("今天20点前付款，预计1月8日送达",
-                                    style: TextStyle(
-                                        fontSize: ScreenAdapter.fontSize(32),
-                                        color: Colors.black87))
-                              ])
-                            ])),
+                          Row(children: [
+                            Icon(XmshopIcons.location,
+                                size: ScreenAdapter.fontSize(30)),
+                            Text("北京市 海淀区",
+                                style: TextStyle(
+                                    fontSize: ScreenAdapter.fontSize(32),
+                                    color: Colors.black38))
+                          ]),
+                          Row(children: [
+                            Text("有现货",
+                                style: TextStyle(
+                                    fontSize: ScreenAdapter.fontSize(32),
+                                    color: Colors.red)),
+                            Icon(XmshopIcons.warningCircle,
+                                size: ScreenAdapter.fontSize(30)),
+                            Text("今天20点前付款，预计1月8日送达",
+                                style: TextStyle(
+                                    fontSize: ScreenAdapter.fontSize(32),
+                                    color: Colors.black87))
+                          ])
+                        ])),
                     onTap: () {
                       BottomSheetUtils.closeBottomSheet();
                     }),
@@ -195,8 +195,8 @@ class ProductDetailsSwitchView extends GetView<ProductDetailsController> {
                       BottomSheetUtils.closeBottomSheet();
                     })
               ])),
-          SizedBox(height: ScreenAdapter.width(30))
-        ]),
+              SizedBox(height: ScreenAdapter.width(30))
+            ]),
         onLoading: const Loading(),
         onEmpty: Container(),
         onError: (error) => Container());
