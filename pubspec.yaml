@@ -29,7 +29,7 @@ flutter:
   fonts:
     - family: xmshopIcon
       fonts:
-        - asset: assets/fonts/iconfont.ttf
+        - asset: assets/fonts/icomoon.ttf
     - family: miFont
       fonts:
         - asset: assets/fonts/mi_font.ttf

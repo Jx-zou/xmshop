@@ -4,7 +4,7 @@ class RouteUtils {
   RouteUtils._();
 
   static toGoodsDetails(String key, String? value) {
-    if (value != null) {
+    if (value != null && value.isNotEmpty) {
       Get.toNamed("product-details",
           parameters: {"requestKey": key, "requestValue": value});
     }

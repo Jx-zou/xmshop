@@ -1,30 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'package:flutter_swiper_view/flutter_swiper_view.dart';
-
-import '../controllers/product_details_controller.dart';
-import '../../../common/views/pagination/rect_fraction_pagination_builder.dart';
 import '../../../common/icons/xmshop_icons.dart';
 import '../../../common/views/loading.dart';
 import '../../../common/views/widgets/text_tile.dart';
-import '../../../utils/screen_adapter.dart';
-import '../../../utils/https_client.dart';
 import '../../../utils/bottom_sheet_utils.dart';
+import '../../../utils/screen_adapter.dart';
 import '../../../widgets/bottom_button.dart';
+import '../controllers/product_details_controller.dart';
 
-class ProductDetailsGoodsView extends GetView<ProductDetailsController> {
-  const ProductDetailsGoodsView({super.key});
+class ProductDetailsSwitchView extends GetView<ProductDetailsController> {
+  const ProductDetailsSwitchView({super.key});
+
 
   Widget _textTile(
-          {required String leading,
-          required Widget title,
-          required VoidCallback onTap}) =>
+      {required String leading,
+        required Widget title,
+        required VoidCallback onTap}) =>
       TextTile(
           leading: leading,
           title: title,
           trailing:
-              Icon(XmshopIcons.arrowRight, size: ScreenAdapter.fontSize(30)),
+          Icon(XmshopIcons.arrowRight, size: ScreenAdapter.fontSize(30)),
           leadingSize: ScreenAdapter.fontSize(32),
           leadingColor: Colors.black26,
           padding: EdgeInsets.only(bottom: ScreenAdapter.height(30)),
@@ -43,7 +40,7 @@ class ProductDetailsGoodsView extends GetView<ProductDetailsController> {
 
   Widget _serviceTag({required String title}) =>
       Row(mainAxisSize: MainAxisSize.min, children: [
-        Icon(XmshopIcons.yes, size: ScreenAdapter.fontSize(28)),
+        Icon(XmshopIcons.safe, size: ScreenAdapter.fontSize(28)),
         SizedBox(width: ScreenAdapter.width(10)),
         Text(title,
             style: TextStyle(
@@ -53,31 +50,11 @@ class ProductDetailsGoodsView extends GetView<ProductDetailsController> {
   @override
   Widget build(BuildContext context) {
     return controller.obx(
-        (state) => Column(children: [
-              SizedBox(
-                  width: ScreenAdapter.width(1080),
-                  height: ScreenAdapter.height(1200),
-                  child: Swiper(
-                      itemCount: 3,
-                      itemBuilder: (context, index) => Image.network(
-                          HttpsClient.picReplaceUrl("${state?.pic}"),
-                          fit: BoxFit.cover),
-                      pagination: SwiperPagination(
-                          alignment: Alignment.bottomRight,
-                          builder: RectFractionPaginationBuilder(
-                              backgroundColor: Colors.black26,
-                              borderRadius: BorderRadius.circular(
-                                  ScreenAdapter.height(10)),
-                              color: Colors.white,
-                              activeColor: Colors.cyan,
-                              width: ScreenAdapter.width(100),
-                              height: ScreenAdapter.height(60),
-                              fontSize: ScreenAdapter.fontSize(28),
-                              activeFontSize: ScreenAdapter.fontSize(28))))),
-              _module(
-                  widget: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
+            (state) => Column(children: [
+          _module(
+              widget: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
                     Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -120,8 +97,8 @@ class ProductDetailsGoodsView extends GetView<ProductDetailsController> {
                                 color: Colors.black87,
                                 fontSize: ScreenAdapter.fontSize(34))))
                   ])),
-              _module(
-                  widget: Column(children: [
+          _module(
+              widget: Column(children: [
                 _textTile(
                     leading: "已选",
                     title: Text(
@@ -171,27 +148,27 @@ class ProductDetailsGoodsView extends GetView<ProductDetailsController> {
                         child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                          Row(children: [
-                            Icon(XmshopIcons.location,
-                                size: ScreenAdapter.fontSize(30)),
-                            Text("贵州 贵阳市 观山湖区",
-                                style: TextStyle(
-                                    fontSize: ScreenAdapter.fontSize(32),
-                                    color: Colors.black38))
-                          ]),
-                          Row(children: [
-                            Text("有现货",
-                                style: TextStyle(
-                                    fontSize: ScreenAdapter.fontSize(32),
-                                    color: Colors.red)),
-                            Icon(XmshopIcons.exclamationMark,
-                                size: ScreenAdapter.fontSize(30)),
-                            Text("今天20点前付款，预计1月8日送达",
-                                style: TextStyle(
-                                    fontSize: ScreenAdapter.fontSize(32),
-                                    color: Colors.black87))
-                          ])
-                        ])),
+                              Row(children: [
+                                Icon(XmshopIcons.location,
+                                    size: ScreenAdapter.fontSize(30)),
+                                Text("北京市 海淀区",
+                                    style: TextStyle(
+                                        fontSize: ScreenAdapter.fontSize(32),
+                                        color: Colors.black38))
+                              ]),
+                              Row(children: [
+                                Text("有现货",
+                                    style: TextStyle(
+                                        fontSize: ScreenAdapter.fontSize(32),
+                                        color: Colors.red)),
+                                Icon(XmshopIcons.warningCircle,
+                                    size: ScreenAdapter.fontSize(30)),
+                                Text("今天20点前付款，预计1月8日送达",
+                                    style: TextStyle(
+                                        fontSize: ScreenAdapter.fontSize(32),
+                                        color: Colors.black87))
+                              ])
+                            ])),
                     onTap: () {
                       BottomSheetUtils.closeBottomSheet();
                     }),
@@ -218,8 +195,8 @@ class ProductDetailsGoodsView extends GetView<ProductDetailsController> {
                       BottomSheetUtils.closeBottomSheet();
                     })
               ])),
-              SizedBox(height: ScreenAdapter.width(30))
-            ]),
+          SizedBox(height: ScreenAdapter.width(30))
+        ]),
         onLoading: const Loading(),
         onEmpty: Container(),
         onError: (error) => Container());

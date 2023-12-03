@@ -4,15 +4,14 @@ import '../../../common/controllers/base_controller.dart';
 import '../../../data/focus_provider.dart';
 import '../../../models/focus_model.dart';
 
-class HomeSwiperController extends BaseController
-    with StateMixin<List<FocusModel>> {
+class HomeHotSwiperController extends BaseController with StateMixin<List<FocusModel>> {
   final IFocusProvider provider;
 
-  HomeSwiperController({required this.provider});
+  HomeHotSwiperController({required this.provider});
 
   @override
   void loadData() async {
-    final response = await provider.getFocusModels();
+    final response = await provider.getFocusModels(query: {"position": "2"});
     if (response.hasError) {
       change(null, status: RxStatus.error(response.statusText));
       return;

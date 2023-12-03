@@ -15,9 +15,9 @@ class Config {
     highlightColor: Colors.transparent,
     appBarTheme: const AppBarTheme(
       elevation: 0,
-      color: Colors.white,
-      foregroundColor: Colors.black87,
-      systemOverlayStyle: SystemUiOverlayStyle(statusBarColor: Colors.transparent,
+      color: Color.fromRGBO(249, 249, 249, 1),
+      foregroundColor: Colors.black,
+      systemOverlayStyle: SystemUiOverlayStyle(statusBarColor: Colors.transparent
       ),
     ),
   );

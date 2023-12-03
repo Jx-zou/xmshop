@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:xmshop/app/utils/bottom_sheet_utils.dart';
 
 import '../../../common/icons/xmshop_icons.dart';
-import '../../../common/views/widgets/close_bottom_sheet.dart';
+import '../../../common/views/widgets/label_icon_button.dart';
+import '../../../utils/bottom_sheet_utils.dart';
 import '../../../utils/screen_adapter.dart';
-import '../controllers/product_details_controller.dart';
 import '../../../widgets/bottom_button.dart';
-import '../../../widgets/selected_bottom_sheet.dart';
+import '../controllers/product_details_controller.dart';
 
 class ProductDetailsBottomView extends GetView<ProductDetailsController> {
   const ProductDetailsBottomView({super.key});
@@ -34,55 +33,24 @@ class ProductDetailsBottomView extends GetView<ProductDetailsController> {
                 top: BorderSide(
                     width: ScreenAdapter.height(3), color: Colors.black12))),
         child: Row(children: [
-          Container(
-            margin: EdgeInsets.only(
-                left: ScreenAdapter.width(30), right: ScreenAdapter.width(30)),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(XmshopIcons.online, size: ScreenAdapter.width(60)),
-                Text(
-                  "客服",
-                  style: TextStyle(
-                      fontSize: ScreenAdapter.fontSize(28),
-                      color: Colors.black54),
-                )
-              ],
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.only(
-                left: ScreenAdapter.width(30), right: ScreenAdapter.width(30)),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(XmshopIcons.collect, size: ScreenAdapter.width(60)),
-                Text(
-                  "收藏",
-                  style: TextStyle(
-                      fontSize: ScreenAdapter.fontSize(28),
-                      color: Colors.black54),
-                )
-              ],
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.only(
-                left: ScreenAdapter.width(30), right: ScreenAdapter.width(30)),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Icon(XmshopIcons.shopCart, size: ScreenAdapter.width(60)),
-                Text(
-                  "购物车",
-                  style: TextStyle(
-                      fontSize: ScreenAdapter.fontSize(28),
-                      color: Colors.black54),
-                )
-              ],
-            ),
-          ),
+          LabelIconButton(
+              onTap: () {},
+              margin: EdgeInsets.symmetric(horizontal: ScreenAdapter.width(10)),
+              icon: Icon(XmshopIcons.online, size: ScreenAdapter.width(60)),
+              label: "客服",
+              style: TextStyle(fontSize: ScreenAdapter.fontSize(28), color: Colors.black54)),
+          LabelIconButton(
+              onTap: () {},
+              margin: EdgeInsets.symmetric(horizontal: ScreenAdapter.width(10)),
+              icon: Icon(XmshopIcons.collect, size: ScreenAdapter.width(58)),
+              label: "收藏",
+              style: TextStyle(fontSize: ScreenAdapter.fontSize(28), color: Colors.black54)),
+          LabelIconButton(
+              onTap: () {},
+              margin: EdgeInsets.symmetric(horizontal: ScreenAdapter.width(10)),
+              icon: Icon(XmshopIcons.shopCart, size: ScreenAdapter.width(60)),
+              label: "购物车",
+              style: TextStyle(fontSize: ScreenAdapter.fontSize(28), color: Colors.black54)),
           Expanded(
               child: _bottomButton(
                   title: "加入购物车",
@@ -93,7 +61,10 @@ class ProductDetailsBottomView extends GetView<ProductDetailsController> {
           Expanded(
               child: _bottomButton(
                   title: "立即购买",
-                  colors: [Colors.deepOrange.withOpacity(0.7), Colors.redAccent],
+                  colors: [
+                    Colors.deepOrange.withOpacity(0.7),
+                    Colors.redAccent
+                  ],
                   onPressed: () {
                     controller.buy();
                   }))

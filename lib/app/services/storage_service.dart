@@ -23,6 +23,10 @@ class StorageService extends GetxService {
     }
   }
 
+  bool contains(String key) {
+    return _prefs.containsKey(key);
+  }
+
   Future<bool> remove(String key) async {
     return _prefs.remove(key);
   }

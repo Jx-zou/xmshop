@@ -5,8 +5,7 @@ import '../../../common/controllers/base_controller.dart';
 import '../../../data/best_category_provider.dart';
 import '../../../models/best_category_model.dart';
 
-class HomeCategoryController extends BaseController
-    with StateMixin<List<BestCategoryModel>> {
+class HomeCategoryController extends BaseController with StateMixin<List<BestCategoryModel>> {
   final IBestCategoryProvider provider;
 
   HomeCategoryController({required this.provider});

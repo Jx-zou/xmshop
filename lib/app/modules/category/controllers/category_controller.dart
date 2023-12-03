@@ -6,7 +6,7 @@ import '../../../models/category_model.dart';
 
 class CategoryController extends BaseController with StateMixin<List<CategoryModel>> {
   final ICategoryProvider provider;
-  final Rx<List<CategoryModel>> secondCategory = Rx(<CategoryModel>[]);
+  List<CategoryModel> secondCategory = <CategoryModel>[];
   final RxInt selectIndex = 0.obs;
 
   CategoryController({required this.provider});
@@ -27,7 +27,7 @@ class CategoryController extends BaseController with StateMixin<List<CategoryMod
       if (response.hasError) {
         return;
       }
-      secondCategory.value = response.body;
+      secondCategory = response.body;
       update();
     }
   }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../utils/screen_adapter.dart';
 import '../controllers/root_controller.dart';
 import '../../../common/icons/xmshop_icons.dart';
 
@@ -25,12 +26,12 @@ class RootView extends GetView<RootController> {
               controller.switchPage(index);
               controller.pageController.jumpToPage(index);
             },
-            items: const [
-              BottomNavigationBarItem(icon: Icon(XmshopIcons.home), label: "首页"),
-              BottomNavigationBarItem(icon: Icon(XmshopIcons.category), label: "分类"),
-              BottomNavigationBarItem(icon: Icon(XmshopIcons.service), label: "服务"),
-              BottomNavigationBarItem(icon: Icon(XmshopIcons.tabShopCart), label: "购物车"),
-              BottomNavigationBarItem(icon: Icon(XmshopIcons.mine), label: "用户")
+            items: [
+              BottomNavigationBarItem(icon: Icon(XmshopIcons.home, size: ScreenAdapter.fontSize(56)), label: "首页"),
+              BottomNavigationBarItem(icon: Icon(XmshopIcons.category, size: ScreenAdapter.fontSize(48)), label: "分类"),
+              BottomNavigationBarItem(icon: Icon(XmshopIcons.service, size: ScreenAdapter.fontSize(56)), label: "服务"),
+              BottomNavigationBarItem(icon: Icon(XmshopIcons.tabShopCart, size: ScreenAdapter.fontSize(56)), label: "购物车"),
+              BottomNavigationBarItem(icon: Icon(XmshopIcons.mine, size: ScreenAdapter.fontSize(56)), label: "用户")
             ],
           ),
         ));

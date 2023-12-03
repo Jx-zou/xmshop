@@ -8,13 +8,21 @@ class CartService extends GetxService {
   final String cartKey = "cart";
   final StorageService storageService = Get.find<StorageService>();
 
-  int find(List<CartItemModel>? items, String id, String selectedAttr) {
-    if (items != null && items.isNotEmpty) {
+  CartModel goodsDetailsToModel(GoodsDetailsModel goodsDetails, String selectedAttr, int shopNum) {
+    return CartModel(
+        id: goodsDetails.id,
+        title: goodsDetails.title,
+        price: goodsDetails.price,
+        pic: goodsDetails.pic,
+        selectedAttr: selectedAttr,
+        count: shopNum);
+  }
+
+  int find(List<CartModel>? items, String? id, String? selectedAttr) {
+    if (items != null && id != null && selectedAttr != null && items.isNotEmpty) {
       for (int i = 0; i < items.length; i++) {
         String? cartAttr = items[i].selectedAttr;
-        if (cartAttr != null &&
-            cartAttr.length == selectedAttr.length &&
-            cartAttr == selectedAttr) {
+        if (cartAttr != null && cartAttr.length == selectedAttr.length && cartAttr == selectedAttr) {
           return i;
         }
       }
@@ -22,113 +30,63 @@ class CartService extends GetxService {
     return -1;
   }
 
-  Future<bool> setGoodsDetails(GoodsDetailsModel? goodsDetailsModel, String? selectedAttr, int? shopNum) async {
-    if (goodsDetailsModel != null && selectedAttr != null && shopNum != null) {
-      num price = goodsDetailsModel.price ?? 0;
-      return await set("${goodsDetailsModel.id}", "${goodsDetailsModel.title}", price, "${goodsDetailsModel.pic}", selectedAttr, shopNum);
+  Future<bool> setGoodsDetails(GoodsDetailsModel? goodsDetails, String? selectedAttr, int? shopNum) async {
+    if (goodsDetails != null && selectedAttr != null && shopNum != null) {
+      return await set(goodsDetailsToModel(goodsDetails, selectedAttr, shopNum));
     }
-    return Future(() => false);
+    return false;
   }
 
-  Future<bool> setCart(CartModel? cartModel) async {
-    return await storageService.set(cartKey, cartModel);
+  Future<bool> setList(List<CartModel>? carts) async {
+    if(carts == null) {
+      return false;
+    }
+    return await storageService.set(cartKey, carts);
   }
 
-  Future<bool> set(String id, String title, num price, String pic, String selectedAttr, int shopNum) async {
-    CartModel? cart = await storageService.get(cartKey);
+  Future<bool> set(CartModel? cart) async {
     if (cart == null) {
-      cart = CartModel(normal: [], expire: []);
-      cart.normal?.add(CartItemModel(
-          id: id,
-          title: title,
-          price: price,
-          selectedAttr: selectedAttr,
-          count: shopNum,
-          pic: pic));
+      return false;
+    }
+    List<CartModel>? carts = await storageService.get(cartKey);
+    if (carts == null) {
+      carts = [];
+      carts.add(cart);
+      return await storageService.set(cartKey, carts);
+    }
+    int index = find(carts, cart.id, cart.selectedAttr);
+    if (index != -1) {
+      carts.removeAt(index);
+      carts.add(cart);
       return await storageService.set(cartKey, cart);
     }
-    cart.normal ??= [];
-    int normalIndex = find(cart.normal, id, selectedAttr);
-    if (normalIndex != -1) {
-      cart.normal?.removeAt(normalIndex);
-      cart.normal?.add(CartItemModel(
-          id: id,
-          title: title,
-          price: price,
-          selectedAttr: selectedAttr,
-          count: shopNum,
-          pic: pic));
-      return await storageService.set(cartKey, cart);
-    }
-    cart.expire ??= [];
-    int expireIndex = find(cart.expire, id, selectedAttr);
-    if (expireIndex != -1) {
-      cart.expire?.removeAt(expireIndex);
-      cart.expire?.add(CartItemModel(
-          id: id,
-          title: title,
-          price: price,
-          selectedAttr: selectedAttr,
-          count: shopNum,
-          pic: pic));
-      return await storageService.set(cartKey, cart);
-    }
-    return Future(() => false);
+    return false;
   }
 
-  Future<CartModel?> get() async {
-    CartModel? cart = await storageService.get(cartKey);
-    if (cart != null) {
-      return cart;
+  Future<List<CartModel>?> get() async {
+    List<CartModel>? carts = await storageService.get(cartKey);
+    if (carts != null) {
+      return carts;
     }
     return null;
   }
 
   Future<bool> delete(String id, String selectedAttr) async {
-    CartModel? cart = await storageService.get(cartKey);
-    if (cart != null) {
-    int normalIndex = find(cart.normal, id, selectedAttr);
-    if (normalIndex != -1) {
-      cart.normal?.removeAt(normalIndex);
-      return await storageService.set(cartKey, cart);
+    List<CartModel>? carts = await storageService.get(cartKey);
+    if (carts != null) {
+      int index = find(carts, id, selectedAttr);
+      if (index != -1) {
+        carts.removeAt(index);
+        return await storageService.set(cartKey, carts);
+      }
     }
-    int expireIndex = find(cart.expire, id, selectedAttr);
-    if (expireIndex != -1) {
-      cart.expire?.removeAt(expireIndex);
-      return await storageService.set(cartKey, cart);
-    }
-  }
-    return Future(() => false);
+    return false;
   }
 
   Future<bool> clear() async {
-    CartModel? cart = await storageService.get(cartKey);
-    if (cart != null) {
+    if (storageService.contains(cartKey)) {
       return await storageService.remove(cartKey);
     }
-    return Future(() => false);
-  }
-
-  void _init() async {
-    bool flag = false;
-    CartModel? cart = await storageService.get(cartKey);
-    if (cart != null && cart.normal != null) {
-      for (int i = 0; i < cart.normal!.length; i++) {
-        if (cart.normal![i].isExpire) {
-          cart.expire ??= [];
-          cart.expire?.add(cart.normal![i]);
-          flag = true;
-        }
-      }
-      if (flag) {
-        await storageService.set(cartKey, cart);
-      }
-    }
-  }
-
-  @override
-  void onInit() {
-    _init();
-    super.onInit();
+    return false;
   }
 }

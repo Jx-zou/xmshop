@@ -161,7 +161,7 @@ class _SelectedBottomSheetState extends State<SelectedBottomSheet> {
                         onPressed: () {
                           _shopNumSubtract();
                         },
-                        icon: Icon(XmshopIcons.subtract,
+                        icon: Icon(XmshopIcons.minus,
                             color: Colors.black45,
                             size: ScreenAdapter.fontSize(32))),
                     Container(

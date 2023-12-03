@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../controllers/cart_guess_controller.dart';
 import '../../../common/views/loading.dart';
 import '../../../common/views/widgets/tile_card.dart';
 import '../../../utils/https_client.dart';
 import '../../../utils/route_utils.dart';
 import '../../../utils/screen_adapter.dart';
-import '../controllers/cart_guess_controller.dart';
 
 class CartGuessView extends GetView<CartGuessController> {
   const CartGuessView({super.key});
@@ -15,26 +15,35 @@ class CartGuessView extends GetView<CartGuessController> {
   Widget build(BuildContext context) {
     return controller.obx(
         (state) => Column(children: [
-              Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                Container(
-                    width: ScreenAdapter.width(30),
-                    height: ScreenAdapter.height(2),
-                    decoration: const BoxDecoration(
-                        gradient: LinearGradient(
-                            colors: [Colors.transparent, Colors.black87]))),
-                Container(
-                    margin: EdgeInsets.all(ScreenAdapter.width(20)),
-                    child: Text("猜你喜欢",
-                        style: TextStyle(
-                            fontSize: ScreenAdapter.fontSize(42),
-                            fontWeight: FontWeight.bold))),
-                Container(
-                    width: ScreenAdapter.width(30),
-                    height: ScreenAdapter.height(2),
-                    decoration: const BoxDecoration(
-                        gradient: LinearGradient(
-                            colors: [Colors.black87, Colors.transparent])))
-              ]),
+              Padding(
+                  padding: EdgeInsets.only(top: ScreenAdapter.height(30)),
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                            width: ScreenAdapter.width(30),
+                            height: ScreenAdapter.height(2),
+                            decoration: const BoxDecoration(
+                                gradient: LinearGradient(colors: [
+                              Colors.transparent,
+                              Colors.black87
+                            ]))),
+                        Container(
+                            margin: EdgeInsets.symmetric(
+                                horizontal: ScreenAdapter.width(20)),
+                            child: Text("猜你喜欢",
+                                style: TextStyle(
+                                    fontSize: ScreenAdapter.fontSize(42),
+                                    fontWeight: FontWeight.bold))),
+                        Container(
+                            width: ScreenAdapter.width(30),
+                            height: ScreenAdapter.height(2),
+                            decoration: const BoxDecoration(
+                                gradient: LinearGradient(colors: [
+                              Colors.black87,
+                              Colors.transparent
+                            ])))
+                      ])),
               GridView.builder(
                   physics: const NeverScrollableScrollPhysics(),
                   padding: EdgeInsets.all(ScreenAdapter.width(30)),

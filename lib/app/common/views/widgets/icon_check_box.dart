@@ -53,8 +53,7 @@ class _IconCheckBoxState extends State<IconCheckBox> {
         alignment: Alignment.center,
         decoration: BoxDecoration(
             shape: shape,
-            border: Border.all(
-                color: widget.value ? Colors.black.withOpacity(0.05) : fillColor),
+            border: Border.all(color: widget.value ? fillColor : Colors.black.withOpacity(0.05)),
             color: fillColor),
         child: widget.value
             ? Icon(

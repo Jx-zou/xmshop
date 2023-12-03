@@ -5,51 +5,76 @@ import '../../../common/controllers/base_controller.dart';
 import '../../../models/cart_model.dart';
 import '../../../services/cart_service.dart';
 
-class CartController extends BaseController with StateMixin<CartModel> {
+class CartController extends BaseController with StateMixin<List<CartModel>> {
   final ScrollController scrollController = ScrollController();
   final CartService cartService = Get.find<CartService>();
+
   final RxBool allSelected = false.obs;
+  final RxNum totalPrice = RxNum(0);
+  final RxString total = "".obs;
+
+  final List<int> normal = [];
+  final List<int> expire = [];
 
   void addShopNum(String? id, String? selectedAttr) {
-    if (id != null && selectedAttr != null) {
-      int index = cartService.find(state?.normal, id, selectedAttr);
-      state!.normal?[index].count++;
+    if (id != null && selectedAttr != null && state != null && state!.isNotEmpty) {
+      int index = cartService.find(state, id, selectedAttr);
+      if(index != -1) {
+        state?[index].count++;
+      }
     }
   }
 
   void reduceShopNum(String? id, String? selectedAttr, int count) {
-    if (id != null && selectedAttr != null && count > 1) {
-      int index = cartService.find(state?.normal, id, selectedAttr);
-      state!.normal?[index].count--;
+    if (id != null && selectedAttr != null && count > 1 && state != null && state!.isNotEmpty) {
+      int index = cartService.find(state, id, selectedAttr);
+      if(index != -1) {
+        state?[index].count--;
+      }
     }
   }
 
+  void updateTotal() {
+    if(state != null) {
+      int total = 0;
+      for(int i = 0; i < state!.length; i ++) {
+        if(!state![i].isExpire && state![i].checked) {
+          total++;
+        }
+      }
+      if(total == 0) {
+        this.total.value = "";
+      }
+      this.total.value = "($total)";
+      update();
+    }
+  }
+
+  void updateTotalPrice() {
+    num total = 0;
+    for(int i = 0; i < state!.length; i ++) {
+      total += state![i].price!;
+    }
+    totalPrice.value = total;
+    update();
+  }
+
   void changeAllSelected() {
-    if(state != null && state?.normal != null && state!.normal!.isNotEmpty) {
-      for(int i = 0; i < state!.normal!.length; i++) {
-        state!.normal?[i].checked = !allSelected.value;
+    if(state != null && state!.isNotEmpty) {
+      for(int i = 0; i < state!.length; i++) {
+        if(!state![i].isExpire) {
+          state?[i].checked = !allSelected.value;
+        }
       }
       allSelected.value = !allSelected.value;
     }
     update();
   }
 
-  bool isAllSelected(List<CartItemModel>? cartItemModels) {
-    if (cartItemModels == null) {
-      return false;
-    }
-    for (CartItemModel value in cartItemModels) {
-      if (!value.checked) {
-        return false;
-      }
-    }
-    return true;
-  }
-
-  void _initAllSelected() {
-    if (state!.normal!.isNotEmpty) {
-      for (int i = 0; i < state!.normal!.length; i++) {
-        if (!state!.normal![i].checked) {
+  void updateAllSelected() {
+    if (state!.isNotEmpty) {
+      for (int i = 0; i < state!.length; i++) {
+        if (!state![i].checked) {
           return;
         }
       }
@@ -58,19 +83,35 @@ class CartController extends BaseController with StateMixin<CartModel> {
     }
   }
 
+  void _initData() {
+    if(state != null && state!.isNotEmpty) {
+      for(int i = 0; i < state!.length; i++) {
+        if(state![i].isExpire){
+          expire.add(i);
+        } else {
+          normal.add(i);
+        }
+      }
+    }
+  }
+
   @override
   void loadData() async {
-    CartModel? cartModel = await cartService.get();
-    if (cartModel == null) {
+    List<CartModel>? carts = await cartService.get();
+    if (carts == null) {
       change(null, status: RxStatus.error());
       return;
     }
-    change(cartModel, status: RxStatus.success());
-    _initAllSelected();
+    change(carts, status: RxStatus.success());
+    _initData();
+    updateAllSelected();
+    updateTotalPrice();
   }
 
   @override
   void close() {
-    cartService.setCart(state);
+    if(state != null) {
+      cartService.setList(state);
+    }
   }
 }

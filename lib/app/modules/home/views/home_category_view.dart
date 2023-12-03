@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../common/views/loading.dart';
+import '../../../utils/https_client.dart';
 import '../../../utils/screen_adapter.dart';
 import '../controllers/home_category_controller.dart';
 
@@ -14,7 +15,7 @@ class HomeCategoryView extends GetView<HomeCategoryController> {
       SizedBox(
           height: ScreenAdapter.height(470),
           child: controller.obx(
-            (state) => GridView.builder(
+                (state) => GridView.builder(
                 scrollDirection: Axis.horizontal,
                 itemCount: state?.length,
                 controller: controller.scrollController,
@@ -23,22 +24,20 @@ class HomeCategoryView extends GetView<HomeCategoryController> {
                     mainAxisSpacing: ScreenAdapter.width(5),
                     crossAxisSpacing: ScreenAdapter.height(20)),
                 itemBuilder: (context, index) => Column(children: [
-                      Container(
-                        alignment: Alignment.center,
-                        width: ScreenAdapter.width(120),
-                        height: ScreenAdapter.width(120),
-                        child: Image.network(
-                            "https://xiaomi.itying.com/${state?[index].pic}"
-                                .replaceAll('\\', '/'),
-                            fit: BoxFit.cover),
-                      ),
-                      Padding(
-                          padding: EdgeInsets.fromLTRB(
-                              0, ScreenAdapter.height(4), 0, 0),
-                          child: Text("${state?[index].title}",
-                              style: TextStyle(
-                                  fontSize: ScreenAdapter.fontSize(34)))),
-                    ])),
+                  Container(
+                      alignment: Alignment.center,
+                      width: ScreenAdapter.width(120),
+                      height: ScreenAdapter.width(120),
+                      child: Image.network(
+                          HttpsClient.picReplaceUrl("${state?[index].pic}"),
+                          fit: BoxFit.cover)),
+                  Padding(
+                      padding: EdgeInsets.fromLTRB(
+                          0, ScreenAdapter.height(4), 0, 0),
+                      child: Text("${state?[index].title}",
+                          style: TextStyle(
+                              fontSize: ScreenAdapter.fontSize(34)))),
+                ])),
             onLoading: const Loading(),
             onEmpty: Container(),
             onError: (error) => Container(),

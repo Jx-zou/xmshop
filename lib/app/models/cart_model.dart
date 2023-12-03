@@ -1,11 +1,4 @@
 class CartModel {
-  List<CartItemModel>? expire;
-  List<CartItemModel>? normal;
-
-  CartModel({this.expire, this.normal});
-}
-
-class CartItemModel {
   String? id;
   String? title;
   num? price;
@@ -15,7 +8,7 @@ class CartItemModel {
   bool checked;
   bool isExpire;
 
-  CartItemModel(
+  CartModel(
       {this.id,
       this.title,
       this.price,

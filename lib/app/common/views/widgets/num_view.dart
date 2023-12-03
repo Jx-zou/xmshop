@@ -4,14 +4,14 @@ class NumView extends StatelessWidget {
   final double? width;
   final double? height;
 
-  final double? num;
+  final num? number;
   final TextStyle? intStyle;
   final TextStyle? fractionStyle;
   final MainAxisAlignment mainAxisAlignment;
   final CrossAxisAlignment crossAxisAlignment;
 
   const NumView(
-    this.num, {
+    this.number, {
     super.key,
     this.width,
     this.height,
@@ -25,7 +25,7 @@ class NumView extends StatelessWidget {
   Widget build(BuildContext context) {
     TextStyle intStyle = this.intStyle ?? const TextStyle(fontSize: 16.0);
     TextStyle fractionStyle = this.fractionStyle ?? const TextStyle(fontSize: 12.0);
-    String numString = num.toString();
+    String numString = number.toString();
     int index = numString.indexOf(".");
 
     return SizedBox(
