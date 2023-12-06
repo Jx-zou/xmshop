@@ -1,16 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../common/controllers/base_controller.dart';
+import '../../../common/controllers/page/scroll_page_controller.dart';
 import '../../../data/goods_provider.dart';
 import '../../../models/goods_model.dart';
 
-class ProductController extends BaseController
-    with StateMixin<List<GoodsModel>> {
+class ProductController extends ScrollPageController<GoodsModel> {
   final IGoodsProvider provider;
-  ProductController({required this.provider});
-
-  /*二级导航数据*/
   final List subHeaderList = [
     // 排序     升序：price_1     {price:1}        降序：price_-1   {price:-1}
     {
@@ -45,49 +41,42 @@ class ProductController extends BaseController
   ];
 
   int sort = 1;
-  Map<String, String> coreQuery = {};
   Map<String, String> screenQuery = {};
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   final RxInt selectId = 1.obs;
-  int page = 1;
-  int pageSize = 10;
-  bool isFetching = false;
-  final RxBool hasMore = true.obs;
-  final ScrollController scrollController = ScrollController();
 
-  onToDetails(String? id) {
+  ProductController({required this.provider}) : super(scrollController: ScrollController(), query: {
+          "${Get.parameters['requestKey']}": "${Get.parameters['requestValue']}"});
+
+  toDetails(String? id) {
     if (id != null) {
-      Get.toNamed("product-details", parameters: {
-        "requestKey": "id",
-        "requestValue": id
-      });
+      Get.toNamed("product-details", parameters: {"requestKey": "id", "requestValue": id});
     }
   }
 
-  onSubTap(int id) {
-    selectId.value = id;
-    update();
-    _getScreenData(id);
+  onSubBannerTap(int selectId) {
+    this.selectId.value = selectId;
+    _getScreenData(selectId);
   }
 
-  _getScreenData(int id) {
+  _getScreenData(int selectId) {
     page = 1;
-    hasMore.value = true;
+    hasMore = true;
     update();
-    Map<String, dynamic> map = subHeaderList[id - 1];
+    Map<String, dynamic> map = subHeaderList[selectId - 1];
     if (map['sort'] == true) {
       sort = -sort;
-      if (id != selectId.value) {
+      if (selectId != this.selectId.value) {
         sort = 1;
       }
-      _updateScreenQueryAndRequest('sort', () => "${map['fileds']}_$sort");
+      _updateScreenQueryAndRequest('sort', () => "${map["fileds"]}_$sort");
       return;
     }
-    if (map['is_drawer'] == true) {
-      _endDrawerSubTap();
+    if (map['is_drawer'] != true) {
+      _updateScreenQueryAndRequest(map['fileds'], () => "1");
       return;
     }
-    _updateScreenQueryAndRequest(map['fileds'], () => "1");
+    _endDrawerSubTap();
   }
 
   _updateScreenQueryAndRequest(String key, String Function() ifAbsent) {
@@ -102,78 +91,14 @@ class ProductController extends BaseController
     scaffoldKey.currentState?.openEndDrawer();
   }
 
-  _addScrollListener() {
-    scrollController.addListener(() {
-      if (!isFetching &&
-          scrollController.offset >
-              scrollController.position.maxScrollExtent - 40) {
-        loadData();
-      }
-    });
-  }
-
-  _initQuery() {
-    coreQuery = {
-      "page": "$page",
-      "pageSize": "$pageSize",
-      "${Get.parameters['requestKey']}": "${Get.parameters['requestValue']}"
-    };
-  }
-
-  @override
-  void loadData() async {
-    //判断是否还有数据，如没有数据了则直接返回
-    if (!hasMore.value) {
-      return;
-    }
-    //初始化参数，将请求状态更新为正在请求中
-    isFetching = true;
-    coreQuery.update("page", (value) => "$page");
-    screenQuery.addAll(coreQuery);
-    //发起请求，并接受返回数据
-    final Response response = await provider.getGoodsModel(query: screenQuery);
-    //如果请求回应发生错误，更新数据并返回错误信息
-    if (response.hasError) {
-      change(state, status: RxStatus.error(response.statusText));
-      isFetching = false;
-      return;
-    }
-    //如果请求返回的数据为空，则修改更多数据状态，并直接返回
-    if (response.body == null || response.body!.isEmpty) {
-      hasMore.value = false;
-      isFetching = false;
-      update();
-      return;
-    }
-    //如果返回的数据数量小于pageSize，则已经到最后一页
-    if (response.body!.length < pageSize) {
-      hasMore.value = false;
-      update();
-    }
-    //如果是第一次发起请求，则更新state数据，并增加page页数
-    if (page == 1) {
-      change(response.body, status: RxStatus.success());
-    }
-    //如果不是首次，那么合并旧数据
-    if (page > 1) {
-      state?.addAll(response.body as List<GoodsModel>);
-      change(state, status: RxStatus.success());
-    }
-    //正常增加数据且不是最后一页，增加页数page
-    page++;
-    isFetching = false;
-  }
-
   @override
   void init() {
-    _initQuery();
     _getScreenData(selectId.value);
-    _addScrollListener();
   }
 
-
   @override
-  void close() {
-    scrollController.dispose();
+  Future<Response<List<GoodsModel>>> getData() {
+    super.query?.addAll(screenQuery);
+    return provider.getGoodsModel(query: super.query);
   }
 }

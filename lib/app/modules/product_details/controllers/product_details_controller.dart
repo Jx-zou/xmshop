@@ -44,8 +44,6 @@ class ProductDetailsController extends BaseController with StateMixin<GoodsDetai
   final RxInt selectedId = 1.obs;
   final RxBool showMoreTar = false.obs;
   final RxInt moreSelected = 1.obs;
-  int loadTime = 10;
-  late Timer timer;
 
   void buy() {
     Get.back();
@@ -67,8 +65,7 @@ class ProductDetailsController extends BaseController with StateMixin<GoodsDetai
     if (selected != moreSelected.value) {
       moreSelected.value = selected;
     }
-    scrollController.animateTo(_getAndUpdateAnchorPoint(2),
-        duration: const Duration(milliseconds: 1000), curve: Curves.easeIn);
+    scrollController.animateTo(_getAndUpdateAnchorPoint(2), duration: const Duration(milliseconds: 1000), curve: Curves.easeIn);
     update();
   }
 
@@ -115,9 +112,6 @@ class ProductDetailsController extends BaseController with StateMixin<GoodsDetai
   }
 
   double _getAndSaveAnchorPoint(int index) {
-    if (loadTime <= 0) {
-      return tannerTitles[index]['anchor_point'];
-    }
     _updateAnchorPoint(index);
     return tannerTitles[index]['anchor_point'];
   }
@@ -128,11 +122,9 @@ class ProductDetailsController extends BaseController with StateMixin<GoodsDetai
       if (offset <= 75) {
         appBarOpacity.value = offset / 75;
         actionColor.value = Colors.white;
-        update();
       } else {
         appBarOpacity.value = 1;
         actionColor.value = Colors.black;
-        update();
       }
       double current;
       double next;
@@ -156,31 +148,19 @@ class ProductDetailsController extends BaseController with StateMixin<GoodsDetai
           }
         }
       }
+      update();
     });
   }
 
   @override
   void loadData() async {
-    final response = await provider.getGoodsDetailsModel(query: query);
+    final Response<GoodsDetailsModel> response = await provider.getGoodsDetailsModel(query: query);
     if (response.hasError) {
       change(null, status: RxStatus.error(response.statusText));
       return;
     }
     change(response.body, status: RxStatus.success());
     _initAttrSelected();
-  }
-
-  void _initTimer() {
-    timer = Timer.periodic(const Duration(seconds: 1), (timer) {
-      if (loadTime <= 0) {
-        for (int i = 0; i < tannerTitles.length; i++) {
-          _updateAnchorPoint(i);
-        }
-        timer.cancel();
-        return;
-      }
-      loadTime--;
-    });
   }
 
   void _initAttrSelected() {
@@ -210,13 +190,11 @@ class ProductDetailsController extends BaseController with StateMixin<GoodsDetai
   void init() {
     _initQuery();
     _initGlobalKey();
-    _initTimer();
     _addScrollListener();
   }
 
   @override
   void close() {
     scrollController.dispose();
-    timer.cancel();
   }
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../common/views/loading.dart';
+import '../../../common/views/status/loading_view.dart';
 import '../../../utils/https_client.dart';
 import '../../../utils/screen_adapter.dart';
 import '../controllers/home_best_banner_controller.dart';
@@ -30,7 +30,7 @@ class HomeBestBannerView extends GetView<HomeBestBannerController> {
               Text("¥${state[index].price}",
                   style: TextStyle(fontSize: ScreenAdapter.fontSize(32)))
             ])),
-        onLoading: const Loading(),
+        onLoading: LoadingView.threeBounce(),
         onError: (error) => Container());
   }
 }

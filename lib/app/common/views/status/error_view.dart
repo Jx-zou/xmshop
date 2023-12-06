@@ -15,7 +15,7 @@ class ErrorView extends StatelessWidget {
   Widget build(BuildContext context) {
 
     ThemeData themeData = Theme.of(context);
-    Color color = this.color ?? themeData.primaryColor;
+    Color color = this.color ?? themeData.primaryColorLight;
     String tag = this.tag ?? defaultTag;
 
     return Container(
@@ -26,6 +26,7 @@ class ErrorView extends StatelessWidget {
         child: Text(tag,
             style: TextStyle(
                 fontSize: tagSize,
-                color: tagColor)));
+                color: tagColor,
+            decoration: TextDecoration.none)));
   }
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../common/views/loading.dart';
+import '../../../common/views/status/loading_view.dart';
 import '../../../utils/https_client.dart';
 import '../../../utils/route_utils.dart';
 import '../../../utils/screen_adapter.dart';
@@ -62,7 +62,7 @@ class HomeHotListView extends GetView<HomeHotListController> {
                                           child: Image.network(HttpsClient.picReplaceUrl("${goodsModel.pic}"), fit: BoxFit.cover))))
                             ]))))))
                 .toList()),
-        onLoading: const Loading(),
+        onLoading: LoadingView.circle(),
         onEmpty: Container(),
         onError: (error) => Container());
   }

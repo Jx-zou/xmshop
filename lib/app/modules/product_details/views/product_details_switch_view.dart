@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../common/icons/xmshop_icons.dart';
-import '../../../common/views/loading.dart';
+import '../../../common/views/status/loading_view.dart';
 import '../../../common/views/widgets/text_tile.dart';
 import '../../../utils/bottom_sheet_utils.dart';
 import '../../../utils/screen_adapter.dart';
@@ -13,15 +13,11 @@ import 'product_details_swiper_view.dart';
 class ProductDetailsSwitchView extends GetView<ProductDetailsController> {
   const ProductDetailsSwitchView({super.key});
 
-  Widget _textTile(
-          {required String leading,
-          required Widget title,
-          required VoidCallback onTap}) =>
+  Widget _textTile({required String leading, required Widget title, required VoidCallback onTap}) =>
       TextTile(
           leading: leading,
           title: title,
-          trailing:
-              Icon(XmshopIcons.arrowRight, size: ScreenAdapter.fontSize(30)),
+          trailing: Icon(XmshopIcons.arrowRight, size: ScreenAdapter.fontSize(30)),
           leadingSize: ScreenAdapter.fontSize(32),
           leadingColor: Colors.black26,
           padding: EdgeInsets.only(bottom: ScreenAdapter.height(30)),
@@ -29,10 +25,8 @@ class ProductDetailsSwitchView extends GetView<ProductDetailsController> {
 
   Widget _module({required Widget widget}) => Container(
       width: ScreenAdapter.width(1080),
-      margin: EdgeInsets.fromLTRB(ScreenAdapter.width(30),
-          ScreenAdapter.width(30), ScreenAdapter.width(30), 0),
-      padding: EdgeInsets.fromLTRB(ScreenAdapter.width(30),
-          ScreenAdapter.width(30), ScreenAdapter.width(30), 0),
+      margin: EdgeInsets.fromLTRB(ScreenAdapter.width(30), ScreenAdapter.width(30), ScreenAdapter.width(30), 0),
+      padding: EdgeInsets.fromLTRB(ScreenAdapter.width(30), ScreenAdapter.width(30), ScreenAdapter.width(30), 0),
       decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(ScreenAdapter.width(20))),
@@ -42,9 +36,7 @@ class ProductDetailsSwitchView extends GetView<ProductDetailsController> {
       Row(mainAxisSize: MainAxisSize.min, children: [
         Icon(XmshopIcons.safe, size: ScreenAdapter.fontSize(28)),
         SizedBox(width: ScreenAdapter.width(10)),
-        Text(title,
-            style: TextStyle(
-                fontSize: ScreenAdapter.fontSize(32), color: Colors.black26))
+        Text(title, style: TextStyle(fontSize: ScreenAdapter.fontSize(32), color: Colors.black26))
       ]);
 
   @override
@@ -80,6 +72,7 @@ class ProductDetailsSwitchView extends GetView<ProductDetailsController> {
                               style: TextStyle(
                                 fontSize: ScreenAdapter.fontSize(42),
                                 color: Colors.black26,
+                                decorationColor: Colors.black26,
                                 decoration: TextDecoration.lineThrough,
                               ))
                         ]),
@@ -197,7 +190,7 @@ class ProductDetailsSwitchView extends GetView<ProductDetailsController> {
               ])),
               SizedBox(height: ScreenAdapter.width(30))
             ]),
-        onLoading: const Loading(),
+        onLoading: LoadingView.circle(),
         onEmpty: Container(),
         onError: (error) => Container());
   }

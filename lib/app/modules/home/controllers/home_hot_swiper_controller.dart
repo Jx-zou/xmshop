@@ -14,8 +14,10 @@ class HomeHotSwiperController extends BaseController with StateMixin<List<FocusM
     final response = await provider.getFocusModels(query: {"position": "2"});
     if (response.hasError) {
       change(null, status: RxStatus.error(response.statusText));
-      return;
+    } else if (response.body!.isEmpty) {
+      change(response.body, status: RxStatus.empty());
+    } else {
+      change(response.body, status: RxStatus.success());
     }
-    change(response.body, status: RxStatus.success());
   }
 }

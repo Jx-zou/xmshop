@@ -17,32 +17,39 @@ class CartController extends BaseController with StateMixin<List<CartModel>> {
   final List<int> expire = [];
 
   void addShopNum(String? id, String? selectedAttr) {
-    if (id != null && selectedAttr != null && state != null && state!.isNotEmpty) {
+    if (id != null &&
+        selectedAttr != null &&
+        state != null &&
+        state!.isNotEmpty) {
       int index = cartService.find(state, id, selectedAttr);
-      if(index != -1) {
+      if (index != -1) {
         state?[index].count++;
       }
     }
   }
 
   void reduceShopNum(String? id, String? selectedAttr, int count) {
-    if (id != null && selectedAttr != null && count > 1 && state != null && state!.isNotEmpty) {
+    if (id != null &&
+        selectedAttr != null &&
+        count > 1 &&
+        state != null &&
+        state!.isNotEmpty) {
       int index = cartService.find(state, id, selectedAttr);
-      if(index != -1) {
+      if (index != -1) {
         state?[index].count--;
       }
     }
   }
 
   void updateTotal() {
-    if(state != null) {
+    if (state != null) {
       int total = 0;
-      for(int i = 0; i < state!.length; i ++) {
-        if(!state![i].isExpire && state![i].checked) {
+      for (int i = 0; i < state!.length; i++) {
+        if (!state![i].isExpire && state![i].checked) {
           total++;
         }
       }
-      if(total == 0) {
+      if (total == 0) {
         this.total.value = "";
       }
       this.total.value = "($total)";
@@ -52,7 +59,7 @@ class CartController extends BaseController with StateMixin<List<CartModel>> {
 
   void updateTotalPrice() {
     num total = 0;
-    for(int i = 0; i < state!.length; i ++) {
+    for (int i = 0; i < state!.length; i++) {
       total += state![i].price!;
     }
     totalPrice.value = total;
@@ -60,9 +67,9 @@ class CartController extends BaseController with StateMixin<List<CartModel>> {
   }
 
   void changeAllSelected() {
-    if(state != null && state!.isNotEmpty) {
-      for(int i = 0; i < state!.length; i++) {
-        if(!state![i].isExpire) {
+    if (state != null && state!.isNotEmpty) {
+      for (int i = 0; i < state!.length; i++) {
+        if (!state![i].isExpire) {
           state?[i].checked = !allSelected.value;
         }
       }
@@ -84,9 +91,9 @@ class CartController extends BaseController with StateMixin<List<CartModel>> {
   }
 
   void _initData() {
-    if(state != null && state!.isNotEmpty) {
-      for(int i = 0; i < state!.length; i++) {
-        if(state![i].isExpire){
+    if (state != null && state!.isNotEmpty) {
+      for (int i = 0; i < state!.length; i++) {
+        if (state![i].isExpire) {
           expire.add(i);
         } else {
           normal.add(i);
@@ -98,8 +105,8 @@ class CartController extends BaseController with StateMixin<List<CartModel>> {
   @override
   void loadData() async {
     List<CartModel>? carts = await cartService.get();
-    if (carts == null) {
-      change(null, status: RxStatus.error());
+    if (carts == null || carts.isEmpty) {
+      change(carts, status: RxStatus.empty());
       return;
     }
     change(carts, status: RxStatus.success());
@@ -110,7 +117,7 @@ class CartController extends BaseController with StateMixin<List<CartModel>> {
 
   @override
   void close() {
-    if(state != null) {
+    if (state != null) {
       cartService.setList(state);
     }
   }

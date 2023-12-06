@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../common/views/loading.dart';
+import '../../../common/views/status/loading_view.dart';
 import '../../../utils/https_client.dart';
 import '../../../utils/screen_adapter.dart';
 import '../controllers/home_category_controller.dart';
@@ -38,7 +38,7 @@ class HomeCategoryView extends GetView<HomeCategoryController> {
                           style: TextStyle(
                               fontSize: ScreenAdapter.fontSize(34)))),
                 ])),
-            onLoading: const Loading(),
+            onLoading: LoadingView.circle(),
             onEmpty: Container(),
             onError: (error) => Container(),
           )),

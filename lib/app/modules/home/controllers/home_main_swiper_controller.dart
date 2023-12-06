@@ -14,8 +14,10 @@ class HomeMainSwiperController extends BaseController with StateMixin<List<Focus
     final response = await provider.getFocusModels();
     if (response.hasError) {
       change(null, status: RxStatus.error(response.statusText));
-      return;
+    } else if (response.body!.isEmpty) {
+      change(response.body, status: RxStatus.empty());
+    } else {
+      change(response.body, status: RxStatus.success());
     }
-    change(response.body, status: RxStatus.success());
   }
 }

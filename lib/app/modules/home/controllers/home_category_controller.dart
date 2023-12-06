@@ -15,10 +15,8 @@ class HomeCategoryController extends BaseController with StateMixin<List<BestCat
 
   _addScrollListener() {
     scrollController.addListener(() {
-      if (scrollController.offset > 0 &&
-          scrollController.position.maxScrollExtent > 0) {
-        paginationValue.value =
-            scrollController.offset / scrollController.position.maxScrollExtent;
+      if (scrollController.offset > 0 && scrollController.position.maxScrollExtent > 0) {
+        paginationValue.value = scrollController.offset / scrollController.position.maxScrollExtent;
         update();
       }
     });
@@ -26,12 +24,14 @@ class HomeCategoryController extends BaseController with StateMixin<List<BestCat
 
   @override
   void loadData() async {
-    final response = await provider.getBestCategoryModel();
+    final Response<List<BestCategoryModel>> response = await provider.getBestCategoryModel();
     if (response.hasError) {
       change(null, status: RxStatus.error(response.statusText));
-      return;
+    } else if (response.body!.isEmpty) {
+      change(response.body, status: RxStatus.empty());
+    } else {
+      change(response.body, status: RxStatus.success());
     }
-    change(response.body, status: RxStatus.success());
   }
 
   @override

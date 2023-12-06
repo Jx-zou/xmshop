@@ -14,8 +14,10 @@ class HomeHotListController extends BaseController with StateMixin<List<GoodsMod
     final response = await provider.getGoodsModel(query: {"is_hot": "1", "pageSize": "3"});
     if (response.hasError) {
       change(null, status: RxStatus.error(response.statusText));
-      return;
+    } else if (response.body!.isEmpty) {
+      change(response.body, status: RxStatus.empty());
+    } else {
+      change(response.body, status: RxStatus.success());
     }
-    change(response.body, status: RxStatus.success());
   }
 }

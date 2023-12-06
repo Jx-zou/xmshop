@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../controllers/cart_guess_controller.dart';
-import '../../../common/views/loading.dart';
+import '../../../common/views/status/loading_view.dart';
 import '../../../common/views/widgets/tile_card.dart';
 import '../../../utils/https_client.dart';
 import '../../../utils/route_utils.dart';
@@ -13,8 +13,7 @@ class CartGuessView extends GetView<CartGuessController> {
 
   @override
   Widget build(BuildContext context) {
-    return controller.obx(
-        (state) => Column(children: [
+    return controller.obx((state) => Column(children: [
               Padding(
                   padding: EdgeInsets.only(top: ScreenAdapter.height(30)),
                   child: Row(
@@ -79,7 +78,7 @@ class CartGuessView extends GetView<CartGuessController> {
                           style:
                               TextStyle(fontSize: ScreenAdapter.fontSize(42)))))
             ]),
-        onLoading: const Loading(),
+        onLoading: LoadingView.circle(),
         onEmpty: Container(),
         onError: (error) => Container());
   }

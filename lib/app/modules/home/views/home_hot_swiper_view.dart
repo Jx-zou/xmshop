@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_swiper_view/flutter_swiper_view.dart';
 import 'package:get/get.dart';
 
-import '../../../common/views/loading.dart';
+import '../../../common/views/status/loading_view.dart';
 import '../../../common/views/pagination/rect_inside_swiper_pagination_builder.dart';
 import '../../../utils/https_client.dart';
 import '../controllers/home_hot_swiper_controller.dart';
@@ -23,7 +23,7 @@ class HomeHotSwiperView extends GetView<HomeHotSwiperController> {
               alignment: Alignment.bottomCenter,
               builder: RectInsideSwiperPaginationBuilder(width: 45.0)),
         ),
-        onLoading: const Loading(),
+        onLoading: LoadingView.circle(),
         onEmpty: Container(),
         onError: (error) => Container());
   }

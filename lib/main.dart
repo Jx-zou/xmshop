@@ -1,21 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:xmshop/handler.dart';
 
 import 'app/routes/app_pages.dart';
 
-import 'app/services/cart_service.dart';
-import 'app/services/search_service.dart';
-import 'app/services/storage_service.dart';
-
+import 'handler.dart';
 import 'config.dart';
-
-void initService() {
-  Get.lazyPut(() => StorageService());
-  Get.lazyPut(() => SearchService());
-  Get.lazyPut(() => CartService());
-}
 
 void run() {
   runApp(ScreenUtilInit(
@@ -35,7 +25,7 @@ void run() {
 
 void main() {
   ExceptionHandler(() {
-    initService();
+    ServiceHandler.instance.initialize();
     run();
   });
 }

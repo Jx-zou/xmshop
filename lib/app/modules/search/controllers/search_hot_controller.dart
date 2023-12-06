@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../common/controllers/base_controller.dart';
@@ -14,9 +13,10 @@ class SearchHotController extends BaseController with StateMixin<List<GoodsModel
     final response = await provider.getGoodsModel(query: {"is_best": "1", "pageSize": "8"});
     if (response.hasError) {
       change(null, status: RxStatus.error());
-      return;
+    } else if(response.body == null || response.body!.isEmpty) {
+      change(response.body, status: RxStatus.empty());
+    } else {
+      change(response.body, status: RxStatus.success());
     }
-    response.body?.map((e) => debugPrint(e.toString()));
-    change(response.body, status: RxStatus.success());
   }
 }

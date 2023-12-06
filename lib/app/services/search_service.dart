@@ -3,44 +3,46 @@ import 'package:get/get.dart';
 import 'storage_service.dart';
 
 class SearchService extends GetxService{
-  static const String searchHistoryKey = "searchHistory";
+  final String searchHistoryKey = "searchHistory";
   final StorageService storageService = Get.find<StorageService>();
 
-  void setHistory(keywords) async {
+  Future<bool> setHistory(keywords) async {
     List<String>? searchHistory = await storageService.get(searchHistoryKey);
     if (searchHistory != null && searchHistory.isNotEmpty) {
       if(!searchHistory.contains(keywords)) {
         searchHistory.add(keywords);
-        await storageService.set(searchHistoryKey, searchHistory);
+        return await storageService.set(searchHistoryKey, searchHistory);
       }
-      return;
+      return false;
     }
     searchHistory = [];
     searchHistory.add(keywords);
-    await storageService.set(searchHistoryKey, searchHistory);
+    return await storageService.set(searchHistoryKey, searchHistory);
   }
 
-  Future<List<String>> getHistory() async {
+  Future<List<String>?> getHistory() async {
     List<String>? searchHistory = await storageService.get(searchHistoryKey);
     if (searchHistory != null) {
       return searchHistory;
     }
-    return [];
+    return null;
   }
 
-  deleteHistory(keywords) async {
+  Future<bool> deleteHistory(keywords) async {
     List<String>? searchHistory = await storageService.get(searchHistoryKey);
     if (searchHistory != null && searchHistory.isNotEmpty && searchHistory.contains(keywords)) {
       searchHistory.remove(keywords);
       storageService.remove(searchHistoryKey);
-      await storageService.set(searchHistoryKey, searchHistory);
+      return await storageService.set(searchHistoryKey, searchHistory);
     }
+    return false;
   }
 
-  clearHistory() async {
+  Future<bool> clearHistory() async {
     List<String>? searchHistory = await storageService.get(searchHistoryKey);
     if (searchHistory != null) {
-      storageService.remove(searchHistoryKey);
+      return await storageService.remove(searchHistoryKey);
     }
+    return true;
   }
 }

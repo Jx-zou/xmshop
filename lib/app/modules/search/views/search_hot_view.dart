@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../common/views/loading.dart';
+import '../../../common/views/status/loading_view.dart';
 import '../../../utils/https_client.dart';
 import '../../../utils/screen_adapter.dart';
 import '../controllers/search_hot_controller.dart';
@@ -25,11 +25,13 @@ class SearchHotView extends GetView<SearchHotController> {
                     image: AssetImage("assets/images/hot_search.png"))),
           ),
           Container(
-              padding: EdgeInsets.all(ScreenAdapter.width(10)),
+              padding: EdgeInsets.fromLTRB(ScreenAdapter.width(10), 0,
+                  ScreenAdapter.width(10), ScreenAdapter.width(50)),
               child: controller.obx(
                   (state) => GridView.builder(
                       itemCount: state?.length,
                       shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
                           crossAxisSpacing: ScreenAdapter.width(40),
@@ -41,8 +43,10 @@ class SearchHotView extends GetView<SearchHotController> {
                               fit: BoxFit.cover),
                           title: Text(
                             "${state?[index].title}",
+                            maxLines: 3,
                             style: TextStyle(
-                                fontSize: ScreenAdapter.fontSize(32)),
+                                fontSize: ScreenAdapter.fontSize(32),
+                                overflow: TextOverflow.ellipsis),
                           ),
                           onTap: () {
                             Get.offAndToNamed("product-details", parameters: {
@@ -50,7 +54,7 @@ class SearchHotView extends GetView<SearchHotController> {
                               "requestValue": "${state?[index].id}"
                             });
                           })),
-                  onLoading: const Loading(),
+                  onLoading: LoadingView.circle(),
                   onEmpty: Container(),
                   onError: (error) => Container())),
           SizedBox(height: ScreenAdapter.height(20))

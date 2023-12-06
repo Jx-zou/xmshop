@@ -31,26 +31,26 @@ class ProductDetailsBottomView extends GetView<ProductDetailsController> {
             color: Colors.white,
             border: Border(
                 top: BorderSide(
-                    width: ScreenAdapter.height(3), color: Colors.black12))),
+                    width: ScreenAdapter.height(3), color: Colors.black.withOpacity(0.02)))),
         child: Row(children: [
           LabelIconButton(
               onTap: () {},
-              margin: EdgeInsets.symmetric(horizontal: ScreenAdapter.width(10)),
-              icon: Icon(XmshopIcons.online, size: ScreenAdapter.width(60)),
+              margin: EdgeInsets.only(left: ScreenAdapter.width(30), right: ScreenAdapter.width(25)),
+              icon: Icon(XmshopIcons.online, size: ScreenAdapter.fontSize(56)),
               label: "客服",
-              style: TextStyle(fontSize: ScreenAdapter.fontSize(28), color: Colors.black54)),
+              style: TextStyle(fontSize: ScreenAdapter.fontSize(28), fontWeight: FontWeight.bold, color: Colors.black.withOpacity(0.6))),
           LabelIconButton(
               onTap: () {},
-              margin: EdgeInsets.symmetric(horizontal: ScreenAdapter.width(10)),
-              icon: Icon(XmshopIcons.collect, size: ScreenAdapter.width(58)),
+              margin: EdgeInsets.symmetric(horizontal: ScreenAdapter.width(25)),
+              icon: Icon(XmshopIcons.collect, size: ScreenAdapter.fontSize(56)),
               label: "收藏",
-              style: TextStyle(fontSize: ScreenAdapter.fontSize(28), color: Colors.black54)),
+              style: TextStyle(fontSize: ScreenAdapter.fontSize(28), fontWeight: FontWeight.bold, color: Colors.black.withOpacity(0.6))),
           LabelIconButton(
               onTap: () {},
-              margin: EdgeInsets.symmetric(horizontal: ScreenAdapter.width(10)),
-              icon: Icon(XmshopIcons.shopCart, size: ScreenAdapter.width(60)),
+              margin: EdgeInsets.symmetric(horizontal: ScreenAdapter.width(25)),
+              icon: Icon(XmshopIcons.shopCart, size: ScreenAdapter.fontSize(56)),
               label: "购物车",
-              style: TextStyle(fontSize: ScreenAdapter.fontSize(28), color: Colors.black54)),
+              style: TextStyle(fontSize: ScreenAdapter.fontSize(28), fontWeight: FontWeight.bold, color: Colors.black.withOpacity(0.6))),
           Expanded(
               child: _bottomButton(
                   title: "加入购物车",

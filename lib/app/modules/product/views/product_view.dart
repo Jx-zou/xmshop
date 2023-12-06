@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../common/icons/xmshop_icons.dart';
-import '../../../common/views/loading.dart';
+import '../../../common/views/status/loading_view.dart';
 import '../../../utils/screen_adapter.dart';
 import '../controllers/product_controller.dart';
 
@@ -55,7 +55,7 @@ class ProductView extends GetView<ProductController> {
                         flex: 1,
                         child: InkWell(
                             onTap: () {
-                              controller.onSubTap(value['id']);
+                              controller.onSubBannerTap(value['id']);
                             },
                             child: Padding(
                                 padding: EdgeInsets.symmetric(
@@ -87,7 +87,7 @@ class ProductView extends GetView<ProductController> {
                   itemCount: state!.length,
                   itemBuilder: (context, index) => Column(children: [
                         InkWell(
-                            onTap: controller.onToDetails(state[index].id),
+                            onTap: controller.toDetails(state[index].id),
                             child: Container(
                                 margin: EdgeInsets.fromLTRB(
                                     ScreenAdapter.height(26),
@@ -208,7 +208,7 @@ class ProductView extends GetView<ProductController> {
                                         )
                                       ])),
                                 ]))),
-                        !controller.hasMore.value && index == state.length - 1
+                        !controller.hasMore && index == state.length - 1
                             ? Container(
                                 height: ScreenAdapter.height(50),
                                 alignment: Alignment.center,
@@ -218,7 +218,7 @@ class ProductView extends GetView<ProductController> {
                                         color: Colors.black45))))
                             : Container()
                       ]))),
-          onLoading: const Loading(),
+          onLoading: LoadingView.circle(),
           onEmpty: Container(),
           onError: (error) => Container()));
 

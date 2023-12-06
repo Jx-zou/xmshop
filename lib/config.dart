@@ -13,12 +13,11 @@ class Config {
     fontFamily: "miFont",
     splashColor: Colors.transparent,
     highlightColor: Colors.transparent,
+    scaffoldBackgroundColor: const Color.fromRGBO(245, 245, 245, 1),
     appBarTheme: const AppBarTheme(
       elevation: 0,
-      color: Color.fromRGBO(249, 249, 249, 1),
-      foregroundColor: Colors.black,
-      systemOverlayStyle: SystemUiOverlayStyle(statusBarColor: Colors.transparent
-      ),
+      color: Colors.white,
+      systemOverlayStyle: SystemUiOverlayStyle(statusBarColor: Colors.transparent),
     ),
   );
 }

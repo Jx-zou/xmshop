@@ -11,12 +11,13 @@ class HomeBestBannerController extends BaseController with StateMixin<List<Goods
 
   @override
   void loadData() async {
-    final response =
-    await provider.getGoodsModel(query: {"is_best": "1", "pageSize": "4"});
+    final Response<List<GoodsModel>> response = await provider.getGoodsModel(query: {"is_best": "1", "pageSize": "4"});
     if (response.hasError) {
       change(null, status: RxStatus.error(response.statusText));
-      return;
+    } else if (response.body!.isEmpty) {
+      change(response.body, status: RxStatus.empty());
+    } else {
+      change(response.body, status: RxStatus.success());
     }
-    change(response.body, status: RxStatus.success());
   }
 }

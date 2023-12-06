@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 import '../../../common/controllers/base_controller.dart';
@@ -42,11 +43,11 @@ class XmSearchController extends BaseController with StateMixin<List<String>> {
 
   @override
   void loadData() async {
-    List<String> history = await searchService.getHistory();
-    if (history.isEmpty) {
-      change([], status: RxStatus.success());
-      return;
+    List<String>? history = await searchService.getHistory();
+    if(history == null || history.isEmpty) {
+      change(history, status: RxStatus.empty());
+    } else {
+      change(history, status: RxStatus.success());
     }
-    change(history, status: RxStatus.success());
   }
 }
