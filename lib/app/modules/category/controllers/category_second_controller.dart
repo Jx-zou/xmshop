@@ -4,11 +4,11 @@ import '../../../common/controllers/base_controller.dart';
 import '../../../data/category_provider.dart';
 import '../../../models/category_model.dart';
 
-class SecondCategoryController extends BaseController with StateMixin<List<CategoryModel>> {
+class CategorySecondController extends BaseController with StateMixin<List<CategoryModel>> {
   final ICategoryProvider provider;
   String? id = "";
 
-  SecondCategoryController({required this.provider});
+  CategorySecondController({required this.provider});
 
   void updateData(String? id) {
     this.id = id;

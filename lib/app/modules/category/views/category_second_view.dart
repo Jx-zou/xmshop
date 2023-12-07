@@ -4,10 +4,10 @@ import 'package:get/get.dart';
 import '../../../common/views/status/loading_view.dart';
 import '../../../utils/https_client.dart';
 import '../../../utils/screen_adapter.dart';
-import '../controllers/second_category_controller.dart';
+import '../controllers/category_second_controller.dart';
 
-class SecondCategoryView extends GetView<SecondCategoryController> {
-  const SecondCategoryView({super.key});
+class CategorySecondView extends GetView<CategorySecondController> {
+  const CategorySecondView({super.key});
 
   @override
   Widget build(BuildContext context) {

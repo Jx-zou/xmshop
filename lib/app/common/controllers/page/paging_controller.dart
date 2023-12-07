@@ -5,31 +5,27 @@ import '../base_controller.dart';
 abstract class PagingController<T> extends BaseController with StateMixin<List<T>> {
   late int page;
   late int pageSize;
-  bool isFetching = false;
+  late bool isFetching;
   late bool hasMore;
-  Map<String, String>? query;
+  Map<String, String> query;
 
-  PagingController({this.query, this.pageSize = 10});
+  PagingController({required this.query, this.pageSize = 10});
 
   void _initQuery() {
     Map<String, String> defaultQuery = {"page": "$page", "pageSize": "$pageSize"};
-    if (query == null) {
-      query = defaultQuery;
-      return;
-    }
-    query?.addAll(defaultQuery);
+    query.addAll(defaultQuery);
   }
 
   void _updateQuery() {
-    query?.update("page", (value) => "$page");
-    query?.update("pageSize", (value) => "$pageSize");
+    query.update("page", (value) => "$page");
+    query.update("pageSize", (value) => "$pageSize");
   }
 
   Future<Response<List<T>>> getData();
 
   @override
   void loadData() async {
-    if (!hasMore) {
+    if (!hasMore || isFetching) {
       return;
     }
     isFetching = true;

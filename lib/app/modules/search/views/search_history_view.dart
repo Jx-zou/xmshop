@@ -11,10 +11,7 @@ class SearchHistoryView extends GetView<XmSearchController> {
 
   Widget _clearHistoryBottomSheet() {
     return controller.obx((state) => Container(
-        padding: EdgeInsets.fromLTRB(ScreenAdapter.width(80),
-            ScreenAdapter.height(50), ScreenAdapter.width(80), 0),
-        width: ScreenAdapter.width(1080),
-        height: ScreenAdapter.height(360),
+        padding: EdgeInsets.all(ScreenAdapter.width(30)),
         color: Colors.white,
         child: Column(children: [
           Center(
@@ -88,14 +85,15 @@ class SearchHistoryView extends GetView<XmSearchController> {
   Widget build(BuildContext context) {
     return controller.obx(
         (state) =>
-            Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            Container(
+                margin: EdgeInsets.only(bottom: ScreenAdapter.height(30)),
+                child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               TitleBanner("搜索历史",
                   leftSize: ScreenAdapter.fontSize(48),
                   iconSize: ScreenAdapter.fontSize(54),
                   icon: Icons.delete, onTap: () {
                 Get.bottomSheet(_clearHistoryBottomSheet());
               }),
-              SizedBox(height: ScreenAdapter.height(30)),
               Wrap(
                   children: state!
                       .map((value) => InkWell(
@@ -108,11 +106,7 @@ class SearchHistoryView extends GetView<XmSearchController> {
                             controller.onKeywordsTap(value);
                           },
                           child: Container(
-                            padding: EdgeInsets.fromLTRB(
-                                ScreenAdapter.width(32),
-                                ScreenAdapter.height(16),
-                                ScreenAdapter.width(32),
-                                ScreenAdapter.width(16)),
+                            padding: EdgeInsets.symmetric(horizontal: ScreenAdapter.width(32), vertical: ScreenAdapter.height(16)),
                             margin: EdgeInsets.all(ScreenAdapter.height(16)),
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(5),
@@ -120,7 +114,7 @@ class SearchHistoryView extends GetView<XmSearchController> {
                             child: Text(value),
                           )))
                       .toList()),
-            ]),
+            ])),
         onLoading: LoadingView.circle(),
         onEmpty: Container(),
         onError: (error) => Container());

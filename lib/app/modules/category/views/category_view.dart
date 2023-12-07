@@ -40,9 +40,8 @@ class CategoryView extends GetView<CategoryController> {
                           )
                         ])),
                 onTap: () {
-                  Get.toNamed("/xm-search");
+                  Get.toNamed("/search");
                 }),
-            backgroundColor: Colors.transparent,
             elevation: 0,
             centerTitle: true,
             actions: [

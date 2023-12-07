@@ -7,9 +7,9 @@ import '../../../utils/route_utils.dart';
 import '../../../utils/screen_adapter.dart';
 import '../controllers/product_details_recommended_controller.dart';
 
-class ProductDetailsRecommendedView extends GetView<ProductDetailsRecommendedController> {
+class ProductDetailsRecommendedView
+    extends GetView<ProductDetailsRecommendedController> {
   const ProductDetailsRecommendedView({super.key});
-
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +34,7 @@ class ProductDetailsRecommendedView extends GetView<ProductDetailsRecommendedCon
           itemCount: state?.length,
           itemBuilder: (context, index) => TileCard(
               onTap: () {
-                RouteUtils.toGoodsDetails("id", state?[index].id);
+                RouteUtils.to("/product-details", "id", state?[index].id);
               },
               padding: EdgeInsets.all(ScreenAdapter.width(30)),
               backgroundColor: Colors.white,

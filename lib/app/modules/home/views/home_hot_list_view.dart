@@ -13,54 +13,58 @@ class HomeHotListView extends GetView<HomeHotListController> {
   @override
   Widget build(BuildContext context) {
     return controller.obx(
-            (state) => Column(
+        (state) => Column(
             children: state!
                 .map((goodsModel) => Expanded(
-                flex: 1,
-                child: Padding(
-                    padding: EdgeInsets.only(
-                        top: ScreenAdapter.height(10),
-                        bottom: ScreenAdapter.height(10)),
-                    child: InkWell(
-                        onTap: () {
-                          RouteUtils.toGoodsDetails("id", goodsModel.id);
-                        },
-                        child: Container(
-                            color: const Color.fromRGBO(246, 246, 246, 1),
-                            child: Row(children: [
-                              Expanded(
-                                  flex: 3,
-                                  child: Column(children: [
-                                    SizedBox(
-                                        height: ScreenAdapter.height(32)),
-                                    Text("${goodsModel.title}",
-                                        style: TextStyle(
-                                            fontSize:
-                                            ScreenAdapter.fontSize(38),
-                                            fontWeight: FontWeight.bold)),
-                                    SizedBox(
-                                        height: ScreenAdapter.height(20)),
-                                    Text("${goodsModel.subTitle}",
-                                        style: TextStyle(
-                                            fontSize:
-                                            ScreenAdapter.fontSize(
-                                                28))),
-                                    SizedBox(
-                                        height: ScreenAdapter.height(20)),
-                                    Text("${goodsModel.price}",
-                                        style: TextStyle(
-                                            fontSize:
-                                            ScreenAdapter.fontSize(34)))
-                                  ])),
-                              Expanded(
-                                  flex: 2,
-                                  child: SizedBox(
-                                      height: ScreenAdapter.height(230),
-                                      child: Padding(
-                                          padding: EdgeInsets.all(
-                                              ScreenAdapter.height(20)),
-                                          child: Image.network(HttpsClient.picReplaceUrl("${goodsModel.pic}"), fit: BoxFit.cover))))
-                            ]))))))
+                    flex: 1,
+                    child: Padding(
+                        padding: EdgeInsets.only(
+                            top: ScreenAdapter.height(10),
+                            bottom: ScreenAdapter.height(10)),
+                        child: InkWell(
+                            onTap: () {
+                              RouteUtils.to(
+                                  "/product-details", "id", goodsModel.id);
+                            },
+                            child: Container(
+                                color: const Color.fromRGBO(246, 246, 246, 1),
+                                child: Row(children: [
+                                  Expanded(
+                                      flex: 3,
+                                      child: Column(children: [
+                                        SizedBox(
+                                            height: ScreenAdapter.height(32)),
+                                        Text("${goodsModel.title}",
+                                            style: TextStyle(
+                                                fontSize:
+                                                    ScreenAdapter.fontSize(38),
+                                                fontWeight: FontWeight.bold)),
+                                        SizedBox(
+                                            height: ScreenAdapter.height(20)),
+                                        Text("${goodsModel.subTitle}",
+                                            style: TextStyle(
+                                                fontSize:
+                                                    ScreenAdapter.fontSize(
+                                                        28))),
+                                        SizedBox(
+                                            height: ScreenAdapter.height(20)),
+                                        Text("${goodsModel.price}",
+                                            style: TextStyle(
+                                                fontSize:
+                                                    ScreenAdapter.fontSize(34)))
+                                      ])),
+                                  Expanded(
+                                      flex: 2,
+                                      child: SizedBox(
+                                          height: ScreenAdapter.height(230),
+                                          child: Padding(
+                                              padding: EdgeInsets.all(
+                                                  ScreenAdapter.height(20)),
+                                              child: Image.network(
+                                                  HttpsClient.picReplaceUrl(
+                                                      "${goodsModel.pic}"),
+                                                  fit: BoxFit.cover))))
+                                ]))))))
                 .toList()),
         onLoading: LoadingView.circle(),
         onEmpty: Container(),

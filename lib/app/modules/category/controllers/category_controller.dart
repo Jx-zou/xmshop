@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:xmshop/app/modules/category/controllers/second_category_controller.dart';
+import 'package:xmshop/app/modules/category/controllers/category_second_controller.dart';
 
 import '../../../common/controllers/base_controller.dart';
 import '../../../data/category_provider.dart';
@@ -7,7 +7,7 @@ import '../../../models/category_model.dart';
 
 class CategoryController extends BaseController with StateMixin<List<CategoryModel>> {
   final ICategoryProvider provider;
-  final SecondCategoryController secondCategoryController = Get.find<SecondCategoryController>();
+  final CategorySecondController secondCategoryController = Get.find<CategorySecondController>();
   final RxInt selectIndex = 0.obs;
 
   CategoryController({required this.provider});

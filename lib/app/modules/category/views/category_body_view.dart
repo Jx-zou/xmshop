@@ -4,14 +4,14 @@ import 'package:get/get.dart';
 import '../../../common/views/status/loading_view.dart';
 import '../../../utils/screen_adapter.dart';
 import '../controllers/category_controller.dart';
-import 'second_category_view.dart';
+import 'category_second_view.dart';
 
 class CategoryBodyView extends GetView<CategoryController> {
   const CategoryBodyView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return  controller.obx((state) => Row(children: [
+    return  Container(color: Colors.white, child: controller.obx((state) => Row(children: [
       SizedBox(
           width: ScreenAdapter.width(300),
           height: double.infinity,
@@ -36,11 +36,11 @@ class CategoryBodyView extends GetView<CategoryController> {
                         )
                       ]))))),
       const Expanded(
-        child: SecondCategoryView(),
+        child: CategorySecondView(),
       )
     ]),
         onLoading: LoadingView.circle(),
         onEmpty: Container(),
-        onError: (error) => Container());
+        onError: (error) => Container()));
   }
 }

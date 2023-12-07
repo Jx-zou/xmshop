@@ -12,12 +12,12 @@ class SearchHotView extends GetView<SearchHotController> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: EdgeInsets.only(top: ScreenAdapter.height(80)),
       decoration: BoxDecoration(
           color: Colors.white, borderRadius: BorderRadius.circular(10)),
       child: Column(
         children: [
           Container(
-            width: double.infinity,
             height: ScreenAdapter.height(138),
             decoration: const BoxDecoration(
                 image: DecorationImage(
@@ -26,7 +26,7 @@ class SearchHotView extends GetView<SearchHotController> {
           ),
           Container(
               padding: EdgeInsets.fromLTRB(ScreenAdapter.width(10), 0,
-                  ScreenAdapter.width(10), ScreenAdapter.width(50)),
+                  ScreenAdapter.width(10), ScreenAdapter.width(80)),
               child: controller.obx(
                   (state) => GridView.builder(
                       itemCount: state?.length,
@@ -57,7 +57,6 @@ class SearchHotView extends GetView<SearchHotController> {
                   onLoading: LoadingView.circle(),
                   onEmpty: Container(),
                   onError: (error) => Container())),
-          SizedBox(height: ScreenAdapter.height(20))
         ],
       ),
     );

@@ -13,7 +13,8 @@ class CartGuessView extends GetView<CartGuessController> {
 
   @override
   Widget build(BuildContext context) {
-    return controller.obx((state) => Column(children: [
+    return controller.obx(
+        (state) => Column(children: [
               Padding(
                   padding: EdgeInsets.only(top: ScreenAdapter.height(30)),
                   child: Row(
@@ -56,7 +57,8 @@ class CartGuessView extends GetView<CartGuessController> {
                   itemCount: state?.length,
                   itemBuilder: (context, index) => TileCard(
                       onTap: () {
-                        RouteUtils.toGoodsDetails("id", state?[index].id);
+                        RouteUtils.to(
+                            "/product-details", "id", state?[index].id);
                       },
                       padding: EdgeInsets.all(ScreenAdapter.width(30)),
                       backgroundColor: Colors.white,

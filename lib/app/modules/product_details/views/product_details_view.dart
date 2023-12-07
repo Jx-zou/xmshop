@@ -10,10 +10,7 @@ import '../../../utils/screen_adapter.dart';
 class ProductDetailsView extends GetView<ProductDetailsController> {
   const ProductDetailsView({super.key});
 
-  _action(
-      {required VoidCallback onPressed,
-      required IconData icon,
-      EdgeInsetsGeometry? margin}) {
+  _action({required VoidCallback onPressed, required IconData icon, EdgeInsetsGeometry? margin}) {
     return Container(
         margin: margin,
         alignment: Alignment.center,

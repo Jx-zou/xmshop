@@ -16,7 +16,9 @@ class Config {
     scaffoldBackgroundColor: const Color.fromRGBO(245, 245, 245, 1),
     appBarTheme: const AppBarTheme(
       elevation: 0,
-      color: Colors.white,
+      foregroundColor: Colors.black54,
+      backgroundColor: Colors.white,
+      surfaceTintColor: Colors.transparent,
       systemOverlayStyle: SystemUiOverlayStyle(statusBarColor: Colors.transparent),
     ),
   );

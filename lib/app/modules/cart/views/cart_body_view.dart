@@ -19,7 +19,6 @@ import 'cart_guess_view.dart';
 class CartBodyView extends GetView<CartController> {
   const CartBodyView({super.key});
 
-
   Widget _storeItem({required CartModel cart}) {
     return Container(
         margin: EdgeInsets.only(top: ScreenAdapter.height(80)),
@@ -30,7 +29,7 @@ class CartBodyView extends GetView<CartController> {
             titleCrossAxisAlignment: CrossAxisAlignment.start,
             onChanged: (isChecked) {},
             onTap: () {
-              RouteUtils.toGoodsDetails("id", "${cart.id}");
+              RouteUtils.to("/product-details", "id", "${cart.id}");
             },
             leading: Container(
                 width: ScreenAdapter.width(300),
@@ -38,7 +37,7 @@ class CartBodyView extends GetView<CartController> {
                 decoration: BoxDecoration(
                     color: Colors.black.withOpacity(0.02),
                     borderRadius:
-                    BorderRadius.circular(ScreenAdapter.fontSize(30)),
+                        BorderRadius.circular(ScreenAdapter.fontSize(30)),
                     image: DecorationImage(
                         image: NetworkImage(
                             HttpsClient.picReplaceUrl("${cart.pic}")),
@@ -57,7 +56,7 @@ class CartBodyView extends GetView<CartController> {
                       ScreenAdapter.width(15),
                       ScreenAdapter.width(10)),
                   borderRadius:
-                  BorderRadius.circular(ScreenAdapter.fontSize(20)),
+                      BorderRadius.circular(ScreenAdapter.fontSize(20)),
                   onPressed: () {
                     BottomSheetUtils.goodsSelectedBottomSheet(
                         showNumWidget: false, onPressed: () {});
@@ -131,7 +130,10 @@ class CartBodyView extends GetView<CartController> {
                 ])));
   }
 
-  Widget _store({required String title, Widget? trailing, required List<CartModel>? carts}) {
+  Widget _store(
+      {required String title,
+      Widget? trailing,
+      required List<CartModel>? carts}) {
     List<Widget> storeItems = [];
     if (carts != null && carts.isNotEmpty) {
       for (int i = 0; i < carts.length; i++) {
@@ -147,7 +149,9 @@ class CartBodyView extends GetView<CartController> {
               onChanged: (value) {
                 controller.changeAllSelected();
               },
-              fillColor: controller.allSelected.isTrue ? Colors.deepOrange : Colors.black.withOpacity(0.05),
+              fillColor: controller.allSelected.isTrue
+                  ? Colors.deepOrange
+                  : Colors.black.withOpacity(0.05),
               unActiveColor: Colors.transparent,
               activeColor: Colors.white,
               size: 18.0,
@@ -155,7 +159,10 @@ class CartBodyView extends GetView<CartController> {
               icon: XmshopIcons.checked),
           Container(
               margin: EdgeInsets.only(left: ScreenAdapter.width(20)),
-              child: Text(title, style: TextStyle(fontSize: ScreenAdapter.fontSize(42), fontWeight: FontWeight.bold)))
+              child: Text(title,
+                  style: TextStyle(
+                      fontSize: ScreenAdapter.fontSize(42),
+                      fontWeight: FontWeight.bold)))
         ]),
         trailing ?? Container()
       ]),
@@ -168,14 +175,14 @@ class CartBodyView extends GetView<CartController> {
     return Stack(children: [
       ListView(controller: controller.scrollController, children: [
         controller.obx(
-              (state) => Column(children: [
+          (state) => Column(children: [
             Container(
                 margin: EdgeInsets.all(ScreenAdapter.width(30)),
                 padding: EdgeInsets.all(ScreenAdapter.width(30)),
                 decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius:
-                    BorderRadius.circular(ScreenAdapter.fontSize(40))),
+                        BorderRadius.circular(ScreenAdapter.fontSize(40))),
                 child: Column(children: [
                   _store(
                       title: "小米自营",
@@ -198,10 +205,12 @@ class CartBodyView extends GetView<CartController> {
                 decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius:
-                    BorderRadius.circular(ScreenAdapter.fontSize(40))),
+                        BorderRadius.circular(ScreenAdapter.fontSize(40))),
                 child: _store(
                     title: "失效分组",
-                    carts: controller.expire.map((index) => state![index]).toList()))
+                    carts: controller.expire
+                        .map((index) => state![index])
+                        .toList()))
           ]),
           onLoading: LoadingView.circle(),
           onEmpty: Container(),

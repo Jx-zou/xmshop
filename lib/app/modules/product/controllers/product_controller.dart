@@ -49,7 +49,7 @@ class ProductController extends ScrollPageController<GoodsModel> {
           "${Get.parameters['requestKey']}": "${Get.parameters['requestValue']}"});
 
   toDetails(String? id) {
-    if (id != null) {
+    if (id != null && id.isNotEmpty) {
       Get.toNamed("product-details", parameters: {"requestKey": "id", "requestValue": id});
     }
   }
@@ -93,12 +93,13 @@ class ProductController extends ScrollPageController<GoodsModel> {
 
   @override
   void init() {
+    super.init();
     _getScreenData(selectId.value);
   }
 
   @override
   Future<Response<List<GoodsModel>>> getData() {
-    super.query?.addAll(screenQuery);
-    return provider.getGoodsModel(query: super.query);
+    screenQuery.addAll(super.query);
+    return provider.getGoodsModel(query: screenQuery);
   }
 }

@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 
 import '../../../common/controllers/base_controller.dart';
 import 'home_best_banner_controller.dart';
-import 'home_best_list_controller.dart';
+import 'home_best_waterfall_controller.dart';
 import 'home_category_controller.dart';
 import 'home_hot_list_controller.dart';
 import 'home_hot_swiper_controller.dart';
@@ -44,7 +44,7 @@ class HomeController extends BaseController {
   @override
   void reset() {
     Get.find<HomeBestBannerController>().onRefresh();
-    Get.find<HomeBestListController>().onRefresh();
+    Get.find<HomeBestWaterfallController>().onRefresh();
     Get.find<HomeCategoryController>().onRefresh();
     Get.find<HomeHotListController>().onRefresh();
     Get.find<HomeHotSwiperController>().onRefresh();

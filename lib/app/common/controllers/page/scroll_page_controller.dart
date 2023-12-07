@@ -6,7 +6,7 @@ abstract class ScrollPageController<T> extends PagingController<T> {
   final ScrollController scrollController;
   final int offset;
 
-  ScrollPageController({required this.scrollController, this.offset = 20, super.query});
+  ScrollPageController({required this.scrollController, this.offset = 20, required super.query});
 
   void _addScrollListener() {
     scrollController.addListener(() {

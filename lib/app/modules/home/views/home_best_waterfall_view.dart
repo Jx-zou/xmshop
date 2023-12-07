@@ -7,14 +7,16 @@ import '../../../common/views/widgets/tile_card.dart';
 import '../../../utils/https_client.dart';
 import '../../../utils/route_utils.dart';
 import '../../../utils/screen_adapter.dart';
-import '../controllers/home_best_list_controller.dart';
+import '../controllers/home_best_waterfall_controller.dart';
 
-class HomeBestListView extends GetView<HomeBestListController> {
-  const HomeBestListView({super.key});
+class HomeBestWaterfallView extends GetView<HomeBestWaterfallController> {
+  const HomeBestWaterfallView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return controller.obx(
+    return Container(
+        padding: EdgeInsets.all(ScreenAdapter.width(30)),
+        child: controller.obx(
         (state) => MasonryGridView.count(
             crossAxisCount: 2,
             mainAxisSpacing: ScreenAdapter.width(26),
@@ -24,7 +26,7 @@ class HomeBestListView extends GetView<HomeBestListController> {
             physics: const NeverScrollableScrollPhysics(),
             itemBuilder: (context, index) => TileCard(
                 onTap: () {
-                  RouteUtils.toGoodsDetails("id", state[index].id);
+                  RouteUtils.to("/product-details", "id", state[index].id);
                 },
                 backgroundColor: Colors.white,
                 image: Image.network(
@@ -42,6 +44,6 @@ class HomeBestListView extends GetView<HomeBestListController> {
                     style: TextStyle(fontSize: ScreenAdapter.fontSize(42))))),
         onLoading: LoadingView.circle(),
         onEmpty: Container(),
-        onError: (error) => Container());
+        onError: (error) => Container()));
   }
 }

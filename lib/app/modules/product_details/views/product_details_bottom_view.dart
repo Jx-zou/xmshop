@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../common/icons/xmshop_icons.dart';
-import '../../../common/views/widgets/label_icon_button.dart';
+import '../../../common/views/widgets/label_button.dart';
 import '../../../utils/bottom_sheet_utils.dart';
 import '../../../utils/screen_adapter.dart';
 import '../../../widgets/bottom_button.dart';
@@ -33,22 +33,22 @@ class ProductDetailsBottomView extends GetView<ProductDetailsController> {
                 top: BorderSide(
                     width: ScreenAdapter.height(3), color: Colors.black.withOpacity(0.02)))),
         child: Row(children: [
-          LabelIconButton(
+          LabelButton(
               onTap: () {},
               margin: EdgeInsets.only(left: ScreenAdapter.width(30), right: ScreenAdapter.width(25)),
-              icon: Icon(XmshopIcons.online, size: ScreenAdapter.fontSize(56)),
+              widget: Icon(XmshopIcons.online, size: ScreenAdapter.fontSize(56)),
               label: "客服",
               style: TextStyle(fontSize: ScreenAdapter.fontSize(28), fontWeight: FontWeight.bold, color: Colors.black.withOpacity(0.6))),
-          LabelIconButton(
+          LabelButton(
               onTap: () {},
               margin: EdgeInsets.symmetric(horizontal: ScreenAdapter.width(25)),
-              icon: Icon(XmshopIcons.collect, size: ScreenAdapter.fontSize(56)),
+              widget: Icon(XmshopIcons.collect, size: ScreenAdapter.fontSize(56)),
               label: "收藏",
               style: TextStyle(fontSize: ScreenAdapter.fontSize(28), fontWeight: FontWeight.bold, color: Colors.black.withOpacity(0.6))),
-          LabelIconButton(
+          LabelButton(
               onTap: () {},
               margin: EdgeInsets.symmetric(horizontal: ScreenAdapter.width(25)),
-              icon: Icon(XmshopIcons.shopCart, size: ScreenAdapter.fontSize(56)),
+              widget: Icon(XmshopIcons.shopCart, size: ScreenAdapter.fontSize(56)),
               label: "购物车",
               style: TextStyle(fontSize: ScreenAdapter.fontSize(28), fontWeight: FontWeight.bold, color: Colors.black.withOpacity(0.6))),
           Expanded(

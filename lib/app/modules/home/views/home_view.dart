@@ -32,15 +32,22 @@ class HomeView extends GetView<HomeController> {
                         alignment: AlignmentDirectional.centerStart,
                         children: [
                           Icon(XmshopIcons.logo,
-                              color: Color.fromRGBO(255, 255, 255, 1 - controller.ratio.value),
+                              color: Color.fromRGBO(
+                                  255, 255, 255, 1 - controller.ratio.value),
                               size: 32),
                           InkWell(
                               child: Container(
-                                  margin: EdgeInsets.only(left: ScreenAdapter.width((1 - controller.ratio.value) * HomeController.maxOffset)),
-                                  width: ScreenAdapter.width(650 + controller.ratio.value * HomeController.maxOffset),
+                                  margin: EdgeInsets.only(
+                                      left: ScreenAdapter.width(
+                                          (1 - controller.ratio.value) *
+                                              HomeController.maxOffset)),
+                                  width: ScreenAdapter.width(650 +
+                                      controller.ratio.value *
+                                          HomeController.maxOffset),
                                   height: ScreenAdapter.height(110),
                                   decoration: BoxDecoration(
-                                      color: const Color.fromARGB(230, 240, 245, 245),
+                                      color: const Color.fromARGB(
+                                          230, 240, 245, 245),
                                       borderRadius: BorderRadius.circular(30)),
                                   child: Row(
                                       crossAxisAlignment:
