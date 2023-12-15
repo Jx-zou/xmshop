@@ -8,14 +8,21 @@ class HomeAdvertisementView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        color: Colors.white,
-        padding: EdgeInsets.all(ScreenAdapter.width(30)),
-        child: Container(
+      color: Colors.white,
+      padding: EdgeInsets.all(
+        ScreenAdapter.width(30),
+      ),
+      child: Container(
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(ScreenAdapter.width(20)),
-            image: const DecorationImage(
-                image: AssetImage("assets/images/xiaomiBanner2.png"),
-                fit: BoxFit.cover)),
-        height: ScreenAdapter.height(420)));
+          borderRadius: BorderRadius.circular(
+            ScreenAdapter.width(20),
+          ),
+          image: const DecorationImage(
+              image: AssetImage("assets/images/xiaomiBanner2.png"),
+              fit: BoxFit.cover),
+        ),
+        height: ScreenAdapter.height(420),
+      ),
+    );
   }
 }

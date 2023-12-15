@@ -24,20 +24,26 @@ class NumView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     TextStyle intStyle = this.intStyle ?? const TextStyle(fontSize: 16.0);
-    TextStyle fractionStyle = this.fractionStyle ?? const TextStyle(fontSize: 12.0);
+    TextStyle fractionStyle =
+        this.fractionStyle ?? const TextStyle(fontSize: 12.0);
     String numString = number.toString();
     int index = numString.indexOf(".");
 
     return SizedBox(
-        width: width,
-        height: height,
-        child: Row(
-          mainAxisAlignment: mainAxisAlignment,
-          crossAxisAlignment: crossAxisAlignment,
-          children: [
-            Text(index != -1 ? numString.substring(0, index) : numString, style: intStyle),
-            index != -1 ? Text(numString.substring(index, numString.length), style: fractionStyle) : Container()
-          ],
-        ));
+      width: width,
+      height: height,
+      child: Row(
+        mainAxisAlignment: mainAxisAlignment,
+        crossAxisAlignment: crossAxisAlignment,
+        children: [
+          Text(index != -1 ? numString.substring(0, index) : numString,
+              style: intStyle),
+          index != -1
+              ? Text(numString.substring(index, numString.length),
+                  style: fractionStyle)
+              : Container()
+        ],
+      ),
+    );
   }
 }

@@ -12,15 +12,29 @@ class ProductDetailsDescriptionView extends GetView<ProductDetailsController> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        margin: EdgeInsets.only(bottom: ScreenAdapter.height(30)),
-        width: ScreenAdapter.width(1080),
-        child: controller.obx((state) => Stack(children: [
-          Html(data: controller.moreSelected.value == 1 ? "${state?.specs}" : "${state?.content}"),
-          Positioned(
+      margin: EdgeInsets.only(
+        bottom: ScreenAdapter.height(30),
+      ),
+      width: ScreenAdapter.width(1080),
+      child: controller.obx(
+        (state) => Stack(
+          children: [
+            Html(
+              data: controller.moreSelected.value == 1
+                  ? "${state?.specs}"
+                  : "${state?.content}",
+            ),
+            Positioned(
               top: 0,
               left: 0,
               right: 0,
-              child: controller.showMoreTar.isFalse ? const ProductDetailsMoreTarView() : const SizedBox())
-        ])));
+              child: controller.showMoreTar.isFalse
+                  ? const ProductDetailsMoreTarView()
+                  : const SizedBox(),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

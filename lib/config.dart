@@ -8,7 +8,7 @@ class Config {
   static const String serverApi = "https://xiaomi.itying.com/api";
   static const String server = "https://xiaomi.itying.com/";
 
-  static ThemeData themeData = ThemeData(
+  static final ThemeData themeData = ThemeData(
     useMaterial3: true,
     fontFamily: "miFont",
     splashColor: Colors.transparent,
@@ -19,7 +19,8 @@ class Config {
       foregroundColor: Colors.black54,
       backgroundColor: Colors.white,
       surfaceTintColor: Colors.transparent,
-      systemOverlayStyle: SystemUiOverlayStyle(statusBarColor: Colors.transparent),
+      systemOverlayStyle:
+          SystemUiOverlayStyle(statusBarColor: Colors.transparent),
     ),
   );
 }

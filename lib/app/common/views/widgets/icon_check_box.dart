@@ -41,28 +41,29 @@ class _IconCheckBoxState extends State<IconCheckBox> {
     double iconSize = widget.iconSize ?? 12.0;
 
     return InkWell(
-      splashColor: Colors.transparent,
-      radius: 0,
-      onTap: () {
-        widget.onChanged(!widget.value);
-      },
-      child: Container(
-        width: size,
-        height: size,
-        margin: widget.margin,
-        alignment: Alignment.center,
-        decoration: BoxDecoration(
-            shape: shape,
-            border: Border.all(color: widget.value ? fillColor : Colors.black.withOpacity(0.05)),
-            color: fillColor),
-        child: widget.value
-            ? Icon(
-                icon,
-                size: iconSize,
-                color: widget.value ? activeColor : unActiveColor,
-              )
-            : null,
-      ),
-    );
+        splashColor: Colors.transparent,
+        radius: 0,
+        onTap: () {
+          widget.onChanged(!widget.value);
+        },
+        child: Container(
+            width: size,
+            height: size,
+            margin: widget.margin,
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+                shape: shape,
+                border: Border.all(
+                  color:
+                      widget.value ? fillColor : Colors.black.withOpacity(0.05),
+                ),
+                color: fillColor),
+            child: widget.value
+                ? Icon(
+                    icon,
+                    size: iconSize,
+                    color: widget.value ? activeColor : unActiveColor,
+                  )
+                : null));
   }
 }

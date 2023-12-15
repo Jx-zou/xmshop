@@ -35,43 +35,53 @@ class CloseBottomSheet extends StatelessWidget {
     Widget child = this.child ?? Container();
     Icon icon = this.icon ?? const Icon(Icons.dangerous_rounded);
     Color color = this.color ?? Colors.white;
-    Color closeBackgroundColor = this.closeBackgroundColor ?? Colors.black.withOpacity(0.05);
+    Color closeBackgroundColor =
+        this.closeBackgroundColor ?? Colors.black.withOpacity(0.05);
     Color closeForegroundColor = this.closeForegroundColor ?? Colors.white;
     EdgeInsetsGeometry padding =
         this.padding ?? const EdgeInsets.fromLTRB(15, 15, 15, 0);
     EdgeInsetsGeometry closePadding = this.padding ?? const EdgeInsets.all(0);
     BorderRadiusGeometry borderRadius = this.borderRadius ??
-        const BorderRadius.vertical(top: Radius.circular(10));
-    BorderRadiusGeometry closeBorderRadius = this.closeBorderRadius ??
-        BorderRadius.circular(10);
+        const BorderRadius.vertical(
+          top: Radius.circular(10),
+        );
+    BorderRadiusGeometry closeBorderRadius =
+        this.closeBorderRadius ?? BorderRadius.circular(10);
 
     return Container(
-        width: width,
-        height: height,
-        decoration: BoxDecoration(color: color, borderRadius: borderRadius),
-        padding: padding,
-        child: Stack(
-          children: [
-            child,
-            Positioned(
-              top: 0,
-              right: 0,
-              child: SizedBox(
-                  width: closeSize,
-                  height: closeSize,
-                  child: ElevatedButton(
-                      onPressed: closed,
-                      style: ButtonStyle(
-                          alignment: Alignment.center,
-                          padding: MaterialStateProperty.all(closePadding),
-                          minimumSize: MaterialStateProperty.all(Size.zero),
-                          backgroundColor: MaterialStateProperty.all(closeBackgroundColor),
-                          foregroundColor: MaterialStateProperty.all(closeForegroundColor),
-                          elevation: MaterialStateProperty.all(0),
-                          shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: closeBorderRadius))),
-                      child: icon)),
-            )
-          ],
-        ));
+      width: width,
+      height: height,
+      decoration: BoxDecoration(color: color, borderRadius: borderRadius),
+      padding: padding,
+      child: Stack(
+        children: [
+          child,
+          Positioned(
+            top: 0,
+            right: 0,
+            child: SizedBox(
+              width: closeSize,
+              height: closeSize,
+              child: ElevatedButton(
+                  onPressed: closed,
+                  style: ButtonStyle(
+                    alignment: Alignment.center,
+                    padding: MaterialStateProperty.all(closePadding),
+                    minimumSize: MaterialStateProperty.all(Size.zero),
+                    backgroundColor:
+                        MaterialStateProperty.all(closeBackgroundColor),
+                    foregroundColor:
+                        MaterialStateProperty.all(closeForegroundColor),
+                    elevation: MaterialStateProperty.all(0),
+                    shape: MaterialStateProperty.all(
+                      RoundedRectangleBorder(borderRadius: closeBorderRadius),
+                    ),
+                  ),
+                  child: icon),
+            ),
+          )
+        ],
+      ),
+    );
   }
 }

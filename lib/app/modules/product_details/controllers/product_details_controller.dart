@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -26,8 +24,8 @@ class ProductDetailsController extends BaseController with StateMixin<GoodsDetai
   ];
   final List moreMenu = [
     {"id": 1, "title": "首页", "icon": XmshopIcons.home},
-    {"id": 2, "title": "消息", "icon": XmshopIcons.message},
-    {"id": 3, "title": "收藏", "icon": XmshopIcons.collect}
+    {"id": 2, "title": "消息通知", "icon": XmshopIcons.message},
+    {"id": 3, "title": "喜欢的商品", "icon": XmshopIcons.collect}
   ];
 
   final List<String> picList = [
@@ -50,12 +48,11 @@ class ProductDetailsController extends BaseController with StateMixin<GoodsDetai
   }
 
   void addCart() async {
-    bool flag = await cartService.setGoodsDetails(state!, selectedAttr.value, shopNum.value);
-    ToastUtils.centerToast(flag ? "收藏成功." : "收藏失败.");
     Get.back();
+    ToastUtils.centerToast(await cartService.setGoodsDetails(state!, selectedAttr.value, shopNum.value) ? "收藏成功." : "收藏失败.");
   }
 
-  updateAttrs(String selectedAttr, int shopNum) {
+  void updateAttrs(String selectedAttr, int shopNum) {
     this.selectedAttr.value = selectedAttr;
     this.shopNum.value = shopNum;
     update();
@@ -91,9 +88,7 @@ class ProductDetailsController extends BaseController with StateMixin<GoodsDetai
       RenderObject? renderObject = context.findRenderObject();
       if (renderObject != null) {
         RenderBox renderBox = renderObject as RenderBox;
-        return renderBox.localToGlobal(Offset.zero).dy +
-            scrollController.offset -
-            ScreenAdapter.height(index == 3 ? 325 : 225);
+        return renderBox.localToGlobal(Offset.zero).dy + scrollController.offset - ScreenAdapter.height(index == 3 ? 325 : 225);
       }
     }
     return 0.0;

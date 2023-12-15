@@ -26,7 +26,8 @@ class TitleBanner extends StatelessWidget {
     this.rightWeight,
     this.leftColor,
     this.rightColor,
-    super.key, this.iconColor,
+    super.key,
+    this.iconColor,
   });
 
   @override
@@ -43,30 +44,35 @@ class TitleBanner extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text(left,
-              style: TextStyle(
-                color: leftColor,
-                fontSize: leftSize,
-                fontWeight: leftWeight,
-              )),
+          Text(
+            left,
+            style: TextStyle(
+              color: leftColor,
+              fontSize: leftSize,
+              fontWeight: leftWeight,
+            ),
+          ),
           InkWell(
-              onTap: onTap,
-              child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(right,
-                        style: TextStyle(
-                          color: rightColor,
-                          fontSize: rightSize,
-                          fontWeight: rightWeight,
-                        )),
-                    Icon(
-                      icon,
-                      color: iconColor ?? rightColor,
-                      size: iconSize ?? rightSize,
-                    )
-                  ]))
+            onTap: onTap,
+            child: Row(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    right,
+                    style: TextStyle(
+                      color: rightColor,
+                      fontSize: rightSize,
+                      fontWeight: rightWeight,
+                    ),
+                  ),
+                  Icon(
+                    icon,
+                    color: iconColor ?? rightColor,
+                    size: iconSize ?? rightSize,
+                  )
+                ]),
+          )
         ]);
   }
 }

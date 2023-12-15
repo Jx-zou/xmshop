@@ -10,20 +10,39 @@ class ProductDetailsMoreTarView extends GetView<ProductDetailsController> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        color: Colors.white,
-        height: ScreenAdapter.height(100),
-        child: Obx(() =>
-            Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
-              InkWell(
-                  highlightColor: Colors.transparent,
-                  radius: 0,
-                  onTap: () => controller.changeMoreSelected(1),
-                  child: Text("商品介绍", style: TextStyle(color: controller.moreSelected.value == 1 ? Colors.redAccent : null))),
-              InkWell(
-                  highlightColor: Colors.transparent,
-                  radius: 0,
-                  onTap: () => controller.changeMoreSelected(2),
-                  child: Text("规格参数", style: TextStyle(color: controller.moreSelected.value == 2 ? Colors.redAccent : null)))
-            ])));
+      color: Colors.white,
+      height: ScreenAdapter.height(150),
+      child: Obx(
+        () => Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            InkWell(
+              highlightColor: Colors.transparent,
+              radius: 0,
+              onTap: () => controller.changeMoreSelected(1),
+              child: Text(
+                "商品介绍",
+                style: TextStyle(
+                    color: controller.moreSelected.value == 1
+                        ? Colors.redAccent
+                        : null),
+              ),
+            ),
+            InkWell(
+              highlightColor: Colors.transparent,
+              radius: 0,
+              onTap: () => controller.changeMoreSelected(2),
+              child: Text(
+                "规格参数",
+                style: TextStyle(
+                    color: controller.moreSelected.value == 2
+                        ? Colors.redAccent
+                        : null),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

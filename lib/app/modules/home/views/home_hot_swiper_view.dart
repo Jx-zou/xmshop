@@ -13,18 +13,20 @@ class HomeHotSwiperView extends GetView<HomeHotSwiperController> {
   @override
   Widget build(BuildContext context) {
     return controller.obx(
-            (state) => Swiper(
-          itemCount: state!.length,
-          itemBuilder: (context, index) => Image.network(
-              HttpsClient.picReplaceUrl("${state[index].pic}"),
-              fit: BoxFit.fill),
-          autoplay: true,
-          pagination: SwiperPagination(
-              alignment: Alignment.bottomCenter,
-              builder: RectInsideSwiperPaginationBuilder(width: 45.0)),
+      (state) => Swiper(
+        itemCount: state!.length,
+        itemBuilder: (context, index) => Image.network(
+            HttpsClient.picReplaceUrl("${state[index].pic}"),
+            fit: BoxFit.fill),
+        autoplay: true,
+        pagination: SwiperPagination(
+          alignment: Alignment.bottomCenter,
+          builder: RectInsideSwiperPaginationBuilder(width: 45.0),
         ),
-        onLoading: LoadingView.circle(),
-        onEmpty: Container(),
-        onError: (error) => Container());
+      ),
+      onLoading: LoadingView.circle(),
+      onEmpty: Container(),
+      onError: (error) => Container(),
+    );
   }
 }

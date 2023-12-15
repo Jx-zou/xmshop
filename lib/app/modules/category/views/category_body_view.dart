@@ -11,36 +11,47 @@ class CategoryBodyView extends GetView<CategoryController> {
 
   @override
   Widget build(BuildContext context) {
-    return  Container(color: Colors.white, child: controller.obx((state) => Row(children: [
-      SizedBox(
-          width: ScreenAdapter.width(300),
-          height: double.infinity,
-          child: ListView.builder(
+    return Container(
+      color: Colors.white,
+      child: controller.obx(
+        (state) => Row(children: [
+          SizedBox(
+            width: ScreenAdapter.width(300),
+            height: double.infinity,
+            child: ListView.builder(
               itemCount: state?.length,
               itemBuilder: (context, index) => SizedBox(
-                  width: double.infinity,
-                  height: ScreenAdapter.height(180),
-                  child: InkWell(
-                      onTap: () => controller.changeSelectIndex(index),
-                      child: Stack(children: [
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: Container(
-                            width: ScreenAdapter.width(10),
-                            height: ScreenAdapter.height(46),
-                            color: controller.selectIndex.value == index ? Colors.deepOrange : Colors.white,
-                          ),
-                        ),
-                        Center(
-                          child: Text("${state?[index].title}"),
-                        )
-                      ]))))),
-      const Expanded(
-        child: CategorySecondView(),
-      )
-    ]),
+                width: double.infinity,
+                height: ScreenAdapter.height(180),
+                child: InkWell(
+                  onTap: () => controller.changeSelectIndex(index),
+                  child: Stack(children: [
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Container(
+                        width: ScreenAdapter.width(10),
+                        height: ScreenAdapter.height(46),
+                        color: controller.selectIndex.value == index
+                            ? Colors.deepOrange
+                            : Colors.white,
+                      ),
+                    ),
+                    Center(
+                      child: Text("${state?[index].title}"),
+                    )
+                  ]),
+                ),
+              ),
+            ),
+          ),
+          const Expanded(
+            child: CategorySecondView(),
+          )
+        ]),
         onLoading: LoadingView.circle(),
         onEmpty: Container(),
-        onError: (error) => Container()));
+        onError: (error) => Container(),
+      ),
+    );
   }
 }

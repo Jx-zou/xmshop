@@ -34,20 +34,25 @@ class TextTile extends StatelessWidget {
     EdgeInsetsGeometry padding = this.padding ?? const EdgeInsets.all(3);
 
     return Container(
-        key: key,
-        width: width,
-        height: height,
-        padding: padding,
-        child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Text(leading,
-              style: TextStyle(fontSize: leadingSize, color: leadingColor)),
-          const SizedBox(width: 20),
-          Expanded(
-              child: InkWell(
-                  onTap: onTap,
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [Expanded(child: title), trailing])))
-        ]));
+      key: key,
+      width: width,
+      height: height,
+      padding: padding,
+      child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        Text(
+          leading,
+          style: TextStyle(fontSize: leadingSize, color: leadingColor),
+        ),
+        const SizedBox(width: 20),
+        Expanded(
+          child: InkWell(
+            onTap: onTap,
+            child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [Expanded(child: title), trailing]),
+          ),
+        )
+      ]),
+    );
   }
 }

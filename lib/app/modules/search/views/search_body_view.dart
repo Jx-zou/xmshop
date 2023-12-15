@@ -14,18 +14,22 @@ class SearchBodyView extends GetView<XmSearchController> {
   Widget build(BuildContext context) {
     ThemeData themeData = Theme.of(context);
     return Container(
-        decoration: BoxDecoration(
-            gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                stops: const [0.0, 0.75],
-                colors: [themeData.scaffoldBackgroundColor, Colors.white])),
-        child: ListView(
-            padding: EdgeInsets.symmetric(horizontal: ScreenAdapter.width(30)),
-            children: const [
-              SearchHistoryView(),
-              SearchGuessView(),
-              SearchHotView()
-            ]));
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            stops: const [0.0, 0.75],
+            colors: [themeData.scaffoldBackgroundColor, Colors.white]),
+      ),
+      child: ListView(
+          padding: EdgeInsets.symmetric(
+            horizontal: ScreenAdapter.width(30),
+          ),
+          children: const [
+            SearchHistoryView(),
+            SearchGuessView(),
+            SearchHotView()
+          ]),
+    );
   }
 }

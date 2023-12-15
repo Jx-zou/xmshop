@@ -12,25 +12,32 @@ class ProductDetailsSwiperView extends GetView<ProductDetailsController> {
 
   @override
   Widget build(BuildContext context) {
-    return controller.obx((state) => SizedBox(
+    return controller.obx(
+      (state) => SizedBox(
         width: ScreenAdapter.width(1080),
         height: ScreenAdapter.height(1200),
         child: Swiper(
-            itemCount: 3,
-            itemBuilder: (context, index) => Image.network(
-                HttpsClient.picReplaceUrl("${state?.pic}"),
-                fit: BoxFit.cover),
-            pagination: SwiperPagination(
-                alignment: Alignment.bottomRight,
-                builder: RectFractionPaginationBuilder(
-                    backgroundColor: Colors.black26,
-                    borderRadius:
-                        BorderRadius.circular(ScreenAdapter.height(10)),
-                    color: Colors.white,
-                    activeColor: Colors.cyan,
-                    width: ScreenAdapter.width(100),
-                    height: ScreenAdapter.height(60),
-                    fontSize: ScreenAdapter.fontSize(28),
-                    activeFontSize: ScreenAdapter.fontSize(28))))));
+          itemCount: 3,
+          itemBuilder: (context, index) => Image.network(
+              HttpsClient.picReplaceUrl("${state?.pic}"),
+              fit: BoxFit.cover),
+          pagination: SwiperPagination(
+            alignment: Alignment.bottomRight,
+            builder: RectFractionPaginationBuilder(
+              backgroundColor: Colors.black26,
+              borderRadius: BorderRadius.circular(
+                ScreenAdapter.height(10),
+              ),
+              color: Colors.white,
+              activeColor: Colors.cyan,
+              width: ScreenAdapter.width(100),
+              height: ScreenAdapter.height(60),
+              fontSize: ScreenAdapter.fontSize(28),
+              activeFontSize: ScreenAdapter.fontSize(28),
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }

@@ -63,22 +63,25 @@ class IconCheckBoxListTile extends StatelessWidget {
         margin: EdgeInsets.only(right: mainSpacing),
       ),
       Expanded(
-          child: InkWell(
-              onTap: onTap,
-              child: Row(children: [
-                leading,
-                SizedBox(width: mainSpacing),
-                Expanded(
-                    child: Column(
-                        crossAxisAlignment: titleCrossAxisAlignment,
-                        children: [
-                      title,
-                      SizedBox(height: crossSpacing),
-                      subTitle,
-                      SizedBox(height: crossSpacing),
-                      secondary
-                    ]))
-              ])))
+        child: InkWell(
+          onTap: onTap,
+          child: Row(children: [
+            leading,
+            SizedBox(width: mainSpacing),
+            Expanded(
+              child: Column(
+                  crossAxisAlignment: titleCrossAxisAlignment,
+                  children: [
+                    title,
+                    SizedBox(height: crossSpacing),
+                    subTitle,
+                    SizedBox(height: crossSpacing),
+                    secondary
+                  ]),
+            )
+          ]),
+        ),
+      ),
     ]);
   }
 }

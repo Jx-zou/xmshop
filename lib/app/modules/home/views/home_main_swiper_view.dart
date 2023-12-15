@@ -14,21 +14,24 @@ class HomeMainSwiperView extends GetView<HomeMainSwiperController> {
   @override
   Widget build(BuildContext context) {
     return controller.obx(
-        (state) => SizedBox(
-            height: ScreenAdapter.height(682),
-            child: Swiper(
-              autoplay: true,
-              loop: true,
-              itemCount: state!.length,
-              itemBuilder: (context, index) => Image.network(
-                  HttpsClient.picReplaceUrl("${state[index].pic}"),
-                  fit: BoxFit.cover),
-              pagination: SwiperPagination(
-                  alignment: Alignment.bottomCenter,
-                  builder: RectInsideSwiperPaginationBuilder()),
-            )),
-        onLoading: LoadingView.circle(),
-        onEmpty: Container(),
-        onError: (error) => Container());
+      (state) => SizedBox(
+        height: ScreenAdapter.height(682),
+        child: Swiper(
+          autoplay: true,
+          loop: true,
+          itemCount: state!.length,
+          itemBuilder: (context, index) => Image.network(
+              HttpsClient.picReplaceUrl("${state[index].pic}"),
+              fit: BoxFit.cover),
+          pagination: SwiperPagination(
+            alignment: Alignment.bottomCenter,
+            builder: RectInsideSwiperPaginationBuilder(),
+          ),
+        ),
+      ),
+      onLoading: LoadingView.circle(),
+      onEmpty: Container(),
+      onError: (error) => Container(),
+    );
   }
 }

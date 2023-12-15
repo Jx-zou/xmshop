@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import '../controllers/user_controller.dart';
 
 class UserView extends GetView<UserController> {
-  const UserView({Key? key}) : super(key: key);
+  const UserView({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -15,28 +15,44 @@ class ProductDetailsBodyView extends GetView<ProductDetailsController> {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() => Stack(children: [
+    return Obx(
+      () => Stack(
+        children: [
           SingleChildScrollView(
-              controller: controller.scrollController,
-              child: Column(children: [
-                ProductDetailsSwitchView(key: controller.tannerTitles[0]['contentKey']),
-                ProductDetailsEvaluateView(key: controller.tannerTitles[1]['contentKey']),
-                ProductDetailsDescriptionView(key: controller.tannerTitles[2]['contentKey']),
-                ProductDetailsRecommendedView(key: controller.tannerTitles[3]['contentKey'])
-              ])),
-          const Positioned(bottom: 0, left: 0, right: 0, child: ProductDetailsBottomView()),
+            controller: controller.scrollController,
+            child: Column(
+              children: [
+                ProductDetailsSwitchView(
+                  key: controller.tannerTitles[0]['contentKey'],
+                ),
+                ProductDetailsEvaluateView(
+                  key: controller.tannerTitles[1]['contentKey'],
+                ),
+                ProductDetailsDescriptionView(
+                  key: controller.tannerTitles[2]['contentKey'],
+                ),
+                ProductDetailsRecommendedView(
+                  key: controller.tannerTitles[3]['contentKey'],
+                ),
+              ],
+            ),
+          ),
+          const Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: ProductDetailsBottomView(),
+          ),
           controller.showMoreTar.isTrue
               ? Positioned(
                   top: ScreenAdapter.height(225),
                   left: 0,
                   right: 0,
-                  child: const ProductDetailsMoreTarView())
+                  child: const ProductDetailsMoreTarView(),
+                )
               : const SizedBox()
-        ]));
+        ],
+      ),
+    );
   }
 }
-
-
-
-
-

@@ -3,26 +3,39 @@ import 'package:flutter/material.dart';
 class LabelButton extends StatelessWidget {
   final Widget widget;
   final String label;
-  final VoidCallback onTap;
   final TextStyle? style;
+  final EdgeInsetsGeometry? padding;
   final EdgeInsetsGeometry? margin;
+  final VoidCallback? onPressed;
 
-  const LabelButton(
-      {super.key,
-      required this.onTap,
-      required this.widget,
-      required this.label,
-      required this.style,
-      this.margin});
+  const LabelButton({
+    super.key,
+    this.margin,
+    this.padding,
+    this.style,
+    required this.widget,
+    required this.label,
+    required this.onPressed,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-        onTap: onTap,
-        child: Container(
-            margin: margin,
-            child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [widget, Text(label, style: style)])));
+    Widget current = Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        widget,
+        Text(label, style: style),
+      ],
+    );
+
+    if (padding != null) {
+      current = Padding(padding: padding!, child: current);
+    }
+
+    if (margin != null) {
+      current = Padding(padding: margin!, child: current);
+    }
+
+    return InkResponse(onTap: onPressed, child: current);
   }
 }

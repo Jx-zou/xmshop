@@ -11,22 +11,28 @@ class HomeBestView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        color: Colors.white,
-        child: Column(
-          children: [
-            Container(
-                padding: EdgeInsets.only(
-                    left: ScreenAdapter.width(25),
-                    right: ScreenAdapter.width(25)),
-                child: TitleBanner("省心优惠",
-                    right: "全部优惠",
-                    icon: XmshopIcons.arrowRight,
-                    leftSize: ScreenAdapter.fontSize(48),
-                    rightSize: ScreenAdapter.fontSize(38))),
-            SizedBox(
-                height: ScreenAdapter.height(350),
-                child: const HomeBestBannerView()),
-          ],
-        ));
+      color: Colors.white,
+      child: Column(
+        children: [
+          Container(
+            padding: EdgeInsets.only(
+              left: ScreenAdapter.width(25),
+              right: ScreenAdapter.width(25),
+            ),
+            child: TitleBanner(
+              "省心优惠",
+              right: "全部优惠",
+              icon: XmshopIcons.arrowRight,
+              leftSize: ScreenAdapter.fontSize(48),
+              rightSize: ScreenAdapter.fontSize(38),
+            ),
+          ),
+          SizedBox(
+            height: ScreenAdapter.height(350),
+            child: const HomeBestBannerView(),
+          ),
+        ],
+      ),
+    );
   }
 }
