@@ -1,7 +1,7 @@
 import 'package:get/get_connect/http/src/response/response.dart';
 
-import '../common/providers/base_provider.dart';
 import '../models/goods_model.dart';
+import 'base_provider.dart';
 
 abstract class IGoodsProvider {
   Future<Response<List<GoodsModel>>> getGoodsModel({Map<String, dynamic>? query});

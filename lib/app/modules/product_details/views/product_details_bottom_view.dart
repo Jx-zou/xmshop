@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../common/views/widgets/gradient_button.dart';
 import '../../../common/icons/xmshop_icons.dart';
-import '../../../common/views/widgets/label_button.dart';
-import '../../../utils/bottom_sheet_utils.dart';
-import '../../../utils/screen_adapter.dart';
+import '../../../common/utils/bottom_sheet_utils.dart';
+import '../../../common/utils/screen_adapter.dart';
+import '../../../views/button/gradient_button.dart';
+import '../../../views/button/label_button.dart';
 import '../controllers/product_details_controller.dart';
 
 class ProductDetailsBottomView extends GetView<ProductDetailsController> {
@@ -18,6 +18,7 @@ class ProductDetailsBottomView extends GetView<ProductDetailsController> {
         right: ScreenAdapter.width(40),
       ),
       gradient: LinearGradient(colors: colors),
+      borderRadius: BorderRadius.circular(ScreenAdapter.fontSize(60)),
       onPressed: () {
         BottomSheetUtils.goodsSelectedBottomSheet(
           onPressed: onTap,

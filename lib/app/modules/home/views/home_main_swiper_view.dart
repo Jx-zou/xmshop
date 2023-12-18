@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_swiper_view/flutter_swiper_view.dart';
 import 'package:get/get.dart';
 
-import '../../../common/views/status/loading_view.dart';
-import '../../../common/views/pagination/rect_inside_swiper_pagination_builder.dart';
-import '../../../utils/https_client.dart';
-import '../../../utils/screen_adapter.dart';
+import '../../../common/utils/https_client.dart';
+import '../../../common/utils/screen_adapter.dart';
+import '../../../views/pagination/rect_inside_swiper_pagination_builder.dart';
+import '../../../views/status/loading_view.dart';
 import '../controllers/home_main_swiper_controller.dart';
 
 class HomeMainSwiperView extends GetView<HomeMainSwiperController> {

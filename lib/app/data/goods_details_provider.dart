@@ -1,14 +1,13 @@
 import 'package:get/get.dart';
 
-import '../common/providers/base_provider.dart';
 import '../models/goods_details_model.dart';
+import 'base_provider.dart';
 
 abstract class IGoodsDetailsProvider {
   Future<Response<GoodsDetailsModel>> getGoodsDetailsModel({required Map<String, dynamic> query});
 }
 
-class GoodsDetailsProvider extends BaseProvider
-    implements IGoodsDetailsProvider {
+class GoodsDetailsProvider extends BaseProvider implements IGoodsDetailsProvider {
   GoodsDetailsModel? _decode(dynamic json) {
     if (json != null && json['result'] != null) {
       return GoodsDetailsModel.fromJson(json['result']);

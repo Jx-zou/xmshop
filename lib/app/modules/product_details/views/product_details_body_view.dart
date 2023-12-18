@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../utils/screen_adapter.dart';
+import '../../../common/utils/screen_adapter.dart';
 import '../controllers/product_details_controller.dart';
 import 'product_details_bottom_view.dart';
 import 'product_details_description_view.dart';

@@ -1,7 +1,7 @@
 import 'package:get/get_connect/http/src/response/response.dart';
 
-import '../common/providers/base_provider.dart';
 import '../models/focus_model.dart';
+import 'base_provider.dart';
 
 abstract class IFocusProvider {
   Future<Response<List<FocusModel>>> getFocusModels({Map<String, dynamic>? query});

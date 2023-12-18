@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../common/icons/xmshop_icons.dart';
-import '../../../common/views/widgets/icon_check_box.dart';
-import '../../../common/views/widgets/num_view.dart';
-import '../../../common/views/widgets/gradient_button.dart';
-import '../../../utils/screen_adapter.dart';
+import '../../../common/utils/screen_adapter.dart';
+import '../../../views/button/gradient_button.dart';
+import '../../../views/icon_check_box.dart';
+import '../../../views/decimal.dart';
 import '../controllers/cart_controller.dart';
 
 class CartBottomView extends GetView<CartController> {
@@ -89,7 +89,7 @@ class CartBottomView extends GetView<CartController> {
                               color: Colors.deepOrange),
                         ),
                         Obx(
-                          () => NumView(
+                          () => Decimal(
                             controller.totalPrice.value,
                             height: ScreenAdapter.height(61),
                             crossAxisAlignment: CrossAxisAlignment.end,

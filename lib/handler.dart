@@ -3,10 +3,10 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'app/common/views/status/error_view.dart';
 import 'app/services/cart_service.dart';
 import 'app/services/search_service.dart';
 import 'app/services/storage_service.dart';
+import 'app/views/status/error_view.dart';
 
 class ExceptionHandler {
   final Widget? errorWidget;

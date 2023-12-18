@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_swiper_view/flutter_swiper_view.dart';
 import 'package:get/get.dart';
 
-import '../../../common/views/pagination/rect_fraction_pagination_builder.dart';
-import '../../../utils/https_client.dart';
-import '../../../utils/screen_adapter.dart';
+import '../../../common/utils/https_client.dart';
+import '../../../common/utils/screen_adapter.dart';
+import '../../../views/pagination/rect_fraction_pagination_builder.dart';
 import '../controllers/product_details_controller.dart';
 
 class ProductDetailsSwiperView extends GetView<ProductDetailsController> {

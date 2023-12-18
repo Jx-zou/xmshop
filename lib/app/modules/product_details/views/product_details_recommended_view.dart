@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../common/views/widgets/tile_card.dart';
-import '../../../utils/https_client.dart';
-import '../../../utils/route_utils.dart';
-import '../../../utils/screen_adapter.dart';
+import '../../../common/utils/https_client.dart';
+import '../../../common/utils/route_utils.dart';
+import '../../../common/utils/screen_adapter.dart';
+import '../../../views/tile_card.dart';
 import '../controllers/product_details_recommended_controller.dart';
 
 class ProductDetailsRecommendedView

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../common/views/widgets/label_button.dart';
-import '../../../common/views/status/loading_view.dart';
-import '../../../utils/https_client.dart';
-import '../../../utils/screen_adapter.dart';
+import '../../../common/utils/https_client.dart';
+import '../../../common/utils/screen_adapter.dart';
+import '../../../views/button/label_button.dart';
+import '../../../views/status/loading_view.dart';
 import '../controllers/home_category_controller.dart';
 
 class HomeCategoryView extends GetView<HomeCategoryController> {

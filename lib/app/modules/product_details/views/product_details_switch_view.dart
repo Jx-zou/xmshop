@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:xmshop/app/common/views/widgets/gradient_button.dart';
 
 import '../../../common/icons/xmshop_icons.dart';
-import '../../../common/views/status/loading_view.dart';
-import '../../../common/views/widgets/text_tile.dart';
-import '../../../utils/bottom_sheet_utils.dart';
-import '../../../utils/screen_adapter.dart';
+import '../../../common/utils/bottom_sheet_utils.dart';
+import '../../../common/utils/screen_adapter.dart';
+import '../../../views/button/gradient_button.dart';
+import '../../../views/status/loading_view.dart';
+import '../../../views/text_tile.dart';
 import '../controllers/product_details_controller.dart';
 import 'product_details_swiper_view.dart';
 

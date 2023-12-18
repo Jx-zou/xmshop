@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'product_details_body_view.dart';
-import '../controllers/product_details_controller.dart';
 import '../../../common/icons/xmshop_icons.dart';
-import '../../../common/views/widgets/shape_button.dart';
-import '../../../utils/screen_adapter.dart';
+import '../../../common/utils/screen_adapter.dart';
+import '../../../views/button/shape_button.dart';
+import '../controllers/product_details_controller.dart';
+import 'product_details_body_view.dart';
 
 class ProductDetailsView extends GetView<ProductDetailsController> {
   const ProductDetailsView({super.key});
@@ -19,12 +19,12 @@ class ProductDetailsView extends GetView<ProductDetailsController> {
         width: ScreenAdapter.width(80),
         height: ScreenAdapter.width(80),
         color: Colors.black.withOpacity(
-          0.38 * (1 - controller.appBarOpacity.value),
+          0.3 * (1 - controller.appBarOpacity.value),
         ),
         shape: ContinuousRectangleBorder(
           side: BorderSide.none,
           borderRadius: BorderRadius.circular(
-            ScreenAdapter.fontSize(40),
+            ScreenAdapter.fontSize(54),
           ),
         ),
         child: Icon(icon,

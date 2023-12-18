@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../controllers/category_controller.dart';
+import '../../../common/utils/screen_adapter.dart';
 import '../../../common/icons/xmshop_icons.dart';
-import '../../../utils/screen_adapter.dart';
+import '../controllers/category_controller.dart';
 import 'category_body_view.dart';
 
 class CategoryView extends GetView<CategoryController> {

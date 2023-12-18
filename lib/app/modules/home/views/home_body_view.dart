@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../utils/screen_adapter.dart';
+import '../../../common/utils/screen_adapter.dart';
 import '../controllers/home_controller.dart';
 import 'home_advertisement_view.dart';
 import 'home_best_view.dart';

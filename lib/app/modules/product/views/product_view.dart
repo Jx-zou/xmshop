@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../common/icons/xmshop_icons.dart';
-import '../../../utils/screen_adapter.dart';
+import '../../../common/utils/screen_adapter.dart';
 import '../controllers/product_controller.dart';
 import 'product_body_view.dart';
 

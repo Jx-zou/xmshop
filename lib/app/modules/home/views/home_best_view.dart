@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../../../common/icons/xmshop_icons.dart';
-import '../../../common/views/widgets/title_banner.dart';
-import '../../../utils/screen_adapter.dart';
+import '../../../common/utils/screen_adapter.dart';
+import '../../../views/title_banner.dart';
 import 'home_best_banner_view.dart';
 
 class HomeBestView extends StatelessWidget {

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:get/get.dart';
 
-import '../../../utils/screen_adapter.dart';
+import '../../../common/utils/screen_adapter.dart';
 import '../controllers/product_details_controller.dart';
 import 'product_details_more_tar_view.dart';
 

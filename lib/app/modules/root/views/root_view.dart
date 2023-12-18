@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../utils/screen_adapter.dart';
 import '../controllers/root_controller.dart';
+import '../../../common/utils/screen_adapter.dart';
 import '../../../common/icons/xmshop_icons.dart';
 
 class RootView extends GetView<RootController> {

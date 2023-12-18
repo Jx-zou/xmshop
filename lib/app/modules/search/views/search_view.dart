@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'search_body_view.dart';
 import '../controllers/xm_search_controller.dart';
-
+import '../../../common/utils/screen_adapter.dart';
 import '../../../common/icons/xmshop_icons.dart';
-import '../../../utils/screen_adapter.dart';
+import 'search_body_view.dart';
 
 class SearchView extends GetView<XmSearchController> {
   const SearchView({super.key});

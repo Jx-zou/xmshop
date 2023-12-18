@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../common/utils/screen_adapter.dart';
 import '../controllers/cart_controller.dart';
 
-import '../../../utils/screen_adapter.dart';
 import 'cart_body_view.dart';
 
 class CartView extends GetView<CartController> {

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../common/utils/https_client.dart';
+import '../../../common/utils/route_utils.dart';
+import '../../../common/utils/screen_adapter.dart';
+import '../../../views/status/loading_view.dart';
+import '../../../views/tile_card.dart';
 import '../controllers/cart_guess_controller.dart';
-import '../../../common/views/status/loading_view.dart';
-import '../../../common/views/widgets/tile_card.dart';
-import '../../../utils/https_client.dart';
-import '../../../utils/route_utils.dart';
-import '../../../utils/screen_adapter.dart';
 
 class CartGuessView extends GetView<CartGuessController> {
   const CartGuessView({super.key});

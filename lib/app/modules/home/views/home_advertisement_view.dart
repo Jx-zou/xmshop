@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../utils/screen_adapter.dart';
+import '../../../common/utils/screen_adapter.dart';
 
 class HomeAdvertisementView extends StatelessWidget {
   const HomeAdvertisementView({super.key});

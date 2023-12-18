@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../common/views/widgets/gradient_button.dart';
 import '../../../common/icons/xmshop_icons.dart';
-import '../../../common/views/status/loading_view.dart';
-import '../../../common/views/widgets/icon_check_box.dart';
-import '../../../common/views/widgets/icon_check_box_list_tile.dart';
-import '../../../common/views/widgets/num_view.dart';
+import '../../../common/utils/bottom_sheet_utils.dart';
+import '../../../common/utils/https_client.dart';
+import '../../../common/utils/route_utils.dart';
+import '../../../common/utils/screen_adapter.dart';
+import '../../../views/button/gradient_button.dart';
+import '../../../views/icon_check_box.dart';
+import '../../../views/icon_check_box_list_tile.dart';
+import '../../../views/decimal.dart';
+import '../../../views/status/loading_view.dart';
 import '../../../models/cart_model.dart';
-import '../../../utils/bottom_sheet_utils.dart';
-import '../../../utils/https_client.dart';
-import '../../../utils/route_utils.dart';
-import '../../../utils/screen_adapter.dart';
 import '../controllers/cart_controller.dart';
 import 'cart_bottom_view.dart';
 import 'cart_guess_view.dart';
@@ -106,7 +106,7 @@ class CartBodyView extends GetView<CartController> {
                       fontWeight: FontWeight.bold,
                       color: Colors.deepOrange),
                 ),
-                NumView(
+                Decimal(
                   cart.price?.toDouble(),
                   height: ScreenAdapter.height(68),
                   crossAxisAlignment: CrossAxisAlignment.end,

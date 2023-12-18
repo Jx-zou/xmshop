@@ -1,7 +1,7 @@
 import 'package:get/get_connect/http/src/response/response.dart';
 
-import '../common/providers/base_provider.dart';
 import '../models/category_model.dart';
+import 'base_provider.dart';
 
 abstract class ICategoryProvider {
   Future<Response<List<CategoryModel>>> getPCateModel({Map<String, dynamic>? query});

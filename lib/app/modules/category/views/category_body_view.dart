@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../common/views/status/loading_view.dart';
-import '../../../utils/screen_adapter.dart';
+import '../../../common/utils/screen_adapter.dart';
+import '../../../views/status/loading_view.dart';
 import '../controllers/category_controller.dart';
 import 'category_second_view.dart';
 

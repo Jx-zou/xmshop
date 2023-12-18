@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../common/icons/xmshop_icons.dart';
-import '../../../common/views/widgets/gradient_button.dart';
-import '../../../common/views/widgets/title_banner.dart';
-import '../../../utils/screen_adapter.dart';
+import '../../../common/utils/screen_adapter.dart';
+import '../../../views/button/gradient_button.dart';
+import '../../../views/title_banner.dart';
 import '../controllers/product_details_controller.dart';
 
 class ProductDetailsEvaluateView extends GetView<ProductDetailsController> {

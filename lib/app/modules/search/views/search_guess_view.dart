@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../common/utils/screen_adapter.dart';
+import '../../../views/status/loading_view.dart';
+import '../../../views/title_banner.dart';
 import '../controllers/search_guess_controller.dart';
-import '../../../common/views/status/loading_view.dart';
-import '../../../common/views/widgets/title_banner.dart';
-import '../../../utils/screen_adapter.dart';
 
 class SearchGuessView extends GetView<SearchGuessController> {
   const SearchGuessView({super.key});
