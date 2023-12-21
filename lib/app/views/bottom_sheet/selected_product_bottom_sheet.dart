@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../button/shape_button.dart';
 import '../../common/icons/xmshop_icons.dart';
 import '../../common/utils/https_client.dart';
 import '../../common/utils/screen_adapter.dart';
+import '../../material/shape_button.dart';
 import '../../models/goods_details_model.dart';
 
 class SelectedProductBottomSheet extends StatefulWidget {
@@ -12,19 +12,19 @@ class SelectedProductBottomSheet extends StatefulWidget {
   final bool? showNumWidget;
   final Function(String selectedAttr, int shopNum)? close;
 
-  const SelectedProductBottomSheet(
-      {super.key,
-      this.bottom,
-      this.showNumWidget,
-      this.close,
-      this.goodsDetailsModel});
+  const SelectedProductBottomSheet({
+    super.key,
+    this.bottom,
+    this.showNumWidget,
+    this.close,
+    this.goodsDetailsModel,
+  });
 
   @override
   State<StatefulWidget> createState() => _SelectedProductBottomSheetState();
 }
 
-class _SelectedProductBottomSheetState
-    extends State<SelectedProductBottomSheet> {
+class _SelectedProductBottomSheetState extends State<SelectedProductBottomSheet> {
   final Map<String, List<String?>> _selectedAttr = {
     'cate': <String>[],
     'selected': <String>[]

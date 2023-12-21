@@ -3,9 +3,9 @@ import 'package:get/get.dart';
 
 import '../../../common/icons/xmshop_icons.dart';
 import '../../../common/utils/screen_adapter.dart';
-import '../../../views/button/gradient_button.dart';
-import '../../../views/icon_check_box.dart';
-import '../../../views/decimal.dart';
+import '../../../material/gradient_button.dart';
+import '../../../material/icon_check_box.dart';
+import '../../../material/decimal.dart';
 import '../controllers/cart_controller.dart';
 
 class CartBottomView extends GetView<CartController> {

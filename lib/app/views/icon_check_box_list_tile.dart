@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'icon_check_box.dart';
+import '../material/icon_check_box.dart';
 
 class IconCheckBoxListTile extends StatelessWidget {
   final bool value;

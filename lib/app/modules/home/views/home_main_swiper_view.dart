@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 
 import '../../../common/utils/https_client.dart';
 import '../../../common/utils/screen_adapter.dart';
-import '../../../views/pagination/rect_inside_swiper_pagination_builder.dart';
+import '../../../material/rect_inside_swiper_pagination_builder.dart';
 import '../../../views/status/loading_view.dart';
 import '../controllers/home_main_swiper_controller.dart';
 
@@ -30,8 +30,12 @@ class HomeMainSwiperView extends GetView<HomeMainSwiperController> {
         ),
       ),
       onLoading: LoadingView.circle(),
-      onEmpty: Container(),
-      onError: (error) => Container(),
+      onEmpty: SizedBox(
+        height: ScreenAdapter.height(682),
+      ),
+      onError: (error) => SizedBox(
+        height: ScreenAdapter.height(682),
+      ),
     );
   }
 }

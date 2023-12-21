@@ -3,7 +3,7 @@ import 'package:flutter_swiper_view/flutter_swiper_view.dart';
 import 'package:get/get.dart';
 
 import '../../../common/utils/https_client.dart';
-import '../../../views/pagination/rect_inside_swiper_pagination_builder.dart';
+import '../../../material/rect_inside_swiper_pagination_builder.dart';
 import '../../../views/status/loading_view.dart';
 import '../controllers/home_hot_swiper_controller.dart';
 

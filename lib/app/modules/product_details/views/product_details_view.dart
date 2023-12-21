@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../material/bubble_button.dart';
 import '../../../common/icons/xmshop_icons.dart';
 import '../../../common/utils/screen_adapter.dart';
-import '../../../views/button/shape_button.dart';
+import '../../../material/shape_button.dart';
 import '../controllers/product_details_controller.dart';
 import 'product_details_body_view.dart';
 
@@ -43,103 +44,125 @@ class ProductDetailsView extends GetView<ProductDetailsController> {
         ),
         child: Obx(
           () => AppBar(
-            leading: _action(() {
-              Get.back();
-            }, XmshopIcons.arrowLeft, null),
-            title: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: controller.tannerTitles
-                  .map(
-                    (value) => InkWell(
-                      onTap: () {
-                        controller.onTarTitlePressed(value['id']);
-                      },
-                      child: Column(
-                        children: [
-                          SizedBox(
-                            height: ScreenAdapter.height(20),
-                          ),
-                          Text(
-                            value['title'],
-                            style: TextStyle(
-                              fontSize: ScreenAdapter.fontSize(35),
-                              color: value['id'] == controller.selectedId.value
-                                  ? Colors.red.withOpacity(
-                                      controller.appBarOpacity.value)
-                                  : Colors.black.withOpacity(
-                                      controller.appBarOpacity.value),
+              leading: _action(() {
+                Get.back();
+              }, XmshopIcons.arrowLeft, null),
+              title: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: controller.tannerTitles
+                    .map(
+                      (value) => InkWell(
+                        onTap: () {
+                          controller.onTarTitlePressed(value['id']);
+                        },
+                        child: Column(
+                          children: [
+                            SizedBox(
+                              height: ScreenAdapter.height(20),
                             ),
-                          ),
-                          Container(
-                              margin: EdgeInsets.only(
-                                top: ScreenAdapter.height(20),
+                            Text(
+                              value['title'],
+                              style: TextStyle(
+                                fontSize: ScreenAdapter.fontSize(35),
+                                color:
+                                    value['id'] == controller.selectedId.value
+                                        ? Colors.red.withOpacity(
+                                            controller.appBarOpacity.value)
+                                        : Colors.black.withOpacity(
+                                            controller.appBarOpacity.value),
                               ),
-                              width: ScreenAdapter.width(50),
-                              height: ScreenAdapter.height(5),
-                              color: value['id'] == controller.selectedId.value
-                                  ? Colors.red.withOpacity(
-                                      controller.appBarOpacity.value)
-                                  : Colors.transparent),
-                        ],
+                            ),
+                            Container(
+                                margin: EdgeInsets.only(
+                                  top: ScreenAdapter.height(20),
+                                ),
+                                width: ScreenAdapter.width(50),
+                                height: ScreenAdapter.height(5),
+                                color:
+                                    value['id'] == controller.selectedId.value
+                                        ? Colors.red.withOpacity(
+                                            controller.appBarOpacity.value)
+                                        : Colors.transparent),
+                          ],
+                        ),
+                      ),
+                    )
+                    .toList(),
+              ),
+              centerTitle: true,
+              backgroundColor:
+                  Color.fromRGBO(255, 255, 255, controller.appBarOpacity.value),
+              elevation: 0,
+              actions: [
+                _action(
+                  () {},
+                  XmshopIcons.share,
+                  EdgeInsets.only(
+                    right: ScreenAdapter.width(40),
+                  ),
+                ),
+                BubbleButton(
+                  arrowWidth: 20,
+                  arrowHeight: 10,
+                  offset: const Offset(0, 10),
+                  popupChild: SizedBox(
+                    width: 150,
+                    child: ListView.builder(
+                          physics: const NeverScrollableScrollPhysics(),
+                          padding: EdgeInsets.all(ScreenAdapter.height(50)),
+                          shrinkWrap: true,
+                          itemCount: controller.moreMenu.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return InkResponse(
+                              onTap: () {},
+                              child: Padding(
+                                padding: 0 == index
+                                    ? EdgeInsets.zero
+                                    : EdgeInsets.only(
+                                        top: ScreenAdapter.height(30)),
+                                child: Row(children: [
+                                  Icon(
+                                    controller.moreMenu[index]['icon'],
+                                    size: ScreenAdapter.fontSize(48),
+                                    color: Colors.white,
+                                  ),
+                                  SizedBox(
+                                    width: ScreenAdapter.width(30),
+                                  ),
+                                  Text(
+                                    controller.moreMenu[index]['title'],
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: ScreenAdapter.fontSize(38)),
+                                  ),
+                                ]),
+                              ),
+                            );
+                          }),
+                  ),
+                  child: Material(
+                    color: Colors.black.withOpacity(
+                      0.3 * (1 - controller.appBarOpacity.value),
+                    ),
+                    shape: ContinuousRectangleBorder(
+                      borderRadius: BorderRadius.circular(
+                        ScreenAdapter.fontSize(54),
                       ),
                     ),
-                  )
-                  .toList(),
-            ),
-            centerTitle: true,
-            backgroundColor:
-                Color.fromRGBO(255, 255, 255, controller.appBarOpacity.value),
-            elevation: 0,
-            actions: [
-              _action(
-                () {},
-                XmshopIcons.share,
-                EdgeInsets.only(
-                  right: ScreenAdapter.width(40),
-                ),
-              ),
-              _action(
-                () => showMenu(
-                  elevation: 0,
-                  color: Colors.black.withOpacity(0.6),
-                  shape: ContinuousRectangleBorder(
-                    borderRadius: BorderRadius.circular(
-                      ScreenAdapter.fontSize(48),
+                    child: SizedBox(
+                      width: ScreenAdapter.width(80),
+                      height: ScreenAdapter.width(80),
+                      child: Icon(XmshopIcons.more,
+                          size: ScreenAdapter.width(40),
+                          color: controller.actionColor.value),
                     ),
                   ),
-                  context: context,
-                  position: RelativeRect.fromLTRB(ScreenAdapter.width(600),
-                      ScreenAdapter.height(250), 0, 0),
-                  items: controller.moreMenu
-                      .map(
-                        (v) => PopupMenuItem(
-                          child: Row(
-                            children: [
-                              Icon(
-                                v['icon'],
-                                color: Colors.white,
-                                size: ScreenAdapter.fontSize(48),
-                              ),
-                              Text(
-                                "${v['title']}",
-                                style: TextStyle(
-                                    fontSize: ScreenAdapter.fontSize(28),
-                                    color: Colors.white),
-                              ),
-                            ],
-                          ),
-                        ),
-                      )
-                      .toList(),
                 ),
-                XmshopIcons.more,
-                EdgeInsets.only(
-                  right: ScreenAdapter.width(40),
-                ),
-              ),
-            ],
-          ),
+                SizedBox(
+                  width: ScreenAdapter.width(40),
+                )
+              ]),
         ),
       ),
       body: const ProductDetailsBodyView(),

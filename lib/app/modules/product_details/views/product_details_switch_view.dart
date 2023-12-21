@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import '../../../common/icons/xmshop_icons.dart';
 import '../../../common/utils/bottom_sheet_utils.dart';
 import '../../../common/utils/screen_adapter.dart';
-import '../../../views/button/gradient_button.dart';
+import '../../../material/gradient_button.dart';
 import '../../../views/status/loading_view.dart';
 import '../../../views/text_tile.dart';
 import '../controllers/product_details_controller.dart';
@@ -162,6 +162,7 @@ class ProductDetailsSwitchView extends GetView<ProductDetailsController> {
                           children: [
                             Expanded(
                               child: GradientButton(
+                                padding: EdgeInsets.symmetric(vertical: ScreenAdapter.width(40)),
                                 onPressed: () {
                                   controller.addCart();
                                 },
@@ -171,6 +172,8 @@ class ProductDetailsSwitchView extends GetView<ProductDetailsController> {
                                     Colors.orange
                                   ],
                                 ),
+                                borderRadius: BorderRadius.circular(
+                                    ScreenAdapter.fontSize(60)),
                                 child: Text(
                                   "加入购物车",
                                   style: TextStyle(
@@ -184,6 +187,7 @@ class ProductDetailsSwitchView extends GetView<ProductDetailsController> {
                             ),
                             Expanded(
                               child: GradientButton(
+                                padding: EdgeInsets.symmetric(vertical: ScreenAdapter.width(40)),
                                 onPressed: () {
                                   controller.buy();
                                 },
@@ -193,6 +197,8 @@ class ProductDetailsSwitchView extends GetView<ProductDetailsController> {
                                     Colors.redAccent
                                   ],
                                 ),
+                                borderRadius: BorderRadius.circular(
+                                    ScreenAdapter.fontSize(60)),
                                 child: Text(
                                   "加入购物车",
                                   style: TextStyle(

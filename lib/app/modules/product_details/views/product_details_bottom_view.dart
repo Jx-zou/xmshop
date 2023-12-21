@@ -4,14 +4,14 @@ import 'package:get/get.dart';
 import '../../../common/icons/xmshop_icons.dart';
 import '../../../common/utils/bottom_sheet_utils.dart';
 import '../../../common/utils/screen_adapter.dart';
-import '../../../views/button/gradient_button.dart';
-import '../../../views/button/label_button.dart';
+import '../../../material/gradient_button.dart';
+import '../../../material/label_button.dart';
 import '../controllers/product_details_controller.dart';
 
 class ProductDetailsBottomView extends GetView<ProductDetailsController> {
   const ProductDetailsBottomView({super.key});
 
-  Widget _bottomButton(String title, List<Color> colors, VoidCallback onTap) {
+  Widget _bottomButton(String title, List<Color> colors, VoidCallback onPressed) {
     return GradientButton(
       height: ScreenAdapter.height(125),
       margin: EdgeInsets.only(
@@ -21,7 +21,7 @@ class ProductDetailsBottomView extends GetView<ProductDetailsController> {
       borderRadius: BorderRadius.circular(ScreenAdapter.fontSize(60)),
       onPressed: () {
         BottomSheetUtils.goodsSelectedBottomSheet(
-          onPressed: onTap,
+          onPressed: onPressed,
           goodsDetailsModel: controller.state,
           close: (selectedAttr, shopNum) {
             controller.updateAttrs(selectedAttr, shopNum);

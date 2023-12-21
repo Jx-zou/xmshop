@@ -33,17 +33,16 @@ class FlatButton extends StatelessWidget {
     }
 
     current = ConstrainedBox(
-        constraints: BoxConstraints.tightFor(width: width, height: height),
-        child: current,
+      constraints: BoxConstraints.tightFor(width: width, height: height),
+      child: current,
     );
 
-
-
     return InkResponse(
-        splashColor: splashColor,
-        highlightColor: highlightColor,
-        radius: radius,
-        onTap: onPressed,
-        child: current);
+      splashColor: splashColor,
+      highlightColor: highlightColor,
+      radius: radius,
+      onTap: onPressed,
+      child: current,
+    );
   }
 }

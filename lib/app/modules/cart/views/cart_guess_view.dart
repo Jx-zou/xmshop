@@ -4,8 +4,8 @@ import 'package:get/get.dart';
 import '../../../common/utils/https_client.dart';
 import '../../../common/utils/route_utils.dart';
 import '../../../common/utils/screen_adapter.dart';
-import '../../../views/status/loading_view.dart';
 import '../../../views/tile_card.dart';
+import '../../../views/status/loading_view.dart';
 import '../controllers/cart_guess_controller.dart';
 
 class CartGuessView extends GetView<CartGuessController> {

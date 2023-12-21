@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 
 import '../../../common/utils/https_client.dart';
 import '../../../common/utils/screen_adapter.dart';
-import '../../../views/button/label_button.dart';
+import '../../../material/label_button.dart';
 import '../../../views/status/loading_view.dart';
 import '../controllers/home_category_controller.dart';
 

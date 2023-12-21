@@ -19,25 +19,31 @@ class ProductDetailsMoreTarView extends GetView<ProductDetailsController> {
             InkWell(
               highlightColor: Colors.transparent,
               radius: 0,
-              onTap: () => controller.changeMoreSelected(1),
+              onTap: () {
+                controller.changeMoreSelected(1);
+              },
               child: Text(
                 "商品介绍",
                 style: TextStyle(
-                    color: controller.moreSelected.value == 1
-                        ? Colors.redAccent
-                        : null),
+                  color: controller.moreSelected.value == 1
+                      ? Colors.redAccent
+                      : null,
+                ),
               ),
             ),
             InkWell(
               highlightColor: Colors.transparent,
               radius: 0,
-              onTap: () => controller.changeMoreSelected(2),
+              onTap: () {
+                controller.changeMoreSelected(2);
+              },
               child: Text(
                 "规格参数",
                 style: TextStyle(
-                    color: controller.moreSelected.value == 2
-                        ? Colors.redAccent
-                        : null),
+                  color: controller.moreSelected.value == 2
+                      ? Colors.redAccent
+                      : null,
+                ),
               ),
             ),
           ],

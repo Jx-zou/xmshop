@@ -17,23 +17,21 @@ class ProductDetailsDescriptionView extends GetView<ProductDetailsController> {
       ),
       width: ScreenAdapter.width(1080),
       child: controller.obx(
-        (state) => Stack(
-          children: [
-            Html(
-              data: controller.moreSelected.value == 1
-                  ? "${state?.specs}"
-                  : "${state?.content}",
-            ),
-            Positioned(
-              top: 0,
-              left: 0,
-              right: 0,
-              child: controller.showMoreTar.isFalse
-                  ? const ProductDetailsMoreTarView()
-                  : const SizedBox(),
-            ),
-          ],
-        ),
+        (state) => Stack(children: [
+          Html(
+            data: controller.moreSelected.value == 1
+                ? "${state?.specs}"
+                : "${state?.content}",
+          ),
+          Positioned(
+            top: 0,
+            left: 0,
+            right: 0,
+            child: controller.showMoreTar.isFalse
+                ? const ProductDetailsMoreTarView()
+                : const SizedBox(),
+          ),
+        ]),
       ),
     );
   }

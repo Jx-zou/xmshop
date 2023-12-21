@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../material/gradient_button.dart';
 import '../../models/goods_details_model.dart';
-import '../../views/bottom_sheet/close_bottom_sheet.dart';
+import '../../material/close_bottom_sheet.dart';
 import '../../views/bottom_sheet/selected_product_bottom_sheet.dart';
-import '../../views/button/gradient_button.dart';
 import '../icons/xmshop_icons.dart';
 import 'screen_adapter.dart';
 
@@ -21,12 +21,13 @@ class BottomSheetUtils {
         child: child);
   }
 
-  static void goodsSelectedBottomSheet(
-      {VoidCallback? onPressed,
-      Widget? bottom,
-      bool? showNumWidget,
-      GoodsDetailsModel? goodsDetailsModel,
-      Function(String selectedAttr, int shopNum)? close}) {
+  static void goodsSelectedBottomSheet({
+    VoidCallback? onPressed,
+    Widget? bottom,
+    bool? showNumWidget,
+    GoodsDetailsModel? goodsDetailsModel,
+    Function(String selectedAttr, int shopNum)? close,
+  }) {
     Get.bottomSheet(
         _closeBottomSheet(
           child: SelectedProductBottomSheet(
@@ -39,10 +40,14 @@ class BottomSheetUtils {
                       ScreenAdapter.width(40),
                     ),
                     child: GradientButton(
+                      padding: EdgeInsets.all(
+                        ScreenAdapter.width(40),
+                      ),
                       gradient: LinearGradient(colors: [
                         Colors.deepOrange.withOpacity(0.5),
                         Colors.redAccent
                       ]),
+                      borderRadius: BorderRadius.circular(ScreenAdapter.fontSize(60)),
                       onPressed: onPressed ?? () {},
                       child: Text(
                         "确定",

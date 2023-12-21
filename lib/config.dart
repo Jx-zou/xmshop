@@ -14,6 +14,12 @@ class Config {
     splashColor: Colors.transparent,
     highlightColor: Colors.transparent,
     scaffoldBackgroundColor: const Color.fromRGBO(245, 245, 245, 1),
+    dividerTheme: const DividerThemeData(
+      color: Colors.black12,
+    ),
+    textTheme: const TextTheme(
+
+    ),
     appBarTheme: const AppBarTheme(
       elevation: 0,
       foregroundColor: Colors.black54,
