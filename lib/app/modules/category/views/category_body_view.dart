@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../common/utils/screen_adapter.dart';
+import '../../../views/status/error_view.dart';
+import '../../../views/status/empty_view.dart';
 import '../../../views/status/loading_view.dart';
+import '../../../common/utils/screen_adapter.dart';
 import '../controllers/category_controller.dart';
 import 'category_second_view.dart';
 
@@ -49,8 +51,8 @@ class CategoryBodyView extends GetView<CategoryController> {
           )
         ]),
         onLoading: LoadingView.circle(),
-        onEmpty: Container(),
-        onError: (error) => Container(),
+        onEmpty: const EmptyView(),
+        onError: (error) => const ErrorView(),
       ),
     );
   }

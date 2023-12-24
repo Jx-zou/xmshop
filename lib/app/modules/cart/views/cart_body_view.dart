@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../material/gradient_button.dart';
+import '../../../material/icon_check_box.dart';
+import '../../../material/decimal.dart';
 import '../../../common/icons/xmshop_icons.dart';
 import '../../../common/utils/bottom_sheet_utils.dart';
 import '../../../common/utils/https_client.dart';
-import '../../../common/utils/route_utils.dart';
+import '../../../common/utils/routes.dart';
 import '../../../common/utils/screen_adapter.dart';
-import '../../../material/gradient_button.dart';
-import '../../../material/icon_check_box.dart';
 import '../../../views/icon_check_box_list_tile.dart';
-import '../../../material/decimal.dart';
 import '../../../views/status/loading_view.dart';
+import '../../../views/status/empty_view.dart';
+import '../../../views/status/error_view.dart';
 import '../../../models/cart_model.dart';
 import '../controllers/cart_controller.dart';
 import 'cart_bottom_view.dart';
@@ -31,7 +33,7 @@ class CartBodyView extends GetView<CartController> {
         titleCrossAxisAlignment: CrossAxisAlignment.start,
         onChanged: (isChecked) {},
         onTap: () {
-          RouteUtils.to("/product-details", "id", "${cart.id}");
+          Routes.toProductDetails(cart.id);
         },
         leading: Container(
           width: ScreenAdapter.width(300),
@@ -284,8 +286,8 @@ class CartBodyView extends GetView<CartController> {
             )
           ]),
           onLoading: LoadingView.circle(),
-          onEmpty: Container(),
-          onError: (error) => Container(),
+          onEmpty: const EmptyView(),
+          onError: (error) => const ErrorView(),
         ),
         const CartGuessView()
       ]),

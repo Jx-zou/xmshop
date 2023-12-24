@@ -5,6 +5,8 @@ import 'package:get/get.dart';
 import '../../../common/utils/https_client.dart';
 import '../../../material/rect_inside_swiper_pagination_builder.dart';
 import '../../../views/status/loading_view.dart';
+import '../../../views/status/empty_view.dart';
+import '../../../views/status/error_view.dart';
 import '../controllers/home_hot_swiper_controller.dart';
 
 class HomeHotSwiperView extends GetView<HomeHotSwiperController> {
@@ -25,8 +27,8 @@ class HomeHotSwiperView extends GetView<HomeHotSwiperController> {
         ),
       ),
       onLoading: LoadingView.circle(),
-      onEmpty: Container(),
-      onError: (error) => Container(),
+      onEmpty: const EmptyView(),
+      onError: (error) => const ErrorView(),
     );
   }
 }

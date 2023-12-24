@@ -1,5 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:xmshop/app/common/utils/routes.dart';
 
 import '../../../common/controllers/base_controller.dart';
 import '../../../services/search_service.dart';
@@ -9,40 +9,42 @@ class XmSearchController extends BaseController with StateMixin<List<String>> {
 
   RxString keywords = "".obs;
 
-  onKeywordsTap(String value) {
-    changeKeywords(value);
-    searchToProduct();
+  void search({String? value}) {
+    if (value != null) {
+      changeKeywords(value);
+    }
+    saveSearchHistory();
+    Routes.toProduct(keywords: keywords.value, type: RouteType.off);
   }
 
-  changeKeywords(String value) {
+  void changeKeywords(String value) {
     keywords.value = value;
     update();
   }
 
-  searchToProduct() {
+  void saveSearchHistory() {
     searchService.setHistory(keywords.value);
-    Get.offAndToNamed("/product",
-        parameters: {"requestKey": "search", "requestValue": keywords.value});
   }
 
-  void clearHistoryData() async {
+  void clearHistoryData() {
     if (state != null && state!.isNotEmpty) {
       state?.clear();
-      await searchService.clearHistory();
+      searchService.clearHistory();
       update();
     }
   }
 
-  void removeHistoryData(String keywords) async {
+  void removeHistoryData(String keywords) {
     if (state != null && state!.contains(keywords)) {
       state?.remove(keywords);
     }
-    await searchService.deleteHistory(keywords);
+    searchService.deleteHistory(keywords);
     update();
   }
 
   @override
   void loadData() async {
+    printInfo(info: "读取搜索历史数据.");
     List<String>? history = await searchService.getHistory();
     if(history == null || history.isEmpty) {
       change(history, status: RxStatus.empty());

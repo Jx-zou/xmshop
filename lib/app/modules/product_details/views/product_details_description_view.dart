@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_html/flutter_html.dart';
 import 'package:get/get.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
+import '../../../views/status/error_view.dart';
+import '../../../views/status/loading_view.dart';
 import '../../../common/utils/screen_adapter.dart';
 import '../controllers/product_details_controller.dart';
-import 'product_details_more_tar_view.dart';
+import 'product_details_more_bar_view.dart';
 
 class ProductDetailsDescriptionView extends GetView<ProductDetailsController> {
   const ProductDetailsDescriptionView({super.key});
@@ -18,20 +20,18 @@ class ProductDetailsDescriptionView extends GetView<ProductDetailsController> {
       width: ScreenAdapter.width(1080),
       child: controller.obx(
         (state) => Stack(children: [
-          Html(
-            data: controller.moreSelected.value == 1
-                ? "${state?.specs}"
-                : "${state?.content}",
-          ),
+          WebViewWidget(controller: controller.htmlController),
           Positioned(
             top: 0,
             left: 0,
             right: 0,
-            child: controller.showMoreTar.isFalse
-                ? const ProductDetailsMoreTarView()
+            child: controller.showBottomMoreBar.isFalse
+                ? const ProductDetailsMoreBarView()
                 : const SizedBox(),
           ),
         ]),
+        onLoading: LoadingView.circle(),
+        onError: (error) => const ErrorView(),
       ),
     );
   }

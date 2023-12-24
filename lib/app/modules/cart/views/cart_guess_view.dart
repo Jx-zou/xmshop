@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../common/utils/https_client.dart';
-import '../../../common/utils/route_utils.dart';
+import '../../../common/utils/routes.dart';
 import '../../../common/utils/screen_adapter.dart';
+import '../../../views/status/error_view.dart';
 import '../../../views/tile_card.dart';
 import '../../../views/status/loading_view.dart';
+import '../../../views/status/empty_view.dart';
 import '../controllers/cart_guess_controller.dart';
 
 class CartGuessView extends GetView<CartGuessController> {
@@ -64,7 +66,7 @@ class CartGuessView extends GetView<CartGuessController> {
           itemCount: state?.length,
           itemBuilder: (context, index) => TileCard(
             onTap: () {
-              RouteUtils.to("/product-details", "id", state?[index].id);
+              Routes.toProductDetails(state?[index].id);
             },
             padding: EdgeInsets.all(
               ScreenAdapter.width(30),
@@ -91,11 +93,11 @@ class CartGuessView extends GetView<CartGuessController> {
               ),
             ),
           ),
-        )
+        ),
       ]),
       onLoading: LoadingView.circle(),
-      onEmpty: Container(),
-      onError: (error) => Container(),
+      onEmpty: const EmptyView(),
+      onError: (error) => const ErrorView(),
     );
   }
 }

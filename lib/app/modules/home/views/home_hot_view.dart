@@ -29,13 +29,7 @@ class HomeHotView extends StatelessWidget {
             flex: 1,
             child: SizedBox(
               height: ScreenAdapter.height(738),
-              child: Padding(
-                padding: EdgeInsets.only(
-                  top: ScreenAdapter.height(10),
-                  bottom: ScreenAdapter.height(10),
-                ),
-                child: const HomeHotSwiperView(),
-              ),
+              child: const HomeHotSwiperView(),
             ),
           ),
           SizedBox(

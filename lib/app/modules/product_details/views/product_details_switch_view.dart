@@ -6,9 +6,10 @@ import '../../../common/utils/bottom_sheet_utils.dart';
 import '../../../common/utils/screen_adapter.dart';
 import '../../../material/gradient_button.dart';
 import '../../../views/status/loading_view.dart';
+import '../../../views/status/empty_view.dart';
+import '../../../views/status/error_view.dart';
 import '../../../views/text_tile.dart';
 import '../controllers/product_details_controller.dart';
-import 'product_details_swiper_view.dart';
 
 class ProductDetailsSwitchView extends GetView<ProductDetailsController> {
   const ProductDetailsSwitchView({super.key});
@@ -72,7 +73,6 @@ class ProductDetailsSwitchView extends GetView<ProductDetailsController> {
     return controller.obx(
       (state) => Column(
         children: [
-          const ProductDetailsSwiperView(),
           _module(
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -299,8 +299,8 @@ class ProductDetailsSwitchView extends GetView<ProductDetailsController> {
         ],
       ),
       onLoading: LoadingView.circle(),
-      onEmpty: Container(),
-      onError: (error) => Container(),
+      onEmpty: const EmptyView(),
+      onError: (error) => const ErrorView(),
     );
   }
 }

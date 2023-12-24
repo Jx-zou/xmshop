@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 import '../../../common/controllers/base_controller.dart';
 import '../../../common/utils/screen_adapter.dart';
@@ -12,9 +13,18 @@ import '../../../services/cart_service.dart';
 class ProductDetailsController extends BaseController with StateMixin<GoodsDetailsModel> {
   final IGoodsDetailsProvider provider;
   ProductDetailsController({required this.provider});
-  Map<String, String> query = {};
+  Map<String, String?> query = {};
   final ScrollController scrollController = ScrollController();
+  final WebViewController htmlController = WebViewController()..enableZoom(false);
   final CartService cartService = Get.find<CartService>();
+
+  late final RxString selectedAttr;
+  final RxInt shopNum = 1.obs;
+  final RxDouble appBarOpacity = 0.0.obs;
+  final Rx<Color> actionColor = Colors.white.obs;
+  final RxInt selectedId = 1.obs;
+  final RxBool showBottomMoreBar = false.obs;
+  final RxInt moreSelected = 1.obs;
 
   final List<Map<String, dynamic>> tannerTitles = [
     {"id": 1, "contentKey": "", "title": "商品", "anchor_point": 0.0},
@@ -27,21 +37,6 @@ class ProductDetailsController extends BaseController with StateMixin<GoodsDetai
     {"id": 2, "title": "消息通知", "icon": XmshopIcons.message},
     {"id": 3, "title": "喜欢的商品", "icon": XmshopIcons.collect}
   ];
-
-  final List<String> picList = [
-    "https://p4.itc.cn/images01/20211031/d0ff5fcb10e240928bc0ec46b8d71fbf.jpeg",
-    "https://files.jb51.net/file_images/article/201407/20140730091343112.jpg",
-    "https://k-static.appmobile.cn/uploads/allimg/211207/28-21120G43118.jpg",
-    "https://img1.mydrivers.com/img/20220927/d35930cd-b2d6-4a59-a11d-1ecc4c163c47_1000.jpg"
-  ];
-
-  final RxString selectedAttr = "".obs;
-  final RxInt shopNum = 1.obs;
-  final RxDouble appBarOpacity = 0.0.obs;
-  final Rx<Color> actionColor = Colors.white.obs;
-  final RxInt selectedId = 1.obs;
-  final RxBool showMoreTar = false.obs;
-  final RxInt moreSelected = 1.obs;
 
   void buy() {
     Get.back();
@@ -61,9 +56,14 @@ class ProductDetailsController extends BaseController with StateMixin<GoodsDetai
   void changeMoreSelected(int selected) {
     if (selected != moreSelected.value) {
       moreSelected.value = selected;
+      if (selectedId.value == 2) {
+        htmlController.loadHtmlString("${state?.content}");
+      } else {
+        htmlController.loadHtmlString("${state?.specs}");
+      }
+      update();
     }
     scrollController.animateTo(_getAndUpdateAnchorPoint(2), duration: const Duration(milliseconds: 1000), curve: Curves.easeIn);
-    update();
   }
 
   void _changeSelectedId(int id) {
@@ -128,7 +128,7 @@ class ProductDetailsController extends BaseController with StateMixin<GoodsDetai
         if (selectedId.value - 1 != i) {
           if (i == tannerTitles.length - 1) {
             if (offset > current) {
-              showMoreTar.value = false;
+              showBottomMoreBar.value = false;
               _changeSelectedId(i + 1);
               update();
             }
@@ -137,7 +137,7 @@ class ProductDetailsController extends BaseController with StateMixin<GoodsDetai
           next = _getAndSaveAnchorPoint(i + 1);
           if (current < offset && offset < next) {
             _changeSelectedId(i + 1);
-            i == 2 ? showMoreTar.value = true : showMoreTar.value = false;
+            i == 2 ? showBottomMoreBar.value = true : showBottomMoreBar.value = false;
             update();
             return;
           }
@@ -156,6 +156,7 @@ class ProductDetailsController extends BaseController with StateMixin<GoodsDetai
     }
     change(response.body, status: RxStatus.success());
     _initAttrSelected();
+    _initHtmlController();
   }
 
   void _initAttrSelected() {
@@ -169,6 +170,10 @@ class ProductDetailsController extends BaseController with StateMixin<GoodsDetai
     }
   }
 
+  void _initHtmlController() {
+    htmlController.loadHtmlString("${state?.specs}");
+  }
+
   void _initGlobalKey() {
     for (int i = 0; i < tannerTitles.length; i++) {
       tannerTitles[i]["contentKey"] = GlobalKey();
@@ -176,13 +181,12 @@ class ProductDetailsController extends BaseController with StateMixin<GoodsDetai
   }
 
   void _initQuery() {
-    query = {
-      "${Get.parameters['requestKey']}": "${Get.parameters['requestValue']}"
-    };
+    query = Get.parameters;
   }
 
   @override
   void init() {
+    selectedAttr = "".obs;
     _initQuery();
     _initGlobalKey();
     _addScrollListener();

@@ -3,9 +3,11 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 
 import '../../../common/utils/https_client.dart';
-import '../../../common/utils/route_utils.dart';
+import '../../../common/utils/routes.dart';
 import '../../../common/utils/screen_adapter.dart';
 import '../../../views/status/loading_view.dart';
+import '../../../views/status/error_view.dart';
+import '../../../views/status/empty_view.dart';
 import '../../../views/tile_card.dart';
 import '../controllers/home_best_waterfall_controller.dart';
 
@@ -28,7 +30,7 @@ class HomeBestWaterfallView extends GetView<HomeBestWaterfallController> {
           physics: const NeverScrollableScrollPhysics(),
           itemBuilder: (context, index) => TileCard(
             onTap: () {
-              RouteUtils.to("/product-details", "id", state[index].id);
+              Routes.toProductDetails(state[index].id);
             },
             backgroundColor: Colors.white,
             image: Image.network(
@@ -51,8 +53,8 @@ class HomeBestWaterfallView extends GetView<HomeBestWaterfallController> {
           ),
         ),
         onLoading: LoadingView.circle(),
-        onEmpty: Container(),
-        onError: (error) => Container(),
+        onEmpty: const EmptyView(),
+        onError: (error) => const ErrorView(),
       ),
     );
   }

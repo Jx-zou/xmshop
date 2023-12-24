@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-import 'paging_controller.dart';
+import 'page_controller.dart';
 
-abstract class ScrollPageController<T> extends PagingController<T> {
+abstract class ScrollPageController<T> extends XmPageController<T> {
   final ScrollController scrollController;
   final int offset;
 
-  ScrollPageController({required this.scrollController, this.offset = 20, required super.query});
+  ScrollPageController({required this.scrollController, this.offset = 100, required super.query});
 
   void _addScrollListener() {
     scrollController.addListener(() {

@@ -11,20 +11,23 @@ class ProductBodyView extends GetView<ProductController> {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(children: [
-      Positioned(
-        top: ScreenAdapter.height(120),
-        left: 0,
-        right: 0,
-        bottom: 0,
-        child: const ProductWaterfallView(),
-      ),
-      const Positioned(
-        left: 0,
-        right: 0,
-        top: 0,
-        child: ProductSubBarView(),
-      )
-    ]);
+    return RefreshIndicator(
+      onRefresh: () => controller.onRefresh(),
+      child: Stack(children: [
+        Positioned(
+          top: ScreenAdapter.height(120),
+          left: 0,
+          right: 0,
+          bottom: 0,
+          child: const ProductWaterfallView(),
+        ),
+        const Positioned(
+          left: 0,
+          right: 0,
+          top: 0,
+          child: ProductSubBarView(),
+        )
+      ]),
+    );
   }
 }

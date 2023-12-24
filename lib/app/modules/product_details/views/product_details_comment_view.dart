@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../controllers/product_details_comment_controller.dart';
 import '../../../common/icons/xmshop_icons.dart';
 import '../../../common/utils/screen_adapter.dart';
 import '../../../material/gradient_button.dart';
 import '../../../views/title_banner.dart';
-import '../controllers/product_details_controller.dart';
 
-class ProductDetailsEvaluateView extends GetView<ProductDetailsController> {
-  const ProductDetailsEvaluateView({super.key});
+class ProductDetailsCommentView extends GetView<ProductDetailsCommentController> {
+  const ProductDetailsCommentView({super.key});
 
   @override
   Widget build(BuildContext context) {

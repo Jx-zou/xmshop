@@ -45,10 +45,9 @@ class HomeView extends GetView<HomeController> {
                     InkWell(
                         child: Container(
                           margin: EdgeInsets.only(
-                            left: ScreenAdapter.width(
-                                (1 - controller.ratio.value) *
-                                    HomeController.maxOffset),
-                          ),
+                              left: ScreenAdapter.width(
+                                  (1 - controller.ratio.value) *
+                                      HomeController.maxOffset)),
                           width: ScreenAdapter.width(650 +
                               controller.ratio.value *
                                   HomeController.maxOffset),

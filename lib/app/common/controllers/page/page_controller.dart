@@ -2,14 +2,14 @@ import 'package:get/get.dart';
 
 import '../base_controller.dart';
 
-abstract class PagingController<T> extends BaseController with StateMixin<List<T>> {
+abstract class XmPageController<T> extends BaseController with StateMixin<List<T>> {
   late int page;
   late int pageSize;
   late bool isFetching;
   late bool hasMore;
-  Map<String, String> query;
+  Map<String, String?> query;
 
-  PagingController({required this.query, this.pageSize = 10});
+  XmPageController({required this.query, this.pageSize = 10});
 
   void _initQuery() {
     Map<String, String> defaultQuery = {"page": "$page", "pageSize": "$pageSize"};

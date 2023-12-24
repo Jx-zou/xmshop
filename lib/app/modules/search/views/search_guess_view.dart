@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 
 import '../../../common/utils/screen_adapter.dart';
 import '../../../views/status/loading_view.dart';
+import '../../../views/status/empty_view.dart';
+import '../../../views/status/error_view.dart';
 import '../../../views/title_banner.dart';
 import '../controllers/search_guess_controller.dart';
 
@@ -23,7 +25,7 @@ class SearchGuessView extends GetView<SearchGuessController> {
               .map(
                 (value) => InkWell(
                   onTap: () {
-                    controller.onKeywordsTap(value);
+                    controller.searchController.search(value: value);
                   },
                   child: Container(
                     padding: EdgeInsets.symmetric(
@@ -44,8 +46,8 @@ class SearchGuessView extends GetView<SearchGuessController> {
         )
       ]),
       onLoading: LoadingView.threeBounce(),
-      onEmpty: Container(),
-      onError: (error) => Container(),
+      onEmpty: const EmptyView(),
+      onError: (error) => const ErrorView(),
     );
   }
 }

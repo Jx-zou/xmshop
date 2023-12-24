@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper_view/flutter_swiper_view.dart';
 import 'package:get/get.dart';
-import 'package:xmshop/app/views/status/loading_view.dart';
 
+import '../../../views/status/empty_view.dart';
+import '../../../views/status/error_view.dart';
+import '../../../views/status/loading_view.dart';
 import '../../../common/utils/https_client.dart';
 import '../../../common/utils/screen_adapter.dart';
 import '../../../material/rect_fraction_pagination_builder.dart';
@@ -39,8 +41,8 @@ class ProductDetailsSwiperView extends GetView<ProductDetailsController> {
                 ),
               ),
           onLoading: LoadingView.circle(),
-          onEmpty: const SizedBox(),
-          onError: (error) => const SizedBox()),
+          onEmpty: const EmptyView(),
+          onError: (error) => const ErrorView()),
     );
   }
 }

@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 
 import '../../../common/utils/https_client.dart';
 import '../../../common/utils/screen_adapter.dart';
+import '../../../views/status/empty_view.dart';
+import '../../../views/status/error_view.dart';
 import '../../../views/status/loading_view.dart';
 import '../controllers/search_hot_controller.dart';
 
@@ -66,8 +68,8 @@ class SearchHotView extends GetView<SearchHotController> {
                     }),
               ),
               onLoading: LoadingView.circle(),
-              onEmpty: Container(),
-              onError: (error) => Container(),
+              onEmpty: const EmptyView(),
+              onError: (error) => const ErrorView(),
             ),
           ),
         ],

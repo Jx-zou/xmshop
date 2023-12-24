@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:xmshop/app/views/status/loading_view.dart';
 
 import '../../../common/utils/https_client.dart';
-import '../../../common/utils/route_utils.dart';
+import '../../../common/utils/routes.dart';
 import '../../../common/utils/screen_adapter.dart';
+import '../../../views/status/loading_view.dart';
+import '../../../views/status/empty_view.dart';
+import '../../../views/status/error_view.dart';
 import '../../../views/tile_card.dart';
-import '../controllers/product_details_recommended_controller.dart';
+import '../controllers/product_details_recommend_controller.dart';
 
-class ProductDetailsRecommendedView
-    extends GetView<ProductDetailsRecommendedController> {
-  const ProductDetailsRecommendedView({super.key});
+class ProductDetailsRecommendView extends GetView<ProductDetailsRecommendController> {
+  const ProductDetailsRecommendView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +44,7 @@ class ProductDetailsRecommendedView
           itemCount: state?.length,
           itemBuilder: (context, index) => TileCard(
             onTap: () {
-              RouteUtils.to("/product-details", "id", state?[index].id);
+              Routes.toProductDetails(state?[index].id);
             },
             padding: EdgeInsets.all(
               ScreenAdapter.width(30),
@@ -76,8 +77,8 @@ class ProductDetailsRecommendedView
         ),
       ]),
       onLoading: LoadingView.threeBounce(),
-      onEmpty: const SizedBox(),
-      onError: (error) => const SizedBox(),
+      onEmpty: const EmptyView(),
+      onError: (error) => const ErrorView(),
     );
   }
 }

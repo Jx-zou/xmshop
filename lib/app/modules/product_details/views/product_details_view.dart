@@ -165,7 +165,7 @@ class ProductDetailsView extends GetView<ProductDetailsController> {
               ]),
         ),
       ),
-      body: const ProductDetailsBodyView(),
+      body: ProductDetailsBodyView(),
     );
   }
 }

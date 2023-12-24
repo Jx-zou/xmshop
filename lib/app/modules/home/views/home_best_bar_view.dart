@@ -4,10 +4,11 @@ import 'package:get/get.dart';
 import '../../../common/utils/https_client.dart';
 import '../../../common/utils/screen_adapter.dart';
 import '../../../views/status/loading_view.dart';
+import '../../../views/status/error_view.dart';
 import '../controllers/home_best_banner_controller.dart';
 
-class HomeBestBannerView extends GetView<HomeBestBannerController> {
-  const HomeBestBannerView({super.key});
+class HomeBestBarView extends GetView<HomeBestBannerController> {
+  const HomeBestBarView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +41,7 @@ class HomeBestBannerView extends GetView<HomeBestBannerController> {
         ]),
       ),
       onLoading: LoadingView.threeBounce(),
-      onError: (error) => Container(),
+      onError: (error) => const ErrorView(),
     );
   }
 }

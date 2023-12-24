@@ -41,18 +41,11 @@ class ProductController extends ScrollPageController<GoodsModel> {
   ];
 
   int sort = 1;
-  Map<String, String> screenQuery = {};
+  Map<String, String?> screenQuery = {};
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   final RxInt selectId = 1.obs;
 
-  ProductController({required this.provider}) : super(scrollController: ScrollController(), query: {
-          "${Get.parameters['requestKey']}": "${Get.parameters['requestValue']}"});
-
-  toDetails(String? id) {
-    if (id != null && id.isNotEmpty) {
-      Get.toNamed("product-details", parameters: {"requestKey": "id", "requestValue": id});
-    }
-  }
+  ProductController({required this.provider}) : super(scrollController: ScrollController(), query: Get.parameters);
 
   onSubBannerTap(int selectId) {
     this.selectId.value = selectId;

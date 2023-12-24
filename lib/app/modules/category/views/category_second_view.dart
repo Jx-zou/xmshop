@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../common/utils/https_client.dart';
+import '../../../common/utils/routes.dart';
 import '../../../common/utils/screen_adapter.dart';
 import '../../../views/status/loading_view.dart';
+import '../../../views/status/error_view.dart';
+import '../../../views/status/empty_view.dart';
 import '../controllers/category_second_controller.dart';
 
 class CategorySecondView extends GetView<CategorySecondController> {
@@ -20,7 +23,7 @@ class CategorySecondView extends GetView<CategorySecondController> {
             childAspectRatio: 240 / 346),
         itemBuilder: (context, index) => InkWell(
           onTap: () {
-            controller.toProduct(state?[index].id);
+            Routes.toProduct(cid: state?[index].id, type: RouteType.off);
           },
           child: Column(children: [
             Container(
@@ -38,8 +41,8 @@ class CategorySecondView extends GetView<CategorySecondController> {
         ),
       ),
       onLoading: LoadingView.circle(),
-      onEmpty: Container(),
-      onError: (error) => Container(),
+      onEmpty: const EmptyView(),
+      onError: (error) => const ErrorView(),
     );
   }
 }

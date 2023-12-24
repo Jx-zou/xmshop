@@ -15,12 +15,6 @@ class CategorySecondController extends BaseController with StateMixin<List<Categ
     loadData();
   }
 
-  void toProduct(String? id) {
-    if(id != null && id.isNotEmpty) {
-      Get.offAndToNamed("/product", parameters: {"requestKey": "cid", "requestValue": id});
-    }
-  }
-
   @override
   void loadData() async {
     if (id == null || id!.isEmpty) {

@@ -70,7 +70,7 @@ class SearchView extends GetView<XmSearchController> {
                     controller.changeKeywords(value);
                   },
                   onSubmitted: (value) {
-                    controller.searchToProduct();
+                    controller.search(value: value);
                   }),
             ),
             actions: [
@@ -80,7 +80,7 @@ class SearchView extends GetView<XmSearchController> {
                 ),
                 child: InkWell(
                   onTap: () {
-                    controller.searchToProduct();
+                    controller.search();
                   },
                   child: Text(
                     "搜索",

@@ -32,7 +32,7 @@ class ExceptionHandler {
 
   void errorWidgetInitialize() {
     ErrorWidget.builder =
-        (details) => errorWidget ?? const ErrorView("该页面走丢了~~");
+        (details) => errorWidget ?? const ErrorView();
   }
 
   void flutterErrorInitialize() {
