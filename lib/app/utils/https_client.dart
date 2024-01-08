@@ -1,4 +1,4 @@
-import 'package:xmshop/config.dart';
+import '../../../config.dart';
 
 class HttpsClient {
   HttpsClient._();

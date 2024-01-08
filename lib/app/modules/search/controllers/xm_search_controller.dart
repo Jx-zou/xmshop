@@ -1,8 +1,8 @@
 import 'package:get/get.dart';
-import 'package:xmshop/app/common/utils/routes.dart';
 
-import '../../../common/controllers/base_controller.dart';
+import '../../../controllers/base_controller.dart';
 import '../../../services/search_service.dart';
+import '../../../utils/routes.dart';
 
 class XmSearchController extends BaseController with StateMixin<List<String>> {
   final SearchService searchService = Get.find<SearchService>();

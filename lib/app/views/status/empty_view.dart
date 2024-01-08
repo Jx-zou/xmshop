@@ -1,24 +1,28 @@
 import 'package:flutter/material.dart';
 
-const double defaultHeight = 128;
+const double kEmptyHeight = 32;
 
 class EmptyView extends StatelessWidget {
   final double? width;
   final double? height;
   final Color? color;
+  final Widget? child;
 
-  const EmptyView({super.key, this.color, this.width, this.height});
+  const EmptyView({
+    super.key,
+    this.color,
+    this.width,
+    this.height,
+    this.child,
+  });
 
   @override
   Widget build(BuildContext context) {
-    ThemeData themeData = Theme.of(context);
-    final double height = this.height ?? defaultHeight;
-    final Color color = this.color ?? themeData.primaryColor;
-
     return Container(
       width: width,
-      height: height,
-      color: color,
+      height: height ?? kEmptyHeight,
+      color: color ?? Colors.transparent,
+      child: child,
     );
   }
 }

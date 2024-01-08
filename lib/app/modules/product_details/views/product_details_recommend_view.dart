@@ -1,35 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../common/utils/https_client.dart';
-import '../../../common/utils/routes.dart';
-import '../../../common/utils/screen_adapter.dart';
-import '../../../views/status/loading_view.dart';
+import '../../../utils/https_client.dart';
+import '../../../utils/routes.dart';
+import '../../../utils/screen_adapter.dart';
 import '../../../views/status/empty_view.dart';
 import '../../../views/status/error_view.dart';
+import '../../../views/status/loading_view.dart';
 import '../../../views/tile_card.dart';
 import '../controllers/product_details_recommend_controller.dart';
 
-class ProductDetailsRecommendView extends GetView<ProductDetailsRecommendController> {
+class ProductDetailsRecommendView
+    extends GetView<ProductDetailsRecommendController> {
   const ProductDetailsRecommendView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return controller.obx(
-      (state) =>
-          Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        Container(
-          margin: EdgeInsets.only(
-            left: ScreenAdapter.width(30),
-          ),
-          child: Text(
-            "猜你喜欢",
-            style: TextStyle(
-                fontSize: ScreenAdapter.fontSize(42),
-                fontWeight: FontWeight.w600),
-          ),
+    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      Container(
+        margin: EdgeInsets.only(
+          left: ScreenAdapter.width(30),
         ),
-        GridView.builder(
+        child: Text(
+          "猜你喜欢",
+          style: TextStyle(
+              fontSize: ScreenAdapter.fontSize(42),
+              fontWeight: FontWeight.w600),
+        ),
+      ),
+      controller.obx(
+        (state) => GridView.builder(
           physics: const NeverScrollableScrollPhysics(),
           padding: EdgeInsets.all(
             ScreenAdapter.width(30),
@@ -72,13 +72,13 @@ class ProductDetailsRecommendView extends GetView<ProductDetailsRecommendControl
             ),
           ),
         ),
-        SizedBox(
-          height: ScreenAdapter.height(30),
-        ),
-      ]),
-      onLoading: LoadingView.threeBounce(),
-      onEmpty: const EmptyView(),
-      onError: (error) => const ErrorView(),
-    );
+        onLoading: const LoadingView(),
+        onEmpty: const EmptyView(),
+        onError: (error) => const ErrorView(),
+      ),
+      SizedBox(
+        height: ScreenAdapter.height(30),
+      ),
+    ]);
   }
 }

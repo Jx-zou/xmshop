@@ -31,8 +31,7 @@ class ExceptionHandler {
   }
 
   void errorWidgetInitialize() {
-    ErrorWidget.builder =
-        (details) => errorWidget ?? const ErrorView();
+    ErrorWidget.builder = (details) => errorWidget ?? const ErrorView();
   }
 
   void flutterErrorInitialize() {

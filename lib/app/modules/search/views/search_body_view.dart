@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../common/utils/screen_adapter.dart';
+import '../../../utils/screen_adapter.dart';
 import '../controllers/xm_search_controller.dart';
 import 'search_guess_view.dart';
 import 'search_history_view.dart';

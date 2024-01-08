@@ -16,22 +16,23 @@ class TileCard extends StatelessWidget {
   final Widget? tag;
   final Widget? trailing;
 
-  const TileCard(
-      {super.key,
-      this.onTap,
-      this.borderRadius = 10,
-      this.backgroundColor,
-      required this.image,
-      required this.title,
-      required this.subTitle,
-      this.titleStyle,
-      this.subTitleStyle,
-      this.spacing = 5,
-      this.tag,
-      this.trailing,
-      this.padding,
-      this.width,
-      this.height});
+  const TileCard({
+    super.key,
+    this.onTap,
+    this.borderRadius = 10,
+    this.backgroundColor,
+    required this.image,
+    required this.title,
+    required this.subTitle,
+    this.titleStyle,
+    this.subTitleStyle,
+    this.spacing = 5,
+    this.tag,
+    this.trailing,
+    this.padding,
+    this.width,
+    this.height,
+  });
 
   @override
   Widget build(BuildContext context) {

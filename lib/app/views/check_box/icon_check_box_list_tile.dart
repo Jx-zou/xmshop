@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../material/icon_check_box.dart';
+import 'icon_check_box.dart';
 
 class IconCheckBoxListTile extends StatelessWidget {
   final bool value;
@@ -21,25 +21,26 @@ class IconCheckBoxListTile extends StatelessWidget {
   final CrossAxisAlignment titleCrossAxisAlignment;
   final VoidCallback? onTap;
 
-  const IconCheckBoxListTile(
-      {super.key,
-      required this.value,
-      required this.onChanged,
-      this.size,
-      this.icon,
-      this.iconSize,
-      this.activeColor,
-      this.unActiveColor,
-      this.fillColor,
-      this.shape,
-      this.mainSpacing,
-      this.crossSpacing,
-      this.leading,
-      this.title,
-      this.subTitle,
-      this.secondary,
-      this.titleCrossAxisAlignment = CrossAxisAlignment.center,
-      this.onTap});
+  const IconCheckBoxListTile({
+    super.key,
+    required this.value,
+    required this.onChanged,
+    this.size,
+    this.icon,
+    this.iconSize,
+    this.activeColor,
+    this.unActiveColor,
+    this.fillColor,
+    this.shape,
+    this.mainSpacing,
+    this.crossSpacing,
+    this.leading,
+    this.title,
+    this.subTitle,
+    this.secondary,
+    this.titleCrossAxisAlignment = CrossAxisAlignment.center,
+    this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {

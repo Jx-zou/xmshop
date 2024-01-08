@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../common/utils/https_client.dart';
-import '../../../common/utils/screen_adapter.dart';
-import '../../../views/status/loading_view.dart';
+import '../../../utils/https_client.dart';
+import '../../../utils/screen_adapter.dart';
+import '../../../views/status/empty_view.dart';
 import '../../../views/status/error_view.dart';
+import '../../../views/status/loading_view.dart';
 import '../controllers/home_best_banner_controller.dart';
 
 class HomeBestBarView extends GetView<HomeBestBannerController> {
@@ -20,8 +21,7 @@ class HomeBestBarView extends GetView<HomeBestBannerController> {
           bottom: ScreenAdapter.height(20),
         ),
         physics: const NeverScrollableScrollPhysics(),
-        gridDelegate:
-            const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 4),
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 4),
         itemBuilder: (context, index) => Column(children: [
           SizedBox(
             height: ScreenAdapter.height(210),
@@ -40,7 +40,7 @@ class HomeBestBarView extends GetView<HomeBestBannerController> {
           )
         ]),
       ),
-      onLoading: LoadingView.threeBounce(),
+      onLoading: const LoadingView(),
       onError: (error) => const ErrorView(),
     );
   }

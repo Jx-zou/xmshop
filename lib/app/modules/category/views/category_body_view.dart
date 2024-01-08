@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../views/status/error_view.dart';
 import '../../../views/status/empty_view.dart';
+import '../../../views/status/error_view.dart';
 import '../../../views/status/loading_view.dart';
-import '../../../common/utils/screen_adapter.dart';
+import '../../../utils/screen_adapter.dart';
 import '../controllers/category_controller.dart';
 import 'category_second_view.dart';
 
@@ -50,7 +50,7 @@ class CategoryBodyView extends GetView<CategoryController> {
             child: CategorySecondView(),
           )
         ]),
-        onLoading: LoadingView.circle(),
+        onLoading: const LoadingView(),
         onEmpty: const EmptyView(),
         onError: (error) => const ErrorView(),
       ),

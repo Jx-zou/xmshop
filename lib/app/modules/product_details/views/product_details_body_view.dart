@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../common/utils/screen_adapter.dart';
-import '../controllers/product_details_comment_controller.dart';
-import '../controllers/product_details_recommend_controller.dart';
+import '../../../utils/screen_adapter.dart';
 import '../controllers/product_details_controller.dart';
 import 'product_details_bottom_view.dart';
 import 'product_details_description_view.dart';
@@ -14,30 +12,19 @@ import 'product_details_swiper_view.dart';
 import 'product_details_switch_view.dart';
 
 class ProductDetailsBodyView extends GetView<ProductDetailsController> {
-  final ProductDetailsRecommendController recommendController = Get.find<ProductDetailsRecommendController>();
-  final ProductDetailsCommentController commentController = Get.find<ProductDetailsCommentController>();
-
-  ProductDetailsBodyView({super.key});
-
-  Future<void> _onRefresh() async {
-    Future.delayed(const Duration(seconds: 3), () {
-      controller.onRefresh();
-      recommendController.onRefresh();
-      commentController.onRefresh();
-    });
-  }
+  const ProductDetailsBodyView({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Obx(
       () => RefreshIndicator(
-        onRefresh: _onRefresh,
+        edgeOffset: 50.0,
+        onRefresh: () => controller.onRefresh(),
         child: SizedBox(
           width: double.infinity,
           height: double.infinity,
           child: Stack(children: [
             SingleChildScrollView(
-              clipBehavior: Clip.antiAlias,
               controller: controller.scrollController,
               child: Column(children: [
                 const ProductDetailsSwiperView(),
@@ -55,20 +42,18 @@ class ProductDetailsBodyView extends GetView<ProductDetailsController> {
                 ),
               ]),
             ),
+            Positioned(
+              top: ScreenAdapter.height(225),
+              left: 0,
+              right: 0,
+              child: controller.showBottomMoreBar.isTrue ? const ProductDetailsMoreBarView() : const SizedBox(),
+            ),
             const Positioned(
               bottom: 0,
               left: 0,
               right: 0,
               child: ProductDetailsBottomView(),
             ),
-            controller.showBottomMoreBar.isTrue
-                ? Positioned(
-                    top: ScreenAdapter.height(225),
-                    left: 0,
-                    right: 0,
-                    child: const ProductDetailsMoreBarView(),
-                  )
-                : const SizedBox()
           ]),
         ),
       ),

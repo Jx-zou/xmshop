@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../common/utils/screen_adapter.dart';
+import '../../../utils/screen_adapter.dart';
 import '../controllers/cart_controller.dart';
 
 import 'cart_body_view.dart';
@@ -28,10 +28,11 @@ class CartView extends GetView<CartController> {
               child: Text(
                 "编辑",
                 style: TextStyle(
-                    fontSize: ScreenAdapter.fontSize(42),
-                    color: Colors.black87),
+                  fontSize: ScreenAdapter.fontSize(42),
+                  color: Colors.black87,
+                ),
               ),
-            )
+            ),
           ]),
       body: const CartBodyView(),
     );

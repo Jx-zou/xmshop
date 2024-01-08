@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../common/icons/xmshop_icons.dart';
-import '../../../common/utils/screen_adapter.dart';
+import '../../../icons/xm_shop_icons.dart';
+import '../../../utils/screen_adapter.dart';
 import '../controllers/product_controller.dart';
 import 'product_body_view.dart';
 
@@ -42,7 +42,7 @@ class ProductView extends GetView<ProductController> {
                   left: ScreenAdapter.width(34),
                   right: ScreenAdapter.width(10),
                 ),
-                child: const Icon(XmshopIcons.search,
+                child: const Icon(XmShopIcons.search,
                     size: 20, color: Colors.black45),
               ),
               Text(

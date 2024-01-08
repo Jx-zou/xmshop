@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../common/controllers/base_controller.dart';
+import '../../../controllers/base_controller.dart';
 import '../../../data/best_category_provider.dart';
 import '../../../models/best_category_model.dart';
 

@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 
-import '../../../common/controllers/base_controller.dart';
+import '../../../controllers/base_controller.dart';
 import '../../../data/category_provider.dart';
 import '../../../models/category_model.dart';
 

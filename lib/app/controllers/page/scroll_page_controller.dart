@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-import 'page_controller.dart';
+import 'xm_page_controller.dart';
 
 abstract class ScrollPageController<T> extends XmPageController<T> {
   final ScrollController scrollController;
-  final int offset;
+  final double? offset;
 
-  ScrollPageController({required this.scrollController, this.offset = 100, required super.query});
+  ScrollPageController({required this.scrollController, this.offset, required super.query});
 
   void _addScrollListener() {
+    final offset = this.offset ?? Get.height / 2;
     scrollController.addListener(() {
       if (!isFetching && scrollController.offset > scrollController.position.maxScrollExtent - offset) {
         isFetching = true;

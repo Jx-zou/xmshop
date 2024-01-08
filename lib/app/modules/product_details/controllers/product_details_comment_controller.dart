@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import '../../../common/controllers/base_controller.dart';
+import '../../../controllers/base_controller.dart';
 
 class ProductDetailsCommentController extends BaseController with StateMixin<String> {
 
@@ -12,7 +12,6 @@ class ProductDetailsCommentController extends BaseController with StateMixin<Str
 
   @override
   void loadData() {
-    // TODO: implement loadData
-    super.loadData();
+    change("newState", status: RxStatus.success());
   }
 }

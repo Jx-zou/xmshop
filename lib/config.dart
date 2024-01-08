@@ -4,13 +4,13 @@ import 'package:flutter/services.dart';
 class Config {
   Config._();
 
-  static const String appTitle = "XmShop";
-  static const String serverApi = "https://xiaomi.itying.com/api";
+  static const String title = "XmShop";
   static const String server = "https://xiaomi.itying.com/";
+  static const String serverApi = "https://xiaomi.itying.com/api";
 
   static final ThemeData themeData = ThemeData(
     useMaterial3: true,
-    fontFamily: "miFont",
+    fontFamily: "font",
     splashColor: Colors.transparent,
     highlightColor: Colors.transparent,
     scaffoldBackgroundColor: const Color.fromRGBO(245, 245, 245, 1),

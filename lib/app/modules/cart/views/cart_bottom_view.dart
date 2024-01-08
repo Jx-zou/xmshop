@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../common/icons/xmshop_icons.dart';
-import '../../../common/utils/screen_adapter.dart';
-import '../../../material/gradient_button.dart';
-import '../../../material/icon_check_box.dart';
-import '../../../material/decimal.dart';
+import '../../../icons/xm_shop_icons.dart';
+import '../../../utils/screen_adapter.dart';
+import '../../../views/button/gradient_button.dart';
+import '../../../views/check_box/icon_check_box.dart';
+import '../../../views/decimal.dart';
 import '../controllers/cart_controller.dart';
 
 class CartBottomView extends GetView<CartController> {
@@ -16,16 +16,11 @@ class CartBottomView extends GetView<CartController> {
     return Container(
       width: ScreenAdapter.width(1080),
       height: ScreenAdapter.height(190),
-      padding: EdgeInsets.all(
-        ScreenAdapter.width(30),
-      ),
+      padding: EdgeInsets.all(ScreenAdapter.width(30)),
       decoration: BoxDecoration(
         color: Colors.white,
         border: Border(
-          top: BorderSide(
-            color: Colors.black.withOpacity(0.02),
-            width: ScreenAdapter.height(2),
-          ),
+          top: BorderSide(color: Colors.black.withOpacity(0.02), width: ScreenAdapter.height(2)),
         ),
       ),
       child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
@@ -33,7 +28,7 @@ class CartBottomView extends GetView<CartController> {
           Obx(
             () => IconCheckBox(
               value: controller.allSelected.value,
-              icon: XmshopIcons.checked,
+              icon: XmShopIcons.checked,
               size: ScreenAdapter.fontSize(56),
               iconSize: ScreenAdapter.fontSize(40),
               onChanged: (isChecked) {
@@ -42,14 +37,10 @@ class CartBottomView extends GetView<CartController> {
               shape: BoxShape.circle,
               activeColor: Colors.white,
               unActiveColor: Colors.transparent,
-              fillColor: controller.allSelected.isTrue
-                  ? Colors.deepOrange
-                  : Colors.black.withOpacity(0.05),
+              fillColor: controller.allSelected.isTrue ? Colors.deepOrange : Colors.black.withOpacity(0.05)
             ),
           ),
-          SizedBox(
-            width: ScreenAdapter.width(25),
-          ),
+          SizedBox(width: ScreenAdapter.width(25)),
           Text(
             "全选",
             style: TextStyle(
@@ -104,27 +95,14 @@ class CartBottomView extends GetView<CartController> {
                   ]),
                 ]),
                 Row(children: [
-                  const Text(
-                    "免运费",
-                    style: TextStyle(color: Colors.black38),
-                  ),
-                  SizedBox(
-                    width: ScreenAdapter.width(10),
-                  ),
-                  const Text(
-                    "优惠:￥0.01",
-                    style: TextStyle(color: Colors.black54),
-                  ),
-                  SizedBox(
-                    width: ScreenAdapter.width(10),
-                  ),
-                  InkWell(
+                  const Text("免运费", style: TextStyle(color: Colors.black38)),
+                  SizedBox(width: ScreenAdapter.width(10)),
+                  const Text("优惠:￥0.01", style: TextStyle(color: Colors.black54)),
+                  SizedBox(width: ScreenAdapter.width(10)),
+                  InkResponse(
                     onTap: () {},
                     child: Row(children: [
-                      const Text(
-                        "明细",
-                        style: TextStyle(color: Colors.deepOrange),
-                      ),
+                      const Text("明细", style: TextStyle(color: Colors.deepOrange)),
                       Icon(
                         Icons.keyboard_arrow_down_outlined,
                         size: ScreenAdapter.fontSize(32),
@@ -134,9 +112,7 @@ class CartBottomView extends GetView<CartController> {
                   ),
                 ]),
               ]),
-          SizedBox(
-            width: ScreenAdapter.width(15),
-          ),
+          SizedBox(width: ScreenAdapter.width(15)),
           Obx(
             () => GradientButton(
               onPressed: () {},
@@ -145,16 +121,10 @@ class CartBottomView extends GetView<CartController> {
                 vertical: ScreenAdapter.height(20),
               ),
               borderRadius: BorderRadius.circular(ScreenAdapter.fontSize(60)),
-              gradient: LinearGradient(colors: [
-                Colors.deepOrange.withOpacity(0.7),
-                Colors.deepOrange
-              ]),
+              gradient: LinearGradient(colors: [Colors.deepOrange.withOpacity(0.7), Colors.deepOrange]),
               child: Text(
                 "结算${controller.total.value}",
-                style: TextStyle(
-                  fontSize: ScreenAdapter.fontSize(48),
-                  color: Colors.white,
-                ),
+                style: TextStyle(fontSize: ScreenAdapter.fontSize(48), color: Colors.white),
               ),
             ),
           ),

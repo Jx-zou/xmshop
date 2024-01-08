@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../common/utils/screen_adapter.dart';
-import '../../../common/icons/xmshop_icons.dart';
+import '../../../utils/screen_adapter.dart';
+import '../../../icons/xm_shop_icons.dart';
 import '../controllers/category_controller.dart';
 import 'category_body_view.dart';
 
@@ -27,7 +27,7 @@ class CategoryView extends GetView<CategoryController> {
                 Padding(
                   padding: EdgeInsets.fromLTRB(
                       ScreenAdapter.width(34), 0, ScreenAdapter.width(10), 0),
-                  child: const Icon(XmshopIcons.search,
+                  child: const Icon(XmShopIcons.search,
                       size: 20, color: Colors.black45),
                 ),
                 Text(
@@ -51,7 +51,7 @@ class CategoryView extends GetView<CategoryController> {
             ),
             child: IconButton(
               onPressed: () {},
-              icon: const Icon(XmshopIcons.message),
+              icon: const Icon(XmShopIcons.message),
             ),
           )
         ],

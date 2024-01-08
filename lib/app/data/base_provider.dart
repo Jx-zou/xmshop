@@ -9,7 +9,7 @@ abstract class BaseProvider extends GetConnect {
     //请求前缀
     httpClient.baseUrl = Config.serverApi;
 
-    //request监听
+    //监听
     httpClient.addResponseModifier((request, response) {
       printInfo(info: request.url.toString());
       return response;

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../common/controllers/page/scroll_page_controller.dart';
+import '../../../controllers/page/scroll_page_controller.dart';
 import '../../../data/goods_provider.dart';
 import '../../../models/goods_model.dart';
 

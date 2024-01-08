@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../common/utils/screen_adapter.dart';
+import '../../../utils/screen_adapter.dart';
 import '../controllers/product_controller.dart';
 
 class ProductSubBarView extends GetView<ProductController> {

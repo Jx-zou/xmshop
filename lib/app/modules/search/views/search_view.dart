@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../controllers/xm_search_controller.dart';
-import '../../../common/utils/screen_adapter.dart';
-import '../../../common/icons/xmshop_icons.dart';
+import '../../../utils/screen_adapter.dart';
+import '../../../icons/xm_shop_icons.dart';
 import 'search_body_view.dart';
 
 class SearchView extends GetView<XmSearchController> {
@@ -26,7 +26,7 @@ class SearchView extends GetView<XmSearchController> {
                 Get.back();
               },
               child: Icon(
-                XmshopIcons.arrowLeft,
+                XmShopIcons.arrowLeft,
                 size: ScreenAdapter.fontSize(42),
               ),
             ),
@@ -61,7 +61,7 @@ class SearchView extends GetView<XmSearchController> {
                           right: ScreenAdapter.width(30),
                         ),
                         child: Icon(
-                          XmshopIcons.search,
+                          XmShopIcons.search,
                           size: ScreenAdapter.fontSize(42),
                         ),
                       ),

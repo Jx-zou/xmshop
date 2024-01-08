@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../common/controllers/base_controller.dart';
+import '../../../controllers/base_controller.dart';
 import '../../../models/cart_model.dart';
 import '../../../services/cart_service.dart';
 
@@ -16,27 +16,11 @@ class CartController extends BaseController with StateMixin<List<CartModel>> {
   final List<int> normal = [];
   final List<int> expire = [];
 
-  void addShopNum(String? id, String? selectedAttr) {
-    if (id != null &&
-        selectedAttr != null &&
-        state != null &&
-        state!.isNotEmpty) {
+  void modifyCount(String? id, String? selectedAttr, int count) {
+    if (id != null && selectedAttr != null && state != null && state!.isNotEmpty) {
       int index = cartService.find(state, id, selectedAttr);
       if (index != -1) {
-        state?[index].count++;
-      }
-    }
-  }
-
-  void reduceShopNum(String? id, String? selectedAttr, int count) {
-    if (id != null &&
-        selectedAttr != null &&
-        count > 1 &&
-        state != null &&
-        state!.isNotEmpty) {
-      int index = cartService.find(state, id, selectedAttr);
-      if (index != -1) {
-        state?[index].count--;
+        state?[index].count = count;
       }
     }
   }
@@ -106,7 +90,7 @@ class CartController extends BaseController with StateMixin<List<CartModel>> {
   void loadData() async {
     List<CartModel>? carts = await cartService.get();
     if (carts == null || carts.isEmpty) {
-      change(carts, status: RxStatus.empty());
+      change([], status: RxStatus.empty());
       return;
     }
     change(carts, status: RxStatus.success());

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../controllers/product_details_comment_controller.dart';
-import '../../../common/icons/xmshop_icons.dart';
-import '../../../common/utils/screen_adapter.dart';
-import '../../../material/gradient_button.dart';
+import '../../../views/button/gradient_button.dart';
 import '../../../views/title_banner.dart';
+import '../controllers/product_details_comment_controller.dart';
+import '../../../icons/xm_shop_icons.dart';
+import '../../../utils/screen_adapter.dart';
 
 class ProductDetailsCommentView extends GetView<ProductDetailsCommentController> {
   const ProductDetailsCommentView({super.key});
@@ -32,7 +32,7 @@ class ProductDetailsCommentView extends GetView<ProductDetailsCommentController>
         TitleBanner(
           "买家秀",
           right: "共有54w+条评论",
-          icon: XmshopIcons.arrowRight,
+          icon: XmShopIcons.arrowRight,
           iconColor: Colors.black87,
           leftSize: ScreenAdapter.fontSize(42),
           rightSize: ScreenAdapter.fontSize(32),
@@ -103,7 +103,7 @@ class ProductDetailsCommentView extends GetView<ProductDetailsCommentController>
         TitleBanner(
           "问大家",
           right: "共143个回答",
-          icon: XmshopIcons.arrowRight,
+          icon: XmShopIcons.arrowRight,
           iconColor: Colors.black87,
           leftSize: ScreenAdapter.fontSize(42),
           rightSize: ScreenAdapter.fontSize(32),

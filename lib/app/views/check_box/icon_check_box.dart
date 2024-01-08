@@ -12,21 +12,22 @@ class IconCheckBox extends StatefulWidget {
   final Color? fillColor;
   final BoxShape? shape;
 
-  const IconCheckBox(
-      {super.key,
-      required this.value,
-      required this.onChanged,
-      this.size,
-      this.icon,
-      this.activeColor,
-      this.unActiveColor,
-      this.fillColor,
-      this.shape,
-      this.iconSize,
-      this.margin});
+  const IconCheckBox({
+    super.key,
+    required this.value,
+    required this.onChanged,
+    this.size,
+    this.icon,
+    this.activeColor,
+    this.unActiveColor,
+    this.fillColor,
+    this.shape,
+    this.iconSize,
+    this.margin,
+  });
 
   @override
-  State<StatefulWidget> createState() => _IconCheckBoxState();
+  State<IconCheckBox> createState() => _IconCheckBoxState();
 }
 
 class _IconCheckBoxState extends State<IconCheckBox> {

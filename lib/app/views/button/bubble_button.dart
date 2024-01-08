@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'bubble_clipper.dart';
-import 'popup_shape.dart';
+import '../clipper/bubble_clipper.dart';
+import '../popup_shape.dart';
 
 class BubbleButton<T> extends StatefulWidget {
   final Widget popupChild;

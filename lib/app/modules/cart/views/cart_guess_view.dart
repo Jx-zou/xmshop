@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../common/utils/https_client.dart';
-import '../../../common/utils/routes.dart';
-import '../../../common/utils/screen_adapter.dart';
-import '../../../views/status/error_view.dart';
+import '../../../utils/https_client.dart';
+import '../../../utils/routes.dart';
+import '../../../utils/screen_adapter.dart';
 import '../../../views/tile_card.dart';
-import '../../../views/status/loading_view.dart';
 import '../../../views/status/empty_view.dart';
+import '../../../views/status/error_view.dart';
+import '../../../views/status/loading_view.dart';
 import '../controllers/cart_guess_controller.dart';
 
 class CartGuessView extends GetView<CartGuessController> {
@@ -68,9 +68,7 @@ class CartGuessView extends GetView<CartGuessController> {
             onTap: () {
               Routes.toProductDetails(state?[index].id);
             },
-            padding: EdgeInsets.all(
-              ScreenAdapter.width(30),
-            ),
+            padding: EdgeInsets.all(ScreenAdapter.width(30)),
             backgroundColor: Colors.white,
             image: Image.network(
               HttpsClient.picReplaceUrl("${state?[index].pic}"),
@@ -84,18 +82,17 @@ class CartGuessView extends GetView<CartGuessController> {
             ),
             subTitle: "${state?[index].subTitle}",
             subTitleStyle: TextStyle(
-                fontSize: ScreenAdapter.fontSize(28),
-                overflow: TextOverflow.ellipsis),
+              fontSize: ScreenAdapter.fontSize(28),
+              overflow: TextOverflow.ellipsis,
+            ),
             trailing: Text(
               "￥${state?[index].price}",
-              style: TextStyle(
-                fontSize: ScreenAdapter.fontSize(42),
-              ),
+              style: TextStyle(fontSize: ScreenAdapter.fontSize(42)),
             ),
           ),
         ),
       ]),
-      onLoading: LoadingView.circle(),
+      onLoading: const LoadingView(),
       onEmpty: const EmptyView(),
       onError: (error) => const ErrorView(),
     );

@@ -11,7 +11,7 @@ class StorageService extends GetxService {
     return _prefs.setString(key, json.encode(value));
   }
 
-  get(String key) async {
+  get<T>(String key) async {
     try {
       String? jsonValue = _prefs.getString(key);
       if (jsonValue != null) {

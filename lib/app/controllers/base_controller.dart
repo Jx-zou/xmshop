@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 
+const Duration refreshDuration = Duration(seconds: 3);
+
 abstract class BaseController extends GetxController {
   void init() {}
 
@@ -10,7 +12,7 @@ abstract class BaseController extends GetxController {
   void reset() {}
 
   Future<void> onRefresh({Duration? duration}) async {
-    await Future.delayed(duration ?? const Duration(seconds: 3), () {
+    await Future.delayed(duration ?? refreshDuration, () {
       reset();
       init();
       loadData();
@@ -26,7 +28,7 @@ abstract class BaseController extends GetxController {
 
   @override
   void onClose() {
-    super.onClose();
     close();
+    super.onClose();
   }
 }

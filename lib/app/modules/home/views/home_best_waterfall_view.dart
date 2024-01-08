@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 
-import '../../../common/utils/https_client.dart';
-import '../../../common/utils/routes.dart';
-import '../../../common/utils/screen_adapter.dart';
-import '../../../views/status/loading_view.dart';
-import '../../../views/status/error_view.dart';
+import '../../../utils/https_client.dart';
+import '../../../utils/routes.dart';
+import '../../../utils/screen_adapter.dart';
 import '../../../views/status/empty_view.dart';
+import '../../../views/status/error_view.dart';
+import '../../../views/status/loading_view.dart';
 import '../../../views/tile_card.dart';
 import '../controllers/home_best_waterfall_controller.dart';
 
@@ -52,7 +52,7 @@ class HomeBestWaterfallView extends GetView<HomeBestWaterfallController> {
             ),
           ),
         ),
-        onLoading: LoadingView.circle(),
+        onLoading: const LoadingView(),
         onEmpty: const EmptyView(),
         onError: (error) => const ErrorView(),
       ),

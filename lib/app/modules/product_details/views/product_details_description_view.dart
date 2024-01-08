@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:webview_flutter/webview_flutter.dart';
 
 import '../../../views/status/error_view.dart';
 import '../../../views/status/loading_view.dart';
-import '../../../common/utils/screen_adapter.dart';
+import '../../../views/web/dynamic_height_web_view.dart';
+import '../../../utils/screen_adapter.dart';
 import '../controllers/product_details_controller.dart';
 import 'product_details_more_bar_view.dart';
 
@@ -18,9 +18,16 @@ class ProductDetailsDescriptionView extends GetView<ProductDetailsController> {
         bottom: ScreenAdapter.height(30),
       ),
       width: ScreenAdapter.width(1080),
+      color: Colors.blue,
       child: controller.obx(
         (state) => Stack(children: [
-          WebViewWidget(controller: controller.htmlController),
+          Padding(
+            padding: EdgeInsets.only(top: ScreenAdapter.height(150)),
+            child: DynamicHeightWebView(
+                data: controller.moreSelected.value == 1
+                    ? "${state?.content}"
+                    : "${state?.specs}"),
+          ),
           Positioned(
             top: 0,
             left: 0,
@@ -30,7 +37,7 @@ class ProductDetailsDescriptionView extends GetView<ProductDetailsController> {
                 : const SizedBox(),
           ),
         ]),
-        onLoading: LoadingView.circle(),
+        onLoading: const LoadingView(),
         onError: (error) => const ErrorView(),
       ),
     );

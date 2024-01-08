@@ -13,7 +13,7 @@ void run() {
     minTextAdapt: true,
     splitScreenMode: true,
     builder: (context, child) => GetMaterialApp(
-      title: Config.appTitle,
+      title: Config.title,
       initialRoute: AppPages.INITIAL,
       getPages: AppPages.routes,
       debugShowCheckedModeBanner: false,

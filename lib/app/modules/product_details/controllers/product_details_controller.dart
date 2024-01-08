@@ -1,29 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-import 'package:webview_flutter/webview_flutter.dart';
 
-import '../../../common/controllers/base_controller.dart';
-import '../../../common/utils/screen_adapter.dart';
-import '../../../common/utils/toast_utils.dart';
+import '../../../controllers/scroll_gradient_controller.dart';
+import '../../../utils/screen_adapter.dart';
 import '../../../data/goods_details_provider.dart';
 import '../../../models/goods_details_model.dart';
-import '../../../common/icons/xmshop_icons.dart';
+import '../../../icons/xm_shop_icons.dart';
 import '../../../services/cart_service.dart';
+import 'product_details_comment_controller.dart';
+import 'product_details_recommend_controller.dart';
 
-class ProductDetailsController extends BaseController with StateMixin<GoodsDetailsModel> {
+class ProductDetailsController extends ScrollGradientController with StateMixin<GoodsDetailsModel> {
   final IGoodsDetailsProvider provider;
-  ProductDetailsController({required this.provider});
-  Map<String, String?> query = {};
-  final ScrollController scrollController = ScrollController();
-  final WebViewController htmlController = WebViewController()..enableZoom(false);
+
+  ProductDetailsController({required this.provider}): super(scrollController: ScrollController());
+
   final CartService cartService = Get.find<CartService>();
 
   late final RxString selectedAttr;
-  final RxInt shopNum = 1.obs;
-  final RxDouble appBarOpacity = 0.0.obs;
-  final Rx<Color> actionColor = Colors.white.obs;
-  final RxInt selectedId = 1.obs;
+  late final Map<String, String?> query;
   final RxBool showBottomMoreBar = false.obs;
+
+  final RxInt shopNum = 1.obs;
+  final RxInt selectedId = 1.obs;
   final RxInt moreSelected = 1.obs;
 
   final List<Map<String, dynamic>> tannerTitles = [
@@ -33,9 +33,9 @@ class ProductDetailsController extends BaseController with StateMixin<GoodsDetai
     {"id": 4, "contentKey": "", "title": "推荐", "anchor_point": 0.0}
   ];
   final List moreMenu = [
-    {"id": 1, "title": "首页", "icon": XmshopIcons.home},
-    {"id": 2, "title": "消息通知", "icon": XmshopIcons.message},
-    {"id": 3, "title": "喜欢的商品", "icon": XmshopIcons.collect}
+    {"id": 1, "title": "首页", "icon": XmShopIcons.home},
+    {"id": 2, "title": "消息通知", "icon": XmShopIcons.message},
+    {"id": 3, "title": "喜欢的商品", "icon": XmShopIcons.collect}
   ];
 
   void buy() {
@@ -43,8 +43,9 @@ class ProductDetailsController extends BaseController with StateMixin<GoodsDetai
   }
 
   void addCart() async {
+    bool res = await cartService.setGoodsDetails(state!, selectedAttr.value, shopNum.value);
+    Fluttertoast.showToast(msg: res ? "收藏成功." : "收藏失败.", gravity: ToastGravity.CENTER);
     Get.back();
-    ToastUtils.centerToast(await cartService.setGoodsDetails(state!, selectedAttr.value, shopNum.value) ? "收藏成功." : "收藏失败.");
   }
 
   void updateAttrs(String selectedAttr, int shopNum) {
@@ -56,19 +57,16 @@ class ProductDetailsController extends BaseController with StateMixin<GoodsDetai
   void changeMoreSelected(int selected) {
     if (selected != moreSelected.value) {
       moreSelected.value = selected;
-      if (selectedId.value == 2) {
-        htmlController.loadHtmlString("${state?.content}");
-      } else {
-        htmlController.loadHtmlString("${state?.specs}");
-      }
       update();
     }
     scrollController.animateTo(_getAndUpdateAnchorPoint(2), duration: const Duration(milliseconds: 1000), curve: Curves.easeIn);
   }
 
   void _changeSelectedId(int id) {
-    selectedId.value = id;
-    update();
+    if (id != selectedId.value) {
+      selectedId.value = id;
+      update();
+    }
   }
 
   void onTarTitlePressed(int id) {
@@ -114,13 +112,6 @@ class ProductDetailsController extends BaseController with StateMixin<GoodsDetai
   void _addScrollListener() {
     scrollController.addListener(() {
       double offset = scrollController.offset;
-      if (offset <= 75) {
-        appBarOpacity.value = offset / 75;
-        actionColor.value = Colors.white;
-      } else {
-        appBarOpacity.value = 1;
-        actionColor.value = Colors.black;
-      }
       double current;
       double next;
       for (int i = 0; i < tannerTitles.length; i++) {
@@ -156,7 +147,6 @@ class ProductDetailsController extends BaseController with StateMixin<GoodsDetai
     }
     change(response.body, status: RxStatus.success());
     _initAttrSelected();
-    _initHtmlController();
   }
 
   void _initAttrSelected() {
@@ -170,10 +160,6 @@ class ProductDetailsController extends BaseController with StateMixin<GoodsDetai
     }
   }
 
-  void _initHtmlController() {
-    htmlController.loadHtmlString("${state?.specs}");
-  }
-
   void _initGlobalKey() {
     for (int i = 0; i < tannerTitles.length; i++) {
       tannerTitles[i]["contentKey"] = GlobalKey();
@@ -185,15 +171,17 @@ class ProductDetailsController extends BaseController with StateMixin<GoodsDetai
   }
 
   @override
+  void reset() {
+    Get.find<ProductDetailsRecommendController>().onRefresh();
+    Get.find<ProductDetailsCommentController>().onRefresh();
+  }
+
+  @override
   void init() {
+    super.init();
     selectedAttr = "".obs;
     _initQuery();
     _initGlobalKey();
     _addScrollListener();
-  }
-
-  @override
-  void close() {
-    scrollController.dispose();
   }
 }

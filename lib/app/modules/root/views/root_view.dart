@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../controllers/root_controller.dart';
-import '../../../common/utils/screen_adapter.dart';
-import '../../../common/icons/xmshop_icons.dart';
+import '../../../utils/screen_adapter.dart';
+import '../../../icons/xm_shop_icons.dart';
 
 class RootView extends GetView<RootController> {
   const RootView({super.key});
@@ -30,31 +30,31 @@ class RootView extends GetView<RootController> {
           items: [
             BottomNavigationBarItem(
                 icon: Icon(
-                  XmshopIcons.home,
+                  XmShopIcons.home,
                   size: ScreenAdapter.fontSize(56),
                 ),
                 label: "首页"),
             BottomNavigationBarItem(
                 icon: Icon(
-                  XmshopIcons.category,
+                  XmShopIcons.category,
                   size: ScreenAdapter.fontSize(48),
                 ),
                 label: "分类"),
             BottomNavigationBarItem(
                 icon: Icon(
-                  XmshopIcons.service,
+                  XmShopIcons.service,
                   size: ScreenAdapter.fontSize(56),
                 ),
                 label: "服务"),
             BottomNavigationBarItem(
                 icon: Icon(
-                  XmshopIcons.tabShopCart,
+                  XmShopIcons.tabShopCart,
                   size: ScreenAdapter.fontSize(56),
                 ),
                 label: "购物车"),
             BottomNavigationBarItem(
                 icon: Icon(
-                  XmshopIcons.mine,
+                  XmShopIcons.mine,
                   size: ScreenAdapter.fontSize(56),
                 ),
                 label: "用户")

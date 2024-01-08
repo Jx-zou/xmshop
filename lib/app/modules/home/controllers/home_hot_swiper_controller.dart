@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 
-import '../../../common/controllers/base_controller.dart';
+import '../../../controllers/base_controller.dart';
 import '../../../data/focus_provider.dart';
 import '../../../models/focus_model.dart';
 
