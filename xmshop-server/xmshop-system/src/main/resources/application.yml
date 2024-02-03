@@ -1,0 +1,26 @@
+server:
+  port: 8732
+  servlet:
+    context-path: /xmshop/api
+
+spring:
+  config:
+    import:
+      - optional:application-service.yml
+  application:
+    name: xmshop
+  datasource:
+    url: jdbc:postgresql://localhost:15432/xmshop?serverTimezone=UTC
+    driver-class-name: org.postgresql.Driver
+    username: xmshop
+    password: xmshop
+  jpa:
+    generate-ddl: true
+    open-in-view: false
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+  web:
+    resources:
+      static-locations: classpath:/public/
+
