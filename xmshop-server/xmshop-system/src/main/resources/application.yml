@@ -1,26 +1,20 @@
 server:
   port: 8732
   servlet:
-    context-path: /xmshop/api
+    context-path: /api
 
 spring:
-  config:
-    import:
-      - optional:application-service.yml
+  profiles:
+    active: prod
+    include: service
   application:
     name: xmshop
-  datasource:
-    url: jdbc:postgresql://localhost:15432/xmshop?serverTimezone=UTC
-    driver-class-name: org.postgresql.Driver
+  webflux:
+    base-path: /xmshop
+  mvc:
+    problemdetails:
+      enabled: true
+  r2dbc:
+    url: r2dbc:postgresql://localhost:15432/xmshop?serverTimezone=UTC
     username: xmshop
     password: xmshop
-  jpa:
-    generate-ddl: true
-    open-in-view: false
-    show-sql: true
-    hibernate:
-      ddl-auto: update
-  web:
-    resources:
-      static-locations: classpath:/public/
-

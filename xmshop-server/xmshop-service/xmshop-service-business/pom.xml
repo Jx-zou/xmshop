@@ -5,31 +5,16 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>xyz.jxzou</groupId>
-        <artifactId>xmshop-server</artifactId>
+        <artifactId>xmshop-service</artifactId>
         <version>0.0.1</version>
     </parent>
 
-    <artifactId>xmshop-common</artifactId>
-    <version>0.0.1</version>
+    <artifactId>xmshop-service-business</artifactId>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-    <dependencies>
-        <dependency>
-            <groupId>com.alibaba.fastjson2</groupId>
-            <artifactId>fastjson2</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <scope>provided</scope>
-        </dependency>
-    </dependencies>
+
 </project>

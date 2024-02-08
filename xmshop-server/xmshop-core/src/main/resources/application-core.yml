@@ -1,0 +1,23 @@
+safety:
+  rsa:
+    size: 2048
+  jwt:
+    salt:
+      size: 20
+    access-token:
+      expire: 3600
+      prefix: "Bearer "
+      iss: z-blog
+      sub: ZBLOG-USER
+
+captcha:
+  code:
+    mail:
+      size: 6
+      expire: 300
+
+messages:
+  basename: classpath:/messages
+  encoding: UTF-8
+web:
+  locale: zh_CN

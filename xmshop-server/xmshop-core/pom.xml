@@ -9,7 +9,8 @@
         <version>0.0.1</version>
     </parent>
 
-    <artifactId>xmshop-system</artifactId>
+    <artifactId>xmshop-core</artifactId>
+    <version>0.0.1</version>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
@@ -19,9 +20,12 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webflux</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.validation</groupId>
+            <artifactId>jakarta.validation-api</artifactId>
         </dependency>
 
         <dependency>
@@ -32,17 +36,13 @@
 
         <dependency>
             <groupId>xyz.jxzou</groupId>
-            <artifactId>xmshop-service-business</artifactId>
+            <artifactId>xmshop-db</artifactId>
+            <version>0.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>xyz.jxzou</groupId>
+            <artifactId>xmshop-common</artifactId>
             <version>0.0.1</version>
         </dependency>
     </dependencies>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
 </project>
