@@ -9,5 +9,8 @@
         <outputRelativeToContentRoot value="true" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="server" target="1.5" />
+    </bytecodeTargetLevel>
   </component>
 </project>
